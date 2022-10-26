@@ -1,14 +1,17 @@
-import React from 'react'
-import { Text,Image,SafeAreaView } from 'react-native';
+import React from "react";
+import { Text, Image, SafeAreaView } from "react-native";
 import styles from "./styles";
 
 function Login() {
   return (
     <SafeAreaView style={styles.mainView}>
-      <Image source={require("../../assets/logo-white.png")} />
-
+      <Image
+        resizeMode="contain"
+        style={styles.logo}
+        source={require("../../assets/logo-white.png")}
+      />
     </SafeAreaView>
-  )
+  );
 }
 
-export default Login
+export default Login;
