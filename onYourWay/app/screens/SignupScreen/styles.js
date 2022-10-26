@@ -10,9 +10,13 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 300,
-    height: 300,
-    flex: 1.95,
+    width: 150,
+    height: 150,
+    marginTop: 20,
+  },
+  scroll: {
+    width: "100%",
+    height: "100%",
   },
   inputContainer: {
     width: "100%",
@@ -28,5 +32,14 @@ export default StyleSheet.create({
     padding: "4%",
     margin: 8,
     fontSize: 15,
+  },
+  date: {
+    width: "100%",
+    alignItems: "center",
+  },
+  datePic: {
+    position: "absolute",
+    right: 40,
+    top: 15,
   },
 });
