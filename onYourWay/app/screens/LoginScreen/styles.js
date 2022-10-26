@@ -1,5 +1,6 @@
 import { Platform, StyleSheet, StatusBar } from "react-native";
 import colors from "../../config/colors";
+import text from "../../config/text";
 
 export default StyleSheet.create({
   mainView: {
@@ -9,9 +10,15 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    marginTop: 20,
     width: 300,
     height: 300,
+    flex: 1.95,
+  },
+  inputContainer: {
+    width: "100%",
+    flex: 2,
+    alignItems: "center",
+    marginTop: 50,
   },
   input: {
     backgroundColor: colors.white,
@@ -19,7 +26,12 @@ export default StyleSheet.create({
     width: "90%",
     height: 55,
     padding: "4%",
-    margin:8,
+    margin: 8,
     fontSize: 15,
+  },
+  signup: {
+    color: colors.white,
+    fontSize: text.sizeMid,
+    marginTop: 20,
   },
 });
