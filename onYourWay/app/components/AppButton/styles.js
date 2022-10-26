@@ -10,10 +10,11 @@ export default StyleSheet.create({
     alignItems: "center",
     padding: 15,
     width: "80%",
+    marginVertical: 10,
   },
   text: {
     color: colors.black,
-    fontSize: text.size,
+    fontSize: text.sizeMid,
     textTransform: "uppercase",
     fontWeight: "bold",
   },
