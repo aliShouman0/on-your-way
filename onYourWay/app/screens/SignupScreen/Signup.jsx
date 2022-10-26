@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
- 
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ function Signup() {
   const [confirmPass, setconfirmPass] = useState("");
   const [password, setPassword] = useState("");
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); 
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -36,7 +37,21 @@ function Signup() {
             value={name}
             onChangeText={(text) => setName(text)}
           />
-          
+          <TouchableOpacity style={styles.date} onPress={() => setOpen(true)}>
+            <TextInput
+              style={styles.input}
+              placeholder="Date Of Birth"
+              value={date.toDateString()}
+              editable={false}
+              contextMenuHidden={true}
+            />
+            <MaterialIcons
+              style={styles.datePic}
+              name="date-range"
+              size={35}
+              color="black"
+            />
+          </TouchableOpacity>
           <TextInput
             clearButtonMode="always"
             style={styles.input}
@@ -75,7 +90,16 @@ function Signup() {
           />
         </View>
 
-        
+        {open && (
+          <DateTimePicker
+            value={date}
+            mode="date"
+            onChange={(e, date) => {
+              setDate(date);
+              setOpen(false);
+            }}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );
