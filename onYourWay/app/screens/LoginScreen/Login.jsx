@@ -10,7 +10,7 @@ import {
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
 
-function Login() {
+function Login() { 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,7 +19,7 @@ function Login() {
       <Image
         resizeMode="contain"
         style={styles.logo}
-        source={require("../../assets/logo-white.png")}
+        source={require("../../assets/logo-gold.png")}
       />
 
       <View style={styles.inputContainer}>
@@ -46,7 +46,9 @@ function Login() {
         />
 
         <TouchableOpacity onPress={() => console.log("no")}>
-          <Text style={styles.signup}>No Account ,It's easy</Text>
+          <Text style={styles.signup}>
+            Don't have an account? <Text style={styles.register}>Register</Text>
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
