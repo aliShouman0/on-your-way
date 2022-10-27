@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import AppButton from "../../components/AppButton/AppButton";
+import Input from "../../components/Input/Input";
 import styles from "./styles";
 
-function Login() { 
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,28 +24,22 @@ function Login() {
       />
 
       <View style={styles.inputContainer}>
-        <TextInput
-          clearButtonMode="always"
-          style={styles.input}
-          placeholder="Email"
+        <Input
+          text="Email"
           keyboardType="email-address"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          setValue={setEmail}
         />
-
-        <TextInput
-          clearButtonMode="always"
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
+        <Input
+          text="Password"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          setValue={setPassword}
+          secureTextEntry={true}
         />
         <AppButton
           value={"Login"}
           onPress={() => console.log(email, password)}
         />
-
         <TouchableOpacity onPress={() => console.log("no")}>
           <Text style={styles.signup}>
             Don't have an account? <Text style={styles.register}>Register</Text>
