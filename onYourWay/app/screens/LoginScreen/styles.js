@@ -12,7 +12,7 @@ export default StyleSheet.create({
   logo: {
     width: 300,
     height: 300,
-    flex: 1.95,
+    flex: 1.5,
   },
   inputContainer: {
     width: "100%",
@@ -20,25 +20,15 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: 50,
   },
-  input: {
-    backgroundColor: colors.white,
-    borderRadius: 5,
-    width: "90%",
-    height: 55,
-    padding: "4%",
-    margin: 8,
-    fontSize: 15,
-  },
   signup: {
     color: colors.white,
-    fontSize: text.sizeMid,
+    fontSize: text.sizeSmall,
     marginTop: 20,
-    fontWeight:"300",
-
+    fontWeight: "300",
   },
   register: {
     color: colors.secondary,
-    fontSize: text.sizeMid,
+    fontSize: text.sizeSmall,
     fontWeight: "500",
   },
 });
