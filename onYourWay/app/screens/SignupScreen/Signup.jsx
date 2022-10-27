@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -12,6 +12,8 @@ import styles from "./styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import Input from "../../components/Input/Input";
+
 function Signup() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -19,29 +21,28 @@ function Signup() {
   const [confirmPass, setconfirmPass] = useState("");
   const [password, setPassword] = useState("");
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
+
+  const [cont, setCont] = useState("");
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShow(!show);
+    }, 5000);
+    return () => clearTimeout(timeout);
+  }, [show]);
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <Image
-        resizeMode="contain"
-        style={styles.logo}
-        source={require("../../assets/logo-white.png")}
-      />
       <ScrollView style={styles.scroll}>
         <View style={styles.inputContainer}>
-          <TextInput
-            clearButtonMode="always"
-            style={styles.input}
-            placeholder="Full Name"
-            value={name}
-            onChangeText={(text) => setName(text)}
-          />
+          <Input text="Full Name" value={name} setValue={setName} />
           <TouchableOpacity style={styles.date} onPress={() => setOpen(true)}>
-            <TextInput
-              style={styles.input}
-              placeholder="Date Of Birth"
+            <Input
+              text="Date Of Birth"
               value={date.toDateString()}
+              placeholder={date.toDateString()}
               editable={false}
               contextMenuHidden={true}
             />
@@ -52,37 +53,31 @@ function Signup() {
               color="black"
             />
           </TouchableOpacity>
-          <TextInput
-            clearButtonMode="always"
-            style={styles.input}
-            placeholder="Email"
-            keyboardType="email-address"
+          <Input
+            text="Email"
             value={email}
-            onChangeText={(text) => setEmail(text)}
+            setValue={setEmail}
+            secureTextEntry={true}
+            keyboardType="email-address"
           />
-          <TextInput
-            clearButtonMode="always"
-            style={styles.input}
-            placeholder="Phone"
-            keyboardType="numeric"
+          <Input
+            text="Phone"
             value={phone}
-            onChangeText={(text) => setPhone(text)}
-          />
-          <TextInput
-            clearButtonMode="always"
-            style={styles.input}
-            placeholder="Password"
+            setValue={setPhone}
             secureTextEntry={true}
+            keyboardType="numeric"
+          />
+          <Input
+            text="Password"
             value={password}
-            onChangeText={(text) => setPassword(text)}
-          />
-          <TextInput
-            clearButtonMode="always"
-            style={styles.input}
-            placeholder="Confirm Password"
+            setValue={setPassword}
             secureTextEntry={true}
+          />
+          <Input
+            text="Confirm Password"
             value={confirmPass}
-            onChangeText={(text) => setconfirmPass(text)}
+            setValue={setconfirmPass}
+            secureTextEntry={true}
           />
           <AppButton
             value={"Next"}
