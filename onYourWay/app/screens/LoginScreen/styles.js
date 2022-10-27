@@ -10,8 +10,8 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     flex: 1.5,
   },
   inputContainer: {

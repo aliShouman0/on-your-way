@@ -6,7 +6,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-} from "react-native";
+} from "react-native"; 
+
 import AppButton from "../../components/AppButton/AppButton";
 import Input from "../../components/Input/Input";
 import styles from "./styles";
