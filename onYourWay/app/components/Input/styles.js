@@ -12,10 +12,11 @@ export default StyleSheet.create({
     fontSize: text.sizeSmall,
     width: "90%",
     textAlign: "left",
-    marginBottom:4,
+    marginBottom: 4,
   },
   input: {
     backgroundColor: colors.white,
+    color: colors.black,
     borderRadius: 5,
     width: "90%",
     height: 55,
