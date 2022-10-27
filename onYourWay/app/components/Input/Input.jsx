@@ -19,6 +19,11 @@ function Input({ keyboardType, text, secureTextEntry, value, setValue }) {
   );
 }
 
-
+Input.defaultProps = {
+  keyboardType: "default",
+  text: "",
+  secureTextEntry: false,
+  value: "",
+};
 
 export default Input;
