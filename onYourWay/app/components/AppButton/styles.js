@@ -4,7 +4,7 @@ import text from "../../config/text";
 
 export default StyleSheet.create({
   button: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.secondary,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
