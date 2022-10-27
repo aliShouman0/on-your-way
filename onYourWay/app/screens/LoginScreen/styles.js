@@ -33,5 +33,12 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: text.sizeMid,
     marginTop: 20,
+    fontWeight:"300",
+
+  },
+  register: {
+    color: colors.secondary,
+    fontSize: text.sizeMid,
+    fontWeight: "500",
   },
 });
