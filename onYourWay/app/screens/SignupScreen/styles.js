@@ -9,6 +9,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+
   logo: {
     width: 150,
     height: 150,
@@ -24,15 +25,6 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: 50,
   },
-  input: {
-    backgroundColor: colors.white,
-    borderRadius: 5,
-    width: "90%",
-    height: 55,
-    padding: "4%",
-    margin: 8,
-    fontSize: 15,
-  },
   date: {
     width: "100%",
     alignItems: "center",
@@ -40,6 +32,6 @@ export default StyleSheet.create({
   datePic: {
     position: "absolute",
     right: 40,
-    top: 15,
+    top: 35,
   },
 });
