@@ -1,6 +1,6 @@
 export default {
-  primary: "#4C769A",
-  secondary: "# ",
+  primary: "#313940",
+  secondary: "#FFC700",
   black: "#000",
   white: "#fff",
 
