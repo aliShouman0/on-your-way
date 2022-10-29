@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import RBSheet from "react-native-raw-bottom-sheet";
 import {
   Image,
   SafeAreaView,
@@ -6,19 +7,37 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  FontAwesome,
+  Entypo,
+} from "@expo/vector-icons";
 
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
 import Navbar from "../../components/Navbar/Navbar";
 
 function NextSignupScreen({ navigation }) {
+  const refRBSheet = useRef();
+  const [photo, setPhoto] = useState(null);
+  const [frontId, setFrontId] = useState(null);
+  const [backId, setBackId] = useState(null);
+  const [imageFor, setImageFor] = useState("");
+
   return (
     <SafeAreaView style={styles.mainView}>
+    
       <Navbar type={"register"} title={"Register"} navigation={navigation} />
       <View style={styles.view}>
         <Text style={styles.text}>Upload your profile photo</Text>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            setImageFor("photo");
+            refRBSheet.current.open();
+          }}
+        >
           <View style={styles.icon}>
             <MaterialCommunityIcons
               name="camera-plus"
@@ -27,28 +46,58 @@ function NextSignupScreen({ navigation }) {
             />
             <Text>Your Photo</Text>
           </View>
-          <Image resizeMode="contain" style={styles.image} />
+          <Image
+            resizeMode="contain"
+            style={styles.image}
+            source={photo ? { uri: photo } : ""}
+          />
         </TouchableOpacity>
       </View>
       <Text style={styles.text}>Upload the required docs</Text>
       <View style={styles.idContainer}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            setImageFor("frontId");
+            refRBSheet.current.open();
+          }}
+        >
           <View style={styles.icon}>
             <MaterialIcons name="add-photo-alternate" size={35} color="black" />
             <Text>Front ID </Text>
           </View>
-          <Image resizeMode="contain" style={styles.imgId} />
+          <Image
+            resizeMode="contain"
+            style={styles.imgId}
+            source={frontId ? { uri: frontId } : ""}
+          />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            setImageFor("backId");
+            refRBSheet.current.open();
+          }}
+        >
           <View style={styles.icon}>
             <MaterialIcons name="add-photo-alternate" size={35} color="black" />
             <Text>Back ID </Text>
           </View>
-          <Image resizeMode="contain" style={styles.imgId} />
+          <Image
+            resizeMode="contain"
+            style={styles.imgId}
+            source={backId ? { uri: backId } : ""}
+          />
         </TouchableOpacity>
       </View>
-      <AppButton value={"SIGNUP"} />
+      <AppButton
+        value={"SIGNUP"}
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Login" }],
+          })
+        }
+      />
     </SafeAreaView>
   );
 }
