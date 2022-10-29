@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import AppButton from "../../components/AppButton/AppButton";
@@ -41,7 +40,13 @@ function NextSignupScreen({ navigation }) {
           <Image resizeMode="contain" style={styles.imgId} />
         </TouchableOpacity>
 
-       
+        <TouchableOpacity onPress={() => {}}>
+          <View style={styles.icon}>
+            <MaterialIcons name="add-photo-alternate" size={35} color="black" />
+            <Text>Back ID </Text>
+          </View>
+          <Image resizeMode="contain" style={styles.imgId} />
+        </TouchableOpacity>
       </View>
       <AppButton value={"SIGNUP"} />
     </SafeAreaView>
