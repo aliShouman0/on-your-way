@@ -14,5 +14,11 @@ export default StyleSheet.create({
     marginLeft: -20,
     fontSize: text.sizeMid,
     fontWeight: "500",
+    paddingVertical: 5,
+  },
+  drawerItemStyle: {
+    width: "100%",
+    borderRadius: 0,
+    marginVertical: 10,
   },
 });
