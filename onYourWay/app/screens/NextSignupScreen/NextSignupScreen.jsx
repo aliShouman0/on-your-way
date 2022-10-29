@@ -42,7 +42,22 @@ function NextSignupScreen({ navigation }) {
     return;
   };
 
+  const camera = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (permission.granted == false) {
+      alert(
+        "Camera permission denied Go to settings and allow it to use the camera"
+      );
+      return;
+    }
+    const result = await ImagePicker.launchCameraAsync();
+    if (!result.cancelled) {
+      return result;
+    }
+    return;
+  };
 
+ 
   return (
     <SafeAreaView style={styles.mainView}>
       <RBSheet
