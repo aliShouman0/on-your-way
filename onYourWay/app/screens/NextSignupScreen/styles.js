@@ -47,5 +47,20 @@ export default StyleSheet.create({
     height: 150,
     backgroundColor: colors.white,
     borderRadius: 15,
-  }
+  },
+  sheetView: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  iconSheet: {
+    color: colors.primary,
+    textAlign: "center",
+  },
+  sheetText: {
+    color: colors.primary,
+    fontSize: text.sizeSmall,
+    marginVertical: 20,
+  },
 });
