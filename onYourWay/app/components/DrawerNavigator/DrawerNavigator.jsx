@@ -4,8 +4,8 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import MyOrder from "../../screens/MyOrderScreen/MyOrder";
 import colors from "../../config/colors";
-import text from "../../config/text";
 import styles from "./styles";
+import CustomDrawer from "../CustomDrawer/CustomDrawer";
 
 function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
@@ -13,6 +13,7 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator
       initialRouteName="MyOrder"
+      drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
         drawerActiveBackgroundColor: colors.secondary,
@@ -21,6 +22,8 @@ function DrawerNavigator() {
         drawerInactiveBackgroundColor: "transparent",
         drawerLabelStyle: styles.drawerLabelStyle,
         drawerStyle: styles.drawerStyle,
+        drawerItemStyle: styles.drawerItemStyle,
+        swipeEdgeWidth: 150,
       }}
     >
       <Drawer.Screen
@@ -29,7 +32,11 @@ function DrawerNavigator() {
         options={{
           title: "My Order",
           drawerIcon: ({ focused, color, size }) => (
-            <FontAwesome name="cart-plus" size={size * 1.5} color={color} />
+            <FontAwesome
+              name="cart-plus"
+              size={size * 1.5}
+              color={colors.black}
+            />
           ),
         }}
       />
