@@ -13,11 +13,13 @@ import {
   MaterialIcons,
   FontAwesome,
   Entypo,
-} from "@expo/vector-icons"; 
+} from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
-import Navbar from "../../components/Navbar/Navbar"; 
+import Navbar from "../../components/Navbar/Navbar";
+import { StackActions } from "@react-navigation/native";
 
 function NextSignupScreen({ navigation }) {
   const refRBSheet = useRef();
@@ -25,6 +27,21 @@ function NextSignupScreen({ navigation }) {
   const [frontId, setFrontId] = useState(null);
   const [backId, setBackId] = useState(null);
   const [imageFor, setImageFor] = useState("");
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      return result;
+    }
+    return;
+  };
+
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -36,11 +53,11 @@ function NextSignupScreen({ navigation }) {
         height={150}
       >
         <View style={styles.sheetView}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => getImage("camera")}>
             <FontAwesome name="camera" size={45} style={styles.iconSheet} />
             <Text style={styles.sheetText}>Camera</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => getImage("library")}>
             <Entypo name="folder-images" size={45} style={styles.iconSheet} />
             <Text style={styles.sheetText}>Image Library</Text>
           </TouchableOpacity>
