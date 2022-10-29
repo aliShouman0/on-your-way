@@ -31,6 +31,19 @@ function NextSignupScreen({ navigation }) {
           <Image resizeMode="contain" style={styles.image} />
         </TouchableOpacity>
       </View>
+      <Text style={styles.text}>Upload the required docs</Text>
+      <View style={styles.idContainer}>
+        <TouchableOpacity onPress={() => {}}>
+          <View style={styles.icon}>
+            <MaterialIcons name="add-photo-alternate" size={35} color="black" />
+            <Text>Front ID </Text>
+          </View>
+          <Image resizeMode="contain" style={styles.imgId} />
+        </TouchableOpacity>
+
+       
+      </View>
+      <AppButton value={"SIGNUP"} />
     </SafeAreaView>
   );
 }
