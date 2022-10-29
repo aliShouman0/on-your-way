@@ -17,6 +17,20 @@ function NextSignupScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"register"} title={"Register"} navigation={navigation} />
+      <View style={styles.view}>
+        <Text style={styles.text}>Upload your profile photo</Text>
+        <TouchableOpacity onPress={() => {}}>
+          <View style={styles.icon}>
+            <MaterialCommunityIcons
+              name="camera-plus"
+              size={35}
+              color="black"
+            />
+            <Text>Your Photo</Text>
+          </View>
+          <Image resizeMode="contain" style={styles.image} />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
