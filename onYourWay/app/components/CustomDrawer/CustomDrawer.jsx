@@ -25,6 +25,19 @@ const CustomDrawer = (props) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.footerContent}>
+          <MaterialIcons name="account-circle" size={45} style={styles.icon} />
+          <Text style={styles.text}>Account</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.footerContent}
+          onPress={() => props.navigation.navigate("Login")}
+        >
+          <MaterialCommunityIcons name="logout" size={45} style={styles.icon} />
+          <Text style={styles.text}>Log Out</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
