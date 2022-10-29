@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import {
-  Image,
   SafeAreaView,
-  TextInput,
   View,
   TouchableOpacity,
   ScrollView,
@@ -13,8 +11,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Input from "../../components/Input/Input";
+import Navbar from "../../components/Navbar/Navbar";
 
-function Signup() {
+function Signup({ navigation }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -23,18 +22,9 @@ function Signup() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
 
-  const [cont, setCont] = useState("");
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShow(!show);
-    }, 5000);
-    return () => clearTimeout(timeout);
-  }, [show]);
-
   return (
     <SafeAreaView style={styles.mainView}>
+      <Navbar type={"register"} title={"Register"} navigation={navigation} />
       <ScrollView style={styles.scroll}>
         <View style={styles.inputContainer}>
           <Input text="Full Name" value={name} setValue={setName} />
@@ -64,7 +54,6 @@ function Signup() {
             text="Phone"
             value={phone}
             setValue={setPhone}
-            secureTextEntry={true}
             keyboardType="numeric"
           />
           <Input
@@ -81,7 +70,7 @@ function Signup() {
           />
           <AppButton
             value={"Next"}
-            onPress={() => console.log(email, password)}
+            onPress={() => navigation.navigate("NextSignupScreen")}
           />
         </View>
 
