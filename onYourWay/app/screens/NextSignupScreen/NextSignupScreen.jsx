@@ -13,11 +13,11 @@ import {
   MaterialIcons,
   FontAwesome,
   Entypo,
-} from "@expo/vector-icons";
+} from "@expo/vector-icons"; 
 
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar"; 
 
 function NextSignupScreen({ navigation }) {
   const refRBSheet = useRef();
@@ -28,7 +28,24 @@ function NextSignupScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.mainView}>
-    
+      <RBSheet
+        ref={refRBSheet}
+        closeOnDragDown={true}
+        closeOnPressMask={true}
+        animationType={"fade"}
+        height={150}
+      >
+        <View style={styles.sheetView}>
+          <TouchableOpacity onPress={() => {}}>
+            <FontAwesome name="camera" size={45} style={styles.iconSheet} />
+            <Text style={styles.sheetText}>Camera</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Entypo name="folder-images" size={45} style={styles.iconSheet} />
+            <Text style={styles.sheetText}>Image Library</Text>
+          </TouchableOpacity>
+        </View>
+      </RBSheet>
       <Navbar type={"register"} title={"Register"} navigation={navigation} />
       <View style={styles.view}>
         <Text style={styles.text}>Upload your profile photo</Text>
