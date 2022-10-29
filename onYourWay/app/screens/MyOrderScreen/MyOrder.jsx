@@ -6,6 +6,7 @@ import styles from "./styles";
 function MyOrder({ navigation }) {
   return (
     <SafeAreaView style={styles.mainView}>
+      <Navbar type={"main"} title={"My Order"} navigation={navigation} />
     </SafeAreaView>
   );
 }
