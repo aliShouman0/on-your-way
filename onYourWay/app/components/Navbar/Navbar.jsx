@@ -5,9 +5,17 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import styles from "./styles";
 
 function Navbar({ type, title, navigation }) {
+  const handelEvent = () => {
+    if (type === "main") {
+      navigation.openDrawer();
+    }
+    if (type === "register") {
+      navigation.pop();
+    }
+  };
   return (
     <View style={styles.view}>
-      <TouchableOpacity onPress={() => navigation.pop()}>
+      <TouchableOpacity onPress={handelEvent}>
         {type === "register" && (
           <Ionicons name="arrow-back" size={35} style={styles.icon} />
         )}
