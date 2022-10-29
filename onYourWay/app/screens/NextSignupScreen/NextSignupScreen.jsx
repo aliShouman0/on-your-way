@@ -42,7 +42,7 @@ function NextSignupScreen({ navigation }) {
     return;
   };
 
-  const  = async () => {
+  const camera = async () => {
     const permission = await ImagePicker.requestCameraPermissionsAsync();
     if (permission.granted == false) {
       alert(
