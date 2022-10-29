@@ -23,7 +23,16 @@ function DrawerNavigator() {
         drawerStyle: styles.drawerStyle,
       }}
     >
-    
+      <Drawer.Screen
+        name="MyOrder"
+        component={MyOrder}
+        options={{
+          title: "My Order",
+          drawerIcon: ({ focused, color, size }) => (
+            <FontAwesome name="cart-plus" size={size * 1.5} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
