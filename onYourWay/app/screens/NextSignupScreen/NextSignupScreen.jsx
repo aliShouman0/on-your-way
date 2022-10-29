@@ -42,7 +42,7 @@ function NextSignupScreen({ navigation }) {
     return;
   };
 
-  const camera = async () => {
+  const  = async () => {
     const permission = await ImagePicker.requestCameraPermissionsAsync();
     if (permission.granted == false) {
       alert(
@@ -57,7 +57,35 @@ function NextSignupScreen({ navigation }) {
     return;
   };
 
- 
+  const getImage = async (by) => {
+    let photo;
+    if (by === "camera") {
+      photo = await camera();
+    }
+    if (by === "library") {
+      photo = await pickImage();
+    }
+    if (photo) {
+      switch (imageFor) {
+        case "photo":
+          setPhoto(photo.uri);
+          break;
+        case "frontId":
+          setFrontId(photo.uri);
+
+          break;
+        case "backId":
+          setBackId(photo.uri);
+
+          break;
+        default:
+          break;
+      }
+    }
+    console.log(photo.uri);
+    refRBSheet.current.close();
+  };
+
   return (
     <SafeAreaView style={styles.mainView}>
       <RBSheet
