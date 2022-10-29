@@ -23,4 +23,19 @@ export default StyleSheet.create({
     color: colors.white,
     marginRight: 20,
   },
+  drawerListWrapper: {
+    marginTop: 65,
+    flex: 1,
+  },
+  footer: {
+    position: "absolute",
+    bottom: 5,
+    left: 20,
+  },
+  footerContent: {
+    marginBottom: 30,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icon: { color: colors.black, marginRight: 20 },
 });
