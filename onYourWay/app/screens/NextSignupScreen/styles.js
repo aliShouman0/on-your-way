@@ -17,4 +17,35 @@ export default StyleSheet.create({
     fontSize: text.sizeMid,
     marginVertical: 20,
   },
+  icon: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 10,
+  },
+  image: {
+    width: "100%",
+    height: 200,
+    backgroundColor: colors.white,
+    borderRadius: 150,
+  },
+  idContainer: {
+    marginTop: 20,
+    width: "100%",
+    flex: 0,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 50,
+  },
+  imgId: {
+    width: 150,
+    height: 150,
+    backgroundColor: colors.white,
+    borderRadius: 15,
+  }
 });
