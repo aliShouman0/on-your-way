@@ -38,11 +38,14 @@ function Login({ navigation }) {
         />
         <AppButton
           value={"Login"}
-          onPress={() => console.log(email, password)}
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "DrawerNavigator" }],
+            })
+          }
         />
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Signup") }
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.signup}>
             Don't have an account? <Text style={styles.register}>Register</Text>
           </Text>
