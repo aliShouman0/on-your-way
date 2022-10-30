@@ -9,7 +9,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontSize: text.sizeMid,
+    fontSize: text.sizeSmall,
     color: colors.white,
     marginRight: 10,
     alignItems: "center",

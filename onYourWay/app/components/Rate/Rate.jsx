@@ -7,10 +7,10 @@ function Rate({ rate }) {
   const getStar = () => {
     const rows = [];
     for (let i = 0; i < rate; i++) {
-      rows.push(<Entypo name="star" size={25} style={styles.fillIcon} />);
+      rows.push(<Entypo name="star" size={18} style={styles.fillIcon} />);
     }
     for (let i = 0; i < 5 - rate; i++) {
-      rows.push(<Entypo name="star" size={25} style={styles.icon} />);
+      rows.push(<Entypo name="star" size={18} style={styles.icon} />);
     }
     return rows;
   };
