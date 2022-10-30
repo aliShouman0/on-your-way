@@ -44,14 +44,32 @@ const testing = [
 ];
 
 function MyOrder({ navigation }) {
- 
+  const [refreshing, setRefreshing] = useState(false);
+  const [data, setData] = useState(testing);
+
+  const refresh = () => {
+    setData([
+      {
+        id: "id",
+        userName: "user Name",
+        userImg: require("../../assets/user1.jpg"),
+        from: "from",
+        to: "to",
+        pay: "pay",
+        orderImg: require("../../assets/keyboard.jpg"),
+        orderDescription: "Refresh Done",
+      },
+    ]);
+  };
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"My Order"} navigation={navigation} />
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={testing} 
+        data={data}
+        refreshing={refreshing}
+        onRefresh={refresh}
         renderItem={({ item, index, separators }) => (
           <OrderInfo
             key={item.id}
