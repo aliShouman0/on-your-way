@@ -14,6 +14,8 @@ export default StyleSheet.create({
     backgroundColor: colors.primary,
     flex: 1,
     flexDirection: "row",
+    padding: 8,
+    alignItems: "center",
   },
   userInfo: {
     flex: 1,
@@ -21,8 +23,15 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   userImg: {
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 130,
     borderRadius: 75,
+    marginBottom: 30,
+  },
+  userDetails: {
+    flex: 1.5,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 3,
   },
 });
