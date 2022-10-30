@@ -1,5 +1,5 @@
 import { Platform, StyleSheet, StatusBar } from "react-native";
-import colors from "../../config/colors"; 
+import colors from "../../config/colors";
 
 export default StyleSheet.create({
   mainView: {
@@ -7,5 +7,10 @@ export default StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
     alignItems: "center",
+    height: "100%",
+  },
+  flatList: { 
+    width: "100%",
+    margin: 15,
   },
 });
