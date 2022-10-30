@@ -16,7 +16,21 @@ function OrderInfo() {
         />
         <Text style={styles.userName}>User Name</Text>
       </View>
-     
+      <View style={styles.orderDetails}>
+        <View style={styles.container}>
+          <Text style={styles.key}>From</Text>
+          <Text style={styles.value}>Beirut</Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.key}>To</Text>
+          <Text style={styles.value}>Byblos</Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.key}>Pay</Text>
+          <Text style={styles.value}>34600L.L</Text>
+        </View>
+      </View>
+  
     </View>
   );
 }
