@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  FlatList,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  View,
-} from "react-native";
+import { FlatList, SafeAreaView } from "react-native";
 import Navbar from "../../components/Navbar/Navbar";
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import styles from "./styles";
@@ -13,33 +7,33 @@ import styles from "./styles";
 const testing = [
   {
     id: "id1",
-    userName: "userName",
+    userName: "Ali Alrida Shouman",
     userImg: require("../../assets/user1.jpg"),
-    from: "from",
-    to: "to",
-    pay: "pay",
+    from: "Beirut",
+    to: "Byblos",
+    pay: "145000L.L",
     orderImg: require("../../assets/keyboard.jpg"),
-    orderDescription: "orderDescription",
+    orderDescription: "keyboard and mouse",
   },
   {
     id: "id2",
-    userName: "userName",
+    userName: "Baker",
     userImg: require("../../assets/user1.jpg"),
-    from: "from",
-    to: "to",
-    pay: "pay",
+    from: "Saida",
+    to: "Nabatieh",
+    pay: "46000L.L",
     orderImg: require("../../assets/keyboard.jpg"),
-    orderDescription: "orderDescription",
+    orderDescription: "Laptop",
   },
   {
     id: "id3",
-    userName: "userName",
+    userName: "Aya Matok",
     userImg: require("../../assets/user1.jpg"),
-    from: "from",
-    to: "to",
-    pay: "pay",
+    from: "Beirut",
+    to: "Tripoli",
+    pay: "745000L.L",
     orderImg: require("../../assets/keyboard.jpg"),
-    orderDescription: "orderDescription",
+    orderDescription: "Sandwich",
   },
 ];
 
@@ -50,17 +44,18 @@ function MyOrder({ navigation }) {
   const refresh = () => {
     setData([
       {
-        id: "id",
-        userName: "user Name",
+        id: "id3",
+        userName: "Refresh Done",
         userImg: require("../../assets/user1.jpg"),
-        from: "from",
-        to: "to",
-        pay: "pay",
+        from: "Beirut",
+        to: "Tripoli",
+        pay: "745000L.L",
         orderImg: require("../../assets/keyboard.jpg"),
         orderDescription: "Refresh Done",
       },
     ]);
   };
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"My Order"} navigation={navigation} />
@@ -81,9 +76,6 @@ function MyOrder({ navigation }) {
             pay={item.pay}
             orderImg={item.orderImg}
             orderDescription={item.orderDescription}
-            onInfoPress={() => {}}
-            onChatPress={() => {}}
-            onStatusPress={() => {}}
           />
         )}
       />
