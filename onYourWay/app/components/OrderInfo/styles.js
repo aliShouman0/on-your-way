@@ -34,5 +34,25 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 20,
   },
-
+  container: {
+    borderRadius: 15,
+    borderColor: colors.lightWhite,
+    color: colors.white,
+    borderStyle: "solid",
+    borderWidth: 1,
+    width: "30%",
+    height: 60,
+    padding: 7,
+  },
+  key: {
+    fontSize: text.sizeSmall,
+    fontWeight: "300",
+    color: colors.white,
+  },
+  value: {
+    fontSize: text.sizeMid,
+    fontWeight: "500",
+    color: colors.white,
+  },
+ 
 });
