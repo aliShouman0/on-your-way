@@ -81,6 +81,9 @@ function MyOrder({ navigation }) {
             pay={item.pay}
             orderImg={item.orderImg}
             orderDescription={item.orderDescription}
+            onInfoPress={() => {}}
+            onChatPress={() => {}}
+            onStatusPress={() => {}}
           />
         )}
       />
