@@ -6,7 +6,7 @@ import LightInput from "../LightInput/LightInput";
 
 import styles from "./styles";
 
-function UserInfo({ refRBSheet, image }) {
+function UserInfo({ refRBSheet }) {
   const windowHeight = Dimensions.get("window").height;
 
   return (
@@ -23,7 +23,10 @@ function UserInfo({ refRBSheet, image }) {
     >
       <View style={styles.sheetView}>
         <View style={styles.userInfo}>
-          <Image source={image} style={styles.userImg} />
+          <Image
+            source={require("../../assets/user1.jpg")}
+            style={styles.userImg}
+          />
           <Rate rate={2} />
         </View>
         <View style={styles.userDetails}>
