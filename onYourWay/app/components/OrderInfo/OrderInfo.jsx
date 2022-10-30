@@ -30,7 +30,21 @@ function OrderInfo() {
           <Text style={styles.value}>34600L.L</Text>
         </View>
       </View>
-  
+      <Image
+        resizeMode="contain"
+        source={require("../../assets/keyboard.jpg")}
+        style={styles.orderImg}
+      />
+      <Text style={styles.description}>keyboard and mouse</Text>
+      <View style={styles.btnContainer}>
+        <SmallButton value={"Info"} onPress={() => console.log("hi Info")} />
+        <SmallButton value={"CHAT"} onPress={() => console.log("hi CHAT")} />
+        <SmallButton
+          value={"STATUS"}
+          onPress={() => console.log("hi STATUS")}
+          color={colors.secondary}
+        />
+      </View>
     </View>
   );
 }
