@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions, Image, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import colors from "../../config/colors";
 import styles from "./styles";
 
-function UserInfo({ refRBSheet }) {
+function UserInfo({ refRBSheet, image }) {
   const refRBSheet1 = useRef();
   const windowHeight = Dimensions.get("window").height;
 
@@ -20,7 +20,12 @@ function UserInfo({ refRBSheet }) {
         container: styles.container,
       }}
     >
-      <View style={styles.sheetView}></View>
+      <View style={styles.sheetView}>
+        <View style={styles.userInfo}>
+          <Image source={image}  style={styles.userImg}/>
+        </View>
+        <View style={styles.userDetails}></View>
+      </View>
     </RBSheet>
   );
 }
