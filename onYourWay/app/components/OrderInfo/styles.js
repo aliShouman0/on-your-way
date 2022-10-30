@@ -13,5 +13,26 @@ export default StyleSheet.create({
     flex: 1,
     alignSelf: "center",
   },
- 
+  userInfo: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  userImg: {
+    width: 45,
+    height: 45,
+    borderRadius: 25,
+  },
+  userName: {
+    marginLeft: 10,
+    fontSize: text.sizeMid,
+    color: colors.white,
+  },
+  orderDetails: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 20,
+  },
+
 });
