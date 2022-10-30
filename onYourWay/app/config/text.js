@@ -1,5 +1,5 @@
 export default {
   sizeSmall: 14,
-  sizeMid: 18,
+  sizeMid: 16,
   sizeBig: 26,
 };
