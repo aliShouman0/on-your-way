@@ -14,6 +14,9 @@ function OrderInfo({
   pay,
   orderImg,
   orderDescription,
+  onInfoPress,
+  onChatPress,
+  onStatusPress,
 }) {
   return (
     <View style={styles.mainView}>
@@ -38,11 +41,11 @@ function OrderInfo({
       <Image resizeMode="contain" source={orderImg} style={styles.orderImg} />
       <Text style={styles.description}>{orderDescription}</Text>
       <View style={styles.btnContainer}>
-        <SmallButton value={"Info"} onPress={() => console.log("hi Info")} />
-        <SmallButton value={"CHAT"} onPress={() => console.log("hi CHAT")} />
+        <SmallButton value={"Info"} onPress={onInfoPress} />
+        <SmallButton value={"CHAT"} onPress={onChatPress} />
         <SmallButton
           value={"STATUS"}
-          onPress={() => console.log("hi STATUS")}
+          onPress={onStatusPress}
           color={colors.secondary}
         />
       </View>
