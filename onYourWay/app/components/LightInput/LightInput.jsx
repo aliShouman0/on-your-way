@@ -30,6 +30,13 @@ function LightInput({
   );
 }
 
- 
+LightInput.defaultProps = {
+  keyboardType: "default",
+  text: "",
+  secureTextEntry: false,
+  value: "",
+  editable: true,
+  contextMenuHidden: false,
+};
 
 export default LightInput;
