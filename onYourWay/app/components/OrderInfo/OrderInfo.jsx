@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Image, Text, View } from "react-native";
 
 import colors from "../../config/colors";
 import SmallButton from "../SmallButton/SmallButton";
+import UserInfo from "../userInfo/UserInfo";
 import styles from "./styles";
 
 function OrderInfo({
@@ -14,10 +15,8 @@ function OrderInfo({
   pay,
   orderImg,
   orderDescription,
-  onInfoPress,
-  onChatPress,
-  onStatusPress,
 }) {
+  const refRBSheet = useRef();
   return (
     <View style={styles.mainView}>
       <View style={styles.userInfo}>
@@ -41,14 +40,11 @@ function OrderInfo({
       <Image resizeMode="contain" source={orderImg} style={styles.orderImg} />
       <Text style={styles.description}>{orderDescription}</Text>
       <View style={styles.btnContainer}>
-        <SmallButton value={"Info"} onPress={onInfoPress} />
-        <SmallButton value={"CHAT"} onPress={onChatPress} />
-        <SmallButton
-          value={"STATUS"}
-          onPress={onStatusPress}
-          color={colors.secondary}
-        />
+        <SmallButton value={"Info"} onPress={() => refRBSheet.current.open()} />
+        <SmallButton value={"CHAT"} />
+        <SmallButton value={"STATUS"} color={colors.secondary} />
       </View>
+      <UserInfo refRBSheet={refRBSheet} />
     </View>
   );
 }
