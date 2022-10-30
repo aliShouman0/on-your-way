@@ -46,7 +46,7 @@ export default StyleSheet.create({
   },
   key: {
     fontSize: text.sizeSmall,
-    fontWeight: "300",
+    fontWeight: "200",
     color: colors.white,
   },
   value: {
