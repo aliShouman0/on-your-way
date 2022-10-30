@@ -28,10 +28,10 @@ export default StyleSheet.create({
     zIndex: 10,
   },
   image: {
-    width: "100%",
+    width: 200,
     height: 200,
     backgroundColor: colors.white,
-    borderRadius: 150,
+    borderRadius: 100,
   },
   idContainer: {
     marginTop: 20,
