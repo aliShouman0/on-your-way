@@ -15,4 +15,18 @@ export default StyleSheet.create({
     marginBottom: 4,
     fontWeight: "400",
   },
+  input: {
+    backgroundColor: "transparent",
+    color: colors.white,
+    borderRadius: 0,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: colors.lightWhite,
+    width: "93%",
+    height: 55,
+    padding: "4%",
+    margin: 8,
+    fontSize: text.sizeSmall,
+    fontWeight: "300",
+  },
 });
