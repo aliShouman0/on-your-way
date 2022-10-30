@@ -54,5 +54,28 @@ export default StyleSheet.create({
     fontWeight: "500",
     color: colors.white,
   },
- 
+  orderImg: {
+    width: "100%",
+    borderRadius: 15,
+    height: "35%",
+    marginTop: 15,
+  },
+  description: {
+    marginTop: 15,
+    borderRadius: 15,
+    borderColor: colors.lightWhite,
+    color: colors.white,
+    borderStyle: "solid",
+    borderWidth: 1,
+    width: "100%",
+    padding: 15,
+    fontSize: text.sizeMid,
+  },
+  btnContainer: {
+    width: "100%",
+    marginTop: 15,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
 });
