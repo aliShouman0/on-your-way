@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
+import colors from "../../config/colors";
+import SmallButton from "../SmallButton/SmallButton";
 import styles from "./styles";
 
 function OrderStatus({ refRBSheet, isReceiver }) {
@@ -31,6 +33,18 @@ function OrderStatus({ refRBSheet, isReceiver }) {
               resizeMode="stretch"
               source={require("../../assets/keyboard.jpg")}
               style={styles.img}
+            />
+          </View>
+
+          <View style={styles.btnContainer}>
+            <SmallButton value={"Received"} color={colors.secondary} />
+            <SmallButton value={"Request \n live Location"} />
+            <SmallButton
+              value={"Cancel"}
+              onPress={() => {
+                refRBSheet.current.close();
+                cancelOrderBSheet.current.open();
+              }}
             />
           </View>
         </View>
