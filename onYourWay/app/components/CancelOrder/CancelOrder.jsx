@@ -32,6 +32,9 @@ function CancelOrder({ refRBSheet }) {
           multiline={true}
           style={styles.input}
         />
+        <Text style={styles.note}>
+          Note: that will affect your rate if the pickup accepted
+        </Text>
       </View>
     </RBSheet>
   );
