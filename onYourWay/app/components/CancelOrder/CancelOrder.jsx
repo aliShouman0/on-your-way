@@ -1,9 +1,10 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
+import Input from "../Input/Input";
 
 import styles from "./styles";
-function CancelOrder({ refRBSheet, isReceiver }) {
+function CancelOrder({ refRBSheet }) {
   const windowHeight = Dimensions.get("window").height;
 
   return (
@@ -17,7 +18,14 @@ function CancelOrder({ refRBSheet, isReceiver }) {
         draggableIcon: styles.draggableIcon,
         container: styles.container,
       }}
-    ></RBSheet>
+    >
+      <View styles={styles.view}>
+        <Text styles={styles.textTitle}>Are you sure ?</Text>
+        <Text styles={styles.textSmall}>
+          Please specify why You are cancelling
+        </Text>
+      </View>
+    </RBSheet>
   );
 }
 
