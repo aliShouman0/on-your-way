@@ -40,5 +40,14 @@ export default StyleSheet.create({
     alignItems: "center",
     width: "30%",
     marginVertical: 15,
-  }
+  },
+  lightInput: {
+    fontWeight: "400",
+    fontSize: text.sizeMid,
+  },
+  time: {
+    width: windowWidth / 3.2,
+  },
+  text: { color: colors.white, fontWeight: "100" },
+ 
 });
