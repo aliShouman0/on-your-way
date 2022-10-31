@@ -11,15 +11,17 @@ function LightInput({
   placeholder,
   contextMenuHidden,
   editable,
+  style,
+  textStyle,
 }) {
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[styles.text, textStyle]}>{text}</Text>
       <TextInput
         secureTextEntry={secureTextEntry}
         clearButtonMode="always"
         keyboardType={keyboardType}
-        style={styles.input}
+        style={[styles.input, style]}
         placeholder={placeholder ? placeholder : text}
         value={value}
         onChangeText={(text) => setValue(text)}
@@ -37,6 +39,8 @@ LightInput.defaultProps = {
   value: "",
   editable: true,
   contextMenuHidden: false,
+  textStyle: "",
+  style: "",
 };
 
 export default LightInput;
