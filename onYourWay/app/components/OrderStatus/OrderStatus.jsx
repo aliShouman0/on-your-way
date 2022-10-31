@@ -68,7 +68,20 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 textStyle={styles.text}
               />
             )}
- 
+
+            <TouchableWithoutFeedback
+              style={styles.time}
+              onPress={() => setopenTime(isReceiver ? false : true)}
+            >
+              <LightInput
+                text={"Average\ntime"}
+                editable={false}
+                contextMenuHidden={true}
+                value={`${date.getHours()}H:${date.getMinutes()}M`}
+                style={styles.lightInput}
+                textStyle={styles.text}
+              />
+            </TouchableWithoutFeedback>
             <LightInput
               text={"Current\nLocation"}
               editable={!isReceiver}
@@ -116,7 +129,16 @@ function OrderStatus({ refRBSheet, isReceiver }) {
           </View>
         </View>
 
-         
+        {openTime && (
+          <DateTimePicker
+            value={date}
+            mode="time"
+            onChange={(e, date) => {
+              setDate(date);
+              setopenTime(false);
+            }}
+          />
+        )}
       </RBSheet> 
     </>
   );
