@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
   view: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "center", 
     width: "100%",
   },
   textSmall: {
