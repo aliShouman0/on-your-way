@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Dimensions, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
-import Input from "../Input/Input";
 
+import Input from "../Input/Input";
+import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
 function CancelOrder({ refRBSheet }) {
   const [reason, setReason] = useState("");
@@ -14,7 +15,7 @@ function CancelOrder({ refRBSheet }) {
       closeOnDragDown={true}
       closeOnPressMask={true}
       animationType={"fade"}
-      height={(windowHeight * 1) / 2}
+      height={(windowHeight * 11) / 20}
       customStyles={{
         draggableIcon: styles.draggableIcon,
         container: styles.container,
@@ -35,6 +36,12 @@ function CancelOrder({ refRBSheet }) {
         <Text style={styles.note}>
           Note: that will affect your rate if the pickup accepted
         </Text>
+        <AppButton
+          value={"Cancel"}
+          onPress={() => {
+            refRBSheet.current.close();
+          }}
+        />
       </View>
     </RBSheet>
   );
