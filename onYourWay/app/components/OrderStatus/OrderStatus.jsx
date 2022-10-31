@@ -56,6 +56,12 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 containerStyle={styles.containerStyle}
                 style={styles.style}
                 dropDownContainerStyle={styles.dropDownContainerStyle}
+                ArrowUpIconComponent={() => (
+                  <AntDesign name="up" size={24} color="white" />
+                )}
+                ArrowDownIconComponent={() => (
+                  <AntDesign name="down" size={24} color="white" />
+                )}
               />
             )}
           </View>
