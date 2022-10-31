@@ -7,7 +7,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import colors from "../../config/colors";
 import SmallButton from "../SmallButton/SmallButton";
 import styles from "./styles";
-import { AntDesign } from "@expo/vector-icons"; 
+import { AntDesign } from "@expo/vector-icons";
+import LightInput from "../LightInput/LightInput";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import CancelOrder from "../CancelOrder/CancelOrder";
 
 function OrderStatus({ refRBSheet, isReceiver }) {
@@ -56,7 +58,26 @@ function OrderStatus({ refRBSheet, isReceiver }) {
           </View>
 
           <View style={styles.orderStatus}>
-       
+            {isReceiver && (
+              <LightInput
+                text={"Status\n"}
+                editable={false}
+                contextMenuHidden={true}
+                value={value}
+                style={styles.lightInput}
+                textStyle={styles.text}
+              />
+            )}
+ 
+            <LightInput
+              text={"Current\nLocation"}
+              editable={!isReceiver}
+              contextMenuHidden={isReceiver}
+              value={location}
+              setValue={setLocation}
+              style={styles.lightInput}
+              textStyle={styles.text}
+            />
 
             {!isReceiver && (
               <DropDownPicker
@@ -81,7 +102,6 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 )}
               />
             )}
-
           </View>
           <View style={styles.btnContainer}>
             <SmallButton value={"Received"} color={colors.secondary} />
@@ -96,9 +116,8 @@ function OrderStatus({ refRBSheet, isReceiver }) {
           </View>
         </View>
 
- 
-      </RBSheet>
-      <CancelOrder refRBSheet={cancelOrderBSheet} />
+         
+      </RBSheet> 
     </>
   );
 }
