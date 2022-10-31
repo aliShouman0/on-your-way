@@ -11,6 +11,8 @@ function Input({
   placeholder,
   contextMenuHidden,
   editable,
+  multiline,
+  style,
 }) {
   return (
     <View style={styles.inputContainer}>
@@ -19,12 +21,14 @@ function Input({
         secureTextEntry={secureTextEntry}
         clearButtonMode="always"
         keyboardType={keyboardType}
-        style={styles.input}
+        style={[styles.input, style]}
         placeholder={placeholder ? placeholder : text}
         value={value}
         onChangeText={(text) => setValue(text)}
         editable={editable}
         contextMenuHidden={contextMenuHidden}
+        multiline={multiline}
+
       />
     </View>
   );
@@ -37,6 +41,8 @@ Input.defaultProps = {
   value: "",
   editable: true,
   contextMenuHidden: false,
+  multiline: false,
+  style: "",
 };
 
 export default Input;
