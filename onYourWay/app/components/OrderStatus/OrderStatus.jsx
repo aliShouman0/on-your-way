@@ -2,17 +2,32 @@ import React, { useRef, useState } from "react";
 import { Dimensions, Image, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import DropDownPicker from "react-native-dropdown-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 import colors from "../../config/colors";
 import SmallButton from "../SmallButton/SmallButton";
 import styles from "./styles";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons"; 
 import CancelOrder from "../CancelOrder/CancelOrder";
 
 function OrderStatus({ refRBSheet, isReceiver }) {
   const cancelOrderBSheet = useRef();
   const windowHeight = Dimensions.get("window").height;
+  const [location, setLocation] = useState("NA");
 
+  const [date, setDate] = useState(new Date());
+  const [openTime, setopenTime] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("Not Started");
+  const [items, setItems] = useState([
+    { label: "Problem", value: "problem" },
+    { label: "Not Started", value: "not" },
+    { label: "Awaiting Info", value: "awaiting" },
+    { label: "Hold", value: "hold" },
+    { label: "Picking", value: "picking" },
+    { label: "Picked", value: "picked" },
+    { label: "On Way", value: "onway" },
+  ]);
   return (
     <>
       <RBSheet
@@ -41,6 +56,8 @@ function OrderStatus({ refRBSheet, isReceiver }) {
           </View>
 
           <View style={styles.orderStatus}>
+       
+
             {!isReceiver && (
               <DropDownPicker
                 placeholder="Status"
@@ -64,6 +81,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 )}
               />
             )}
+
           </View>
           <View style={styles.btnContainer}>
             <SmallButton value={"Received"} color={colors.secondary} />
@@ -77,6 +95,8 @@ function OrderStatus({ refRBSheet, isReceiver }) {
             />
           </View>
         </View>
+
+ 
       </RBSheet>
       <CancelOrder refRBSheet={cancelOrderBSheet} />
     </>
