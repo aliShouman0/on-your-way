@@ -49,5 +49,34 @@ export default StyleSheet.create({
     width: windowWidth / 3.2,
   },
   text: { color: colors.white, fontWeight: "100" },
- 
+  textStyle: {
+    color: colors.white,
+    fontWeight: "100",
+  },
+  style: {
+    backgroundColor: "transparent",
+    color: colors.white,
+    borderColor: "white",
+    borderRadius: 0,
+  },
+  dropDownContainerStyle: {
+    backgroundColor: "transparent",
+    borderColor: "white",
+    borderRadius: 0,
+  },
+  containerStyle: {
+    height: 50,
+    width: "100%",
+    alignItems: "center",
+    marginTop: 38,
+    backgroundColor: "transparent",
+    color: colors.white,
+  },
+  btnContainer: {
+    width: "100%",
+    marginVertical: 3,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
 });
