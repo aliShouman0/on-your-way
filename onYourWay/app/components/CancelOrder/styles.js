@@ -33,4 +33,11 @@ export default StyleSheet.create({
     maxHeight: (windowHeight * 1) / 5,
     minHeight: 80,
   },
+  note: {
+    fontSize: text.sizeMid,
+    fontWeightL: "200",
+    color: colors.white,
+    width: "90%",
+    marginVertical: 20,
+  },
 });
