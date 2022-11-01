@@ -40,7 +40,29 @@ function AddOrder({ navigation }) {
           style={styles.style}
           dropDownContainerStyle={styles.dropDownContainerStyle}
           searchable={true}
-          searchPlaceholder={"City Name"} 
+          searchPlaceholder={"City Name"}
+          itemSeparator={false}
+          ArrowUpIconComponent={() => (
+            <AntDesign name="up" size={24} color="black" />
+          )}
+          ArrowDownIconComponent={() => (
+            <AntDesign name="down" size={24} color="black" />
+          )}
+        />
+        <DropDownPicker
+          placeholder="To"
+          open={openTo}
+          value={To}
+          items={items}
+          setOpen={setOpenTo}
+          setValue={setTo}
+          setItems={setItems}
+          textStyle={styles.textStyle}
+          containerStyle={styles.containerStyle}
+          style={styles.style}
+          dropDownContainerStyle={styles.dropDownContainerStyle}
+          searchable={true}
+          searchPlaceholder={"City Name"}
           itemSeparator={false}
           ArrowUpIconComponent={() => (
             <AntDesign name="up" size={24} color="black" />
