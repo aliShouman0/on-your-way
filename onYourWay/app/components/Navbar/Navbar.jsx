@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import styles from "./styles";
 
-function Navbar({ type, title, navigation }) {
+function Navbar({ type, title, navigation, rightIcon, onRightIconPress }) {
   const handelEvent = () => {
     if (type === "main") {
       navigation.openDrawer();
@@ -25,8 +25,15 @@ function Navbar({ type, title, navigation }) {
       </TouchableOpacity>
 
       <Text style={styles.title}>{title}</Text>
+      {rightIcon && (
+        <TouchableOpacity style={styles.rightIcon} onPress={onRightIconPress}>
+          {rightIcon}
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
-
+Navbar.defaultProps = {
+  rightIcon: false,
+};
 export default Navbar;
