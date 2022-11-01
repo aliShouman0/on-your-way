@@ -11,9 +11,11 @@ import { AntDesign } from "@expo/vector-icons";
 import LightInput from "../LightInput/LightInput";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import CancelOrder from "../CancelOrder/CancelOrder";
+import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
 
 function OrderStatus({ refRBSheet, isReceiver }) {
   const cancelOrderBSheet = useRef();
+  const receiveOrderBSheet = useRef();
   const windowHeight = Dimensions.get("window").height;
   const [location, setLocation] = useState("NA");
 
@@ -117,7 +119,14 @@ function OrderStatus({ refRBSheet, isReceiver }) {
             )}
           </View>
           <View style={styles.btnContainer}>
-            <SmallButton value={"Received"} color={colors.secondary} />
+            <SmallButton
+              value={"Received"}
+              color={colors.secondary}
+              onPress={() => {
+                refRBSheet.current.close();
+                receiveOrderBSheet.current.open();
+              }}
+            />
             <SmallButton value={"Request \n live Location"} />
             <SmallButton
               value={"Cancel"}
@@ -139,7 +148,9 @@ function OrderStatus({ refRBSheet, isReceiver }) {
             }}
           />
         )}
-      </RBSheet> 
+      </RBSheet>
+      <CancelOrder refRBSheet={cancelOrderBSheet} />
+      <ReceiveOrder refRBSheet={receiveOrderBSheet} />
     </>
   );
 }
