@@ -9,6 +9,8 @@ import DropDownPicker from "react-native-dropdown-picker";
 function AddOrder({ navigation }) {
   const [openFrom, setOpenFrom] = useState(false);
   const [from, setFrom] = useState("From");
+  const [openTo, setOpenTo] = useState(false);
+  const [to, setTo] = useState("To");
   const [items, setItems] = useState([
     { label: "Tripoli", value: "Tripoli" },
     { label: "Beirut", value: "Beirut" },
@@ -52,7 +54,7 @@ function AddOrder({ navigation }) {
         <DropDownPicker
           placeholder="To"
           open={openTo}
-          value={To}
+          value={to}
           items={items}
           setOpen={setOpenTo}
           setValue={setTo}
