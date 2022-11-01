@@ -9,8 +9,9 @@ export default StyleSheet.create({
     alignItems: "center",
     height: "100%",
   },
-  flatList: { 
+  flatList: {
     width: "100%",
     margin: 15,
+    flex: 1,
   },
 });
