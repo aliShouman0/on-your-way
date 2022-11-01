@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dimensions, Text, View, TouchableOpacity } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet"; 
+import RBSheet from "react-native-raw-bottom-sheet";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import Rate from "../Rate/Rate";
@@ -31,10 +31,10 @@ function CompletedOrder({ refRBSheet }) {
         <View style={styles.rateView}>
           <Rate rate={rate} styleText={styles.rate} size={28} />
           <View style={styles.iconView}>
-            <TouchableOpacity onPress={() => setRate(rate + 1)}> 
-              <FontAwesome5 name="plus-circle" size={30} style={styles.icon}/>
+            <TouchableOpacity onPress={() => setRate(rate + 1)}>
+              <FontAwesome5 name="plus-circle" size={30} style={styles.icon} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setRate(rate - 1)}> 
+            <TouchableOpacity onPress={() => setRate(rate - 1)}>
               <FontAwesome5 name="minus-circle" size={30} style={styles.icon} />
             </TouchableOpacity>
           </View>

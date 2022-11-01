@@ -36,4 +36,12 @@ export default StyleSheet.create({
     fontSize: text.sizeMid,
     marginRight: 20,
   },
+  iconView: {
+    flexDirection: "row",
+    marginLeft: 20,
+  },
+  icon: {
+    color: colors.white,
+    marginHorizontal: 5,
+  },
 });
