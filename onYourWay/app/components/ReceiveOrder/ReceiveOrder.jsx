@@ -33,7 +33,8 @@ function ReceiveOrder({ refRBSheet }) {
     };
 
     getBarCodeScannerPermissions();
-  }, []);
+  }, []); 
+
   const scan = () => {
     if (hasPermission === null) {
       alert("Requesting for camera permission");
@@ -66,10 +67,16 @@ function ReceiveOrder({ refRBSheet }) {
               <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={styles.barCodeScanner}
-              /> 
+              />
+              <AppButton
+                value={"Cancel"}
+                onPress={() => {
+                  setStartScan(false);
+                }}
+              />
             </>
           ) : (
-            <>
+            <> 
               <QRCode
                 value={codeValue ? "codeValue" : "error"}
                 logoSize={100}
@@ -96,7 +103,7 @@ function ReceiveOrder({ refRBSheet }) {
             </>
           )}
         </View>
-      </RBSheet>
+      </RBSheet> 
     </>
   );
 }
