@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 import text from "../../config/text";
 
- export default StyleSheet.create({
+export default StyleSheet.create({
   draggableIcon: {
     backgroundColor: colors.secondary,
   },
@@ -26,5 +26,14 @@ import text from "../../config/text";
     textAlignVertical: "top",
     height: 90,
   },
- 
+  rateView: {
+    marginBottom: 15,
+    justifyContent: "center",
+    width: "100%",
+    flexDirection: "row",
+  },
+  rate: {
+    fontSize: text.sizeMid,
+    marginRight: 20,
+  },
 });
