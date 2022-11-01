@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
 import Navbar from "../../components/Navbar/Navbar";
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
+import { AntDesign } from "@expo/vector-icons"; 
+import colors from "../../config/colors";
 import styles from "./styles";
 
 const testing = [
@@ -58,7 +60,14 @@ function MyOrder({ navigation }) {
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <Navbar type={"main"} title={"My Order"} navigation={navigation} />
+      <Navbar
+        type={"main"}
+        title={"My Order"}
+        navigation={navigation}
+        rightIcon={<AntDesign name="plus" size={35} color={colors.white} />}
+        onRightIconPress={() => navigation.navigate("AddOrder")}
+      />
+
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
