@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Dimensions, Text, View  } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet"; 
+import { Dimensions, Text, View, TouchableOpacity } from "react-native";
+import RBSheet from "react-native-raw-bottom-sheet";
+import { FontAwesome } from "@expo/vector-icons";
 import QRCode from "react-native-qrcode-svg";
 
 import Input from "../Input/Input";
-import styles from "./styles"; 
+import styles from "./styles";
+import AppButton from "../AppButton/AppButton";
 function ReceiveOrder({ refRBSheet }) {
   const [code, setCode] = useState("");
   const [startScan, setStartScan] = useState(false);
@@ -37,7 +39,12 @@ function ReceiveOrder({ refRBSheet }) {
             {codeValue ? codeValue : "Loading..."}
           </Text>
           <Input text="Code" value={code} setValue={setCode} />
-           
+          <Text style={styles.text}>Or</Text>
+          <TouchableOpacity style={styles.imgScan} onPress={() => {}}>
+            <FontAwesome name="camera" size={45} style={styles.icon} />
+            <Text style={styles.scan}>Scan</Text>
+          </TouchableOpacity>
+          <AppButton value={"submit"} onPress={() => {}} />
         </View>
       </RBSheet>
     </>
