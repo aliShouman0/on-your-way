@@ -5,8 +5,9 @@ import { AntDesign } from "@expo/vector-icons";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 import DropDownPicker from "react-native-dropdown-picker";
+import Input from "../../components/Input/Input";
 
-function AddOrder({ navigation }) {
+function AddOrder({ navigation }) { 
   const [openFrom, setOpenFrom] = useState(false);
   const [from, setFrom] = useState("From");
   const [openTo, setOpenTo] = useState(false);
@@ -74,6 +75,19 @@ function AddOrder({ navigation }) {
           )}
         />
       </View>
+      <Input
+        text="Description"
+        value={description}
+        setValue={setDescription}
+        style={styles.input}
+      />
+      <Input
+        text="Pay"
+        value={pay}
+        setValue={setPay}
+        style={styles.input}
+        keyboardType="numeric"
+      />
     </SafeAreaView>
   );
 }
