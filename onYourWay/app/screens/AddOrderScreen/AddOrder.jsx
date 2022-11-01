@@ -7,7 +7,9 @@ import styles from "./styles";
 import DropDownPicker from "react-native-dropdown-picker";
 import Input from "../../components/Input/Input";
 
-function AddOrder({ navigation }) { 
+function AddOrder({ navigation }) {
+  const [pay, setPay] = useState("");
+  const [description, setDescription] = useState("");
   const [openFrom, setOpenFrom] = useState(false);
   const [from, setFrom] = useState("From");
   const [openTo, setOpenTo] = useState(false);
