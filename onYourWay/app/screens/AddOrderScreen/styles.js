@@ -20,5 +20,16 @@ export default StyleSheet.create({
     color: colors.black,
     fontWeight: "400",
   },
- 
+  style: {
+    backgroundColor: colors.white,
+    color: colors.black,
+    borderRadius: 5,
+    width: "100%",
+  },
+  dropDownContainerStyle: {
+    backgroundColor: colors.white,
+    color: colors.black,
+    borderRadius: 0,
+    width: "100%",
+  }
 });
