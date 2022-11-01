@@ -15,7 +15,8 @@ import QRCode from "react-native-qrcode-svg";
 
 import Input from "../Input/Input";
 import styles from "./styles";
-import AppButton from "../AppButton/AppButton"; 
+import AppButton from "../AppButton/AppButton";
+import CompletedOrder from "../CompletedOrder/CompletedOrder";
 function ReceiveOrder({ refRBSheet }) {
   const completedOrderRBSheet = useRef();
   const [code, setCode] = useState("");
@@ -33,9 +34,6 @@ function ReceiveOrder({ refRBSheet }) {
 
     getBarCodeScannerPermissions();
   }, []);
-
- ;
-
   const scan = () => {
     if (hasPermission === null) {
       alert("Requesting for camera permission");
@@ -63,29 +61,40 @@ function ReceiveOrder({ refRBSheet }) {
         }}
       >
         <View style={styles.view}>
-          <QRCode
-            value={codeValue ? "codeValue" : "error"}
-            logoSize={100}
-            logoBackgroundColor="transparent"
-            backgroundColor="transparent"
-            size={150}
-          />
-          <Text style={styles.code}>
-            {codeValue ? codeValue : "Loading..."}
-          </Text>
-          <Input text="Code" value={code} setValue={setCode} />
-          <Text style={styles.text}>Or</Text>
-          <TouchableOpacity style={styles.imgScan} onPress={() => scan()}>
-            <FontAwesome name="camera" size={45} style={styles.icon} />
-            <Text style={styles.scan}>Scan</Text>
-          </TouchableOpacity>
-          <AppButton
-            value={"submit"}
-            onPress={() => {
-              refRBSheet.current.close();
-              completedOrderRBSheet.current.open();
-            }}
-          />
+          {startScan ? (
+            <>
+              <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={styles.barCodeScanner}
+              /> 
+            </>
+          ) : (
+            <>
+              <QRCode
+                value={codeValue ? "codeValue" : "error"}
+                logoSize={100}
+                logoBackgroundColor="transparent"
+                backgroundColor="transparent"
+                size={150}
+              />
+              <Text style={styles.code}>
+                {codeValue ? codeValue : "Loading..."}
+              </Text>
+              <Input text="Code" value={code} setValue={setCode} />
+              <Text style={styles.text}>Or</Text>
+              <TouchableOpacity style={styles.imgScan} onPress={() => scan()}>
+                <FontAwesome name="camera" size={45} style={styles.icon} />
+                <Text style={styles.scan}>Scan</Text>
+              </TouchableOpacity>
+              <AppButton
+                value={"submit"}
+                onPress={() => {
+                  refRBSheet.current.close();
+                  completedOrderRBSheet.current.open();
+                }}
+              />
+            </>
+          )}
         </View>
       </RBSheet>
     </>
