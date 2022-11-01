@@ -24,7 +24,18 @@ function Navbar({ type, title, navigation, rightIcon, onRightIconPress }) {
         )}
       </TouchableOpacity>
 
-      <Text style={styles.title}>{title}</Text>
+      <Text
+        style={[
+          styles.title,
+          rightIcon
+            ? ""
+            : {
+                marginRight: 50,
+              },
+        ]}
+      >
+        {title}
+      </Text>
       {rightIcon && (
         <TouchableOpacity style={styles.rightIcon} onPress={onRightIconPress}>
           {rightIcon}
