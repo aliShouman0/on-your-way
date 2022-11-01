@@ -14,5 +14,17 @@ import text from "../../config/text";
     flex: 1,
     alignItems: "center",
     width: "100%",
-  }, 
+  },
+  textTitle: {
+    fontSize: text.sizeBig,
+    fontWeightL: "500",
+    color: colors.white,
+    marginVertical: 15,
+  },
+  input: {
+    marginBottom: 15,
+    textAlignVertical: "top",
+    height: 90,
+  },
+ 
 });
