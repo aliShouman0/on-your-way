@@ -16,10 +16,12 @@ export default StyleSheet.create({
     textAlign: "left",
   },
   title: {
-    flex:1,
+    flex: 1,
     color: colors.white,
     fontSize: text.sizeMid,
     textAlign: "center",
-    marginRight:50
+  },
+  rightIcon: {
+    marginRight: 15,
   },
 });
