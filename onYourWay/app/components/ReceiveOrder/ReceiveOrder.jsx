@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Dimensions, Text, View, TouchableOpacity } from "react-native";
+import {
+  Button,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { FontAwesome } from "@expo/vector-icons";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -7,7 +15,7 @@ import QRCode from "react-native-qrcode-svg";
 
 import Input from "../Input/Input";
 import styles from "./styles";
-import AppButton from "../AppButton/AppButton";
+import AppButton from "../AppButton/AppButton"; 
 function ReceiveOrder({ refRBSheet }) {
   const completedOrderRBSheet = useRef();
   const [code, setCode] = useState("");
@@ -26,6 +34,21 @@ function ReceiveOrder({ refRBSheet }) {
     getBarCodeScannerPermissions();
   }, []);
 
+ ;
+
+  const scan = () => {
+    if (hasPermission === null) {
+      alert("Requesting for camera permission");
+    }
+    if (hasPermission === false) {
+      alert(
+        "Camera permission denied Go to settings and allow it to use the camera"
+      );
+      return;
+    }
+    setScanned(false);
+    setStartScan(true);
+  };
   return (
     <>
       <RBSheet
@@ -60,6 +83,7 @@ function ReceiveOrder({ refRBSheet }) {
             value={"submit"}
             onPress={() => {
               refRBSheet.current.close();
+              completedOrderRBSheet.current.open();
             }}
           />
         </View>
