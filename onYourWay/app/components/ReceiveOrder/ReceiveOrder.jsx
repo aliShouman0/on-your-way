@@ -33,7 +33,13 @@ function ReceiveOrder({ refRBSheet }) {
     };
 
     getBarCodeScannerPermissions();
-  }, []); 
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    setStartScan(false);
+    setCode(data);
+  };
 
   const scan = () => {
     if (hasPermission === null) {
@@ -76,7 +82,7 @@ function ReceiveOrder({ refRBSheet }) {
               />
             </>
           ) : (
-            <> 
+            <>
               <QRCode
                 value={codeValue ? "codeValue" : "error"}
                 logoSize={100}
