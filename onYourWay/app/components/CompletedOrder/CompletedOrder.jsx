@@ -9,6 +9,7 @@ import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
 function CompletedOrder({ refRBSheet }) {
   const [comment, setComment] = useState("");
+  const [close, setClose] = useState(false);
   const [rate, setRate] = useState(3);
   const windowHeight = Dimensions.get("window").height;
   if (rate < 0) setRate(0);
@@ -16,8 +17,11 @@ function CompletedOrder({ refRBSheet }) {
   return (
     <RBSheet
       ref={refRBSheet}
-      closeOnDragDown={true}
-      closeOnPressMask={true}
+      closeOnDragDown={false}
+      closeOnPressMask={false}
+      onClose={() => {
+        !close ? refRBSheet.current.open() : "";
+      }}
       animationType={"fade"}
       height={windowHeight / 2}
       customStyles={{
@@ -51,6 +55,7 @@ function CompletedOrder({ refRBSheet }) {
         <AppButton
           value={"submit"}
           onPress={() => {
+            setClose(true);
             refRBSheet.current.close();
           }}
         />
