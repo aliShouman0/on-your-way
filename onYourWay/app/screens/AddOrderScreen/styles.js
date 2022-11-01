@@ -31,5 +31,12 @@ export default StyleSheet.create({
     color: colors.black,
     borderRadius: 0,
     width: "100%",
-  }
+  },
+  containerStyle: {
+    alignItems: "center",
+    marginTop: 38,
+    backgroundColor: "transparent",
+    color: colors.white,
+    width: "45%",
+  }, 
 });
