@@ -7,7 +7,12 @@ import Rate from "../Rate/Rate";
 import Input from "../Input/Input";
 import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
-function CompletedOrder({ refRBSheet }) { 
+function CompletedOrder({ refRBSheet }) {
+  const [comment, setComment] = useState("");
+  const [rate, setRate] = useState(3);
+  const windowHeight = Dimensions.get("window").height;
+  if (rate < 0) setRate(0);
+  if (rate > 5) setRate(5);
   return (
     <RBSheet
       ref={refRBSheet}
@@ -22,6 +27,7 @@ function CompletedOrder({ refRBSheet }) {
     >
       <View style={styles.view}>
         <Text style={styles.textTitle}>Congrats </Text>
+
         <View style={styles.rateView}>
           <Rate rate={rate} styleText={styles.rate} size={28} />
           <View style={styles.iconView}>
@@ -32,7 +38,7 @@ function CompletedOrder({ refRBSheet }) {
               <FontAwesome5 name="minus-circle" size={30} style={styles.icon} />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> 
       </View>
     </RBSheet>
   );
