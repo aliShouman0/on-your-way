@@ -109,7 +109,8 @@ function ReceiveOrder({ refRBSheet }) {
             </>
           )}
         </View>
-      </RBSheet> 
+      </RBSheet>
+      <CompletedOrder refRBSheet={completedOrderRBSheet} />
     </>
   );
 }
