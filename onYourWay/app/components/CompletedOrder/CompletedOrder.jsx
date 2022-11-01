@@ -48,7 +48,12 @@ function CompletedOrder({ refRBSheet }) {
           style={styles.input}
         />
 
-         
+        <AppButton
+          value={"submit"}
+          onPress={() => {
+            refRBSheet.current.close();
+          }}
+        />
       </View>
     </RBSheet>
   );
