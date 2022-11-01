@@ -30,4 +30,21 @@ export default StyleSheet.create({
     fontSize: text.sizeSmall,
     marginVertical: 10,
   },
+  imgScan: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  icon: {
+    color: colors.white,
+    marginHorizontal: 10,
+  },
+  scan: {
+    color: colors.white,
+    fontSize: text.sizeMid,
+  },
+  barCodeScanner: {
+    width: "90%",
+    flex: 1,
+  },
 });
