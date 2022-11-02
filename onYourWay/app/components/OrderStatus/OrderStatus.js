@@ -62,7 +62,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
           <View style={styles.orderStatus}>
             {isReceiver && (
               <LightInput
-                text={"Status\n"}
+                text={"Current\nstatus"}
                 editable={false}
                 contextMenuHidden={true}
                 value={value}
@@ -85,7 +85,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
               />
             </TouchableWithoutFeedback>
             <LightInput
-              text={"Current\nLocation"}
+              text={"Current\nlocation"}
               editable={!isReceiver}
               contextMenuHidden={isReceiver}
               value={location}
@@ -127,7 +127,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 receiveOrderBSheet.current.open();
               }}
             />
-            <SmallButton value={"Request \n live Location"} />
+            <SmallButton value={"Request\nlocation"} />
             <SmallButton
               value={"Cancel"}
               onPress={() => {

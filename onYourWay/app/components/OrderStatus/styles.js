@@ -42,13 +42,16 @@ export default StyleSheet.create({
     marginVertical: 15,
   },
   lightInput: {
-    fontWeight: "400",
+    fontWeight: "300",
     fontSize: text.sizeMid,
   },
   time: {
     width: windowWidth / 3.2,
   },
-  text: { color: colors.white, fontWeight: "100" },
+  text: {
+    color: colors.white,
+    fontWeight: "100", 
+  },
   textStyle: {
     color: colors.white,
     fontWeight: "100",

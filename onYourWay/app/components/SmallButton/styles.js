@@ -8,7 +8,6 @@ export default StyleSheet.create({
     borderRadius: 0,
     width: "28%",
     height: 38,
-    marginVertical: 10,
     alignItems: "center",
     justifyContent: "center",
   },
