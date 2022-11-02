@@ -1,12 +1,13 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons"; 
 
 import MyOrder from "../../screens/MyOrderScreen/MyOrder";
 import colors from "../../config/colors";
 import styles from "./styles";
 import CustomDrawer from "../CustomDrawer/CustomDrawer";
 import AddOrder from "../../screens/AddOrderScreen/AddOrder";
+import PickUps from "../../screens/PickUpsScreen/PickUps"; 
 
 function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
@@ -46,7 +47,17 @@ function DrawerNavigator() {
         component={AddOrder}
         options={{
           title: "Add Order",
-          drawerItemStyle: { height: 0 },
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name="PickUps"
+        component={PickUps}
+        options={{
+          title: "Pick Ups",
+          drawerIcon: ({ focused, color, size }) => (
+            <FontAwesome name="level-up" size={size * 1.8} color={colors.black} />
+          ) 
         }}
       />
     </Drawer.Navigator>
