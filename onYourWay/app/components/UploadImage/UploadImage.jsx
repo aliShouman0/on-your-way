@@ -57,7 +57,16 @@ function UploadImage({ refRBSheet, setImage }) {
       animationType={"fade"}
       height={150}
     >
-     
+      <View style={styles.sheetView}>
+        <TouchableOpacity onPress={() => getImage("camera")}>
+          <FontAwesome name="camera" size={45} style={styles.iconSheet} />
+          <Text style={styles.sheetText}>Camera</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => getImage("library")}>
+          <Entypo name="folder-images" size={45} style={styles.iconSheet} />
+          <Text style={styles.sheetText}>Image Library</Text>
+        </TouchableOpacity>
+      </View>
     </RBSheet>
   );
 }
