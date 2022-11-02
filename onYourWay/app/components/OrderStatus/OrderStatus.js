@@ -11,13 +11,13 @@ import { AntDesign } from "@expo/vector-icons";
 import LightInput from "../LightInput/LightInput";
 import CancelOrder from "../CancelOrder/CancelOrder";
 import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
+import AppButton from "../AppButton/AppButton";
 
 function OrderStatus({ refRBSheet, isReceiver }) {
   const cancelOrderBSheet = useRef();
   const receiveOrderBSheet = useRef();
   const windowHeight = Dimensions.get("window").height;
   const [location, setLocation] = useState("NA");
-
   const [date, setDate] = useState(new Date());
   const [openTime, setopenTime] = useState(false);
   const [open, setOpen] = useState(false);
@@ -71,7 +71,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
             {!isReceiver && (
               <>
                 <View style={styles.statusContainer}>
-                  <Text style={styles.statusText}>{"Current\nstatus\n"}</Text>
+                  <Text style={styles.statusText}>{"Current\nstatus"}</Text>
                   <DropDownPicker
                     placeholder="Status"
                     open={open}
@@ -105,7 +105,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 text={"Average\ntime"}
                 editable={false}
                 contextMenuHidden={true}
-                value={`${date.getHours()}H:${date.getMinutes()}M`}
+                value={`${date.getHours()}:${date.getMinutes()}`}
                 style={styles.lightInput}
                 textStyle={styles.text}
               />
@@ -120,6 +120,13 @@ function OrderStatus({ refRBSheet, isReceiver }) {
               textStyle={styles.text}
             />
           </View>
+          {!isReceiver && (
+            <AppButton
+              value={"Save"}
+              style={[styles.save, { backgroundColor: "grey" }]}
+              onPress={() => {}}
+            />
+          )}
           <View style={styles.btnContainer}>
             <SmallButton
               value={"Received"}
@@ -129,7 +136,9 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 receiveOrderBSheet.current.open();
               }}
             />
-            <SmallButton value={"Request\nlocation"} />
+            <SmallButton
+              value={`${isReceiver ? "Request" : "Live"}\nlocation`}
+            />
             <SmallButton
               value={"Cancel"}
               onPress={() => {
