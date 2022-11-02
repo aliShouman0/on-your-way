@@ -18,6 +18,14 @@ function DropDownCity({ placeholder, setValue, value }) {
       setOpen={setOpenFrom}
       setValue={setValue}
       setItems={setItems}
+      textStyle={styles.textStyle}
+      containerStyle={styles.containerStyle}
+      style={styles.style}
+      dropDownContainerStyle={styles.dropDownContainerStyle} 
+      searchTextInputStyle={styles.searchTextInputStyle}
+      searchable={true}
+      searchPlaceholder={"City Name"}
+      itemSeparator={false}
       ArrowUpIconComponent={() => (
         <AntDesign name="up" size={24} color={colors.white} />
       )}
