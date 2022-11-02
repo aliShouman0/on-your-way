@@ -34,7 +34,21 @@ function UploadImage({ refRBSheet, setImage }) {
       return result;
     }
     return;
-  }; 
+  };
+
+  const getImage = async (by) => {
+    let photo;
+    if (by === "camera") {
+      photo = await camera();
+    }
+    if (by === "library") {
+      photo = await pickImage();
+    }
+    if (photo) {
+      setImage(photo);
+    }
+    refRBSheet.current.close();
+  };
   return (
     <RBSheet
       ref={refRBSheet}
