@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -6,14 +6,21 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 import DropDownPicker from "react-native-dropdown-picker";
 import Input from "../../components/Input/Input";
+import UploadImage from "../../components/UploadImage/UploadImage";
 
 function AddOrder({ navigation }) {
+  const uploadRBSheet = useRef();
   const [pay, setPay] = useState("");
   const [description, setDescription] = useState("");
   const [openFrom, setOpenFrom] = useState(false);
   const [from, setFrom] = useState("From");
   const [openTo, setOpenTo] = useState(false);
   const [to, setTo] = useState("To");
+  const [photo, setPhoto] = useState(null);
+  const [mainImg, setMainImg] = useState(null);
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [imageFor, setImageFor] = useState("");
   const [items, setItems] = useState([
     { label: "Tripoli", value: "Tripoli" },
     { label: "Beirut", value: "Beirut" },
@@ -28,9 +35,34 @@ function AddOrder({ navigation }) {
     { label: "Marjayoun", value: "Marjayoun" },
     { label: "Jdaidet el Matn", value: "Jdaidet" },
   ]);
+
+  const saveImage = async (by) => {
+    if (photo) {
+      switch (imageFor) {
+        case "mainImg":
+          setMainImg(photo.uri);
+          break;
+        case "image1":
+          setImage1(photo.uri);
+
+          break;
+        case "image2":
+          setImage2(photo.uri);
+
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  useEffect(() => {
+    saveImage(imageFor);
+  }, [photo]);
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Add Order"} navigation={navigation} />
+      <UploadImage refRBSheet={uploadRBSheet} setImage={setPhoto} />
       <View style={styles.city}>
         <DropDownPicker
           placeholder="From"
