@@ -16,6 +16,7 @@ function OrderInfo({
   pay,
   orderImg,
   orderDescription,
+  isReceiver,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
@@ -55,9 +56,11 @@ function OrderInfo({
         />
       </View>
       <UserInfo refRBSheet={userInfoBSheet} />
-      <OrderStatus refRBSheet={orderStatusBSheet} isReceiver={true} />
+      <OrderStatus refRBSheet={orderStatusBSheet} isReceiver={isReceiver} />
     </View>
   );
 }
-
+OrderInfo.defaultProps = {
+  isReceiver: true,
+};
 export default OrderInfo;
