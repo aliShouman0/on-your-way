@@ -1,5 +1,12 @@
-import { StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 import text from "../../config/text";
 
-export default StyleSheet.create({});
+export default StyleSheet.create({
+  mainView: {
+    backgroundColor: colors.primary,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    alignItems: "center",
+    height: "100%",
+  },
+});
