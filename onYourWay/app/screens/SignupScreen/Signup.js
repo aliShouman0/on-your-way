@@ -1,10 +1,5 @@
-import React, {  useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, View, TouchableOpacity, ScrollView } from "react-native";
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -17,6 +12,7 @@ function Signup({ navigation }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [confirmPass, setconfirmPass] = useState("");
   const [password, setPassword] = useState("");
   const [date, setDate] = useState(new Date());
@@ -56,6 +52,7 @@ function Signup({ navigation }) {
             setValue={setPhone}
             keyboardType="numeric"
           />
+          <Input text="Address" value={address} setValue={setAddress} />
           <Input
             text="Password"
             value={password}

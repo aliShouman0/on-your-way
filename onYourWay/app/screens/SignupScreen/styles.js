@@ -22,7 +22,7 @@ export default StyleSheet.create({
     width: "100%",
     flex: 2,
     alignItems: "center",
-    marginTop: 50,
+    marginTop: 15,
   },
   date: {
     width: "100%",
