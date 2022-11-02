@@ -181,7 +181,16 @@ function AddOrder({ navigation }) {
             source={image2 ? { uri: image2 } : ""}
           />
         </TouchableOpacity>
-      </View> 
+      </View>
+      <AppButton
+        value={"ADD Order"}
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "MyOrder" }],
+          })
+        }
+      />
     </SafeAreaView>
   );
 }
