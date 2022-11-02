@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dimensions, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import Input from "../Input/Input";
+import Input from "../Input/Input.js";
 import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
 function CancelOrder({ refRBSheet }) {
