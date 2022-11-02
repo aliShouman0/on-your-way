@@ -1,13 +1,15 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { FontAwesome } from "@expo/vector-icons"; 
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import MyOrder from "../../screens/MyOrderScreen/MyOrder";
 import colors from "../../config/colors";
 import styles from "./styles";
 import CustomDrawer from "../CustomDrawer/CustomDrawer";
 import AddOrder from "../../screens/AddOrderScreen/AddOrder";
-import PickUps from "../../screens/PickUpsScreen/PickUps"; 
+import PickUps from "../../screens/PickUpsScreen/PickUps";
+import History from "../../screens/History/History";
 
 function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
@@ -36,7 +38,8 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <FontAwesome
               name="cart-plus"
-              size={size * 1.5}
+              size={35}
+              style={{ width: 35 }}
               color={colors.black}
             />
           ),
@@ -56,8 +59,29 @@ function DrawerNavigator() {
         options={{
           title: "Pick Ups",
           drawerIcon: ({ focused, color, size }) => (
-            <FontAwesome name="level-up" size={size * 1.8} color={colors.black} />
-          ) 
+            <FontAwesome
+              name="level-up"
+              size={35}
+              style={{ width: 35 ,paddingLeft:10}}
+              color={colors.black}
+            />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name="History"
+        component={History}
+        options={{
+          title: "History",
+          drawerIcon: ({ focused, color, size }) => (
+            <MaterialCommunityIcons
+              name="timer-sand"
+              size={35}
+              style={{ width: 35 }}
+              color={colors.black}
+            />
+          ),
         }}
       />
     </Drawer.Navigator>
