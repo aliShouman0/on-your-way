@@ -59,11 +59,11 @@ export default StyleSheet.create({
   description: {
     marginTop: 12,
     borderRadius: 10,
-    borderColor: colors.lightWhite, 
+    borderColor: colors.lightWhite,
     borderStyle: "solid",
     borderWidth: 0.5,
     width: "100%",
-    padding: 15, 
+    padding: 15,
     fontSize: text.sizeMid,
     fontWeight: "400",
     color: colors.white,
@@ -73,5 +73,8 @@ export default StyleSheet.create({
     marginTop: 12,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  rate: {
+    marginTop: 12,
   },
 });
