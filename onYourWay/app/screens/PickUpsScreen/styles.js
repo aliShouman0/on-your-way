@@ -13,7 +13,9 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
-    marginTop: 5,
-    marginBottom: 20, flex:1
+    marginVertical: 15, 
+  },
+  flatList: {
+    width: "100%",
   },
 });
