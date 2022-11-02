@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../../screens/LoginScreen/Login";
 import NextSignupScreen from "../../screens/NextSignupScreen/NextSignupScreen";
 import Signup from "../../screens/SignupScreen/Signup";
+import DrawerNavigator from "../DrawerNavigator/DrawerNavigator";
 
 function StackNavigator() {
   const Stack = createStackNavigator();
@@ -25,6 +26,11 @@ function StackNavigator() {
         <Stack.Screen
           name="NextSignupScreen"
           component={NextSignupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="DrawerNavigator"
+          component={DrawerNavigator}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
