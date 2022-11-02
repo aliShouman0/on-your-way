@@ -1,9 +1,30 @@
 import React, { useState } from "react";
-import DropDownPicker from "react-native-dropdown-picker"; 
+import DropDownPicker from "react-native-dropdown-picker";
+import { AntDesign } from "@expo/vector-icons";
 
-function DropDownCity({ placeholder, setValue, value }) { 
+import styles from "./styles";
+import colors from "../../config/colors";
+import cities from "../../config/cities";
+
+function DropDownCity({ placeholder, setValue, value }) {
+  const [openFrom, setOpenFrom] = useState(false);
+  const [items, setItems] = useState(cities);
   return (
-     <></>
+    <DropDownPicker
+      placeholder={placeholder}
+      open={openFrom}
+      value={value}
+      items={items}
+      setOpen={setOpenFrom}
+      setValue={setValue}
+      setItems={setItems}
+      ArrowUpIconComponent={() => (
+        <AntDesign name="up" size={24} color={colors.white} />
+      )}
+      ArrowDownIconComponent={() => (
+        <AntDesign name="down" size={24} color={colors.white} />
+      )}
+    />
   );
 }
 
