@@ -1,11 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SafeAreaView, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 import DropDownPicker from "react-native-dropdown-picker";
 import Input from "../../components/Input/Input";
+import AppButton from "../../components/AppButton/AppButton";
 import UploadImage from "../../components/UploadImage/UploadImage";
 
 function AddOrder({ navigation }) {
@@ -122,6 +130,27 @@ function AddOrder({ navigation }) {
         style={styles.input}
         keyboardType="numeric"
       />
+
+      <View style={styles.imgContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            setImageFor("mainImg");
+            uploadRBSheet.current.open();
+          }}
+        >
+          <View style={styles.icon}>
+            <MaterialIcons name="add-photo-alternate" size={25} color="black" />
+            <Text>Main Image</Text>
+          </View>
+          <Image
+            resizeMode="contain"
+            style={styles.img}
+            source={mainImg ? { uri: mainImg } : ""}
+          />
+        </TouchableOpacity>
+      </View>
+
+     
     </SafeAreaView>
   );
 }
