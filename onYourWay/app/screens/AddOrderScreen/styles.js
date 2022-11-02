@@ -62,5 +62,27 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 100,
   },
-  
+  imgContainer: {
+    marginTop: 20,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 50,
+  },
+  img: {
+    width: 100,
+    height: 100,
+    backgroundColor: colors.white,
+    borderRadius: 15,
+  },
+  iconSheet: {
+    color: colors.primary,
+    textAlign: "center",
+  },
+  sheetText: {
+    color: colors.primary,
+    fontSize: text.sizeSmall,
+    marginVertical: 20,
+  },
 });
