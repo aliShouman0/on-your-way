@@ -43,7 +43,7 @@ export default StyleSheet.create({
   },
   lightInput: {
     fontWeight: "300",
-    fontSize: text.sizeMid,
+    fontSize: text.sizeSmall,
   },
   time: {
     width: windowWidth / 3.2,
