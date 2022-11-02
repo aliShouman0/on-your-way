@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Dimensions, Image, View } from "react-native";
+import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -9,7 +9,6 @@ import SmallButton from "../SmallButton/SmallButton";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import LightInput from "../LightInput/LightInput";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import CancelOrder from "../CancelOrder/CancelOrder";
 import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
 
@@ -58,7 +57,6 @@ function OrderStatus({ refRBSheet, isReceiver }) {
               style={styles.img}
             />
           </View>
-
           <View style={styles.orderStatus}>
             {isReceiver && (
               <LightInput
@@ -70,8 +68,36 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 textStyle={styles.text}
               />
             )}
+            {!isReceiver && (
+              <>
+                <View style={styles.statusContainer}>
+                  <Text style={styles.statusText}>{"Current\nstatus\n"}</Text>
+                  <DropDownPicker
+                    placeholder="Status"
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    disabled={isReceiver}
+                    showArrowIcon={!isReceiver}
+                    textStyle={styles.textStyle}
+                    containerStyle={styles.containerStyle}
+                    style={styles.style}
+                    dropDownContainerStyle={styles.dropDownContainerStyle}
+                    ArrowUpIconComponent={() => (
+                      <AntDesign name="up" size={24} color="white" />
+                    )}
+                    ArrowDownIconComponent={() => (
+                      <AntDesign name="down" size={24} color="white" />
+                    )}
+                  />
+                </View>
+              </>
+            )}
 
-            <TouchableWithoutFeedback
+            <TouchableOpacity
               style={styles.time}
               onPress={() => setopenTime(isReceiver ? false : true)}
             >
@@ -83,7 +109,7 @@ function OrderStatus({ refRBSheet, isReceiver }) {
                 style={styles.lightInput}
                 textStyle={styles.text}
               />
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
             <LightInput
               text={"Current\nlocation"}
               editable={!isReceiver}
@@ -93,30 +119,6 @@ function OrderStatus({ refRBSheet, isReceiver }) {
               style={styles.lightInput}
               textStyle={styles.text}
             />
-
-            {!isReceiver && (
-              <DropDownPicker
-                placeholder="Status"
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                disabled={isReceiver}
-                showArrowIcon={!isReceiver}
-                textStyle={styles.textStyle}
-                containerStyle={styles.containerStyle}
-                style={styles.style}
-                dropDownContainerStyle={styles.dropDownContainerStyle}
-                ArrowUpIconComponent={() => (
-                  <AntDesign name="up" size={24} color="white" />
-                )}
-                ArrowDownIconComponent={() => (
-                  <AntDesign name="down" size={24} color="white" />
-                )}
-              />
-            )}
           </View>
           <View style={styles.btnContainer}>
             <SmallButton
