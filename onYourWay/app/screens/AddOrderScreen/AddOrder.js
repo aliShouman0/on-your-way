@@ -15,7 +15,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import Input from "../../components/Input/Input";
 import AppButton from "../../components/AppButton/AppButton";
 import UploadImage from "../../components/UploadImage/UploadImage";
-
+import cities from "../../config/cities";
 function AddOrder({ navigation }) {
   const uploadRBSheet = useRef();
   const [pay, setPay] = useState("");
@@ -29,20 +29,7 @@ function AddOrder({ navigation }) {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [imageFor, setImageFor] = useState("");
-  const [items, setItems] = useState([
-    { label: "Tripoli", value: "Tripoli" },
-    { label: "Beirut", value: "Beirut" },
-    { label: "Sidon", value: "Sidon" },
-    { label: "Tyre", value: "Tyre" },
-    { label: "Jounie", value: "Jounie" },
-    { label: "Zahle", value: "Zahle" },
-    { label: "Nabatiye", value: "Nabatiye" },
-    { label: "Baalbek", value: "Baalbek" },
-    { label: "Amioun", value: "Amioun" },
-    { label: "Baabda", value: "Baabda" },
-    { label: "Marjayoun", value: "Marjayoun" },
-    { label: "Jdaidet el Matn", value: "Jdaidet" },
-  ]);
+  const [items, setItems] = useState(cities);
 
   const saveImage = async (by) => {
     if (photo) {

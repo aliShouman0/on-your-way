@@ -5,7 +5,7 @@ import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
- 
+
 function PickUps({ navigation }) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");

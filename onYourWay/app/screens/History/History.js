@@ -5,7 +5,38 @@ import Navbar from "../../components/Navbar/Navbar";
 import OrderInfo from "../../components/OrderInfo/OrderInfo"; 
 import styles from "./styles";
 
- 
+const testing = [
+  {
+    id: "id1",
+    userName: "Ali Alrida Shouman",
+    userImg: require("../../assets/user1.jpg"),
+    from: "Beirut",
+    to: "Byblos",
+    pay: "145000L.L",
+    orderImg: require("../../assets/keyboard.jpg"),
+    orderDescription: "keyboard and mouse",
+  },
+  {
+    id: "id2",
+    userName: "Baker",
+    userImg: require("../../assets/user1.jpg"),
+    from: "Saida",
+    to: "Nabatieh",
+    pay: "46000L.L",
+    orderImg: require("../../assets/keyboard.jpg"),
+    orderDescription: "Laptop",
+  },
+  {
+    id: "id3",
+    userName: "Aya Matok",
+    userImg: require("../../assets/user1.jpg"),
+    from: "Beirut",
+    to: "Tripoli",
+    pay: "745000L.L",
+    orderImg: require("../../assets/keyboard.jpg"),
+    orderDescription: "Sandwich",
+  },
+];
 
 function History({ navigation }) {
   const [from, setFrom] = useState("");
