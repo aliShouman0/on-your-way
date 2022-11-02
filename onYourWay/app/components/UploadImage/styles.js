@@ -8,5 +8,9 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-  } 
+  },
+  iconSheet: {
+    color: colors.primary,
+    textAlign: "center",
+  },
 });
