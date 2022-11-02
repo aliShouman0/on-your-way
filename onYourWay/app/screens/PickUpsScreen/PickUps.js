@@ -11,7 +11,21 @@ function PickUps({ navigation }) {
   const [to, setTo] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState(testing);
- 
+
+  const refresh = () => {
+    setData([
+      {
+        id: "id3",
+        userName: "Refresh Done",
+        userImg: require("../../assets/user1.jpg"),
+        from: "Beirut",
+        to: "Tripoli",
+        pay: "745000L.L",
+        orderImg: require("../../assets/keyboard.jpg"),
+        orderDescription: "Refresh Done",
+      },
+    ]);
+  };
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} />
@@ -25,7 +39,20 @@ function PickUps({ navigation }) {
         data={data}
         refreshing={refreshing}
         onRefresh={refresh}
-       
+        renderItem={({ item, index, separators }) => (
+          <OrderInfo
+            key={item.id}
+            id={item.id}
+            userName={item.userName}
+            userImg={item.userImg}
+            from={item.from}
+            to={item.to}
+            pay={item.pay}
+            orderImg={item.orderImg}
+            orderDescription={item.orderDescription}
+            isReceiver={false}
+          />
+        )}
       />
     </SafeAreaView>
   );
