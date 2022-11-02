@@ -148,9 +148,40 @@ function AddOrder({ navigation }) {
             source={mainImg ? { uri: mainImg } : ""}
           />
         </TouchableOpacity>
-      </View>
 
-     
+        <TouchableOpacity
+          onPress={() => {
+            setImageFor("image1");
+            uploadRBSheet.current.open();
+          }}
+        >
+          <View style={styles.icon}>
+            <MaterialIcons name="add-photo-alternate" size={25} color="black" />
+            <Text> Image-1 </Text>
+          </View>
+          <Image
+            resizeMode="contain"
+            style={styles.img}
+            source={image1 ? { uri: image1 } : ""}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setImageFor("image2");
+            uploadRBSheet.current.open();
+          }}
+        >
+          <View style={styles.icon}>
+            <MaterialIcons name="add-photo-alternate" size={25} color="black" />
+            <Text> Image-2 </Text>
+          </View>
+          <Image
+            resizeMode="contain"
+            style={styles.img}
+            source={image2 ? { uri: image2 } : ""}
+          />
+        </TouchableOpacity>
+      </View> 
     </SafeAreaView>
   );
 }
