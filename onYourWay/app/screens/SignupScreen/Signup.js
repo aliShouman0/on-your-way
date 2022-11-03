@@ -20,7 +20,7 @@ function Signup({ navigation }) {
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <Navbar type={"register"} title={"Register"} navigation={navigation} />
+      <Navbar type={"back"} title={"Register"} navigation={navigation} />
       <ScrollView style={styles.scroll}>
         <View style={styles.inputContainer}>
           <Input text="Full Name" value={name} setValue={setName} />

@@ -45,7 +45,7 @@ function NextSignupScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.mainView}>
       <UploadImage refRBSheet={uploadRBSheet} setImage={setImage} />
-      <Navbar type={"register"} title={"Register"} navigation={navigation} />
+      <Navbar type={"back"} title={"Register"} navigation={navigation} />
       <View style={styles.view}>
         <Text style={styles.text}>Upload your profile photo</Text>
         <TouchableOpacity

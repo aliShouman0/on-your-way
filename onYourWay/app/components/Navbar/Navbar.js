@@ -9,7 +9,7 @@ function Navbar({ type, title, navigation, rightIcon, onRightIconPress }) {
     if (type === "main") {
       navigation.openDrawer();
     }
-    if (type === "register") {
+    if (type === "back") {
       navigation.pop();
     }
   };
