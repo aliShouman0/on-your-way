@@ -21,5 +21,20 @@ export default StyleSheet.create({
     flex: 1,
     marginLeft: 15,
     justifyContent: "center",
-  }
+  },
+  name: {
+    color: colors.white,
+    fontSize: text.sizeMid,
+    fontWeight: "400",
+  },
+  lastMessage: {
+    color: colors.white,
+    fontSize: text.sizeSmall,
+    fontWeight: "200",
+  },
+  date: {
+    color: colors.white,
+    fontSize: text.sizeSmall,
+    marginRight: 15,
+  },
 });
