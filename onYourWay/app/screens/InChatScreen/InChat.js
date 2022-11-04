@@ -1,9 +1,12 @@
-import React from "react";
-import { Image, SafeAreaView, ScrollView, Text } from "react-native";
+import React, { useState } from "react";
+import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
+
+import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 
 function InChat({ navigation, route }) {
+  const [message, setMessage] = useState("");
   const { userName, userImg } = route.params;
   return (
     <SafeAreaView style={styles.mainView}>
@@ -29,6 +32,15 @@ function InChat({ navigation, route }) {
         <Text style={styles.getMessage}>Hi</Text>
         <Text style={styles.sendMessage}>Hello</Text>
       </ScrollView>
+
+      <View>
+        <Input 
+          placeholder={"Say Hi!"}
+          value={message}
+          setValue={setMessage}
+          style={styles.input}
+        />
+      </View>
     </SafeAreaView>
   );
 }
