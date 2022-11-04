@@ -1,9 +1,22 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { Image, SafeAreaView, ScrollView, Text } from "react-native";
+import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 
 function InChat({ navigation, route }) {
-  return <SafeAreaView style={styles.mainView}></SafeAreaView>;
+  const { userName, userImg } = route.params;
+  return (
+    <SafeAreaView style={styles.mainView}>
+      <Navbar
+        type={"back"}
+        title={userName}
+        navigation={navigation}
+        rightIcon={
+          <Image resizeMode="contain" source={userImg} style={styles.userImg} />
+        }
+      />
+    </SafeAreaView>
+  );
 }
 
 export default InChat;
