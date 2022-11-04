@@ -4,21 +4,20 @@ import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-import MyOrder from "../../screens/MyOrderScreen/MyOrder";
 import colors from "../../config/colors";
 import styles from "./styles";
 import CustomDrawer from "../CustomDrawer/CustomDrawer";
-import AddOrder from "../../screens/AddOrderScreen/AddOrder";
 import PickUps from "../../screens/PickUpsScreen/PickUps";
 import History from "../../screens/History/History";
 import ChatStackNavigator from "../ChatStackNavigator/ChatStackNavigator";
+import MyOrderStackNavigator from "../MyOrderStackNavigator/MyOrderStackNavigator";
 
 function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
 
   return (
     <Drawer.Navigator
-      initialRouteName="MyOrder"
+      initialRouteName="MyOrderStackNavigator"
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
@@ -33,8 +32,8 @@ function DrawerNavigator() {
       }}
     >
       <Drawer.Screen
-        name="MyOrder"
-        component={MyOrder}
+        name="MyOrderStackNavigator"
+        component={MyOrderStackNavigator}
         options={{
           title: "My Order",
           drawerIcon: ({ focused, color, size }) => (
@@ -45,14 +44,6 @@ function DrawerNavigator() {
               color={colors.black}
             />
           ),
-        }}
-      />
-      <Drawer.Screen
-        name="AddOrder"
-        component={AddOrder}
-        options={{
-          title: "Add Order",
-          drawerItemStyle: { display: "none" },
         }}
       />
       <Drawer.Screen
