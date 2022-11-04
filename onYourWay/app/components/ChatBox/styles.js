@@ -6,7 +6,7 @@ export default StyleSheet.create({
   mainView: {
     flexDirection: "row",
     backgroundColor: colors.darker,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     marginVertical:10,
     padding: 10,
     borderRadius: 10,
