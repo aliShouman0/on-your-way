@@ -1,6 +1,5 @@
 import { Platform, StatusBar, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import text from "../../config/text";
+import colors from "../../config/colors"; 
 
 export default StyleSheet.create({
   mainView: {
@@ -12,6 +11,6 @@ export default StyleSheet.create({
   },
   flatList: {
     width: "100%",
-    margin: 15, 
+    margin: 15,
   },
 });

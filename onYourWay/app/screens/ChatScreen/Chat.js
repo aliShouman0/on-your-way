@@ -5,7 +5,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 
  
-
 function Chat({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState(testing);
@@ -36,6 +35,7 @@ function Chat({ navigation }) {
             userImg={item.userImg}
             lastMessage={item.lastMessage}
             date={item.date}
+            navigation={navigation}
           />
         )}
       />
