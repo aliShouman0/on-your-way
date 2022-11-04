@@ -44,4 +44,19 @@ export default StyleSheet.create({
     marginVertical: 5,
     alignSelf: "flex-end",
   },
+  messageBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 20,
+  },
+  inputContainerStyle: { width: "80%", marginRight: 10 },
+  input: {
+    backgroundColor: colors.dark,
+    color: colors.white,
+    width: "100%",
+    margin: 0,
+    height: 50,
+  }, 
 });
