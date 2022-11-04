@@ -11,6 +11,7 @@ import PickUps from "../../screens/PickUpsScreen/PickUps";
 import History from "../../screens/History/History";
 import ChatStackNavigator from "../ChatStackNavigator/ChatStackNavigator";
 import MyOrderStackNavigator from "../MyOrderStackNavigator/MyOrderStackNavigator";
+import Account from "../../screens/AccountScreen/Account";
 
 function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
@@ -90,6 +91,13 @@ function DrawerNavigator() {
               color={colors.black}
             />
           ),
+        }}
+      />
+      <Drawer.Screen
+        name="Account"
+        component={Account}
+        options={{
+          drawerItemStyle: { height: 0, display: "none" },
         }}
       />
     </Drawer.Navigator>
