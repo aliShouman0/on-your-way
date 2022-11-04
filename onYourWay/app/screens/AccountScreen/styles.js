@@ -19,5 +19,19 @@ export default StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  
+  inputContainer: {
+    width: "100%",
+    flex: 2,
+    alignItems: "center",
+    marginTop: 15,
+  },
+  date: {
+    width: "100%",
+    alignItems: "center",
+  },
+  datePic: {
+    position: "absolute",
+    right: 40,
+    top: 35,
+  },
 });
