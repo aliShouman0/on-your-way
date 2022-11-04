@@ -1,13 +1,17 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { FontAwesome } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  FontAwesome5,
+  Entypo,
+} from "@expo/vector-icons";
 
 import colors from "../../config/colors";
 import styles from "./styles";
 import CustomDrawer from "../CustomDrawer/CustomDrawer";
 import PickUps from "../../screens/PickUpsScreen/PickUps";
+import Orders from "../../screens/OrdersScreen/Orders";
 import History from "../../screens/History/History";
 import ChatStackNavigator from "../ChatStackNavigator/ChatStackNavigator";
 import MyOrderStackNavigator from "../MyOrderStackNavigator/MyOrderStackNavigator";
@@ -40,7 +44,7 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <FontAwesome
               name="cart-plus"
-              size={35}
+              size={30}
               style={{ width: 35 }}
               color={colors.black}
             />
@@ -55,7 +59,7 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <FontAwesome
               name="level-up"
-              size={35}
+              size={30}
               style={{ width: 35, paddingLeft: 10 }}
               color={colors.black}
             />
@@ -71,8 +75,22 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
               name="timer-sand"
-              size={35}
+              size={30}
               style={{ width: 35 }}
+              color={colors.black}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Orders"
+        component={Orders}
+        options={{
+          title: "Orders",
+          drawerIcon: ({ focused, color, size }) => (
+            <FontAwesome5
+              name="box-open"
+              size={27} 
               color={colors.black}
             />
           ),
@@ -86,7 +104,7 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <Entypo
               name="chat"
-              size={35}
+              size={27}
               style={{ width: 35 }}
               color={colors.black}
             />
