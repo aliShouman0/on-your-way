@@ -37,7 +37,7 @@ export default StyleSheet.create({
   },
   footerText: {
     paddingVertical: 20,
-    fontSize: text.sizeMid,
+    fontSize: text.sizeSmall,
     fontWeight: "500",
     color: colors.white,
   },

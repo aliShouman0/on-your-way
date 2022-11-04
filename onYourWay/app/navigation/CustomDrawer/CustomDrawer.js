@@ -30,7 +30,7 @@ const CustomDrawer = (props) => {
           style={[styles.footerContent, account && styles.active]}
           onPress={() => props.navigation.navigate("Account")}
         >
-          <MaterialIcons name="account-circle" size={45} style={styles.icon} />
+          <MaterialIcons name="account-circle" size={40} style={styles.icon} />
           <Text style={[styles.footerText, account && styles.active]}>
             Account
           </Text>
@@ -40,7 +40,7 @@ const CustomDrawer = (props) => {
           style={styles.footerContent}
           onPress={() => props.navigation.navigate("Login")}
         >
-          <MaterialCommunityIcons name="logout" size={45} style={styles.icon} />
+          <MaterialCommunityIcons name="logout" size={40} style={styles.icon} />
           <Text style={styles.footerText}>Log Out</Text>
         </TouchableOpacity>
       </View>
