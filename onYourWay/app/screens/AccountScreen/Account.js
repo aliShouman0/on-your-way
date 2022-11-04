@@ -54,6 +54,29 @@ function Account({ navigation }) {
               color="black"
             />
           </TouchableOpacity>
+          <Input
+            text="Email"
+            value={email}
+            setValue={setEmail}
+            secureTextEntry={true}
+            editable={false}
+            contextMenuHidden={true}
+          />
+          <Input
+            text="Phone"
+            value={phone}
+            setValue={setPhone}
+            editable={false}
+            contextMenuHidden={true}
+          />
+          <Input
+            text="Address"
+            value={address}
+            setValue={setAddress}
+            editable={false}
+            contextMenuHidden={true}
+          />
+          <AppButton value={"EDIT"} onPress={() => {}} />
         </View>
       </ScrollView>
     </SafeAreaView>
