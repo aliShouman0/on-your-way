@@ -56,7 +56,7 @@ function AddOrder({ navigation }) {
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <Navbar type={"main"} title={"Add Order"} navigation={navigation} />
+      <Navbar type={"back"} title={"Add Order"} navigation={navigation} />
       <UploadImage refRBSheet={uploadRBSheet} setImage={setPhoto} />
       <View style={styles.city}>
         <DropDownPicker
