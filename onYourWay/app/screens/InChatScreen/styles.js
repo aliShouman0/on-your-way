@@ -30,5 +30,18 @@ export default StyleSheet.create({
     height: "auto",
     marginVertical: 5,
     alignSelf: "flex-start",
-  }
+  },
+  sendMessage: {
+    backgroundColor: colors.dark,
+    color: colors.white,
+    fontSize: text.sizeSmall,
+    borderRadius: 10,
+    padding: 10,
+    maxWidth: "70%",
+    minWidth: "30%",
+    lineHeight: 20,
+    height: "auto",
+    marginVertical: 5,
+    alignSelf: "flex-end",
+  },
 });
