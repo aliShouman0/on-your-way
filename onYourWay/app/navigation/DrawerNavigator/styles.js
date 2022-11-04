@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
   drawerLabelStyle: {
     marginLeft: -20,
-    fontSize: text.sizeMid,
+    fontSize: text.sizeSmall,
     fontWeight: "500",
     paddingVertical: 5,
   },

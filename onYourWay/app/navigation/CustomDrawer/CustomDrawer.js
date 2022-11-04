@@ -4,13 +4,12 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"; 
 
 import styles from "./styles";
 
 const CustomDrawer = (props) => {
-  const account = props.state.index == 4;
+  const account = props.state.index == 5;
   return (
     <View style={styles.mainView}>
       <DrawerContentScrollView {...props}>
