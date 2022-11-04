@@ -9,4 +9,10 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "90%",
+    marginVertical: 15,
+  },
 });
