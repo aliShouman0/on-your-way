@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
 
+import { Ionicons } from "@expo/vector-icons";
 import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import colors from "../../config/colors";
 
 function InChat({ navigation, route }) {
   const [message, setMessage] = useState("");
@@ -33,13 +36,22 @@ function InChat({ navigation, route }) {
         <Text style={styles.sendMessage}>Hello</Text>
       </ScrollView>
 
-      <View>
-        <Input 
+      <View style={styles.messageBox}>
+        <Input
           placeholder={"Say Hi!"}
           value={message}
           setValue={setMessage}
           style={styles.input}
+          inputContainerStyle={styles.inputContainerStyle}
         />
+        <TouchableOpacity style={styles.iconBox}>
+          <Ionicons
+            name="send"
+            size={50}
+            color={colors.dark}
+            style={styles.icon}
+          />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
