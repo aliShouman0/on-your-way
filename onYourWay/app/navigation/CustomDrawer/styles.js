@@ -21,21 +21,33 @@ export default StyleSheet.create({
     fontSize: text.sizeMid,
     fontWeight: "500",
     color: colors.white,
-    marginRight: 20,
   },
   drawerListWrapper: {
     marginTop: 65,
     flex: 1,
   },
   footer: {
-    position: "absolute",
-    bottom: 5,
-    left: 20,
+    width: "100%",
   },
   footerContent: {
-    marginBottom: 30,
     flexDirection: "row",
     alignItems: "center",
+    width: "100%",
+    marginBottom: 15,
   },
-  icon: { color: colors.black, marginRight: 20 },
+  footerText: {
+    paddingVertical: 20,
+    fontSize: text.sizeMid,
+    fontWeight: "500",
+    color: colors.white,
+  },
+  icon: {
+    color: colors.black,
+    marginRight: 20,
+    marginLeft: 10,
+  },
+  active: {
+    backgroundColor: colors.secondary,
+    color: colors.black,
+  },
 });

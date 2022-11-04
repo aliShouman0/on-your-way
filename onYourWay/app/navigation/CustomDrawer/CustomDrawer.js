@@ -10,6 +10,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import styles from "./styles";
 
 const CustomDrawer = (props) => {
+  const account = props.state.index == 4;
   return (
     <View style={styles.mainView}>
       <DrawerContentScrollView {...props}>
@@ -26,16 +27,22 @@ const CustomDrawer = (props) => {
         </View>
       </DrawerContentScrollView>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerContent}>
+        <TouchableOpacity
+          style={[styles.footerContent, account && styles.active]}
+          onPress={() => props.navigation.navigate("Account")}
+        >
           <MaterialIcons name="account-circle" size={45} style={styles.icon} />
-          <Text style={styles.text}>Account</Text>
+          <Text style={[styles.footerText, account && styles.active]}>
+            Account
+          </Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.footerContent}
           onPress={() => props.navigation.navigate("Login")}
         >
           <MaterialCommunityIcons name="logout" size={45} style={styles.icon} />
-          <Text style={styles.text}>Log Out</Text>
+          <Text style={styles.footerText}>Log Out</Text>
         </TouchableOpacity>
       </View>
     </View>
