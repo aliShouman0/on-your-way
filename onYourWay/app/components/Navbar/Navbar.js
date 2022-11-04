@@ -16,7 +16,7 @@ function Navbar({ type, title, navigation, rightIcon, onRightIconPress }) {
   return (
     <View style={styles.view}>
       <TouchableOpacity onPress={handelEvent}>
-        {type === "register" && (
+        {type === "back" && (
           <Ionicons name="arrow-back" size={35} style={styles.icon} />
         )}
         {type === "main" && (
