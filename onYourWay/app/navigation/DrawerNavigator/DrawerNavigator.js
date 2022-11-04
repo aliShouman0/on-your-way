@@ -11,7 +11,7 @@ import CustomDrawer from "../CustomDrawer/CustomDrawer";
 import AddOrder from "../../screens/AddOrderScreen/AddOrder";
 import PickUps from "../../screens/PickUpsScreen/PickUps";
 import History from "../../screens/History/History";
-import Chat from "../../screens/ChatScreen/Chat";
+import ChatStackNavigator from "../ChatStackNavigator/ChatStackNavigator";
 
 function DrawerNavigator() {
   const Drawer = createDrawerNavigator();
@@ -86,10 +86,9 @@ function DrawerNavigator() {
           ),
         }}
       />
-
       <Drawer.Screen
-        name="Chat"
-        component={Chat}
+        name="ChatStackNavigator"
+        component={ChatStackNavigator}
         options={{
           title: "Chat",
           drawerIcon: ({ focused, color, size }) => (
