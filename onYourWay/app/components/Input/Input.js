@@ -12,11 +12,11 @@ function Input({
   contextMenuHidden,
   editable,
   multiline,
-  style,
+  style,inputContainerStyle
 }) {
   return (
-    <View style={styles.inputContainer}>
-      <Text style={styles.text}>{text}</Text>
+    <View style={[styles.inputContainer,inputContainerStyle]}>
+      {text && <Text style={styles.text}>{text}</Text>}
       <TextInput
         secureTextEntry={secureTextEntry}
         clearButtonMode="always"
@@ -28,7 +28,6 @@ function Input({
         editable={editable}
         contextMenuHidden={contextMenuHidden}
         multiline={multiline}
-
       />
     </View>
   );
@@ -42,7 +41,7 @@ Input.defaultProps = {
   editable: true,
   contextMenuHidden: false,
   multiline: false,
-  style: "",
+  style: "",inputContainerStyle:""
 };
 
 export default Input;
