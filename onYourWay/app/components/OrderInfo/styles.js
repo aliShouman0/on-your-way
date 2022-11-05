@@ -15,6 +15,7 @@ export default StyleSheet.create({
   userInfo: {
     flexDirection: "row",
     alignItems: "center",
+    flex: 1,
   },
   userImg: {
     width: 45,
@@ -24,30 +25,6 @@ export default StyleSheet.create({
   userName: {
     marginLeft: 10,
     fontSize: text.sizeMid,
-    color: colors.white,
-  },
-  orderDetails: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 12,
-  },
-  container: {
-    borderRadius: 10,
-    borderColor: colors.lightWhite,
-    borderStyle: "solid",
-    borderWidth: 0.5,
-    width: "30%",
-    height: 55,
-    padding: 5,
-  },
-  key: {
-    fontSize: text.sizeSmall,
-    fontWeight: "100",
-    color: colors.white,
-  },
-  value: {
-    fontSize: text.sizeMid,
-    fontWeight: "400",
     color: colors.white,
   },
   orderImg: {
@@ -67,6 +44,7 @@ export default StyleSheet.create({
     fontSize: text.sizeMid,
     fontWeight: "400",
     color: colors.white,
+    flex: 1,
   },
   btnContainer: {
     width: "100%",

@@ -3,6 +3,7 @@ import { Image, Text, View } from "react-native";
 
 import colors from "../../config/colors";
 import text from "../../config/text";
+import InfoBoxes from "../InfoBoxes/InfoBoxes";
 import OrderStatus from "../OrderStatus/OrderStatus";
 import Rate from "../Rate/Rate";
 import SmallButton from "../SmallButton/SmallButton";
@@ -30,25 +31,12 @@ function OrderInfo({
         <Image resizeMode="contain" source={userImg} style={styles.userImg} />
         <Text style={styles.userName}>{userName}</Text>
       </View>
-      <View style={styles.orderDetails}>
-        <View style={styles.container}>
-          <Text style={styles.key}>From</Text>
-          <Text style={styles.value}>{from}</Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.key}>To</Text>
-          <Text style={styles.value}>{to}</Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.key}>Pay</Text>
-          <Text style={styles.value}>{pay}</Text>
-        </View>
-      </View>
+      <InfoBoxes from={from} to={to} pay={pay} />
       <Image resizeMode="contain" source={orderImg} style={styles.orderImg} />
       <Text style={styles.description}>{orderDescription}</Text>
       {completed ? (
         <View style={styles.rate}>
-          <Rate rate={3} size={33} styleText={{ fontSize: text.sizeMid }} />
+          <Rate rate={3} size={25} styleText={{ fontSize: text.sizeMid }} />
         </View>
       ) : (
         <>
