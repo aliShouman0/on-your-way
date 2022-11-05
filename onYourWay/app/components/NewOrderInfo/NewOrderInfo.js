@@ -12,7 +12,7 @@ function NewOrderInfo({
   userImg,
   from,
   to,
-  pay, 
+  pay,
   orderDescription,
   orderImg1,
   orderImg2,
@@ -27,12 +27,37 @@ function NewOrderInfo({
       <InfoBoxes from={from} to={to} pay={pay} />
 
       <View style={styles.imgContainer}>
-        <Image resizeMode="stretch" source={orderImg1} style={styles.orderImg} />
-        <Image resizeMode="stretch" source={orderImg2} style={styles.orderImg} />
-        <Image resizeMode="stretch" source={orderImg3} style={styles.orderImg} />
+        <Image
+          resizeMode="stretch"
+          source={orderImg1}
+          style={styles.orderImg}
+        />
+        <Image
+          resizeMode="stretch"
+          source={orderImg2}
+          style={styles.orderImg}
+        />
+        <Image
+          resizeMode="stretch"
+          source={orderImg3}
+          style={styles.orderImg}
+        />
       </View>
       <Text style={styles.description}>{orderDescription}</Text>
- 
+
+      <View style={styles.btnContainer}>
+        <SmallButton
+          value={"CHAT"}
+          onPress={() => {}}
+          buttonStyle={styles.buttonStyle}
+        />
+        <SmallButton
+          value={"Pick"}
+          color={colors.secondary}
+          onPress={() => {}}
+          buttonStyle={styles.buttonStyle}
+        />
+      </View>
     </View>
   );
 }
