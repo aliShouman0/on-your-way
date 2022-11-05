@@ -16,5 +16,15 @@ export default StyleSheet.create({
     width: "30%",
     height: 55,
     padding: 5,
-  }
+  },
+  key: {
+    fontSize: text.sizeSmall,
+    fontWeight: "100",
+    color: colors.white,
+  },
+  value: {
+    fontSize: text.sizeMid,
+    fontWeight: "400",
+    color: colors.white,
+  },
 });
