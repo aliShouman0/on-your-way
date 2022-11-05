@@ -28,7 +28,9 @@ return new class extends Migration
             $table->string("status");
             $table->string("location");
             $table->string("arrived_time");
-            $table->integer("approved");
+            $table->boolean("approved");
+            $table->boolean("completed");
+            $table->boolean("canceled");
             $table->string("time_picked");
             $table->timestamps();
         });
