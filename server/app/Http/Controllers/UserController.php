@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    function save_images($image_base64, $Image_name, $isId)
+    function saveImages($image_base64, $Image_name, $isId)
     {
         // split the string on commas
         // $data[ 0 ] == "data:image/png;base64"
@@ -48,23 +48,23 @@ class UserController extends Controller
             //saving images
             $front_id = $user->email . "front_id";
             $back_id = $user->email . "back_id";
-            $this->save_images($request->avatar, $user->email, false);
-            $this->save_images($request->front_id_photo, $front_id, true);
-            $this->save_images($request->back_id_photo, $back_id, true);
+            $this->saveImages($request->avatar, $user->email, false);
+            $this->saveImages($request->front_id_photo, $front_id, true);
+            $this->saveImages($request->back_id_photo, $back_id, true);
             $user->front_id_photo =  'ids/' . $front_id . '.png';
             $user->back_id_photo =  'ids/' . $back_id . '.png';
             $user->avatar =  'user_images/' . $user->email . '.png';
 
             if ($user->save()) {
                 return response()->json([
-                    "status" => "Success",
+                    "status" => 1,
                     "data" => $user
                 ]);
             }
         }
 
         return response()->json([
-            "status" => "Error",
+            "status" => 0,
             "data" => "Error -Some Data is missing"
         ], 400);
     }
