@@ -21,4 +21,8 @@ export default StyleSheet.create({
     borderRadius: 0,
     marginVertical: 10,
   },
+  icon: {
+    width: 35,
+    textAlign: "center",
+  },
 });

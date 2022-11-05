@@ -33,7 +33,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    marginBottom: 15,
+    marginBottom: 10,
   },
   footerText: {
     paddingVertical: 20,
@@ -43,8 +43,10 @@ export default StyleSheet.create({
   },
   icon: {
     color: colors.black,
-    marginRight: 20,
-    marginLeft: 10,
+    marginRight: 10,
+    marginLeft: 20,
+    width: 35,
+    textAlign: "center",
   },
   active: {
     backgroundColor: colors.secondary,

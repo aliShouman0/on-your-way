@@ -1,9 +1,9 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { FontAwesome } from "@expo/vector-icons";
 import {
   MaterialCommunityIcons,
   FontAwesome5,
+  FontAwesome,
   Entypo,
 } from "@expo/vector-icons";
 
@@ -45,7 +45,7 @@ function DrawerNavigator() {
             <FontAwesome
               name="cart-plus"
               size={30}
-              style={{ width: 35 }}
+              style={styles.icon}
               color={colors.black}
             />
           ),
@@ -60,7 +60,7 @@ function DrawerNavigator() {
             <FontAwesome
               name="level-up"
               size={30}
-              style={{ width: 35, paddingLeft: 10 }}
+              style={styles.icon}
               color={colors.black}
             />
           ),
@@ -76,7 +76,7 @@ function DrawerNavigator() {
             <MaterialCommunityIcons
               name="timer-sand"
               size={30}
-              style={{ width: 35 }}
+              style={styles.icon}
               color={colors.black}
             />
           ),
@@ -90,8 +90,9 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <FontAwesome5
               name="box-open"
-              size={27} 
+              size={20}
               color={colors.black}
+              style={styles.icon}
             />
           ),
         }}
@@ -104,8 +105,8 @@ function DrawerNavigator() {
           drawerIcon: ({ focused, color, size }) => (
             <Entypo
               name="chat"
-              size={27}
-              style={{ width: 35 }}
+              size={25}
+              style={styles.icon}
               color={colors.black}
             />
           ),
