@@ -33,4 +33,32 @@ export default StyleSheet.create({
     borderRadius: 10,
     marginTop: 12,
   },
+  imgContainer: {
+    marginTop: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flex: 2,
+  },
+  description: {
+    marginTop: 12,
+    borderRadius: 10,
+    borderColor: colors.lightWhite,
+    borderStyle: "solid",
+    borderWidth: 0.5,
+    width: "100%",
+    padding: 15,
+    fontSize: text.sizeMid,
+    fontWeight: "400",
+    color: colors.white,
+    flex: 1,
+  },
+  btnContainer: {
+    width: "100%",
+    marginTop: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  buttonStyle: {
+    width: "45%",
+  },
 });
