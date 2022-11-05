@@ -17,5 +17,20 @@ export default StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
- 
+  userImg: {
+    width: 45,
+    height: 45,
+    borderRadius: 25,
+  },
+  userName: {
+    marginLeft: 10,
+    fontSize: text.sizeMid,
+    color: colors.white,
+  },
+  orderImg: {
+    width: "30%",
+    height: "90%",
+    borderRadius: 10,
+    marginTop: 12,
+  },
 });
