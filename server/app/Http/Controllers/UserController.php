@@ -23,6 +23,7 @@ class UserController extends Controller
     //signup
     function signup(Request $request)
     {
+
         // create new user
         $user = new User;
         if (
@@ -37,6 +38,29 @@ class UserController extends Controller
             $request->back_id_photo
 
         ) {
+            //check if  all needed data are sended and save user
+            $user->name =  $request->name;
+            $user->birthday =  $request->birthday;
+            $user->email =  $request->email;
+            $user->phone =  $request->phone;
+            $user->address =  $request->address;
+            $user->password =  Hash::make($request->password);
+            //saving images
+            $front_id = $user->email . "front_id";
+            $back_id = $user->email . "back_id";
+            $this->save_images($request->avatar, $user->email, false);
+            $this->save_images($request->front_id_photo, $front_id, true);
+            $this->save_images($request->back_id_photo, $back_id, true);
+            $user->front_id_photo =  'ids/' . $front_id . '.png';
+            $user->back_id_photo =  'ids/' . $back_id . '.png';
+            $user->avatar =  'user_images/' . $user->email . '.png';
+
+            if ($user->save()) {
+                return response()->json([
+                    "status" => "Success",
+                    "data" => $user
+                ]);
+            }
         }
 
         return response()->json([
