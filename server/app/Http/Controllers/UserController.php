@@ -20,4 +20,28 @@ class UserController extends Controller
         Storage::disk('local')->put($save_name,  $data);
     }
 
+    //signup
+    function signup(Request $request)
+    {
+        // create new user
+        $user = new User;
+        if (
+            $request->name &&
+            $request->birthday &&
+            $request->email &&
+            $request->phone &&
+            $request->address &&
+            $request->password &&
+            $request->avatar &&
+            $request->front_id_photo &&
+            $request->back_id_photo
+
+        ) {
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error -Some Data is missing"
+        ], 400);
+    }
 }
