@@ -16,6 +16,22 @@ function Chat({ navigation, phone = 71993980 }) {
     setIsLoading(true);
     firebaseHelper.chatLogin(phone, setMyData, setUsers, setIsLoading);
   }, []);
+
+  useEffect(() => {
+    if (users)
+      for (let i = 0; i < users.length; i++) {
+        renderedUser.push({
+          id: i,
+          name: users[i].name,
+          userImg: require("../../assets/user1.jpg"),
+          date: users[i].date,
+          lastMessage: "....",
+          user: users[i],
+        });
+      }
+    setData(renderedUser);
+  }, [users]);
+
   if (isLoading) {
     return <Loading />;
   }
