@@ -15,4 +15,23 @@ const findUser = async (phone) => {
 };
 
 
+const chatLogin = async (phone,setMyData, setUsers,setIsLoading) => {
+  const user = await findUser(phone);
+  const database = getDatabase();
+  //create a new user if not registered
+  if (user) {
+    setMyData(user);
+    // set friends list change listener
+    const myUserRef = ref(database, `users/${phone}`);
+    onValue(myUserRef, (snapshot) => {
+      const data = snapshot.val();
+      setUsers(data.friends);
+      setMyData((prevData) => ({
+        ...prevData,
+        friends: data.friends,
+      }));
+    });
+  }
+  setIsLoading(false);
+};
 
