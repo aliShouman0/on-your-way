@@ -61,7 +61,32 @@ const onAddFriend = async (phone, myData, setIsLoading) => {
       });
       const newChatroomId = newChatroomRef.key;
       const userFriends = user.friends || [];
-      
+      //join myself to this user friend list
+      update(ref(database, `users/${user.phone}`), {
+        friends: [
+          ...userFriends,
+          {
+            phone: myData.phone,
+            name: myData.name,
+            date: new Date().toLocaleDateString(),
+            // avatar: myData.avatar,
+            chatroomId: newChatroomId,
+          },
+        ],
+      });
+      const myFriends = myData.friends || [];
+      //add this user to my friend list
+      update(ref(database, `users/${myData.phone}`), {
+        friends: [
+          ...myFriends,
+          {
+            phone: user.phone,
+            name: user.name,
+            date: new Date().toLocaleDateString(),
+            chatroomId: newChatroomId,
+          },
+        ],
+      });
     }
   } catch (error) {
     console.error(error);
