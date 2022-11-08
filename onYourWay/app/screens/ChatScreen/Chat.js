@@ -12,7 +12,13 @@ function Chat({ navigation, phone = 71993980 }) {
   const [myData, setMyData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const renderedUser = [];
-
+  useEffect(() => {
+    setIsLoading(true);
+    firebaseHelper.chatLogin(phone, setMyData, setUsers, setIsLoading);
+  }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Chat"} navigation={navigation} />
