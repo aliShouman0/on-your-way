@@ -7,15 +7,13 @@ import {
   update,
 } from "firebase/database";
 
-
 const findUser = async (phone) => {
   const database = getDatabase();
   const mySnapshot = await get(ref(database, `users/${phone}`));
   return mySnapshot.val();
 };
 
-
-const chatLogin = async (phone,setMyData, setUsers,setIsLoading) => {
+const chatLogin = async (phone, setMyData, setUsers, setIsLoading) => {
   const user = await findUser(phone);
   const database = getDatabase();
   //create a new user if not registered
@@ -35,3 +33,30 @@ const chatLogin = async (phone,setMyData, setUsers,setIsLoading) => {
   setIsLoading(false);
 };
 
+const onAddFriend = async (phone, myData, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    //find user and add it to my friends and also add me to his friends
+    const database = getDatabase();
+    const user = await findUser(phone);
+    if (user) {
+      if (user.phone === myData.phone) {
+        // don't let user add himself
+        setIsLoading(false);
+        return;
+      }
+      if (
+        myData.friends &&
+        myData.friends.findIndex((f) => f.phone === user.phone) >= 0
+      ) {
+        // don't let user add a user twice
+        setIsLoading(false);
+        return;
+      }  
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  setIsLoading(false);
+};
+export default { onAddFriend, findUser, chatLogin };
