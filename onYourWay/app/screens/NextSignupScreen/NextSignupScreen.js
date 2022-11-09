@@ -12,14 +12,21 @@ import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
 import Navbar from "../../components/Navbar/Navbar";
 import UploadImage from "../../components/UploadImage/UploadImage";
+import Loading from "../../components/Loading/Loading";
 
-function NextSignupScreen({ navigation }) {
+function NextSignupScreen({ navigation, route }) {
   const uploadRBSheet = useRef();
   const [image, setImage] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [frontId, setFrontId] = useState(null);
   const [backId, setBackId] = useState(null);
   const [imageFor, setImageFor] = useState("");
+  const [load, setLoad] = useState(false);
+  const [error, setError] = useState("");
+  const { email, name, phone, address, confirmPass, password, date } =
+    route.params;
+
+  const onHandleSignup = () => {};
 
   const saveImage = async () => {
     if (image) {
@@ -29,7 +36,6 @@ function NextSignupScreen({ navigation }) {
           break;
         case "frontId":
           setFrontId(image.uri);
-
           break;
         case "backId":
           setBackId(image.uri);
@@ -42,6 +48,10 @@ function NextSignupScreen({ navigation }) {
   useEffect(() => {
     saveImage();
   }, [image]);
+
+  if (load) {
+    return <Loading />;
+  }
   return (
     <SafeAreaView style={styles.mainView}>
       <UploadImage refRBSheet={uploadRBSheet} setImage={setImage} />
@@ -105,15 +115,7 @@ function NextSignupScreen({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-      <AppButton
-        value={"SIGNUP"}
-        onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Login" }],
-          })
-        }
-      />
+      <AppButton value={"SIGNUP"} onPress={onHandleSignup} />
     </SafeAreaView>
   );
 }
