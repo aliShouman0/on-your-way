@@ -20,6 +20,10 @@ Route::group(["prefix" => "ony"], function () {
         Route::get('get_my_order', [OrderController::class, 'getMyOrder'])->name("getMyOrder");
         // user info 
         Route::get("get_user_info/{user_id}", [UserController::class, "getUserInfo"])->name("getUserInfo");
-       
+        //get My Pickup
+        Route::get('get_my_pickup', [OrderController::class, 'getMyPickup'])->name("getMyPickup");
+        //get specific pickup 
+        Route::get('get_pickup/{order_id}', [OrderController::class, 'getPickup'])->name("getPickup");
+        
     });
 });
