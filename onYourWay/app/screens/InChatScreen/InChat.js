@@ -1,16 +1,27 @@
-import React, { useState } from "react";
-import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
-
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Loading from "../../components/Loading/Loading";
 import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../../config/colors";
+import firebaseHelper from "../../config/firebaseHelper";
 
 function InChat({ navigation, route }) {
-  const [message, setMessage] = useState("");
-  const { userName, userImg } = route.params;
+  const [myMessage, setMyMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [load, setLoad] = useState(false);
+  const scrollViewRef = useRef();
+  const { userName, userImg, myData, selectedUser } = route.params;
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar
@@ -21,30 +32,35 @@ function InChat({ navigation, route }) {
           <Image resizeMode="contain" source={userImg} style={styles.userImg} />
         }
       />
-      <ScrollView style={styles.message}>
-        <Text style={styles.getMessage}>Hi</Text>
-        <Text style={styles.sendMessage}>Hello</Text>
-        <Text style={styles.getMessage}>
-          So what if you pay 10$ and get by 1h
-        </Text>
-        <Text style={styles.sendMessage}>
-          Sounds Good but with live location
-        </Text>
-        <Text style={styles.getMessage}>Okay Deal</Text>
-        <Text style={styles.sendMessage}>Hello</Text>
-        <Text style={styles.getMessage}>Hi</Text>
-        <Text style={styles.sendMessage}>Hello</Text>
-      </ScrollView>
+      <ScrollView
+        style={styles.message}
+        ref={scrollViewRef}
+        onContentSizeChange={() =>
+          scrollViewRef.current.scrollToEnd({ animated: true })
+        }
+      ></ScrollView>
 
       <View style={styles.messageBox}>
         <Input
           placeholder={"Say Hi!"}
-          value={message}
-          setValue={setMessage}
+          value={myMessage}
+          setValue={setMyMessage}
           style={styles.input}
           inputContainerStyle={styles.inputContainerStyle}
         />
-        <TouchableOpacity style={styles.iconBox}>
+        <TouchableOpacity
+          style={styles.iconBox}
+          onPress={() => {
+            if (myMessage != "")
+              firebaseHelper.onSend(
+                myMessage,
+                selectedUser,
+                myData,
+                setMessages,
+                setMyMessage
+              );
+          }}
+        >
           <Ionicons
             name="send"
             size={50}
