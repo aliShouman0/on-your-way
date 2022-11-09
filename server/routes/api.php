@@ -24,6 +24,8 @@ Route::group(["prefix" => "ony"], function () {
         Route::get('get_my_pickup', [OrderController::class, 'getMyPickup'])->name("getMyPickup");
         //get specific pickup 
         Route::get('get_pickup/{order_id}', [OrderController::class, 'getPickup'])->name("getPickup");
+        // addOrUpdatePickup
+        Route::post("add_update_pickup/{pickup_id?}", [OrderController::class, "addOrUpdatePickup"])->name("addOrUpdatePickup");
         
     });
 });
