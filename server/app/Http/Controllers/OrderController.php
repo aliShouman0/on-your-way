@@ -184,5 +184,38 @@ class OrderController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
- 
+
+    // cancelOrder
+    function cancelOrder(Request $request)
+    {
+        if ($request->pickup_id && $request->reason) {
+            $pickup = Pickup::find($request->pickup_id);
+            $user = User::find($pickup->picker_id);
+            $canceledPickup = new CanceledPickup;
+            $order = Order::find($pickup->order_id);
+            $order->ended = true;
+            $pickup->canceled = true;
+            $user->rate = $user->rate - 0.3;
+            $canceledPickup->canceled_by = $user->id;
+            $canceledPickup->pickup_id = $request->pickup_id;
+            $canceledPickup->reason = $request->reason;
+
+            if (
+                $pickup->save() && $user->save() &&
+                $canceledPickup->save() && $pickup->save() && $order->save()
+            ) {
+
+                return response()->json([
+                    "status" => 1,
+                    "data" => $canceledPickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
 }
