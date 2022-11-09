@@ -260,6 +260,7 @@ class OrderController extends Controller
     //searchOrders
     function searchOrders(Request $request)
     {
+
         $id = Auth::id();
         $order = false;
         if ($request->to && $request->from) {
@@ -288,5 +289,14 @@ class OrderController extends Controller
         ], 400);
     }
 
+    function saveImages($image_base64, $Image_name,)
+    {
+        // split the string on commas
+        // $data[ 0 ] == "data:image/png;base64"
+        // $data[ 1 ] == <actual base64 string> 
+        $data = base64_decode(explode(',', $image_base64)[1]);
+        $save_name =  "orders_images/" . $Image_name . '.png';
+        Storage::disk('local')->put($save_name,  $data);
+    }
 
 }
