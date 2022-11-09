@@ -5,10 +5,11 @@ import {
   onValue,
   push,
   update,
+  set,
 } from "firebase/database";
-
 import { auth, database } from "./firebase";
 import { off } from "firebase/database";
+
 const findUser = async (phone) => {
   const database = getDatabase();
   const mySnapshot = await get(ref(database, `users/${phone}`));
@@ -148,4 +149,35 @@ const loadMessages = (selectedUser, setMessages) => {
   };
 };
 
-export default { onAddFriend, findUser, chatLogin, onSend, fetchMessages,loadMessages };
+const onSignup = async (phone, email, name, setError) => {
+  try {
+    const database = getDatabase();
+    //first check if the user registered before
+    const user = await findUser(phone);
+    //create a new user if not registered
+    if (!user) {
+      const newUserObj = {
+        email: email,
+        name,
+        phone,
+      };
+      set(ref(database, `users/${phone}`), newUserObj);
+    } else {
+      setError("Phone Number Already Exist");
+      return;
+    }
+  } catch (error) {
+    console.error(error);
+    setError("Phone Number Already Exist");
+  }
+};
+
+export default {
+  onAddFriend,
+  findUser,
+  chatLogin,
+  onSend,
+  fetchMessages,
+  loadMessages,
+  onSignup,
+};
