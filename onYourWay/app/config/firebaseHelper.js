@@ -132,4 +132,20 @@ const fetchMessages = async (selectedUser) => {
   return snapshot.val();
 };
 
-export default { onAddFriend, findUser, chatLogin, onSend, fetchMessages };
+const loadMessages = (selectedUser, setMessages) => {
+  const myChatroom = fetchMessages(selectedUser);
+  setMessages(myChatroom.messages);
+  // set chatroom change listener
+  const database = getDatabase();
+  const chatroomRef = ref(database, `chatrooms/${selectedUser.chatroomId}`);
+  onValue(chatroomRef, (snapshot) => {
+    const data = snapshot.val();
+    setMessages(data ? data.messages : "");
+  });
+  return () => {
+    //remove chatroom listener
+    off(chatroomRef);
+  };
+};
+
+export default { onAddFriend, findUser, chatLogin, onSend, fetchMessages,loadMessages };
