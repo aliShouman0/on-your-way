@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { SafeAreaView, View, TouchableOpacity, ScrollView } from "react-native";
 import AppButton from "../../components/AppButton/AppButton";
-import styles from "./styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import styles from "./styles";
 import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -13,10 +13,25 @@ function Signup({ navigation }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [confirmPass, setconfirmPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [password, setPassword] = useState("");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+
+  // test if email match
+  function emailMatch(em) {
+    let pattern = /\w[\w0-9+_.-]*@[a-z0-9]+.\w+/;
+    return em.match(pattern) == null ? false : true;
+  }
+
+  // test if phone match
+  function phoneMatch(phone) {
+    let pattern = /^(03|3|70|71|76|78|79|81)[0-9]{6}/;
+    return phone.match(pattern) == null ? false : true;
+  }
+
+  // validation input and go next
+  const next = () => {};
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -49,6 +64,7 @@ function Signup({ navigation }) {
           <Input
             text="Phone"
             value={phone}
+            placeholder={"ex: 70123456"}
             setValue={setPhone}
             keyboardType="numeric"
           />
@@ -62,13 +78,10 @@ function Signup({ navigation }) {
           <Input
             text="Confirm Password"
             value={confirmPass}
-            setValue={setconfirmPass}
+            setValue={setConfirmPass}
             secureTextEntry={true}
           />
-          <AppButton
-            value={"Next"}
-            onPress={() => navigation.navigate("NextSignupScreen")}
-          />
+          <AppButton value={"Next"} onPress={next} />
         </View>
 
         {open && (
