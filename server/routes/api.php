@@ -30,6 +30,10 @@ Route::group(["prefix" => "ony"], function () {
         Route::post("received_order", [OrderController::class, "receivedOrder"])->name("receivedOrder");
         //completePickups
         Route::post("complete_pickup", [OrderController::class, "completePickup"])->name("completePickup");
-     
+        // Cancel order
+        Route::post("cancel_order", [OrderController::class, "cancelOrder"])->name("cancelOrder");
+        //getMyEndedOrder
+        Route::get('get_ended_order', [OrderController::class, 'getMyEndedOrder'])->name("getMyEndedOrder");
+       
     });
 });
