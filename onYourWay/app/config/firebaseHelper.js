@@ -94,7 +94,7 @@ const onAddFriend = async (phone, myData, setIsLoading) => {
   setIsLoading(false);
 };
 
-const onSend = async (msg, selectedUser, myData, setMyMessage) => {
+const onSend = async (msg, selectedUser, myData, setMessages, setMyMessage) => {
   const database = getDatabase();
   //fetch fresh messages from server
   const currentChatroom = await fetchMessages();
@@ -120,4 +120,13 @@ const onSend = async (msg, selectedUser, myData, setMyMessage) => {
   ]);
   setMyMessage("");
 };
-export default { onAddFriend, findUser, chatLogin, onSend };
+
+const fetchMessages = async () => {
+  const database = getDatabase();
+  const snapshot = await get(
+    ref(database, `chatrooms/${selectedUser.chatroomId}`)
+  );
+  return snapshot.val();
+};
+
+export default { onAddFriend, findUser, chatLogin, onSend,fetchMessages };
