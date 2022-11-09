@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string("front_id_photo");
             $table->string("back_id_photo");
             $table->boolean("is_verified")->default(0);
-            $table->integer("rate")->default(0);
+            $table->double("rate")->default(0);
             $table->integer("user_type_id")->references("id")->on("user_types")->default(2);
             $table->timestamps();
         });
