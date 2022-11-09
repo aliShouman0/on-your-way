@@ -237,4 +237,24 @@ class OrderController extends Controller
         ], 400);
     }
 
+    //getAllOrders
+    function getAllOrders()
+    {
+        $id = Auth::id();
+        $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->with("userInfo")->get();
+        if ($order) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $order,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+ 
 }
