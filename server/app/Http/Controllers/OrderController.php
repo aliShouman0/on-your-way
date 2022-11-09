@@ -51,5 +51,22 @@ class OrderController extends Controller
         ], 400);
     }
 
-  
+    // get specific pickup
+    function getPickup($order_id)
+    {
+        $pickup = Pickup::where("order_id", $order_id)->where("completed", false)->where("canceled", false)->with("orderInfo")->get();
+        if ($pickup) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $pickup,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
 }
