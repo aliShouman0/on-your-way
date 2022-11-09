@@ -22,6 +22,13 @@ function InChat({ navigation, route }) {
   const scrollViewRef = useRef();
   const { userName, userImg, myData, selectedUser } = route.params;
 
+  useEffect(() => {
+    setLoad(true);
+    //load old messages and set chatroom change listener
+    firebaseHelper.loadMessages(selectedUser, setMessages);
+    setLoad(false);
+  }, [firebaseHelper.fetchMessages, selectedUser.chatroomId]);
+
   const renderMessages = (msgs) => {
     return msgs
       ? msgs.map((msg, index) => {
@@ -40,7 +47,11 @@ function InChat({ navigation, route }) {
           }
         })
       : [];
-  }; 
+  };
+  if (load) {
+    return <Loading />;
+  }
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar
