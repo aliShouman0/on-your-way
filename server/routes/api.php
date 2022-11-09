@@ -38,5 +38,7 @@ Route::group(["prefix" => "ony"], function () {
         Route::get('get_all_orders', [OrderController::class, 'getAllOrders'])->name("getAllOrders");
         //!!searchOrders  
         Route::post('search_orders', [OrderController::class, 'searchOrders'])->name("searchOrders");
+        //add_order
+        Route::post('add_order', [OrderController::class, 'AddOrder'])->name("AddOrder");
     });
 });
