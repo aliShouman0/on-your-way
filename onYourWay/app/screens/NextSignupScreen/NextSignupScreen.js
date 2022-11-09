@@ -13,6 +13,7 @@ import styles from "./styles";
 import Navbar from "../../components/Navbar/Navbar";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import Loading from "../../components/Loading/Loading";
+import firebaseHelper from "../../config/firebaseHelper";
 
 function NextSignupScreen({ navigation, route }) {
   const uploadRBSheet = useRef();
@@ -26,7 +27,24 @@ function NextSignupScreen({ navigation, route }) {
   const { email, name, phone, address, confirmPass, password, date } =
     route.params;
 
-  const onHandleSignup = () => {};
+  const onHandleSignup = () => {
+    if (!photo || !frontId || !backId) {
+      alert("All Image Are Required");
+      return;
+    }
+    setLoad(true);
+    firebaseHelper.onSignup(phone, email, name, setError);
+    setLoad(false);
+    if (error) {
+      alert(error);
+      setError("");
+      return;
+    }
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Login" }],
+    });
+  };
 
   const saveImage = async () => {
     if (image) {
