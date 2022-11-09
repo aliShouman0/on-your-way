@@ -146,5 +146,43 @@ class OrderController extends Controller
         ], 400);
     }
 
-     
+    //receivedOrder 
+    function  completePickup(Request $request)
+    {
+        if (
+            $request->pickup_id &&
+            $request->picker_comment &&
+            $request->picker_rated
+        ) {
+            $pickup = Pickup::find($request->pickup_id);
+            $user = User::find($pickup->picker_id);
+            $order = Order::find($pickup->order_id);
+            $receiver = User::find($order->user_id);
+            $user->profit = $user->profit + $order->pay;
+            $user->order_count = $user->order_count + 1;
+            $pickup->completed = true;
+            $completed_pickups =  CompletedPickup::where("pickup_id", $request->pickup_id)->first();
+            if (!$completed_pickups) {
+                $completed_pickups = new CompletedPickup;
+                $completed_pickups->pickup_id = $request->pickup_id;
+                $completed_pickups->receiver_comment = "NA";
+                $completed_pickups->receiver_rated = -1;
+            }
+            $completed_pickups->picker_comment = $request->picker_comment;
+            $completed_pickups->picker_rated = $request->picker_rated;
+            $receiver->rate =   $request->picker_rated + $receiver->rate;
+            if ($pickup->save() && $user->save() && $completed_pickups->save() && $receiver->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $completed_pickups,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+ 
 }
