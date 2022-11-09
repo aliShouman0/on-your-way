@@ -299,4 +299,50 @@ class OrderController extends Controller
         Storage::disk('local')->put($save_name,  $data);
     }
 
+    //Add order
+    function addOrder(Request $request)
+    {
+        $id = Auth::id();
+        if (
+            $request->user_id &&
+            $request->from &&
+            $request->to &&
+            $request->description &&
+            $request->pay &&
+            $request->main_image &&
+            $request->image1 &&
+            $request->image2
+
+        ) {
+            $order = new Order();
+            $order->user_id = $id;
+            $order->from = $request->from;
+            $order->to = $request->to;
+            $order->description = $request->description;
+            $order->pay = $request->pay;
+            $main_image = uniqid();
+            $image1 = uniqid();
+            $image2 = uniqid();
+            $this->saveImages($request->main_image, $main_image);
+            $this->saveImages($request->main_image, $image1);
+            $this->saveImages($request->main_image, $image2);
+            $order->main_image = "orders_images/" . $main_image;
+            $order->image1 = "orders_images/" . $image1;
+            $order->image2 = "orders_images/" . $image2;
+
+            if ($order->save()) {
+
+                return response()->json([
+                    "status" => 1,
+                    "data" => $order,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
 }
