@@ -22,6 +22,25 @@ function InChat({ navigation, route }) {
   const scrollViewRef = useRef();
   const { userName, userImg, myData, selectedUser } = route.params;
 
+  const renderMessages = (msgs) => {
+    return msgs
+      ? msgs.map((msg, index) => {
+          if (msg.sender === myData.phone) {
+            return (
+              <Text key={index} style={styles.getMessage}>
+                {msg.text}
+              </Text>
+            );
+          } else {
+            return (
+              <Text key={index} style={styles.sendMessage}>
+                {msg.text}
+              </Text>
+            );
+          }
+        })
+      : [];
+  }; 
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar
@@ -38,7 +57,9 @@ function InChat({ navigation, route }) {
         onContentSizeChange={() =>
           scrollViewRef.current.scrollToEnd({ animated: true })
         }
-      ></ScrollView>
+      >
+        {renderMessages(messages)}
+      </ScrollView>
 
       <View style={styles.messageBox}>
         <Input
