@@ -69,4 +69,31 @@ class OrderController extends Controller
         ], 400);
     }
 
+    //addOrUpdatePickup
+    function addOrUpdatePickup(Request $request, $pickup_id = 0)
+    {
+        
+            $pickup = Pickup::find($pickup_id);
+            $pickup->arrived_time = $request->arrived_time ? $request->arrived_time : $pickup->arrived_time;
+            $pickup->completed = $request->completed ? $request->completed : $pickup->completed;
+            $pickup->canceled = $request->canceled ? $request->canceled : $pickup->canceled;
+            $pickup->status = $request->status ? $request->status : $pickup->status;
+            $pickup->location = $request->location ? $request->location : $pickup->location;
+        
+        if ($pickup->save() && $order->save()) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $pickup,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+     
 }
