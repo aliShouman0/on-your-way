@@ -7,6 +7,8 @@ import {
   update,
 } from "firebase/database";
 
+import { auth, database } from "./firebase";
+import { off } from "firebase/database";
 const findUser = async (phone) => {
   const database = getDatabase();
   const mySnapshot = await get(ref(database, `users/${phone}`));
@@ -95,11 +97,12 @@ const onAddFriend = async (phone, myData, setIsLoading) => {
 };
 
 const onSend = async (msg, selectedUser, myData, setMessages, setMyMessage) => {
+  const chatroomId = selectedUser.chatroomId;
   const database = getDatabase();
   //fetch fresh messages from server
-  const currentChatroom = await fetchMessages();
+  const currentChatroom = await fetchMessages(selectedUser);
   const lastMessages = (currentChatroom && currentChatroom.messages) || [];
-  update(ref(database, `chatrooms/${selectedUser.chatroomId}`), {
+  update(ref(database, `chatrooms/${chatroomId}`), {
     messages: [
       ...lastMessages,
       {
@@ -121,7 +124,7 @@ const onSend = async (msg, selectedUser, myData, setMessages, setMyMessage) => {
   setMyMessage("");
 };
 
-const fetchMessages = async () => {
+const fetchMessages = async (selectedUser) => {
   const database = getDatabase();
   const snapshot = await get(
     ref(database, `chatrooms/${selectedUser.chatroomId}`)
@@ -129,4 +132,4 @@ const fetchMessages = async () => {
   return snapshot.val();
 };
 
-export default { onAddFriend, findUser, chatLogin, onSend,fetchMessages };
+export default { onAddFriend, findUser, chatLogin, onSend, fetchMessages };
