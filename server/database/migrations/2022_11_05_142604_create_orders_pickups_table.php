@@ -18,20 +18,20 @@ return new class extends Migration
             $table->string("main_image");
             $table->string("image1");
             $table->string("image2");
-            $table->boolean("picked");
+            $table->boolean("picked")->default(0);
             $table->timestamps();
         });
         Schema::create('pickups', function (Blueprint $table) {
             $table->id();
             $table->integer("picker_id")->references("id")->on("users");
             $table->integer("order_id")->references("id")->on("orders");
-            $table->string("status");
-            $table->string("location");
-            $table->string("arrived_time");
-            $table->boolean("approved");
-            $table->boolean("completed");
-            $table->boolean("canceled");
-            $table->string("time_picked");
+            $table->string("status")->default("Not Started");
+            $table->string("location")->default("NA");
+            $table->string("arrived_time")->default("NA");
+            $table->boolean("approved")->default(1);
+            $table->boolean("completed")->default(0);
+            $table->boolean("canceled")->default(0);
+            $table->string("time_picked")->default(time());
             $table->timestamps();
         });
     }
