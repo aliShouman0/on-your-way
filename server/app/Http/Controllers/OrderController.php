@@ -218,4 +218,23 @@ class OrderController extends Controller
         ], 400);
     }
 
+    //get_ended_order
+    function getMyEndedOrder()
+    {
+        $id = Auth::id();
+        $order = Order::where("user_id", $id)->where("ended", true)->with("EndedPickupInfo")->get();
+        if ($order) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $order,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
 }
