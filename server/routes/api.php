@@ -34,6 +34,7 @@ Route::group(["prefix" => "ony"], function () {
         Route::post("cancel_order", [OrderController::class, "cancelOrder"])->name("cancelOrder");
         //getMyEndedOrder
         Route::get('get_ended_order', [OrderController::class, 'getMyEndedOrder'])->name("getMyEndedOrder");
-       
+        //getAllOrders
+        Route::get('get_all_orders', [OrderController::class, 'getAllOrders'])->name("getAllOrders");
     });
 });
