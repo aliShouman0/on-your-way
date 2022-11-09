@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    // get image as base64 and decode then save it in storage
     function saveImages($image_base64, $Image_name, $isId)
     {
         // split the string on commas
@@ -66,6 +68,24 @@ class UserController extends Controller
         return response()->json([
             "status" => 0,
             "data" => "Error -Some Data is missing"
+        ], 400);
+    }
+
+    //getUserInfo
+    function getUserInfo($user_id)
+    {
+        $user = User::where("id", $user_id)->get();
+        if ($user) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $user,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
         ], 400);
     }
 }
