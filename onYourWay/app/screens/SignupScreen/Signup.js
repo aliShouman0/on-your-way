@@ -31,7 +31,37 @@ function Signup({ navigation }) {
   }
 
   // validation input and go next
-  const next = () => {};
+  const next = () => {
+    if (!email || !name || !phone || !address || !confirmPass || !password) {
+      alert("All Input Are required ");
+      return;
+    }
+    if (!emailMatch(email)) {
+      alert("Incorrect Email ex@domain.ex");
+      return;
+    }
+    if (!phoneMatch(phone)) {
+      alert("Phone Not Match ");
+      return;
+    }
+    if (password != confirmPass) {
+      alert("Password Not Match ");
+      return;
+    }
+    if (password.length < 4) {
+      alert("Password Must Be More Than 4 Character");
+      return;
+    }
+    navigation.navigate("NextSignupScreen", {
+      email,
+      name,
+      phone,
+      address,
+      confirmPass,
+      password,
+      date: date.toDateString(),
+    });
+  };
 
   return (
     <SafeAreaView style={styles.mainView}>
