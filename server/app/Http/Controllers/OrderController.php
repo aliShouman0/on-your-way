@@ -108,5 +108,43 @@ class OrderController extends Controller
         ], 400);
     }
 
-    
+    //receivedOrder 
+    function  receivedOrder(Request $request)
+    {
+        if (
+            $request->pickup_id &&
+            $request->receiver_comment &&
+            $request->receiver_rated
+        ) {
+            $pickup = Pickup::find($request->pickup_id);
+            $order = Order::find($pickup->order_id);
+            $picker = User::find($pickup->picker_id);
+            $user = User::find($order->user_id);
+            $user->order_count = $user->order_count + 1;
+            $order->ended = true;
+            $completed_pickups =  CompletedPickup::where("pickup_id", $request->pickup_id)->first();
+            if (!$completed_pickups) {
+                $completed_pickups = new CompletedPickup;
+                $completed_pickups->pickup_id = $request->pickup_id;
+                $completed_pickups->picker_comment = "NA";
+                $completed_pickups->picker_rated = -1;
+            }
+            $completed_pickups->receiver_comment = $request->receiver_comment;
+            $completed_pickups->receiver_rated = $request->receiver_rated;
+            $picker->rate =  $request->receiver_rated + $picker->rate;
+            if ($picker->save() && $user->save() && $order->save() && $completed_pickups->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $completed_pickups,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+     
 }
