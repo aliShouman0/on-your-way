@@ -15,8 +15,11 @@ Route::group(["prefix" => "ony"], function () {
     //JWT auth  
     Route::group(["middleware" => "security"], function () {
         // get my data/current user info
-        Route::post('me', [AuthController::class, 'me']);
+        Route::post('me', [AuthController::class, 'me'])->name("me");
         //get my order
-        Route::get('get_my_order', [OrderController::class, 'getMyOrder']);
+        Route::get('get_my_order', [OrderController::class, 'getMyOrder'])->name("getMyOrder");
+        // user info 
+        Route::get("get_user_info/{user_id}", [UserController::class, "getUserInfo"])->name("getUserInfo");
+       
     });
 });
