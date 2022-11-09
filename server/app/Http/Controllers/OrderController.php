@@ -256,5 +256,37 @@ class OrderController extends Controller
         ], 400);
     }
 
- 
+
+    //searchOrders
+    function searchOrders(Request $request)
+    {
+        $id = Auth::id();
+        $order = false;
+        if ($request->to && $request->from) {
+
+            $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('from', 'like', '%' . $request->from . '%')->where('to', 'like', '%' . $request->to . '%')->with("userInfo")->get();
+        } else {
+            if ($request->to) {
+
+                $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('to', 'like', '%' . $request->to . '%')->with("userInfo")->get();
+            }
+            if ($request->from) {
+                $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('from', 'like', '%' . $request->from . '%')->with("userInfo")->get();
+            }
+        }
+
+        if ($order) {
+            return response()->json([
+                "status" => 1,
+                "data" => $order,
+                // "refresh" => Auth::refresh()
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+
 }
