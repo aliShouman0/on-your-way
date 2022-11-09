@@ -94,4 +94,30 @@ const onAddFriend = async (phone, myData, setIsLoading) => {
   setIsLoading(false);
 };
 
-export default { onAddFriend, findUser, chatLogin };
+const onSend = async (msg, selectedUser, myData, setMyMessage) => {
+  const database = getDatabase();
+  //fetch fresh messages from server
+  const currentChatroom = await fetchMessages();
+  const lastMessages = (currentChatroom && currentChatroom.messages) || [];
+  update(ref(database, `chatrooms/${selectedUser.chatroomId}`), {
+    messages: [
+      ...lastMessages,
+      {
+        text: msg,
+        sender: myData.phone,
+        createdAt: new Date(),
+      },
+    ],
+  });
+
+  setMessages((prevMessages) => [
+    ...prevMessages,
+    {
+      text: msg,
+      sender: myData.phone,
+      createdAt: new Date(),
+    },
+  ]);
+  setMyMessage("");
+};
+export default { onAddFriend, findUser, chatLogin, onSend };
