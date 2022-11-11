@@ -422,4 +422,26 @@ class OrderController extends Controller
         ], 400);
     }
     
+    //approveOrder 
+    function  disapproveOrder(Request $request)
+    {
+        if (
+            $request->order_id
+        ) {
+            $order = Order::find($request->order_id);
+            $order->approved = false;
+
+            if ($order->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $order,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
 }
