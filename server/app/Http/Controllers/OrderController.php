@@ -280,7 +280,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $order,
-                // "refresh" => Auth::refresh()
+                 "refresh" => Auth::refresh()
             ]);
         }
         return response()->json([
@@ -340,6 +340,24 @@ class OrderController extends Controller
             }
         }
 
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    //getAllOrder ended or not
+    function getAllOrder()
+    {
+        $order = Order::with("PickupInfo")->with("userInfo")->get();
+        if ($order) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $order,
+                "refresh" => Auth::refresh()
+            ]);
+        }
         return response()->json([
             "status" => 0,
             "data" => "Error -Some Thing went wrong "
