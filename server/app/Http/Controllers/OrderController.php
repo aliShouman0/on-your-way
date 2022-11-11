@@ -280,7 +280,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $order,
-                 "refresh" => Auth::refresh()
+                "refresh" => Auth::refresh()
             ]);
         }
         return response()->json([
@@ -357,6 +357,41 @@ class OrderController extends Controller
                 "data" => $order,
                 "refresh" => Auth::refresh()
             ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    //get order Comments and rates
+    function getComments($pickup_id)
+    {
+       
+        if ($pickup_id) {
+            $pickup = Pickup::where("id", $pickup_id)->first();
+            if ($pickup) {
+                $canceled = false;
+                if ($pickup->canceled) {
+                    $canceled = true;
+                    $result = CanceledPickup::where("pickup_id", $pickup_id)->get();
+                } else
+                if ($pickup->completed) {
+                    $result = CompletedPickup::where("pickup_id", $pickup_id)->get();
+                } else {
+                    return response()->json([
+                        "status" => -1,
+                        "data" => "Order Not ended "
+                    ], 400);
+                }
+
+                return response()->json([
+                    "status" => 1,
+                    "data" => $result,
+                    "canceled" => $canceled,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
         }
         return response()->json([
             "status" => 0,
