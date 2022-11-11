@@ -107,4 +107,28 @@ class UserController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
+
+    //searchUser
+    function searchUser($like)
+    {
+        $user = User::orWhere('name', 'like', '%' . $like . '%')
+            ->orWhere('phone', 'like', '%' . $like . '%')
+            ->orWhere('email', 'like', '%' . $like . '%')
+            ->orWhere('address', 'like', '%' . $like . '%')
+            ->orderBy('name')
+            ->orderBy('rate')
+            ->get();
+        $user = $user->makeVisible(['birthday', 'front_id_photo', 'back_id_photo', 'is_verified', 'user_type_id',  'created_at']);
+        if ($user) {
+            return response()->json([
+                "status" => 1,
+                "data" => $user,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
 }
