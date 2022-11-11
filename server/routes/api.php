@@ -57,6 +57,10 @@ Route::group(["prefix" => "ony"], function () {
             Route::get("get_all_order", [OrderController::class, "getAllOrder"])->name("getAllOrder");
             //get order Comments
             Route::get("get_comments/{pickup_id}", [OrderController::class, "getComments"])->name("getComments");
+            //approve Order
+            Route::post("approve_order", [OrderController::class, "approveOrder"])->name("approveOrder");
+            //disapprove Order
+            Route::post("disapprove_order", [OrderController::class, "disapproveOrder"])->name("disapproveOrder");
         });
     });
 });
