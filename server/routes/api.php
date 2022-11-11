@@ -55,6 +55,8 @@ Route::group(["prefix" => "ony"], function () {
             Route::post("unverified_user", [UserController::class, "UnVerifiedUser"])->name("UnVerifiedUser");
             // get Order ended or not
             Route::get("get_all_order", [OrderController::class, "getAllOrder"])->name("getAllOrder");
+            //get order Comments
+            Route::get("get_comments/{pickup_id}", [OrderController::class, "getComments"])->name("getComments");
         });
     });
 });
