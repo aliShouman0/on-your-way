@@ -49,6 +49,10 @@ Route::group(["prefix" => "ony"], function () {
             Route::get("get_all_users", [UserController::class, "getAllUsers"])->name("getAllUsers");
             // Search
             Route::get("search_user/{like}", [UserController::class, "searchUser"])->name("searchUser");
+            // Verified user
+            Route::post("verified_user", [UserController::class, "verifiedUser"])->name("verifiedUser");
+            // UnVerifiedUser
+            Route::post("unverified_user", [UserController::class, "UnVerifiedUser"])->name("UnVerifiedUser");
         });
     });
 });
