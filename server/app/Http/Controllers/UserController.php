@@ -131,4 +131,25 @@ class UserController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
+
+    //verifiedUser
+    function verifiedUser(Request $request)
+    {
+        if ($request->id) {
+            $user = User::find($request->id);
+            $user->is_verified = true;
+            $user = $user->makeVisible(['birthday', 'front_id_photo', 'back_id_photo', 'is_verified', 'user_type_id',  'created_at']);
+            if ($user->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $user,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    } 
 }
