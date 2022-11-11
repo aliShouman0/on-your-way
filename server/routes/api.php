@@ -12,6 +12,8 @@ Route::group(["prefix" => "ony"], function () {
     Route::post("signup", [UserController::class, "signup"])->name("signup");
     //login
     Route::post('login', [AuthController::class, 'login'])->name("login");
+
+
     //JWT auth  
     Route::group(["middleware" => "security"], function () {
         // get my data/current user info
@@ -40,5 +42,11 @@ Route::group(["prefix" => "ony"], function () {
         Route::post('search_orders', [OrderController::class, 'searchOrders'])->name("searchOrders");
         //add_order
         Route::post('add_order', [OrderController::class, 'AddOrder'])->name("AddOrder");
+        
+        // on admin can access
+        Route::group(["middleware" => "isAdmin"], function () {
+            // getAllUsers
+            Route::get("get_all_users", [UserController::class, "getAllUsers"])->name("getAllUsers");
+        });
     });
 });
