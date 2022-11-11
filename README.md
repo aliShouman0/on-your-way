@@ -29,17 +29,13 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Login                              | SignUp                               | Next                                     |
-| ---------------------------------- | ------------------------------------ | ---------------------------------------- |
-| ![Login](./readme/figma/Login.jpg) | ![SignUp](./readme/figma/Signup.jpg) | ![SignUp](./readme/figma/NextSignup.jpg) |
+| Login                              | SignUp                               | Next                                     | Account                                        | Add order                                       |
+| ---------------------------------- | ------------------------------------ | ---------------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| ![Login](./readme/figma/Login.jpg) | ![SignUp](./readme/figma/Signup.jpg) | ![SignUp](./readme/figma/NextSignup.jpg) | ![Artist's Albums](./readme/figma/Account.jpg) | ![Artist's Albums](./readme/figma/AddOrder.jpg) |
 
-| MyOrder                                        | Add order                                       | Order                                        |
-| ---------------------------------------------- | ----------------------------------------------- | -------------------------------------------- |
-| ![Artists results](./readme/figma/MyOrder.jpg) | ![Artist's Albums](./readme/figma/AddOrder.jpg) | ![Artist's Albums](./readme/figma/Order.jpg) |
-
-| Chat                                        | In Chat                                       | Account                                        |
-| ------------------------------------------- | --------------------------------------------- | ---------------------------------------------- |
-| ![Artists results](./readme/figma/Chat.jpg) | ![Artist's Albums](./readme/figma/InChat.jpg) | ![Artist's Albums](./readme/figma/Account.jpg) |
+| MyOrder                                        | Order                                        | Chat                                        | In Chat                                       |
+| ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- | --------------------------------------------- |
+| ![Artists results](./readme/figma/MyOrder.jpg) | ![Artist's Albums](./readme/figma/Order.jpg) | ![Artists results](./readme/figma/Chat.jpg) | ![Artist's Albums](./readme/figma/InChat.jpg) |
 
 > Bottom Sheet
 
@@ -65,19 +61,15 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 > Using the above mentioned tech stacks and the wire frames build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Login                                 | SignUp                                  | Next                                        |
-| ------------------------------------- | --------------------------------------- | ------------------------------------------- |
-| ![Login](./readme/realApp/login.jpeg) | ![SignUp](./readme/realApp/signUp.jpeg) | ![SignUp](./readme/realApp/nextSignup.jpeg) |
+| Login                                 | SignUp                                  | Next                                        | Account                                           | Add order                                          |
+| ------------------------------------- | --------------------------------------- | ------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| ![Login](./readme/realApp/login.jpeg) | ![SignUp](./readme/realApp/signUp.jpeg) | ![SignUp](./readme/realApp/nextSignup.jpeg) | ![Artist's Albums](./readme/realApp/account.jpeg) | ![Artist's Albums](./readme/realApp/addOrder.jpeg) |
 
-| MyOrder                                           | Add order                                          | Order                                           |
-| ------------------------------------------------- | -------------------------------------------------- | ----------------------------------------------- |
-| ![Artists results](./readme/realApp/myOrder.jpeg) | ![Artist's Albums](./readme/realApp/addOrder.jpeg) | ![Artist's Albums](./readme/realApp/order.jpeg) |
+| MyOrder                                           | Order                                           | Chat                                           | In Chat                                          |
+| ------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------- | ------------------------------------------------ |
+| ![Artists results](./readme/realApp/myOrder.jpeg) | ![Artist's Albums](./readme/realApp/order.jpeg) | ![Artists results](./readme/realApp/chat.jpeg) | ![Artist's Albums](./readme/realApp/inchat.jpeg) |
 
-| Chat                                           | In Chat                                          | Account                                           |
-| ---------------------------------------------- | ------------------------------------------------ | ------------------------------------------------- |
-| ![Artists results](./readme/realApp/chat.jpeg) | ![Artist's Albums](./readme/realApp/inchat.jpeg) | ![Artist's Albums](./readme/realApp/account.jpeg) |
-
-> 
+>
 
 | Order Details && App OverView                | cancel order                                    |
 | -------------------------------------------- | ----------------------------------------------- |
