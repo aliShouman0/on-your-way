@@ -42,11 +42,13 @@ Route::group(["prefix" => "ony"], function () {
         Route::post('search_orders', [OrderController::class, 'searchOrders'])->name("searchOrders");
         //add_order
         Route::post('add_order', [OrderController::class, 'AddOrder'])->name("AddOrder");
-        
+
         // on admin can access
         Route::group(["middleware" => "isAdmin"], function () {
             // getAllUsers
             Route::get("get_all_users", [UserController::class, "getAllUsers"])->name("getAllUsers");
+            // Search
+            Route::get("search_user/{like}", [UserController::class, "searchUser"])->name("searchUser");
         });
     });
 });
