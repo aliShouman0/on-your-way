@@ -53,6 +53,8 @@ Route::group(["prefix" => "ony"], function () {
             Route::post("verified_user", [UserController::class, "verifiedUser"])->name("verifiedUser");
             // UnVerifiedUser
             Route::post("unverified_user", [UserController::class, "UnVerifiedUser"])->name("UnVerifiedUser");
+            // get Order ended or not
+            Route::get("get_all_order", [OrderController::class, "getAllOrder"])->name("getAllOrder");
         });
     });
 });
