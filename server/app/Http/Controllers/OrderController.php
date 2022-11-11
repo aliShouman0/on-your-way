@@ -367,7 +367,7 @@ class OrderController extends Controller
     //get order Comments and rates
     function getComments($pickup_id)
     {
-       
+
         if ($pickup_id) {
             $pickup = Pickup::where("id", $pickup_id)->first();
             if ($pickup) {
@@ -398,4 +398,28 @@ class OrderController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
+
+    //approveOrder 
+    function  approveOrder(Request $request)
+    {
+        if (
+            $request->order_id
+        ) {
+            $order = Order::find($request->order_id);
+            $order->approved = true;
+
+            if ($order->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $order,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+    
 }
