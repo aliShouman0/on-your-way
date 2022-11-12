@@ -26,6 +26,7 @@ function Login({ navigation }) {
     error: loginUpError,
     data: result,
   } = useMutation(main.login);
+
   useEffect(() => {
     if (isError) {
       console.log(loginUpError);
@@ -35,7 +36,7 @@ function Login({ navigation }) {
     }
 
     if (result && result === 401) {
-      Toast.show("Thats Wrong 😔", {
+      Toast.show("That's Wrong 😔", {
         duration: Toast.durations.LONG,
       });
     }
@@ -45,7 +46,6 @@ function Login({ navigation }) {
         duration: Toast.durations.LONG,
       });
       const access_token = result.data.access_token;
-      console.log(access_token);
       ContinueLogin(access_token);
     }
   }, [result]);
@@ -60,9 +60,13 @@ function Login({ navigation }) {
     data.append("password", password);
     login(data);
   };
+
   const ContinueLogin = async (access_token) => {
     await SecureStore.setItemAsync("secure_token", access_token);
-    const token = await SecureStore.getItemAsync("secure_token");
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "DrawerNavigator" }],
+    });
   };
 
   if (isLoading) {
