@@ -15,6 +15,7 @@ function DropDownCity({
   style,
   textStyle,
   iconColor,
+  searchTextInputStyle,
 }) {
   const [openFrom, setOpenFrom] = useState(false);
   const [items, setItems] = useState(cities);
@@ -34,7 +35,7 @@ function DropDownCity({
         styles.dropDownContainerStyle,
         dropDownContainerStyle,
       ]}
-      searchTextInputStyle={[styles.searchTextInputStyle]}
+      searchTextInputStyle={[styles.searchTextInputStyle,searchTextInputStyle]}
       searchable={true}
       searchPlaceholder={"City Name"}
       itemSeparator={false}
