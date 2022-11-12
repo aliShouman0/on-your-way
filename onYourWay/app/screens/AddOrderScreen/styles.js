@@ -34,16 +34,7 @@ export default StyleSheet.create({
     borderRadius: 0,
     width: "100%",
     borderWidth: 0,
-  },
-  containerStyle: {
-    // alignItems: "center",
-    // backgroundColor: "transparent",
-    // color: colors.white,
-    width: "45%",
-    //   borderWidth: 0,
-    zIndex: 1000,
-    height:50
-  },
+  }, 
   input: {
     marginVertical: 20,
   },

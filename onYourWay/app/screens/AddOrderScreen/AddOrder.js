@@ -5,19 +5,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+} from "react-native"; 
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
-import DropDownPicker from "react-native-dropdown-picker";
 import Input from "../../components/Input/Input";
 import AppButton from "../../components/AppButton/AppButton";
 import UploadImage from "../../components/UploadImage/UploadImage";
-import cities from "../../config/cities";
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
 import colors from "../../config/colors";
+
 function AddOrder({ navigation }) {
   const uploadRBSheet = useRef();
   const [pay, setPay] = useState("");
