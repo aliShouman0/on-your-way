@@ -57,12 +57,10 @@ function Signup({ navigation }) {
       name,
       phone,
       address,
-      confirmPass,
       password,
-      date: date.toDateString(),
+      date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
     });
   };
-
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"back"} title={"Register"} navigation={navigation} />
