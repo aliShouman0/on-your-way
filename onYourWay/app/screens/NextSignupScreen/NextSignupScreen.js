@@ -48,6 +48,18 @@ function NextSignupScreen({ navigation, route }) {
       setLoad(false);
       return;
     }
+    const data = new FormData();
+    data.append("name", name);
+    data.append("birthday", date);
+    data.append("email", email);
+    data.append("phone", phone);
+    data.append("address", address);
+    data.append("password", password);
+    data.append("avatar", photo.base64);
+    data.append("front_id_photo", frontId.base64);
+    data.append("back_id_photo", backId.base64);
+    //  sign up user on local server
+    signUp(data);
     if (isError) {
       alert(signUpError);
       setError("");
