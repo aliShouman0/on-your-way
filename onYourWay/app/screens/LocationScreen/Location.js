@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import MapView from "react-native-maps";
 import { Marker, Polygon } from "react-native-maps";
-import * as geoLocation from "expo-location";
+import * as geoLocation from "expo-location"; 
 import MapViewDirections from "react-native-maps-directions";
 
 import styles from "./styles";
@@ -39,7 +39,7 @@ function Location({ navigation }) {
   }, []);
 
   if (load) {
-    return <Loading />;
+    return <Loading/>
   }
 
   return (
@@ -63,6 +63,24 @@ function Location({ navigation }) {
         }}
       >
         <Marker coordinate={myLocation} title={"Your Location"} />
+
+        <MapViewDirections
+          origin={{
+            latitude: 33.88863,
+            longitude: 35.49548,
+          }}
+          destination={myLocation}
+          apikey={Constants.manifest.extra.googleApiKey}
+          strokeWidth={3}
+          strokeColor={colors.darker}
+        />
+        <Marker
+          coordinate={{
+            latitude: 33.88863,
+            longitude: 35.49548,
+          }}
+          title={"Picker Location"}
+        />
       </MapView>
     </SafeAreaView>
   );
