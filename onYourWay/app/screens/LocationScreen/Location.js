@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import MapView from "react-native-maps";
 import { Marker, Polygon } from "react-native-maps";
 import * as geoLocation from "expo-location";
@@ -45,6 +45,25 @@ function Location({ navigation }) {
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"back"} title={"Location"} navigation={navigation} />
+      <MapView
+        style={styles.mapView}
+        initialRegion={{
+          latitude: myLocation.latitude,
+          longitude: myLocation.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        showsUserLocation={true}
+        onUserLocationChange={(e) => {
+          //   console.log("e", e.nativeEvent.coordinate);
+          // setMyLocation({
+          //   longitude: e.nativeEvent.longitude,
+          //   latitude: e.nativeEvent.latitude,
+          // });
+        }}
+      >
+        <Marker coordinate={myLocation} title={"Your Location"} />
+      </MapView>
     </SafeAreaView>
   );
 }
