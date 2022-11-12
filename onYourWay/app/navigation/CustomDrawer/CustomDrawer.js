@@ -1,25 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, View, Text, TouchableOpacity } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"; 
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import * as SecureStore from "expo-secure-store";
 
 import styles from "./styles";
+import main from "../../config/main";
+import Loading from "../../components/Loading/Loading";
+
 
 const CustomDrawer = (props) => {
   const account = props.state.index == 5;
+  const [data, setData] = useState("");
+  const [load, setLoad] = useState(true);
+  useEffect(() => {
+    setLoad(true);
+    const getData = async () => {
+      const res = await SecureStore.getItemAsync("user_info");
+      setData(JSON.parse(res));
+      setLoad(false);
+    };
+    getData();
+  }, []);
+  if (load) {
+    return <Loading />;
+  }
   return (
     <View style={styles.mainView}>
       <DrawerContentScrollView {...props}>
         <View style={styles.view}>
           <Image
             resizeMode="contain"
-            source={require("../../assets/user.png")}
+            source={
+              data && data.avatar
+                ? { uri: main.baseLink + data.avatar }
+                : require("../../assets/user.png")
+            }
             style={styles.userImg}
           />
-          <Text style={styles.text}>User Name</Text>
+          <Text style={styles.text}>{data ? data.name : "Loading..."}</Text>
         </View>
         <View style={styles.drawerListWrapper}>
           <DrawerItemList {...props} />
