@@ -57,6 +57,32 @@ function Login({ navigation }) {
     }
   }, [result]);
 
+  useEffect(() => {
+    if (userInfoIsError) {
+      console.log(userInfoError);
+      Toast.show("Sorry Some Thing Went Wrong 😮", {
+        duration: Toast.durations.LONG,
+      });
+    }
+
+    if (userInfoResult && userInfoResult === 401) {
+      Toast.show("That's Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+    }
+
+    if (userInfoResult && userInfoResult.status === 200) {
+      Toast.show("Verify Done!! 🙂", {
+        duration: Toast.durations.LONG,
+      });
+      save("user_info", JSON.stringify(userInfoResult.data)); 
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "DrawerNavigator" }],
+      });
+    }
+  }, [userInfoResult]);
+
   const onLogin = async () => {
     if (!email || !password) {
       alert("All Inputs Are Required");
