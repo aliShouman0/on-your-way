@@ -13,7 +13,7 @@ import CancelOrder from "../CancelOrder/CancelOrder";
 import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
 import AppButton from "../AppButton/AppButton";
 
-function OrderStatus({ refRBSheet, isReceiver }) {
+function OrderStatus({ refRBSheet, isReceiver, navigation }) {
   const cancelOrderBSheet = useRef();
   const receiveOrderBSheet = useRef();
   const windowHeight = Dimensions.get("window").height;
@@ -138,6 +138,10 @@ function OrderStatus({ refRBSheet, isReceiver }) {
             />
             <SmallButton
               value={`${isReceiver ? "Request" : "Live"}\nlocation`}
+              onPress={() => {
+                refRBSheet.current.close();
+                navigation.navigate("Location");
+              }}
             />
             <SmallButton
               value={"Cancel"}
