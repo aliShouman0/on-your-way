@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { useQuery, useMutation } from "react-query";
 
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
@@ -14,6 +15,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import Loading from "../../components/Loading/Loading";
 import firebaseHelper from "../../config/firebaseHelper";
+import main from "../../config/main";
 
 function NextSignupScreen({ navigation, route }) {
   const uploadRBSheet = useRef();
@@ -24,20 +26,32 @@ function NextSignupScreen({ navigation, route }) {
   const [imageFor, setImageFor] = useState("");
   const [load, setLoad] = useState(false);
   const [error, setError] = useState("");
-  const { email, name, phone, address, confirmPass, password, date } =
-    route.params;
+  const { email, name, phone, address, password, date } = route.params;
+  const {
+    mutate: signUp,
+    isError,
+    isLoading,
+    error: signUpError,
+  } = useMutation((user) => main.signUp(user));
 
-  const onHandleSignup = () => {
+  const onHandleSignup = async () => {
     if (!photo || !frontId || !backId) {
       alert("All Image Are Required");
       return;
     }
     setLoad(true);
+    //sign up user on firebase if not exist
     firebaseHelper.onSignup(phone, email, name, setError);
-    setLoad(false);
     if (error) {
       alert(error);
       setError("");
+      setLoad(false);
+      return;
+    }
+    if (isError) {
+      alert(signUpError);
+      setError("");
+      setLoad(false);
       return;
     }
     navigation.reset({
@@ -45,18 +59,17 @@ function NextSignupScreen({ navigation, route }) {
       routes: [{ name: "Login" }],
     });
   };
-
   const saveImage = async () => {
     if (image) {
       switch (imageFor) {
         case "photo":
-          setPhoto(image.uri);
+          setPhoto(image);
           break;
         case "frontId":
-          setFrontId(image.uri);
+          setFrontId(image);
           break;
         case "backId":
-          setBackId(image.uri);
+          setBackId(image);
           break;
         default:
           break;
@@ -67,7 +80,7 @@ function NextSignupScreen({ navigation, route }) {
     saveImage();
   }, [image]);
 
-  if (load) {
+  if (load || isLoading) {
     return <Loading />;
   }
   return (
@@ -93,7 +106,7 @@ function NextSignupScreen({ navigation, route }) {
           <Image
             resizeMode="contain"
             style={styles.image}
-            source={photo ? { uri: photo } : ""}
+            source={photo ? { uri: photo.uri } : ""}
           />
         </TouchableOpacity>
       </View>
@@ -112,7 +125,7 @@ function NextSignupScreen({ navigation, route }) {
           <Image
             resizeMode="contain"
             style={styles.imgId}
-            source={frontId ? { uri: frontId } : ""}
+            source={frontId ? { uri: frontId.uri } : ""}
           />
         </TouchableOpacity>
 
@@ -129,7 +142,7 @@ function NextSignupScreen({ navigation, route }) {
           <Image
             resizeMode="contain"
             style={styles.imgId}
-            source={backId ? { uri: backId } : ""}
+            source={backId ? { uri: backId.uri } : ""}
           />
         </TouchableOpacity>
       </View>
