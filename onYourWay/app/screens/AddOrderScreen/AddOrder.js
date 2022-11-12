@@ -64,6 +64,7 @@ function AddOrder({ navigation }) {
           style={styles.style}
           textStyle={styles.textStyle}
           iconColor={colors.black}
+          searchTextInputStyle={styles.searchTextInputStyle}
         />
         <DropDownCity
           placeholder={"To"}
@@ -73,6 +74,7 @@ function AddOrder({ navigation }) {
           style={styles.style}
           textStyle={styles.textStyle}
           iconColor={colors.black}
+          searchTextInputStyle={styles.searchTextInputStyle}
         />
       </View>
       <Input
