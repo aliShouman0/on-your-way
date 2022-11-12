@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
-import OrderInfo from "../../components/OrderInfo/OrderInfo";
 
+import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
+
+const testing = [
+  {
+    id: "id1",
+    userName: "Ali Alrida Shouman",
+    userImg: require("../../assets/user1.jpg"),
+    from: "Beirut",
+    to: "Byblos",
+    pay: "145000L.L",
+    orderImg: require("../../assets/keyboard.jpg"),
+    orderDescription: "keyboard and mouse",
+  } 
+];
 
 function PickUps({ navigation }) {
   const [from, setFrom] = useState("");
