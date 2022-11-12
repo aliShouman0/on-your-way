@@ -23,13 +23,20 @@ function Login({ navigation }) {
     mutate: login,
     isError,
     isLoading,
-    error: loginUpError,
+    error: loginError,
     data: result,
   } = useMutation(main.login);
+  const {
+    mutate: userInfo,
+    isError: userInfoIsError,
+    isLoading: load,
+    error: userInfoError,
+    data: userInfoResult,
+  } = useMutation(main.me);
 
   useEffect(() => {
     if (isError) {
-      console.log(loginUpError);
+      console.log(loginError);
       Toast.show("Sorry Some Thing Went Wrong 😮", {
         duration: Toast.durations.LONG,
       });
@@ -62,14 +69,17 @@ function Login({ navigation }) {
   };
 
   const ContinueLogin = async (access_token) => {
-    await SecureStore.setItemAsync("secure_token", access_token);
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "DrawerNavigator" }],
-    });
+    save("access_token", access_token);
+    const token = new FormData();
+    token.append("token", access_token);
+    userInfo(token);
   };
 
-  if (isLoading) {
+  const save = async (key, value) => {
+    await SecureStore.setItemAsync(key, value);
+  };
+
+  if (isLoading || load) {
     return <Loading />;
   }
 
