@@ -16,20 +16,19 @@ import Input from "../../components/Input/Input";
 import AppButton from "../../components/AppButton/AppButton";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import cities from "../../config/cities";
+import DropDownCity from "../../components/DropDownCity/DropDownCity";
+import colors from "../../config/colors";
 function AddOrder({ navigation }) {
   const uploadRBSheet = useRef();
   const [pay, setPay] = useState("");
   const [description, setDescription] = useState("");
-  const [openFrom, setOpenFrom] = useState(false);
   const [from, setFrom] = useState("From");
-  const [openTo, setOpenTo] = useState(false);
   const [to, setTo] = useState("To");
   const [photo, setPhoto] = useState(null);
   const [mainImg, setMainImg] = useState(null);
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [imageFor, setImageFor] = useState("");
-  const [items, setItems] = useState(cities);
 
   const saveImage = async (by) => {
     if (photo) {
@@ -58,50 +57,24 @@ function AddOrder({ navigation }) {
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"back"} title={"Add Order"} navigation={navigation} />
       <UploadImage refRBSheet={uploadRBSheet} setImage={setPhoto} />
-      <View style={styles.city}>
-        <DropDownPicker
-          placeholder="From"
-          open={openFrom}
-          value={from}
-          items={items}
-          setOpen={setOpenFrom}
+      <View style={styles.container}>
+        <DropDownCity
+          placeholder={"From"}
           setValue={setFrom}
-          setItems={setItems}
-          textStyle={styles.textStyle}
-          containerStyle={styles.containerStyle}
-          style={styles.style}
+          value={from}
           dropDownContainerStyle={styles.dropDownContainerStyle}
-          searchable={true}
-          searchPlaceholder={"City Name"}
-          itemSeparator={false}
-          ArrowUpIconComponent={() => (
-            <AntDesign name="up" size={24} color="black" />
-          )}
-          ArrowDownIconComponent={() => (
-            <AntDesign name="down" size={24} color="black" />
-          )}
+          style={styles.style}
+          textStyle={styles.textStyle}
+          iconColor={colors.black}
         />
-        <DropDownPicker
-          placeholder="To"
-          open={openTo}
-          value={to}
-          items={items}
-          setOpen={setOpenTo}
+        <DropDownCity
+          placeholder={"To"}
           setValue={setTo}
-          setItems={setItems}
-          textStyle={styles.textStyle}
-          containerStyle={styles.containerStyle}
-          style={styles.style}
+          value={to}
           dropDownContainerStyle={styles.dropDownContainerStyle}
-          searchable={true}
-          searchPlaceholder={"City Name"}
-          itemSeparator={false}
-          ArrowUpIconComponent={() => (
-            <AntDesign name="up" size={24} color="black" />
-          )}
-          ArrowDownIconComponent={() => (
-            <AntDesign name="down" size={24} color="black" />
-          )}
+          style={styles.style}
+          textStyle={styles.textStyle}
+          iconColor={colors.black}
         />
       </View>
       <Input
@@ -117,7 +90,6 @@ function AddOrder({ navigation }) {
         style={styles.input}
         keyboardType="numeric"
       />
-
       <View style={styles.imgContainer}>
         <TouchableOpacity
           onPress={() => {
@@ -135,7 +107,6 @@ function AddOrder({ navigation }) {
             source={mainImg ? { uri: mainImg } : ""}
           />
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={() => {
             setImageFor("image1");
