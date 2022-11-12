@@ -6,17 +6,16 @@ export default StyleSheet.create({
   mainView: {
     backgroundColor: colors.primary,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flex: 1,
     alignItems: "center",
     height: "100%",
   },
-  city: {
+  container: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
     marginTop: 50,
     marginBottom: 20,
-    zIndex: 10,
+    marginVertical: 15,
   },
   textStyle: {
     color: colors.black,
@@ -34,14 +33,16 @@ export default StyleSheet.create({
     color: colors.black,
     borderRadius: 0,
     width: "100%",
-    borderWidth: 0, 
+    borderWidth: 0,
   },
   containerStyle: {
-    alignItems: "center",
-    backgroundColor: "transparent",
-    color: colors.white,
+    // alignItems: "center",
+    // backgroundColor: "transparent",
+    // color: colors.white,
     width: "45%",
-    borderWidth: 0,
+    //   borderWidth: 0,
+    zIndex: 1000,
+    height:50
   },
   input: {
     marginVertical: 20,
