@@ -27,7 +27,6 @@ function ChatBox({
         <Image resizeMode="contain" source={userImg} style={styles.userImg} />
         <View style={styles.text}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.lastMessage}>{lastMessage}</Text>
         </View>
         <Text style={styles.date}>{date}</Text>
       </View>

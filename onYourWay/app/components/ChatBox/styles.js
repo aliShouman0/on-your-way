@@ -25,7 +25,7 @@ export default StyleSheet.create({
   name: {
     color: colors.white,
     fontSize: text.sizeMid,
-    fontWeight: "400",
+    fontWeight: "200",
   },
   lastMessage: {
     color: colors.white,
@@ -36,5 +36,7 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: text.sizeSmall,
     marginRight: 15,
+    fontWeight: "200",
+
   },
 });
