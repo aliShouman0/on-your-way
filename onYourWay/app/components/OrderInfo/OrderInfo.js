@@ -21,6 +21,7 @@ function OrderInfo({
   orderDescription,
   isReceiver,
   completed,
+  navigation,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
@@ -53,7 +54,11 @@ function OrderInfo({
             />
           </View>
           <UserInfo refRBSheet={userInfoBSheet} />
-          <OrderStatus refRBSheet={orderStatusBSheet} isReceiver={isReceiver} />
+          <OrderStatus
+            refRBSheet={orderStatusBSheet}
+            isReceiver={isReceiver}
+            navigation={navigation}
+          />
         </>
       )}
     </View>
