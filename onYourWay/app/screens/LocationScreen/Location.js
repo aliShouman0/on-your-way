@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
-import Navbar from "../../components/Navbar/Navbar";
-import styles from "./styles";
+import { ActivityIndicator, SafeAreaView } from "react-native";
+import MapView from "react-native-maps";
+import { Marker, Polygon } from "react-native-maps";
 import * as geoLocation from "expo-location";
+import MapViewDirections from "react-native-maps-directions";
+
+import styles from "./styles";
+import Navbar from "../../components/Navbar/Navbar";
+import colors from "../../config/colors";
+import Constants from "expo-constants";
 import Loading from "../../components/Loading/Loading";
 
 function Location({ navigation }) {
@@ -20,6 +26,7 @@ function Location({ navigation }) {
         alert("Permission to access location was denied");
         return;
       }
+
       let getLocation = await geoLocation.getCurrentPositionAsync({});
       //  console.log("my ", getLocation);
       setMyLocation({
