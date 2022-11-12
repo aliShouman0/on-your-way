@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useMutation } from "react-query";
+import Toast from "react-native-root-toast";
+import * as SecureStore from "expo-secure-store";
 const baseUrl = "http://192.168.8.135:8000/api/ony";
 
 const postAPI = async (api_url, api_data, api_token = null) => {
@@ -31,12 +34,16 @@ const getAPI = async (api_url, api_token) => {
   }
 };
 
-const signUp = (data) => {
-  return postAPI(`${baseUrl}/signup`, data);
+const signUp = async (data) => {
+  return await postAPI(`${baseUrl}/signup`, data);
 };
 
-const login = (data) => {
-  return postAPI(`${baseUrl}/login`, data);
+const login = async (data) => {
+  return await postAPI(`${baseUrl}/login`, data);
 };
 
-export default { getAPI, postAPI, baseUrl, signUp, login };
+const me = async (token) => {
+  return await postAPI(`${baseUrl}/me`, token);
+};
+
+export default { getAPI, postAPI, baseUrl, signUp, login, me };
