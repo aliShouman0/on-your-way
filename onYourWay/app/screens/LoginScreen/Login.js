@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useMutation } from "react-query";
-import Toast from "react-native-root-toast"; 
+import Toast from "react-native-root-toast";
+import * as SecureStore from "expo-secure-store";
 
 import AppButton from "../../components/AppButton/AppButton";
 import Input from "../../components/Input/Input";
@@ -25,18 +26,6 @@ function Login({ navigation }) {
     error: loginUpError,
     data: result,
   } = useMutation(main.login);
-
-  const onLogin = async () => {
-    if (!email || !password) {
-      alert("All Inputs Are Required");
-      return;
-    }
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    login(data);
-  };
-
   useEffect(() => {
     if (isError) {
       console.log(loginUpError);
@@ -55,8 +44,26 @@ function Login({ navigation }) {
       Toast.show("Login Done!! 🙂", {
         duration: Toast.durations.LONG,
       });
+      const access_token = result.data.access_token;
+      console.log(access_token);
+      ContinueLogin(access_token);
     }
   }, [result]);
+
+  const onLogin = async () => {
+    if (!email || !password) {
+      alert("All Inputs Are Required");
+      return;
+    }
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    login(data);
+  };
+  const ContinueLogin = async (access_token) => {
+    await SecureStore.setItemAsync("secure_token", access_token);
+    const token = await SecureStore.getItemAsync("secure_token");
+  };
 
   if (isLoading) {
     return <Loading />;
