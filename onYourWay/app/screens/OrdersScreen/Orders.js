@@ -6,6 +6,21 @@ import Navbar from "../../components/Navbar/Navbar";
 import NewOrderInfo from "../../components/NewOrderInfo/NewOrderInfo";
 import styles from "./styles";
 
+const testing = [
+  {
+    id: "id1",
+    userName: "Ali Alrida Shouman",
+    userImg: require("../../assets/user1.jpg"),
+    from: "Beirut",
+    to: "Byblos",
+    pay: "145000L.L",
+    orderImg1: require("../../assets/keyboard.jpg"),
+    orderImg2: require("../../assets/keyboard.jpg"),
+    orderImg3: require("../../assets/keyboard.jpg"),
+    orderDescription: "keyboard and mouse ",
+  },
+];
+
 function Orders({ navigation }) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
