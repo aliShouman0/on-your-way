@@ -13,6 +13,7 @@ function UploadImage({ refRBSheet, setImage }) {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
+      base64: true,
     });
 
     if (!result.cancelled) {
@@ -22,7 +23,11 @@ function UploadImage({ refRBSheet, setImage }) {
   };
 
   const camera = async () => {
-    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    const permission = await ImagePicker.requestCameraPermissionsAsync({
+      allowsEditing: true,
+      quality: 1,
+      base64: true,
+    });
     if (permission.granted == false) {
       alert(
         "Camera permission denied Go to settings and allow it to use the camera"
