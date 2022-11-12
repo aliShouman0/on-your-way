@@ -1,4 +1,4 @@
-import axios from "axios"; 
+import axios from "axios";
 const baseUrl = "http://192.168.8.135:8000/api/ony";
 
 const postAPI = async (api_url, api_data, api_token = null) => {
@@ -12,7 +12,7 @@ const postAPI = async (api_url, api_data, api_token = null) => {
   } catch (error) {
     console.log("Error from POST API ", error);
     console.log("error.response ", error.response.data);
-    return error;
+    return error.response.status;
   }
 };
 
@@ -35,4 +35,8 @@ const signUp = (data) => {
   return postAPI(`${baseUrl}/signup`, data);
 };
 
-export default { getAPI, postAPI, baseUrl ,signUp};
+const login = (data) => {
+  return postAPI(`${baseUrl}/login`, data);
+};
+
+export default { getAPI, postAPI, baseUrl, signUp, login };
