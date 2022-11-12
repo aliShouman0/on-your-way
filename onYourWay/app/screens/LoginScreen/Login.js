@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   Image,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useMutation } from "react-query";
-import Toast from "react-native-root-toast";
+import Toast from "react-native-root-toast"; 
 
 import AppButton from "../../components/AppButton/AppButton";
 import Input from "../../components/Input/Input";
@@ -23,42 +23,45 @@ function Login({ navigation }) {
     isError,
     isLoading,
     error: loginUpError,
-    status,
     data: result,
-  } = useMutation((user) => main.login(user));
+  } = useMutation(main.login);
 
   const onLogin = async () => {
     if (!email || !password) {
-      alert("All Image Are Required");
+      alert("All Inputs Are Required");
       return;
     }
     const data = new FormData();
     data.append("email", email);
     data.append("password", password);
     login(data);
+  };
+
+  useEffect(() => {
     if (isError) {
-      setLoad(false);
       console.log(loginUpError);
       Toast.show("Sorry Some Thing Went Wrong 😮", {
         duration: Toast.durations.LONG,
       });
-      return;
     }
+
     if (result && result === 401) {
       Toast.show("Thats Wrong 😔", {
         duration: Toast.durations.LONG,
       });
     }
+
     if (result && result.status === 200) {
       Toast.show("Login Done!! 🙂", {
         duration: Toast.durations.LONG,
       });
     }
-  };
+  }, [result]);
 
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Image
