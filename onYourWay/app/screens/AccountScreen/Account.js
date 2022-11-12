@@ -6,10 +6,9 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import AppButton from "../../components/AppButton/AppButton";
-import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import styles from "./styles";
 import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
 import Rate from "../../components/Rate/Rate";
@@ -58,7 +57,6 @@ function Account({ navigation }) {
             text="Email"
             value={email}
             setValue={setEmail}
-            secureTextEntry={true}
             editable={false}
             contextMenuHidden={true}
           />
@@ -76,7 +74,7 @@ function Account({ navigation }) {
             editable={false}
             contextMenuHidden={true}
           />
-          <AppButton value={"EDIT"} onPress={() => {}} />
+          {/* <AppButton value={"EDIT"} onPress={() => {}} /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

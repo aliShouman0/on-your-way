@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
-import Navbar from "../../components/Navbar/Navbar";
+
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
+import Navbar from "../../components/Navbar/Navbar";
 import { AntDesign } from "@expo/vector-icons"; 
 import colors from "../../config/colors";
 import styles from "./styles";
 
- 
+const data = [
+  {
+    id: "id1",
+    userName: "Ali Alrida Shouman",
+    userImg: require("../../assets/user1.jpg"),
+    from: "Beirut",
+    to: "Byblos",
+    pay: "145000L.L",
+    orderImg: require("../../assets/keyboard.jpg"),
+    orderDescription: "keyboard and mouse",
+  }, 
+];
+
 function MyOrder({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState(testing);
+  const [data, setData] = useState(data);
 
   const refresh = () => {
     setData([
@@ -53,6 +66,7 @@ function MyOrder({ navigation }) {
             pay={item.pay}
             orderImg={item.orderImg}
             orderDescription={item.orderDescription}
+            navigation={navigation}
           />
         )}
       />
