@@ -6,7 +6,16 @@ import styles from "./styles";
 import colors from "../../config/colors";
 import cities from "../../config/cities";
 
-function DropDownCity({ placeholder, setValue, value }) {
+function DropDownCity({
+  placeholder,
+  setValue,
+  value,
+  containerStyle,
+  dropDownContainerStyle,
+  style,
+  textStyle,
+  iconColor,
+}) {
   const [openFrom, setOpenFrom] = useState(false);
   const [items, setItems] = useState(cities);
   return (
@@ -18,19 +27,22 @@ function DropDownCity({ placeholder, setValue, value }) {
       setOpen={setOpenFrom}
       setValue={setValue}
       setItems={setItems}
-      textStyle={styles.textStyle}
-      containerStyle={styles.containerStyle}
-      style={styles.style}
-      dropDownContainerStyle={styles.dropDownContainerStyle} 
-      searchTextInputStyle={styles.searchTextInputStyle}
+      textStyle={[styles.textStyle, textStyle]}
+      containerStyle={[styles.containerStyle, containerStyle]}
+      style={[styles.style, style]}
+      dropDownContainerStyle={[
+        styles.dropDownContainerStyle,
+        dropDownContainerStyle,
+      ]}
+      searchTextInputStyle={[styles.searchTextInputStyle]}
       searchable={true}
       searchPlaceholder={"City Name"}
       itemSeparator={false}
       ArrowUpIconComponent={() => (
-        <AntDesign name="up" size={24} color={colors.white} />
+        <AntDesign name="up" size={24} color={[colors.white, iconColor]} />
       )}
       ArrowDownIconComponent={() => (
-        <AntDesign name="down" size={24} color={colors.white} />
+        <AntDesign name="down" size={24} color={[colors.white, iconColor]} />
       )}
     />
   );
