@@ -7,7 +7,8 @@ import {
   View,
 } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { useQuery, useMutation } from "react-query";
+import { useMutation } from "react-query";
+import Toast from "react-native-root-toast";
 
 import AppButton from "../../components/AppButton/AppButton";
 import styles from "./styles";
@@ -66,6 +67,9 @@ function NextSignupScreen({ navigation, route }) {
       setLoad(false);
       return;
     }
+    Toast.show("Sign up Successfully!", {
+      duration: Toast.durations.LONG,
+    });
     navigation.reset({
       index: 0,
       routes: [{ name: "Login" }],
