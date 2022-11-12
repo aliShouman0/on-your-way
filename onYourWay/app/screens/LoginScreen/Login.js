@@ -32,6 +32,28 @@ function Login({ navigation }) {
       alert("All Image Are Required");
       return;
     }
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    login(data);
+    if (isError) {
+      setLoad(false);
+      console.log(loginUpError);
+      Toast.show("Sorry Some Thing Went Wrong 😮", {
+        duration: Toast.durations.LONG,
+      });
+      return;
+    }
+    if (result && result === 401) {
+      Toast.show("Thats Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+    }
+    if (result && result.status === 200) {
+      Toast.show("Login Done!! 🙂", {
+        duration: Toast.durations.LONG,
+      });
+    }
   };
 
   if (isLoading) {
