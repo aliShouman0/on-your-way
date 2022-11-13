@@ -62,6 +62,11 @@ const OrderStatus = async (id) => {
   return await getAPI(`${baseUrl}/get_pickup/${id}`, token);
 };
 
+const cancelOrder = async (data) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await postAPI(`${baseUrl}/cancel_order`, data, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -73,4 +78,5 @@ export default {
   getMyOrder,
   save,
   OrderStatus,
+  cancelOrder,
 };
