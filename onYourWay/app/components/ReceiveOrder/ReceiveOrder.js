@@ -12,18 +12,21 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import { FontAwesome } from "@expo/vector-icons";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import QRCode from "react-native-qrcode-svg";
+import Toast from "react-native-root-toast";
 
 import Input from "../Input/Input";
 import styles from "./styles";
 import AppButton from "../AppButton/AppButton";
 import CompletedOrder from "../CompletedOrder/CompletedOrder";
-function ReceiveOrder({ refRBSheet }) {
+function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
   const completedOrderRBSheet = useRef();
   const [code, setCode] = useState("");
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [startScan, setStartScan] = useState(false);
-  const [codeValue, setCodeValue] = useState(null);
+  const [codeValue, setCodeValue] = useState(
+    `${orderId + pickupId}?${orderId}@${pickupId}`
+  );
 
   const windowHeight = Dimensions.get("window").height;
   useEffect(() => {
@@ -53,6 +56,9 @@ function ReceiveOrder({ refRBSheet }) {
     }
     setScanned(false);
     setStartScan(true);
+  };
+
+  const onSubmit = () => {
   };
   return (
     <>
@@ -99,13 +105,7 @@ function ReceiveOrder({ refRBSheet }) {
                 <FontAwesome name="camera" size={45} style={styles.icon} />
                 <Text style={styles.scan}>Scan</Text>
               </TouchableOpacity>
-              <AppButton
-                value={"submit"}
-                onPress={() => {
-                  refRBSheet.current.close();
-                  completedOrderRBSheet.current.open();
-                }}
-              />
+              <AppButton value={"submit"} onPress={onSubmit} />
             </>
           )}
         </View>
