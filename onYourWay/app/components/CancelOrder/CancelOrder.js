@@ -31,7 +31,23 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
     data.append("pickup_id", pickupId);
     mutate(data);
   };
- 
+
+  if (
+    isError ||
+    (result && (result === 401 || result === 400 || result === 0))
+  ) {
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+    });
+    console.log(error);
+  }
+
+  if (result && result.status === 200) {
+    if (result.data.status === 1) {
+      main.save("access_token", result.data.refresh);
+      setRefreshing();
+    }
+  }
 
   return (
     <RBSheet
