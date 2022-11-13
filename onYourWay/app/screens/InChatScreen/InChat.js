@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+
 import Loading from "../../components/Loading/Loading";
 import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
@@ -25,10 +26,22 @@ function InChat({ navigation, route }) {
   useEffect(() => {
     setLoad(true);
     //load old messages and set chatroom change listener
-    firebaseHelper.loadMessages(selectedUser, setMessages);
+    let chatroomId;
+    if (selectedUser["friends"]) {
+      const friends = selectedUser["friends"];
+      const currentFriends = friends.findIndex((f) => f.phone === myData.phone);
+      if (currentFriends === -1) {
+        setLoad(false);
+        return;
+      }
+      chatroomId = friends[currentFriends]["chatroomId"];
+    } else {
+      chatroomId = selectedUser["chatroomId"];
+    }
+
+    firebaseHelper.loadMessages(chatroomId, setMessages);
     setLoad(false);
   }, [firebaseHelper.fetchMessages, selectedUser.chatroomId]);
-
   const renderMessages = (msgs) => {
     return msgs
       ? msgs.map((msg, index) => {
