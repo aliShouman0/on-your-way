@@ -22,16 +22,19 @@ function OrderInfo({
   isReceiver,
   completed,
   navigation,
+  picked,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
 
   return (
     <View style={styles.mainView}>
-      <View style={styles.userInfo}>
-        <Image resizeMode="contain" source={userImg} style={styles.userImg} />
-        <Text style={styles.userName}>{userName}</Text>
-      </View>
+      {picked === 1 && (
+        <View style={styles.userInfo}>
+          <Image resizeMode="contain" source={userImg} style={styles.userImg} />
+          <Text style={styles.userName}>{userName}</Text>
+        </View>
+      )}
       <InfoBoxes from={from} to={to} pay={pay} />
       <Image resizeMode="contain" source={orderImg} style={styles.orderImg} />
       <Text style={styles.description}>{orderDescription}</Text>
@@ -41,18 +44,20 @@ function OrderInfo({
         </View>
       ) : (
         <>
-          <View style={styles.btnContainer}>
-            <SmallButton
-              value={"Info"}
-              onPress={() => userInfoBSheet.current.open()}
-            />
-            <SmallButton value={"CHAT"} />
-            <SmallButton
-              value={"STATUS"}
-              color={colors.secondary}
-              onPress={() => orderStatusBSheet.current.open()}
-            />
-          </View>
+          {picked === 1 && (
+            <View style={styles.btnContainer}>
+              <SmallButton
+                value={"Info"}
+                onPress={() => userInfoBSheet.current.open()}
+              />
+              <SmallButton value={"CHAT"} />
+              <SmallButton
+                value={"STATUS"}
+                color={colors.secondary}
+                onPress={() => orderStatusBSheet.current.open()}
+              />
+            </View>
+          )}
           <UserInfo refRBSheet={userInfoBSheet} />
           <OrderStatus
             refRBSheet={orderStatusBSheet}
