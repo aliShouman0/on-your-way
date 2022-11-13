@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Toast from "react-native-root-toast";
 
 import colors from "../../config/colors";
 import SmallButton from "../SmallButton/SmallButton";
@@ -12,8 +13,11 @@ import LightInput from "../LightInput/LightInput";
 import CancelOrder from "../CancelOrder/CancelOrder";
 import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
 import AppButton from "../AppButton/AppButton";
+import main from "../../config/main";
+import Loading from "../Loading/Loading";
+import { useQuery } from "react-query";
 
-function OrderStatus({ refRBSheet, isReceiver, navigation }) {
+function OrderStatus({ refRBSheet, isReceiver, navigation, id }) {
   const cancelOrderBSheet = useRef();
   const receiveOrderBSheet = useRef();
   const windowHeight = Dimensions.get("window").height;
@@ -22,6 +26,17 @@ function OrderStatus({ refRBSheet, isReceiver, navigation }) {
   const [openTime, setopenTime] = useState(false);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Not Started");
+  const [load, setLoad] = useState(false);
+
+  const {
+    isLoading,
+    data: result,
+    isError,
+    error,
+  } = useQuery("orderStatus", () => main.OrderStatus(id), {
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+  });
   const [items, setItems] = useState([
     { label: "Problem", value: "problem" },
     { label: "Not Started", value: "not" },
@@ -29,8 +44,13 @@ function OrderStatus({ refRBSheet, isReceiver, navigation }) {
     { label: "Hold", value: "hold" },
     { label: "Picking", value: "picking" },
     { label: "Picked", value: "picked" },
-    { label: "On Way", value: "onway" },
+    { label: "On Way", value: "onWay" },
   ]);
+
+  
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <RBSheet
@@ -48,12 +68,20 @@ function OrderStatus({ refRBSheet, isReceiver, navigation }) {
           <View style={styles.imageContainer}>
             <Image
               resizeMode="stretch"
-              source={require("../../assets/keyboard.jpg")}
+              source={
+                load
+                  ? { uri: main.baseLink + result.data.data.order_info.image1 }
+                  : ""
+              }
               style={styles.img}
             />
             <Image
               resizeMode="stretch"
-              source={require("../../assets/keyboard.jpg")}
+              source={
+                load
+                  ? { uri: main.baseLink + result.data.data.order_info.image2 }
+                  : ""
+              }
               style={styles.img}
             />
           </View>
