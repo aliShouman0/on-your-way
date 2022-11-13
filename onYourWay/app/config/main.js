@@ -67,6 +67,11 @@ const cancelOrder = async (data) => {
   return await postAPI(`${baseUrl}/cancel_order`, data, token);
 };
 
+const receivedOrder = async (data) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await postAPI(`${baseUrl}/received_order`, data, token);
+};
+
 export default {
   getAPI,
   postAPI,
