@@ -21,7 +21,18 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
     data: result,
   } = useMutation(main.cancelOrder);
 
-  const onCancel = () => {};
+  const onCancel = () => {
+    if (!reason) {
+      alert("Please specify reason of canceling");
+      return;
+    }
+    const data = new FormData();
+    data.append("reason", reason);
+    data.append("pickup_id", pickupId);
+    mutate(data);
+  };
+ 
+
   return (
     <RBSheet
       ref={refRBSheet}
