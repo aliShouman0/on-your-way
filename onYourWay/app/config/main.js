@@ -53,6 +53,10 @@ const getMyOrder = async () => {
   return await getAPI(`${baseUrl}/get_my_order`, token);
 };
 
+const save = async (key, value) => {
+  await SecureStore.setItemAsync(key, value);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -62,4 +66,5 @@ export default {
   login,
   me,
   getMyOrder,
+  save,
 };
