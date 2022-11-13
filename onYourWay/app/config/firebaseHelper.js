@@ -97,11 +97,16 @@ const onAddFriend = async (phone, myData, setIsLoading) => {
   setIsLoading(false);
 };
 
-const onSend = async (msg, selectedUser, myData, setMessages, setMyMessage) => {
-  const chatroomId = selectedUser.chatroomId;
+const onSend = async (msg, OldSelectedUser, myData, setMessages, setMyMessage) => { 
+
+  //as first time chatting will not have the user in friends list  so we get an updated data from firebase  
+  const selectedUser = await findUser(OldSelectedUser.phone); 
+  const friends = selectedUser["friends"]; 
+  const currentFriends = friends.findIndex((f) => f.phone === myData.phone); 
+  const chatroomId = friends[currentFriends]["chatroomId"]; 
   const database = getDatabase();
   //fetch fresh messages from server
-  const currentChatroom = await fetchMessages(selectedUser);
+  const currentChatroom = await fetchMessages(chatroomId);
   const lastMessages = (currentChatroom && currentChatroom.messages) || [];
   update(ref(database, `chatrooms/${chatroomId}`), {
     messages: [
@@ -125,20 +130,20 @@ const onSend = async (msg, selectedUser, myData, setMessages, setMyMessage) => {
   setMyMessage("");
 };
 
-const fetchMessages = async (selectedUser) => {
+const fetchMessages = async (chatroomId) => {
   const database = getDatabase();
   const snapshot = await get(
-    ref(database, `chatrooms/${selectedUser.chatroomId}`)
+    ref(database, `chatrooms/${chatroomId}`)
   );
   return snapshot.val();
 };
 
-const loadMessages = (selectedUser, setMessages) => {
-  const myChatroom = fetchMessages(selectedUser);
+const loadMessages = (chatroomId, setMessages) => {
+  const myChatroom = fetchMessages(chatroomId);
   setMessages(myChatroom.messages);
   // set chatroom change listener
   const database = getDatabase();
-  const chatroomRef = ref(database, `chatrooms/${selectedUser.chatroomId}`);
+  const chatroomRef = ref(database, `chatrooms/${chatroomId}`);
   onValue(chatroomRef, (snapshot) => {
     const data = snapshot.val();
     setMessages(data ? data.messages : "");
