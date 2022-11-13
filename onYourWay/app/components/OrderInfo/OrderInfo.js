@@ -1,9 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Image, Text, View } from "react-native";
+import * as SecureStore from "expo-secure-store";
+import Toast from "react-native-root-toast";
 
 import colors from "../../config/colors";
+import firebaseHelper from "../../config/firebaseHelper";
 import text from "../../config/text";
 import InfoBoxes from "../InfoBoxes/InfoBoxes";
+import Loading from "../Loading/Loading";
 import OrderStatus from "../OrderStatus/OrderStatus";
 import Rate from "../Rate/Rate";
 import SmallButton from "../SmallButton/SmallButton";
@@ -28,10 +32,12 @@ function OrderInfo({
   pickerPhone,
   pickerAddress,
   pickerRate,
+  setIsLoading
 }) {
   const userInfoBSheet = useRef();
-  const orderStatusBSheet = useRef();
-
+  const orderStatusBSheet = useRef(); 
+  const chat = async () => {
+  }; 
   return (
     <View style={styles.mainView}>
       {picked === 1 && (
@@ -55,7 +61,7 @@ function OrderInfo({
                 value={"Info"}
                 onPress={() => userInfoBSheet.current.open()}
               />
-              <SmallButton value={"CHAT"} />
+              <SmallButton value={"CHAT"} onPress={chat} />
               <SmallButton
                 value={"STATUS"}
                 color={colors.secondary}
@@ -76,6 +82,7 @@ function OrderInfo({
             refRBSheet={orderStatusBSheet}
             isReceiver={isReceiver}
             navigation={navigation}
+            id={id}
           />
         </>
       )}
