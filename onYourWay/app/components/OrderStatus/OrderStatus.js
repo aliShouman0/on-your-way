@@ -47,6 +47,23 @@ function OrderStatus({ refRBSheet, isReceiver, navigation, id }) {
     { label: "On Way", value: "onWay" },
   ]);
 
+  if (isError || (result && (result === 401 || result === 400))) {
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+    });
+    console.log(error);
+  }
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        main.save("access_token", result.data.refresh);
+        setValue(result.data.data.status);
+        setDate(new Date(parseInt(result.data.data.arrived_time) * 1000));
+        setLocation(result.data.data.location);
+        setLoad(true);
+      }
+    }
+  }, [result]);
   
   if (isLoading) {
     return <Loading />;
