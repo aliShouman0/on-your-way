@@ -1,43 +1,25 @@
 import React, { useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { useQuery } from "react-query";
+import Toast from "react-native-root-toast";
 
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
-import { AntDesign } from "@expo/vector-icons"; 
+import Loading from "../../components/Loading/Loading";
 import colors from "../../config/colors";
 import styles from "./styles";
-
-const data = [
-  {
-    id: "id1",
-    userName: "Ali Alrida Shouman",
-    userImg: require("../../assets/user1.jpg"),
-    from: "Beirut",
-    to: "Byblos",
-    pay: "145000L.L",
-    orderImg: require("../../assets/keyboard.jpg"),
-    orderDescription: "keyboard and mouse",
-  }, 
-];
+import main from "../../config/main";
 
 function MyOrder({ navigation }) {
-  const [refreshing, setRefreshing] = useState(false);
+  const [loadData, setLoadData] = useState(false);
   const [data, setData] = useState(data);
-
-  const refresh = () => {
-    setData([
-      {
-        id: "id3",
-        userName: "Refresh Done",
-        userImg: require("../../assets/user1.jpg"),
-        from: "Beirut",
-        to: "Tripoli",
-        pay: "745000L.L",
-        orderImg: require("../../assets/keyboard.jpg"),
-        orderDescription: "Refresh Done",
-      },
-    ]);
-  };
+  const {
+    isLoading,
+    data: result,
+    isError,
+    error,
+  } = useQuery("myOrder", main.getMyOrder);
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -52,23 +34,25 @@ function MyOrder({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={data}
-        refreshing={refreshing}
-        onRefresh={refresh}
-        renderItem={({ item, index, separators }) => (
-          <OrderInfo
-            key={item.id}
-            id={item.id}
-            userName={item.userName}
-            userImg={item.userImg}
-            from={item.from}
-            to={item.to}
-            pay={item.pay}
-            orderImg={item.orderImg}
-            orderDescription={item.orderDescription}
-            navigation={navigation}
-          />
-        )}
+        data={loadData ? result.data.data : []}
+        renderItem={({ item, index, separators }) => {
+          return (
+            <OrderInfo
+              key={item.index}
+              id={item.id}
+              userName={item.picked ? picker.name : ""}
+              userImg={
+                item.picked ? { uri: main.baseLink + picker.avatar } : ""
+              }
+              from={item.from}
+              to={item.to}
+              pay={item.pay}
+              orderImg={{ uri: main.baseLink + item.main_image }}
+              orderDescription={item.description}
+              navigation={navigation}
+            />
+          );
+        }}
       />
     </SafeAreaView>
   );
