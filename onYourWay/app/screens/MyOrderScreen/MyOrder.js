@@ -29,7 +29,7 @@ function MyOrder({ navigation }) {
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         main.save("access_token", result.data.refresh);
-        setLoadData(true);
+        setLoadData(true); 
       }
     }
     setRefreshing(false);
@@ -38,6 +38,7 @@ function MyOrder({ navigation }) {
   if (isLoading || load) {
     return <Loading />;
   }
+
   if (isError || (result && (result === 401 || result === 400))) {
     Toast.show("Some Thing went Wrong 😔", {
       duration: Toast.durations.LONG,
@@ -86,7 +87,9 @@ function MyOrder({ navigation }) {
               pickerPhone={item.picked ? picker.phone : ""}
               pickerAddress={item.picked ? picker.address : ""}
               pickerRate={item.picked ? picker.rate : ""}
+              pickupId={item.picked ? item.pickup_info.id : ""}
               setIsLoading={setLoad}
+              setRefreshing={refetch}
             />
           );
         }}
