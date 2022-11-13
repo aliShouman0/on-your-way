@@ -6,7 +6,15 @@ import LightInput from "../LightInput/LightInput";
 
 import styles from "./styles";
 
-function UserInfo({ refRBSheet }) {
+function UserInfo({
+  refRBSheet,
+  pickerName,
+  pickerEmail,
+  pickerPhone,
+  pickerAddress,
+  userImg,
+  pickerRate,
+}) {
   const windowHeight = Dimensions.get("window").height;
 
   return (
@@ -23,36 +31,33 @@ function UserInfo({ refRBSheet }) {
     >
       <View style={styles.sheetView}>
         <View style={styles.userInfo}>
-          <Image
-            source={require("../../assets/user1.jpg")}
-            style={styles.userImg}
-          />
-          <Rate rate={2} />
+          <Image source={userImg} style={styles.userImg} />
+          <Rate rate={Math.round(pickerRate)} />
         </View>
         <View style={styles.userDetails}>
           <LightInput
             text="Name"
             editable={false}
             contextMenuHidden={true}
-            value={"Alex"}
+            value={pickerName}
           />
           <LightInput
             text="Email"
             editable={false}
             contextMenuHidden={true}
-            value={"alex@gmail.com"}
+            value={pickerEmail}
           />
           <LightInput
             text="Phone"
             editable={false}
             contextMenuHidden={true}
-            value={"71974454"}
+            value={pickerPhone}
           />
           <LightInput
             text="Address"
             editable={false}
             contextMenuHidden={true}
-            value={"Byblos"}
+            value={pickerAddress}
           />
         </View>
       </View>
