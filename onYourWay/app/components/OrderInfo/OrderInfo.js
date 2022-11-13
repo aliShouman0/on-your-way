@@ -23,6 +23,11 @@ function OrderInfo({
   completed,
   navigation,
   picked,
+  pickerName,
+  pickerEmail,
+  pickerPhone,
+  pickerAddress,
+  pickerRate,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
@@ -58,7 +63,15 @@ function OrderInfo({
               />
             </View>
           )}
-          <UserInfo refRBSheet={userInfoBSheet} />
+          <UserInfo
+            refRBSheet={userInfoBSheet}
+            pickerName={pickerName}
+            pickerEmail={pickerEmail}
+            pickerPhone={pickerPhone}
+            pickerAddress={pickerAddress}
+            userImg={userImg}
+            pickerRate={pickerRate}
+          />
           <OrderStatus
             refRBSheet={orderStatusBSheet}
             isReceiver={isReceiver}
