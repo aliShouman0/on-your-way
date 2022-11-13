@@ -14,6 +14,7 @@ import main from "../../config/main";
 function MyOrder({ navigation }) {
   const [loadData, setLoadData] = useState(false);
   const [refreshing, setRefreshing] = useState(true);
+  const [load, setLoad] = useState(false);
   const {
     isLoading,
     data: result,
@@ -34,7 +35,7 @@ function MyOrder({ navigation }) {
     setRefreshing(false);
   }, [result]);
 
-  if (isLoading) {
+  if (isLoading || load) {
     return <Loading />;
   }
   if (isError || (result && (result === 401 || result === 400))) {
@@ -85,6 +86,7 @@ function MyOrder({ navigation }) {
               pickerPhone={item.picked ? picker.phone : ""}
               pickerAddress={item.picked ? picker.address : ""}
               pickerRate={item.picked ? picker.rate : ""}
+              setIsLoading={setLoad}
             />
           );
         }}
