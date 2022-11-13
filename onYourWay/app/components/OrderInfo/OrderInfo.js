@@ -37,6 +37,25 @@ function OrderInfo({
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef(); 
   const chat = async () => {
+    setIsLoading(true);
+    const user = await firebaseHelper.findUser(pickerPhone);
+    const user_info = await SecureStore.getItemAsync("user_info");
+    const phone = JSON.parse(user_info).phone;
+    const myData = await firebaseHelper.findUser(phone);
+    if (user && myData) {
+      await firebaseHelper.onAddFriend(pickerPhone, myData, setIsLoading);
+      navigation.navigate("InChat", {
+        userName: pickerName,
+        userImg,
+        myData,
+        selectedUser: user,
+      });
+      return;
+    }
+    setIsLoading(false);
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+    });
   }; 
   return (
     <View style={styles.mainView}>
