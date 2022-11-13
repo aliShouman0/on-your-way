@@ -3,13 +3,14 @@ import { useMutation } from "react-query";
 import Toast from "react-native-root-toast";
 import * as SecureStore from "expo-secure-store";
 const baseUrl = "http://192.168.8.135:8000/api/ony";
+const baseLink = "http://192.168.8.135:8000/storage/";
 
 const postAPI = async (api_url, api_data, api_token = null) => {
   try {
     return await axios.post(api_url, api_data, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: "token " + api_token,
+        Authorization: "Bearer  " + api_token,
       },
     });
   } catch (error) {
@@ -24,13 +25,13 @@ const getAPI = async (api_url, api_token) => {
     return await axios(api_url, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: "token " + token,
+        Authorization: "Bearer  " + api_token,
       },
     });
   } catch (error) {
-    console.log("Error from get API ", error);
-    console.log("error.response", error.response);
-    return error;
+    console.log("Error from POST API ", error);
+    console.log("error.response ", error.response.data);
+    return error.response.status;
   }
 };
 
@@ -42,8 +43,23 @@ const login = async (data) => {
   return await postAPI(`${baseUrl}/login`, data);
 };
 
-const me = async (token) => {
-  return await postAPI(`${baseUrl}/me`, token);
+const me = async (data) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await postAPI(`${baseUrl}/me`, data, token);
 };
 
-export default { getAPI, postAPI, baseUrl, signUp, login, me };
+const getMyOrder = async () => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await getAPI(`${baseUrl}/get_my_order`, token);
+};
+
+export default {
+  getAPI,
+  postAPI,
+  baseUrl,
+  baseLink,
+  signUp,
+  login,
+  me,
+  getMyOrder,
+};
