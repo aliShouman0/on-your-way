@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useQuery } from "react-query";
@@ -13,13 +13,26 @@ import main from "../../config/main";
 
 function MyOrder({ navigation }) {
   const [loadData, setLoadData] = useState(false);
-  const [data, setData] = useState(data);
+  const [refreshing, setRefreshing] = useState(true);
   const {
     isLoading,
     data: result,
     isError,
     error,
-  } = useQuery("myOrder", main.getMyOrder);
+    refetch,
+  } = useQuery("myOrder", main.getMyOrder, {
+    refetchOnMount: "always",
+    retryOnMount: true,
+  });
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        main.save("access_token", result.data.refresh);
+        setLoadData(true);
+      }
+    }
+    setRefreshing(false);
+  }, [result]);
 
   if (isLoading) {
     return <Loading />;
@@ -30,12 +43,7 @@ function MyOrder({ navigation }) {
     });
     console.log(error);
   }
-  if (!loadData && result && result.status === 200) {
-    if (result.data.status === 1) {
-      main.save("access_token", result.data.refresh);
-      setLoadData(true);
-    }
-  }
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar
@@ -49,6 +57,11 @@ function MyOrder({ navigation }) {
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
         data={loadData ? result.data.data : []}
+        onRefresh={() => {
+          setLoadData(false);
+          refetch();
+        }}
+        refreshing={refreshing}
         renderItem={({ item, index, separators }) => {
           userImg = item.picked ? item.pickup_info.picker_info.avatar : "";
           picker = item.picked ? item.pickup_info.picker_info : "";
