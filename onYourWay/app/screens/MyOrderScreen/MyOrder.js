@@ -32,6 +32,7 @@ function MyOrder({ navigation }) {
   }
   if (!loadData && result && result.status === 200) {
     if (result.data.status === 1) {
+      main.save("access_token", result.data.refresh);
       setLoadData(true);
     }
   }
