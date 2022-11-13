@@ -21,6 +21,22 @@ function MyOrder({ navigation }) {
     error,
   } = useQuery("myOrder", main.getMyOrder);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError || (result && result === 401)) {
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+    });
+    console.log(error);
+  }
+  if (!loadData && result && result.status === 200) {
+    if (result.data.status === 1) {
+      setLoadData(true);
+    }
+  }
+
+  console.log("test", result.data.data[0].pickup_info.picker_info);
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar
@@ -36,6 +52,8 @@ function MyOrder({ navigation }) {
         keyExtractor={(data) => data.id.toString()}
         data={loadData ? result.data.data : []}
         renderItem={({ item, index, separators }) => {
+          userImg = item.picked ? item.pickup_info.picker_info.avatar : "";
+          picker = item.picked ? item.pickup_info.picker_info : "";
           return (
             <OrderInfo
               key={item.index}
@@ -50,6 +68,7 @@ function MyOrder({ navigation }) {
               orderImg={{ uri: main.baseLink + item.main_image }}
               orderDescription={item.description}
               navigation={navigation}
+              picked={item.picked}
             />
           );
         }}
