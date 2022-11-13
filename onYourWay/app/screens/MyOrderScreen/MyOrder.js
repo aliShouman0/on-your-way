@@ -35,8 +35,6 @@ function MyOrder({ navigation }) {
       setLoadData(true);
     }
   }
-
-  console.log("test", result.data.data[0].pickup_info.picker_info);
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar
@@ -46,7 +44,6 @@ function MyOrder({ navigation }) {
         rightIcon={<AntDesign name="plus" size={35} color={colors.white} />}
         onRightIconPress={() => navigation.navigate("AddOrder")}
       />
-
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
@@ -69,6 +66,11 @@ function MyOrder({ navigation }) {
               orderDescription={item.description}
               navigation={navigation}
               picked={item.picked}
+              pickerName={item.picked ? picker.name : ""}
+              pickerEmail={item.picked ? picker.email : ""}
+              pickerPhone={item.picked ? picker.phone : ""}
+              pickerAddress={item.picked ? picker.address : ""}
+              pickerRate={item.picked ? picker.rate : ""}
             />
           );
         }}
