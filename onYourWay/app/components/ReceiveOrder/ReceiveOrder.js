@@ -59,6 +59,20 @@ function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
   };
 
   const onSubmit = () => {
+    if (!code) {
+      alert("Please Scan The code ⛔");
+      return;
+    }
+    if (code !== `${pickupId}?${orderId}@${orderId + pickupId}`) {
+      alert("Wrong Code!!");
+      return;
+    }
+    Toast.show("Congrats!! Order Done ♾️🎉", {
+      duration: Toast.durations.LONG,
+      containerStyle: { marginBottom: (windowHeight * 3) / 5 },
+    });
+    refRBSheet.current.close();
+    completedOrderRBSheet.current.open();
   };
   return (
     <>
