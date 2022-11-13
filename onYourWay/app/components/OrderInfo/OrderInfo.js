@@ -16,6 +16,7 @@ import styles from "./styles";
 
 function OrderInfo({
   id,
+  pickupId,
   userName,
   userImg,
   from,
@@ -32,10 +33,11 @@ function OrderInfo({
   pickerPhone,
   pickerAddress,
   pickerRate,
-  setIsLoading
+  setIsLoading,
+  setRefreshing,
 }) {
   const userInfoBSheet = useRef();
-  const orderStatusBSheet = useRef(); 
+  const orderStatusBSheet = useRef();
   const chat = async () => {
     setIsLoading(true);
     const user = await firebaseHelper.findUser(pickerPhone);
@@ -56,7 +58,7 @@ function OrderInfo({
     Toast.show("Some Thing went Wrong 😔", {
       duration: Toast.durations.LONG,
     });
-  }; 
+  };
   return (
     <View style={styles.mainView}>
       {picked === 1 && (
@@ -75,34 +77,40 @@ function OrderInfo({
       ) : (
         <>
           {picked === 1 && (
-            <View style={styles.btnContainer}>
-              <SmallButton
-                value={"Info"}
-                onPress={() => userInfoBSheet.current.open()}
+            <>
+              <View style={styles.btnContainer}>
+                <SmallButton
+                  value={"Info"}
+                  onPress={() => userInfoBSheet.current.open()}
+                />
+                <SmallButton value={"CHAT"} onPress={chat} />
+                <SmallButton
+                  value={"STATUS"}
+                  color={colors.secondary}
+                  onPress={() => orderStatusBSheet.current.open()}
+                />
+              </View>
+
+              <UserInfo
+                refRBSheet={userInfoBSheet}
+                pickerName={pickerName}
+                pickerEmail={pickerEmail}
+                pickerPhone={pickerPhone}
+                pickerAddress={pickerAddress}
+                userImg={userImg}
+                pickerRate={pickerRate}
               />
-              <SmallButton value={"CHAT"} onPress={chat} />
-              <SmallButton
-                value={"STATUS"}
-                color={colors.secondary}
-                onPress={() => orderStatusBSheet.current.open()}
+              <OrderStatus
+                refRBSheet={orderStatusBSheet}
+                isReceiver={isReceiver}
+                navigation={navigation}
+                setIsLoading={setIsLoading}
+                setRefreshing={setRefreshing}
+                pickupId={pickupId}
+                id={id}
               />
-            </View>
+            </>
           )}
-          <UserInfo
-            refRBSheet={userInfoBSheet}
-            pickerName={pickerName}
-            pickerEmail={pickerEmail}
-            pickerPhone={pickerPhone}
-            pickerAddress={pickerAddress}
-            userImg={userImg}
-            pickerRate={pickerRate}
-          />
-          <OrderStatus
-            refRBSheet={orderStatusBSheet}
-            isReceiver={isReceiver}
-            navigation={navigation}
-            id={id}
-          />
         </>
       )}
     </View>
