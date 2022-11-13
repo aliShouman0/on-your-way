@@ -33,6 +33,7 @@ function NextSignupScreen({ navigation, route }) {
     isError,
     isLoading,
     error: signUpError,
+    data,
   } = useMutation((user) => main.signUp(user));
 
   const onHandleSignup = async () => {
@@ -61,8 +62,8 @@ function NextSignupScreen({ navigation, route }) {
     data.append("back_id_photo", backId.base64);
     //  sign up user on local server
     signUp(data);
-    if (isError) {
-      alert(signUpError);
+    if (isError || (result && (result === 401 || result === 400))) {
+      alert("Some Thing went Wrong 😔");
       setError("");
       setLoad(false);
       return;

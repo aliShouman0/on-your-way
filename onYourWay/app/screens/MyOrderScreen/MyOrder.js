@@ -24,7 +24,7 @@ function MyOrder({ navigation }) {
   if (isLoading) {
     return <Loading />;
   }
-  if (isError || (result && result === 401)) {
+  if (isError || (result && (result === 401 || result === 400))) {
     Toast.show("Some Thing went Wrong 😔", {
       duration: Toast.durations.LONG,
     });

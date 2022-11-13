@@ -42,7 +42,7 @@ function Login({ navigation }) {
       });
     }
 
-    if (result && result === 401) {
+    if (result && (result === 401 || result === 400)) {
       Toast.show("That's Wrong 😔", {
         duration: Toast.durations.LONG,
       });
@@ -75,7 +75,7 @@ function Login({ navigation }) {
       Toast.show("Verify Done!! 🙂", {
         duration: Toast.durations.LONG,
       });
-      save("user_info", JSON.stringify(userInfoResult.data)); 
+      save("user_info", JSON.stringify(userInfoResult.data));
       navigation.reset({
         index: 0,
         routes: [{ name: "DrawerNavigator" }],
