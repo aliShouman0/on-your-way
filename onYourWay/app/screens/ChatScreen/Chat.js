@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
+import * as SecureStore from "expo-secure-store";
+
 import firebaseHelper from "../../config/firebaseHelper";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import Navbar from "../../components/Navbar/Navbar";
 import Loading from "../../components/Loading/Loading";
 import styles from "./styles";
 
-function Chat({ navigation, phone = 71993980 }) {
+function Chat({ navigation }) {
   const [data, setData] = useState(renderedUser);
   const [users, setUsers] = useState([]);
   const [myData, setMyData] = useState(null);
@@ -14,7 +16,21 @@ function Chat({ navigation, phone = 71993980 }) {
   const renderedUser = [];
   useEffect(() => {
     setIsLoading(true);
-    firebaseHelper.chatLogin(phone, setMyData, setUsers, setIsLoading);
+    const getPhone = async () => {
+      const user_info = await SecureStore.getItemAsync("user_info");
+      const myPhone = JSON.parse(user_info).phone;
+      return myPhone;
+    };
+    const chatLogin = async () => {
+      const myPhone = await getPhone();
+      await firebaseHelper.chatLogin(
+        myPhone,
+        setMyData,
+        setUsers,
+        setIsLoading
+      );
+    };
+    chatLogin();
   }, []);
 
   useEffect(() => {
@@ -30,7 +46,7 @@ function Chat({ navigation, phone = 71993980 }) {
         });
       }
     setData(renderedUser);
-  }, [users]);
+  }, [users, Loading]);
 
   if (isLoading) {
     return <Loading />;
