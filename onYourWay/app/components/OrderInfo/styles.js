@@ -5,7 +5,7 @@ import text from "../../config/text";
 export default StyleSheet.create({
   mainView: {
     width: "90%",
-    height: 420,
+    height: 400,
     backgroundColor: colors.darker,
     borderRadius: 10,
     marginVertical: 10,
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   userInfo: {
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
+    flex: 2,
   },
   userImg: {
     width: 45,
@@ -30,7 +30,8 @@ export default StyleSheet.create({
   orderImg: {
     width: "100%",
     borderRadius: 10,
-    height: "35%",
+    flex: 1,
+    minHeight: "25%",
     marginTop: 12,
   },
   description: {
