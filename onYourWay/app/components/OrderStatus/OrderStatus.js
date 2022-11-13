@@ -232,6 +232,8 @@ function OrderStatus({
       <ReceiveOrder
         refRBSheet={receiveOrderBSheet}
         setRefreshing={setRefreshing}
+        pickupId={pickupId}
+        orderId={id}
       />
     </>
   );
