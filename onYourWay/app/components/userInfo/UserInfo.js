@@ -14,6 +14,7 @@ function UserInfo({
   pickerAddress,
   userImg,
   pickerRate,
+  orderCount,
 }) {
   const windowHeight = Dimensions.get("window").height;
 
@@ -32,7 +33,13 @@ function UserInfo({
       <View style={styles.sheetView}>
         <View style={styles.userInfo}>
           <Image source={userImg} style={styles.userImg} />
-          <Rate rate={Math.round(pickerRate)} />
+          <Rate
+            rate={
+              orderCount == 0
+                ? 0
+                : Math.round(Math.round(pickerRate) / orderCount)
+            }
+          />
         </View>
         <View style={styles.userDetails}>
           <LightInput

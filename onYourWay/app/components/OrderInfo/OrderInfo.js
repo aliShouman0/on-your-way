@@ -35,6 +35,7 @@ function OrderInfo({
   pickerRate,
   setIsLoading,
   setRefreshing,
+  pickerOrderCount,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
@@ -99,6 +100,7 @@ function OrderInfo({
                 pickerAddress={pickerAddress}
                 userImg={userImg}
                 pickerRate={pickerRate}
+                orderCount={pickerOrderCount}
               />
               <OrderStatus
                 refRBSheet={orderStatusBSheet}
