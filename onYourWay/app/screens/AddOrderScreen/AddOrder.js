@@ -7,6 +7,8 @@ import {
   View,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import Toast from "react-native-root-toast";
+import { useMutation } from "react-query";
 
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
@@ -15,8 +17,8 @@ import AppButton from "../../components/AppButton/AppButton";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
 import colors from "../../config/colors";
-import { useMutation } from "react-query";
 import main from "../../config/main";
+import Loading from "../../components/Loading/Loading";
 
 function AddOrder({ navigation }) {
   const uploadRBSheet = useRef();
@@ -41,14 +43,14 @@ function AddOrder({ navigation }) {
     if (photo) {
       switch (imageFor) {
         case "mainImg":
-          setMainImg(photo.uri);
+          setMainImg(photo);
           break;
         case "image1":
-          setImage1(photo.uri);
+          setImage1(photo);
 
           break;
         case "image2":
-          setImage2(photo.uri);
+          setImage2(photo);
 
           break;
         default:
@@ -74,8 +76,21 @@ function AddOrder({ navigation }) {
       alert("All Inputs Including The 3 Images are Required");
       return;
     }
-    navigation.navigate("MyOrder");
+    const data = new FormData();
+    data.append("from", from);
+    data.append("to", to);
+    data.append("description", description);
+    data.append("pay", pay);
+    data.append("main_image", mainImg.base64);
+    data.append("image1", image1.base64);
+    data.append("image2", image2.base64);
+    mutate(data);
   };
+
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -130,7 +145,7 @@ function AddOrder({ navigation }) {
           <Image
             resizeMode="contain"
             style={styles.img}
-            source={mainImg ? { uri: mainImg } : ""}
+            source={mainImg ? { uri: mainImg.uri } : ""}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -146,7 +161,7 @@ function AddOrder({ navigation }) {
           <Image
             resizeMode="contain"
             style={styles.img}
-            source={image1 ? { uri: image1 } : ""}
+            source={image1 ? { uri: image1.uri } : ""}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -162,7 +177,7 @@ function AddOrder({ navigation }) {
           <Image
             resizeMode="contain"
             style={styles.img}
-            source={image2 ? { uri: image2 } : ""}
+            source={image2 ? { uri: image2.uri } : ""}
           />
         </TouchableOpacity>
       </View>
