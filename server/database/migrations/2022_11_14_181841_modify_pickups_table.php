@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::table('pickups', function (Blueprint $table) {
             $table->boolean("live_location")->default(false)->after("canceled");
-            $table->integer("latitude")->default(-1)->after("live_location");        
-            $table->integer("longitude")->default(-1)->after("latitude");
+            $table->double("latitude")->default(-1)->after("live_location");        
+            $table->double("longitude")->default(-1)->after("latitude");
             
         });
     }
