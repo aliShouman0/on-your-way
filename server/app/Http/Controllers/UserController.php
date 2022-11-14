@@ -12,12 +12,9 @@ class UserController extends Controller
 {
     // get image as base64 and decode then save it in storage
     function saveImages($image_base64, $Image_name, $isId)
-    {
-        // split the string on commas
-        // $data[ 0 ] == "data:image/png;base64"
-        // $data[ 1 ] == <actual base64 string>
-        $folder = $isId ? "ids/" : "user_images/";
-        $data = base64_decode(explode(',', $image_base64)[1]);
+    { 
+        $folder = $isId ? "public/ids/" : "public/user_images/";
+        $data = base64_decode($image_base64);
         $save_name = $folder . $Image_name . '.png';
         Storage::disk('local')->put($save_name,  $data);
     }
@@ -173,5 +170,4 @@ class UserController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
-
 }
