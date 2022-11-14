@@ -53,6 +53,34 @@ function Location({ navigation, route }) {
     getLocation();
   }, []);
   
+  useEffect(() => {
+    if (
+      isError ||
+      (result &&
+        (result === 401 || result === 400 || result === 0 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+      console.log(error);
+    }
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        main.save("access_token", result.data.refresh);
+        if (result.data.data.live_location) {
+          const latitude = result.data.data.latitude;
+          const longitude = result.data.data.longitude;
+          setUserLocation({ latitude, longitude });
+        } else {
+          Toast.show("Location Rejected 😔", {
+            duration: Toast.durations.LONG,
+          });
+          navigation.pop();
+        }
+      }
+    }
+  }, [result]);
+
 
   if (load) {
     return <Loading />;
