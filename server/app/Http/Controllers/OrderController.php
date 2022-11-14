@@ -290,7 +290,7 @@ class OrderController extends Controller
     }
 
     function saveImages($image_base64, $Image_name,)
-    { 
+    {
         $data = base64_decode($image_base64);
         $save_name =  "public/orders_images/" . $Image_name . '.png';
         Storage::disk('local')->put($save_name,  $data);
@@ -435,6 +435,93 @@ class OrderController extends Controller
                 ]);
             }
         }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    //accept live Location  
+    function  acceptLocation(Request $request)
+    {
+        if ($request->id) {
+            $pickup = Pickup::find($request->id);
+            $pickup->live_location = true;
+
+            if ($pickup->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $pickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    //reject live Location  
+    function  rejectLocation(Request $request)
+    {
+        if ($request->id) {
+            $pickup = Pickup::find($request->id);
+            $pickup->live_location = false;
+
+            if ($pickup->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $pickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    //  set Location  
+    function  setLocation(Request $request)
+    {
+        if (
+            $request->id && $request->longitude &&
+            $request->latitude
+        ) {
+            $pickup = Pickup::find($request->id);
+            $pickup->longitude = $request->longitude;
+            $pickup->latitude = $request->latitude;
+
+            if ($pickup->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $pickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    //  get Location  
+    function  getLocation($id)
+    {
+        $pickup = Pickup::select('longitude', 'latitude', 'live_location')
+            ->where('id',   $id)->first();;
+
+        if ($pickup->save()) {
+            return response()->json([
+                "status" => 1,
+                "data" => $pickup,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+
         return response()->json([
             "status" => 0,
             "data" => "Error -Some Thing went wrong "

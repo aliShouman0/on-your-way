@@ -38,10 +38,18 @@ Route::group(["prefix" => "ony"], function () {
         Route::get('get_ended_order', [OrderController::class, 'getMyEndedOrder'])->name("getMyEndedOrder");
         //getAllOrders
         Route::get('get_all_orders', [OrderController::class, 'getAllOrders'])->name("getAllOrders");
-        //!!searchOrders  
+        //searchOrders  
         Route::post('search_orders', [OrderController::class, 'searchOrders'])->name("searchOrders");
         //add_order
         Route::post('add_order', [OrderController::class, 'AddOrder'])->name("AddOrder");
+        //accept live location
+        Route::post('accept_location', [OrderController::class, 'acceptLocation'])->name("acceptLocation");
+        //reject live location
+        Route::post('reject_location', [OrderController::class, 'rejectLocation'])->name("rejectLocation");
+        //set Location
+        Route::post('set_location', [OrderController::class, 'setLocation'])->name("setLocation");
+        //get Location
+        Route::get('get_location/{id}', [OrderController::class, 'getLocation'])->name("getLocation");
 
         // on admin can access
         Route::group(["middleware" => "isAdmin"], function () {
