@@ -29,13 +29,26 @@ function PickUps({ navigation }) {
     enabled: false,
   });
 
+  useEffect(() => {
+    if (isFocused) {
+      setLoadData(false);
+      refetch();
+    }
+  }, [isFocused]);
+
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        main.save("access_token", result.data.refresh);
+        setLoadData(true);
+        console.log(result.data.data);
+      }
+    }
+    setRefreshing(false);
+  }, [result]);
   return (
     <SafeAreaView style={styles.mainView}>
-      <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} />
-      <View style={styles.container}>
-        <DropDownCity placeholder={"From"} setValue={setFrom} value={from} />
-        <DropDownCity placeholder={"To"} setValue={setTo} value={to} />
-      </View>
+      <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} /> 
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
@@ -46,7 +59,7 @@ function PickUps({ navigation }) {
           refetch();
         }}
         renderItem={({ item, index, separators }) => (
-          <></>
+          <></> 
         )}
       />
     </SafeAreaView>
