@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Dimensions, Text, View, TouchableOpacity } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { FontAwesome5 } from "@expo/vector-icons";
+import Toast from "react-native-root-toast";
+import Loading from "../Loading/Loading";
 
 import Rate from "../Rate/Rate";
 import Input from "../Input/Input";
@@ -29,8 +31,8 @@ function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
       alert("Please Add your comment");
       return;
     } 
-    refRBSheet.current.close();
   };
+ 
 
   return (
     <RBSheet
@@ -44,29 +46,43 @@ function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
         container: styles.container,
       }}
     >
-      <View style={styles.view}>
-        <Text style={styles.textTitle}>Congrats </Text>
-        <View style={styles.rateView}>
-          <Rate rate={rate} styleText={styles.rate} size={28} />
-          <View style={styles.iconView}>
-            <TouchableOpacity onPress={() => setRate(rate + 1)}>
-              <FontAwesome5 name="plus-circle" size={30} style={styles.icon} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setRate(rate - 1)}>
-              <FontAwesome5 name="minus-circle" size={30} style={styles.icon} />
-            </TouchableOpacity>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <View style={styles.view}>
+            <Text style={styles.textTitle}>Congrats </Text>
+            <View style={styles.rateView}>
+              <Rate rate={rate} styleText={styles.rate} size={28} />
+              <View style={styles.iconView}>
+                <TouchableOpacity onPress={() => setRate(rate + 1)}>
+                  <FontAwesome5
+                    name="plus-circle"
+                    size={30}
+                    style={styles.icon}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setRate(rate - 1)}>
+                  <FontAwesome5
+                    name="minus-circle"
+                    size={30}
+                    style={styles.icon}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <Input
+              text="Comment"
+              value={comment}
+              placeholder={"Comments,Your experience,Notes"}
+              setValue={setComment}
+              multiline={true}
+              style={styles.input}
+            />
+            <AppButton value={"submit"} onPress={onSubmit} />
           </View>
-        </View>
-        <Input
-          text="Comment"
-          value={comment}
-          placeholder={"Comments,Your experience,Notes"}
-          setValue={setComment}
-          multiline={true}
-          style={styles.input}
-        />
-        <AppButton value={"submit"} onPress={onSubmit} />
-      </View>
+        </>
+      )}
     </RBSheet>
   );
 }
