@@ -17,7 +17,7 @@ class OrderController extends Controller
     function getMyOrder()
     {
         $id = Auth::id();
-        $order = Order::where("user_id", $id)->where("ended", false)->with("PickupInfo")->get();
+        $order = Order::where("user_id", $id)->where("ended", false)->where("approved", true)->with("PickupInfo")->get();
         if ($order) {
 
             return response()->json([
@@ -54,7 +54,7 @@ class OrderController extends Controller
     // get specific pickup
     function getPickup($order_id)
     {
-        $pickup = Pickup::where("order_id", $order_id)->where("completed", false)->where("canceled", false)->with("orderInfo")->get();
+        $pickup = Pickup::where("order_id", $order_id)->where("completed", false)->where("canceled", false)->with("orderInfo")->first();
         if ($pickup) {
 
             return response()->json([
@@ -290,12 +290,9 @@ class OrderController extends Controller
     }
 
     function saveImages($image_base64, $Image_name,)
-    {
-        // split the string on commas
-        // $data[ 0 ] == "data:image/png;base64"
-        // $data[ 1 ] == <actual base64 string> 
-        $data = base64_decode(explode(',', $image_base64)[1]);
-        $save_name =  "orders_images/" . $Image_name . '.png';
+    { 
+        $data = base64_decode($image_base64);
+        $save_name =  "public/orders_images/" . $Image_name . '.png';
         Storage::disk('local')->put($save_name,  $data);
     }
 
@@ -304,7 +301,6 @@ class OrderController extends Controller
     {
         $id = Auth::id();
         if (
-            $request->user_id &&
             $request->from &&
             $request->to &&
             $request->description &&
@@ -326,9 +322,9 @@ class OrderController extends Controller
             $this->saveImages($request->main_image, $main_image);
             $this->saveImages($request->main_image, $image1);
             $this->saveImages($request->main_image, $image2);
-            $order->main_image = "orders_images/" . $main_image;
-            $order->image1 = "orders_images/" . $image1;
-            $order->image2 = "orders_images/" . $image2;
+            $order->main_image = "orders_images/" . $main_image . ".png";
+            $order->image1 = "orders_images/" . $image1 . ".png";
+            $order->image2 = "orders_images/" . $image2 . ".png";
 
             if ($order->save()) {
 
@@ -421,7 +417,7 @@ class OrderController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
-    
+
     //approveOrder 
     function  disapproveOrder(Request $request)
     {
