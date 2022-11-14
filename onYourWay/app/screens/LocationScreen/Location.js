@@ -5,13 +5,13 @@ import { Marker, Polygon } from "react-native-maps";
 import * as geoLocation from "expo-location";
 import MapViewDirections from "react-native-maps-directions";
 import Toast from "react-native-root-toast";
+import { useQuery } from "react-query";
 
 import styles from "./styles";
 import Navbar from "../../components/Navbar/Navbar";
 import colors from "../../config/colors";
 import Constants from "expo-constants";
 import Loading from "../../components/Loading/Loading";
-import { useQuery } from "react-query";
 import main from "../../config/main";
 
 function Location({ navigation, route }) {
