@@ -5,7 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native"; 
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import Navbar from "../../components/Navbar/Navbar";
@@ -15,6 +15,8 @@ import AppButton from "../../components/AppButton/AppButton";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
 import colors from "../../config/colors";
+import { useMutation } from "react-query";
+import main from "../../config/main";
 
 function AddOrder({ navigation }) {
   const uploadRBSheet = useRef();
@@ -27,6 +29,13 @@ function AddOrder({ navigation }) {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [imageFor, setImageFor] = useState("");
+  const {
+    mutate,
+    isError,
+    isLoading,
+    error,
+    data: result,
+  } = useMutation(main.addOrder);
 
   const saveImage = async (by) => {
     if (photo) {
@@ -47,9 +56,26 @@ function AddOrder({ navigation }) {
       }
     }
   };
+
   useEffect(() => {
     saveImage(imageFor);
   }, [photo]);
+
+  const addOrder = () => {
+    if (
+      !from ||
+      !to ||
+      !description ||
+      !pay ||
+      !mainImg ||
+      !image2 ||
+      !image2
+    ) {
+      alert("All Inputs Including The 3 Images are Required");
+      return;
+    }
+    navigation.navigate("MyOrder");
+  };
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -140,15 +166,7 @@ function AddOrder({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-      <AppButton
-        value={"ADD Order"}
-        onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "MyOrder" }],
-          })
-        }
-      />
+      <AppButton value={"ADD Order"} onPress={addOrder} />
     </SafeAreaView>
   );
 }
