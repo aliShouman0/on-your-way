@@ -462,5 +462,24 @@ class OrderController extends Controller
         ], 400);
     }
 
-    
+    //reject live Location  
+    function  rejectLocation(Request $request)
+    {
+        if ($request->id) {
+            $pickup = Pickup::find($request->id);
+            $pickup->live_location = false;
+
+            if ($pickup->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $pickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
 }
