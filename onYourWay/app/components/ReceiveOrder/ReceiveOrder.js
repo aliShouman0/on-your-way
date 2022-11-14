@@ -1,13 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Button,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Dimensions, Text, View, TouchableOpacity } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { FontAwesome } from "@expo/vector-icons";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -124,7 +116,12 @@ function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
           )}
         </View>
       </RBSheet>
-      <CompletedOrder refRBSheet={completedOrderRBSheet} />
+      <CompletedOrder
+        refRBSheet={completedOrderRBSheet}
+        setRefreshing={setRefreshing}
+        pickupId={pickupId}
+        orderId={orderId}
+      />
     </>
   );
 }
