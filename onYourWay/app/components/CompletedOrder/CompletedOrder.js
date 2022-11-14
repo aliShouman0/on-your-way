@@ -30,9 +30,26 @@ function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
     if (!comment) {
       alert("Please Add your comment");
       return;
-    } 
+    }
+    const data = new FormData();
+    data.append("pickup_id", pickupId);
+    data.append("receiver_comment", comment);
+    data.append("receiver_rated", rate);
+    mutate(data);
   };
- 
+
+  if (
+    isError ||
+    (result &&
+      (result === 401 || result === 400 || result === 0 || result === 500))
+  ) {
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+      containerStyle: { marginBottom: windowHeight / 2 },
+    });
+    console.log(error);
+  }
+
 
   return (
     <RBSheet
