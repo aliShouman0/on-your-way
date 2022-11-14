@@ -1,44 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { useQuery } from "react-query";
 
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./styles";
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
-
-const testing = [
-  {
-    id: "id1",
-    userName: "Ali Alrida Shouman",
-    userImg: require("../../assets/user1.jpg"),
-    from: "Beirut",
-    to: "Byblos",
-    pay: "145000L.L",
-    orderImg: require("../../assets/keyboard.jpg"),
-    orderDescription: "keyboard and mouse",
-  } 
-];
+import Loading from "../../components/Loading/Loading";
+import main from "../../config/main";
 
 function PickUps({ navigation }) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState(testing);
+  const [loadData, setLoadData] = useState(false);
+  const [load, setLoad] = useState(false);
+  const isFocused = useIsFocused();
+  const {
+    isLoading,
+    data: result,
+    isError,
+    error,
+    refetch,
+  } = useQuery("myOrder", main.getMyPickup, {
+    refetchOnMount: "always",
+    retryOnMount: true,
+    enabled: false,
+  });
 
-  const refresh = () => {
-    setData([
-      {
-        id: "id3",
-        userName: "Refresh Done",
-        userImg: require("../../assets/user1.jpg"),
-        from: "Beirut",
-        to: "Tripoli",
-        pay: "745000L.L",
-        orderImg: require("../../assets/keyboard.jpg"),
-        orderDescription: "Refresh Done",
-      },
-    ]);
-  };
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} />
@@ -49,22 +39,14 @@ function PickUps({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={data}
+        data={result}
         refreshing={refreshing}
-        onRefresh={refresh}
+        onRefresh={() => {
+          setLoadData(false);
+          refetch();
+        }}
         renderItem={({ item, index, separators }) => (
-          <OrderInfo
-            key={item.id}
-            id={item.id}
-            userName={item.userName}
-            userImg={item.userImg}
-            from={item.from}
-            to={item.to}
-            pay={item.pay}
-            orderImg={item.orderImg}
-            orderDescription={item.orderDescription}
-            isReceiver={false}
-          />
+          <></>
         )}
       />
     </SafeAreaView>
