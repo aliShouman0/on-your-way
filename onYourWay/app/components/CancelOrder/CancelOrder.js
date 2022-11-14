@@ -34,10 +34,12 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
 
   if (
     isError ||
-    (result && (result === 401 || result === 400 || result === 0))
+    (result &&
+      (result === 401 || result === 400 || result === 0 || result === 500))
   ) {
     Toast.show("Some Thing went Wrong 😔", {
       duration: Toast.durations.LONG,
+      containerStyle: { marginBottom: (windowHeight * 11) / 20 },
     });
     console.log(error);
   }
@@ -45,6 +47,10 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
   if (result && result.status === 200) {
     if (result.data.status === 1) {
       main.save("access_token", result.data.refresh);
+      Toast.show("Canceling Done !! ", {
+        duration: Toast.durations.LONG,
+        containerStyle: { marginBottom: (windowHeight * 11) / 20 },
+      });
       setRefreshing();
     }
   }
