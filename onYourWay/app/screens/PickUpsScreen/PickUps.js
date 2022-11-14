@@ -46,6 +46,20 @@ function PickUps({ navigation }) {
     }
     setRefreshing(false);
   }, [result]);
+
+  if (
+    isError ||
+    (result && (result === 401 || result === 400 || result === 500))
+  ) {
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+    });
+    console.log(error);
+  }
+
+  if (isLoading || load || !loadData) {
+    return <Loading />;
+  }
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} /> 
