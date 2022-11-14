@@ -101,7 +101,9 @@ function MyOrder({ navigation }) {
               pickerPhone={item.picked ? picker.phone : ""}
               pickerAddress={item.picked ? picker.address : ""}
               pickerRate={item.picked ? picker.rate : ""}
+              pickerOrderCount={item.picked ? picker.order_count : ""}
               pickupId={item.picked ? item.pickup_info.id : ""}
+              liveLocation={item.picked ? item.pickup_info.live_location : ""}
               setIsLoading={setLoad}
               setRefreshing={refetch}
             />
