@@ -87,6 +87,32 @@ function AddOrder({ navigation }) {
     mutate(data);
   };
 
+  useEffect(() => {
+    if (
+      isError ||
+      (result &&
+        (result === 401 ||
+          result === 400 ||
+          result === 0 ||
+          result === 0 ||
+          result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+      console.log(error);
+    }
+
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        main.save("access_token", result.data.refresh);
+        Toast.show("Add Order Done ", {
+          duration: Toast.durations.LONG,
+        });
+        navigation.navigate("MyOrder");
+      }
+    }
+  }, [result, isError]);
 
   if (isLoading) {
     return <Loading />;
