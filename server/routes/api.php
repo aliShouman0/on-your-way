@@ -47,7 +47,9 @@ Route::group(["prefix" => "ony"], function () {
         //reject live location
         Route::post('reject_location', [OrderController::class, 'rejectLocation'])->name("rejectLocation");
         //set Location
-        Route::post('set_location', [OrderController::class, 'setLocation'])->name("setLocation"); 
+        Route::post('set_location', [OrderController::class, 'setLocation'])->name("setLocation");
+        //get Location
+        Route::get('get_location/{id}', [OrderController::class, 'getLocation'])->name("getLocation");
 
         // on admin can access
         Route::group(["middleware" => "isAdmin"], function () {
