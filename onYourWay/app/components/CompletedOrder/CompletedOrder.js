@@ -7,21 +7,36 @@ import Rate from "../Rate/Rate";
 import Input from "../Input/Input";
 import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
-function CompletedOrder({ refRBSheet }) {
+import main from "../../config/main";
+import { useMutation } from "react-query";
+function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
   const [comment, setComment] = useState("");
-  const [close, setClose] = useState(false);
   const [rate, setRate] = useState(3);
   const windowHeight = Dimensions.get("window").height;
+  const {
+    mutate,
+    isError,
+    isLoading,
+    error,
+    data: result,
+  } = useMutation(main.receivedOrder);
+
   if (rate < 0) setRate(0);
   if (rate > 5) setRate(5);
+
+  const onSubmit = () => {
+    if (!comment) {
+      alert("Please Add your comment");
+      return;
+    } 
+    refRBSheet.current.close();
+  };
+
   return (
     <RBSheet
       ref={refRBSheet}
       closeOnDragDown={false}
       closeOnPressMask={false}
-      onClose={() => {
-        !close ? refRBSheet.current.open() : "";
-      }}
       animationType={"fade"}
       height={windowHeight / 2}
       customStyles={{
@@ -31,7 +46,6 @@ function CompletedOrder({ refRBSheet }) {
     >
       <View style={styles.view}>
         <Text style={styles.textTitle}>Congrats </Text>
-
         <View style={styles.rateView}>
           <Rate rate={rate} styleText={styles.rate} size={28} />
           <View style={styles.iconView}>
@@ -51,14 +65,7 @@ function CompletedOrder({ refRBSheet }) {
           multiline={true}
           style={styles.input}
         />
-
-        <AppButton
-          value={"submit"}
-          onPress={() => {
-            setClose(true);
-            refRBSheet.current.close();
-          }}
-        />
+        <AppButton value={"submit"} onPress={onSubmit} />
       </View>
     </RBSheet>
   );
