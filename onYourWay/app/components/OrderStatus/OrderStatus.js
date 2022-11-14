@@ -39,7 +39,7 @@ function OrderStatus({
     isReceiver
       ? liveLocation
         ? "Live"
-        : "Request"
+        : "No "
       : liveLocation
       ? "Reject"
       : "Accept"
@@ -64,8 +64,10 @@ function OrderStatus({
   ]);
 
   const onLocationSubmit = () => {
-    // refRBSheet.current.close();
-    // navigation.navigate("Location");
+    if (liveLocation) {
+      refRBSheet.current.close();
+      navigation.navigate("Location",{pickupId});
+    }
   };
 
   if (isError || (result && (result === 401 || result === 400))) {
@@ -212,6 +214,7 @@ function OrderStatus({
                 <SmallButton
                   value={locationBtnValue}
                   onPress={onLocationSubmit}
+                  color={liveLocation ? "" : "grey"}
                 />
                 <SmallButton
                   value={"Cancel"}

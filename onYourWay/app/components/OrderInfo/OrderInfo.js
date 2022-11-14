@@ -36,6 +36,7 @@ function OrderInfo({
   setIsLoading,
   setRefreshing,
   pickerOrderCount,
+  liveLocation,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
@@ -108,6 +109,7 @@ function OrderInfo({
                 navigation={navigation}
                 setIsLoading={setIsLoading}
                 setRefreshing={setRefreshing}
+                liveLocation={liveLocation}
                 pickupId={pickupId}
                 id={id}
               />
