@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, View, Text, TouchableOpacity } from "react-native";
+import { Image, View, Text, TouchableOpacity, NativeModules } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -60,7 +60,10 @@ const CustomDrawer = (props) => {
 
         <TouchableOpacity
           style={styles.footerContent}
-          onPress={() => props.navigation.navigate("Login")}
+          onPress={() =>{
+            setLoad(true); 
+            NativeModules.DevSettings.reload();
+          }}
         >
           <MaterialCommunityIcons name="logout" size={40} style={styles.icon} />
           <Text style={styles.footerText}>Log Out</Text>
