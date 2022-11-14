@@ -290,7 +290,7 @@ class OrderController extends Controller
     }
 
     function saveImages($image_base64, $Image_name,)
-    { 
+    {
         $data = base64_decode($image_base64);
         $save_name =  "public/orders_images/" . $Image_name . '.png';
         Storage::disk('local')->put($save_name,  $data);
@@ -440,4 +440,27 @@ class OrderController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
+
+    //accept live Location  
+    function  acceptLocation(Request $request)
+    {
+        if ($request->id) {
+            $pickup = Pickup::find($request->id);
+            $pickup->live_location = true;
+
+            if ($pickup->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $pickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+    
 }
