@@ -508,5 +508,23 @@ class OrderController extends Controller
         ], 400);
     }
 
-   
+    //  get Location  
+    function  getLocation($id)
+    {
+        $pickup = Pickup::select('longitude', 'latitude', 'live_location')
+            ->where('id',   $id)->first();;
+
+        if ($pickup->save()) {
+            return response()->json([
+                "status" => 1,
+                "data" => $pickup,
+                "refresh" => Auth::refresh()
+            ]);
+        }
+
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
 }
