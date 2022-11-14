@@ -5,11 +5,11 @@ import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Toast from "react-native-root-toast";
 import { useQuery } from "react-query";
+import { AntDesign } from "@expo/vector-icons";
 
 import colors from "../../config/colors";
 import SmallButton from "../SmallButton/SmallButton";
 import styles from "./styles";
-import { AntDesign } from "@expo/vector-icons";
 import LightInput from "../LightInput/LightInput";
 import CancelOrder from "../CancelOrder/CancelOrder";
 import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
@@ -22,6 +22,7 @@ function OrderStatus({
   isReceiver,
   navigation,
   setRefreshing,
+  liveLocation,
   id,
   pickupId,
 }) {
@@ -34,7 +35,15 @@ function OrderStatus({
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Not Started");
   const [load, setLoad] = useState(false);
-
+  const locationBtnValue = `${
+    isReceiver
+      ? liveLocation
+        ? "Live"
+        : "Request"
+      : liveLocation
+      ? "Reject"
+      : "Accept"
+  }\nlocation`;
   const {
     isLoading,
     data: result,
@@ -53,6 +62,11 @@ function OrderStatus({
     { label: "Picked", value: "picked" },
     { label: "On Way", value: "onWay" },
   ]);
+
+  const onLocationSubmit = () => {
+    // refRBSheet.current.close();
+    // navigation.navigate("Location");
+  };
 
   if (isError || (result && (result === 401 || result === 400))) {
     Toast.show("Some Thing went Wrong 😔", {
@@ -196,11 +210,8 @@ function OrderStatus({
                   }}
                 />
                 <SmallButton
-                  value={`${isReceiver ? "Request" : "Live"}\nlocation`}
-                  onPress={() => {
-                    refRBSheet.current.close();
-                    navigation.navigate("Location");
-                  }}
+                  value={locationBtnValue}
+                  onPress={onLocationSubmit}
                 />
                 <SmallButton
                   value={"Cancel"}
