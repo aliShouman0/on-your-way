@@ -77,6 +77,11 @@ const addOrder = async (data) => {
   return await postAPI(`${baseUrl}/add_order`, data, token);
 };
 
+const getLocation = async (id) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await getAPI(`${baseUrl}/get_location/${id}`, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -91,4 +96,5 @@ export default {
   cancelOrder,
   receivedOrder,
   addOrder,
+  getLocation,
 };
