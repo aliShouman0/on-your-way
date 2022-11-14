@@ -24,7 +24,16 @@ function Location({ navigation, route }) {
   const [userLocation, setUserLocation] = useState({
     latitude: 33.450736,
     longitude: 35.396315,
-  }); 
+  });
+  const {
+    data: result,
+    isError,
+    error,
+  } = useQuery("getLocation", () => main.getLocation(pickupId), {
+    refetchOnMount: "always",
+    retryOnMount: true,
+    refetchInterval: 10000, 
+  });
 
   useEffect(() => {
     const getLocation = async () => {
@@ -43,6 +52,7 @@ function Location({ navigation, route }) {
     };
     getLocation();
   }, []);
+  
 
   if (load) {
     return <Loading />;
