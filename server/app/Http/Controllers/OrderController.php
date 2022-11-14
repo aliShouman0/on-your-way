@@ -482,4 +482,31 @@ class OrderController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
+
+    //  set Location  
+    function  setLocation(Request $request)
+    {
+        if (
+            $request->id && $request->longitude &&
+            $request->latitude
+        ) {
+            $pickup = Pickup::find($request->id);
+            $pickup->longitude = $request->longitude;
+            $pickup->latitude = $request->latitude;
+
+            if ($pickup->save()) {
+                return response()->json([
+                    "status" => 1,
+                    "data" => $pickup,
+                    "refresh" => Auth::refresh()
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+   
 }
