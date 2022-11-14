@@ -82,6 +82,11 @@ const getLocation = async (id) => {
   return await getAPI(`${baseUrl}/get_location/${id}`, token);
 };
 
+const getMyPickup = async () => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await getAPI(`${baseUrl}/get_my_pickup`, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -97,4 +102,5 @@ export default {
   receivedOrder,
   addOrder,
   getLocation,
+  getMyPickup,
 };
