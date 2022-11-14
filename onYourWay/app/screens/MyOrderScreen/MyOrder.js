@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useQuery } from "react-query";
 import Toast from "react-native-root-toast";
+import { useIsFocused } from "@react-navigation/native";
 
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
@@ -15,6 +16,7 @@ function MyOrder({ navigation }) {
   const [loadData, setLoadData] = useState(false);
   const [refreshing, setRefreshing] = useState(true);
   const [load, setLoad] = useState(false);
+  const isFocused = useIsFocused();
   const {
     isLoading,
     data: result,
@@ -24,22 +26,34 @@ function MyOrder({ navigation }) {
   } = useQuery("myOrder", main.getMyOrder, {
     refetchOnMount: "always",
     retryOnMount: true,
+    enabled: false,
   });
+
+  useEffect(() => {
+    if (isFocused) {
+      setLoadData(false);
+      refetch();
+    }
+  }, [isFocused]);
+  
   useEffect(() => {
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         main.save("access_token", result.data.refresh);
-        setLoadData(true); 
+        setLoadData(true);
       }
     }
     setRefreshing(false);
   }, [result]);
 
-  if (isLoading || load) {
+  if (isLoading || load || !loadData) {
     return <Loading />;
   }
 
-  if (isError || (result && (result === 401 || result === 400))) {
+  if (
+    isError ||
+    (result && (result === 401 || result === 400 || result === 500))
+  ) {
     Toast.show("Some Thing went Wrong 😔", {
       duration: Toast.durations.LONG,
     });
