@@ -121,6 +121,46 @@ const pickupResultUseEffect = (
   }, [pickupResult, pickupIsError]);
 };
 
+const liveLocationUseEffect = (
+  liveLocationIsError,
+  liveLocationResult,
+  liveLocationError,
+  setLiveLocation,
+  pickupId,
+  setAccessLiveLocation,
+  accessLiveLocation
+) => {
+  return useEffect(() => {
+    if (
+      liveLocationIsError ||
+      (liveLocationResult &&
+        (liveLocationResult === 401 ||
+          liveLocationResult === 400 ||
+          liveLocationResult === 0 ||
+          liveLocationResult === 500))
+    ) {
+      Toast.show("Some Thing went Wrong in set live location😔", {
+        duration: Toast.durations.LONG,
+        containerStyle: { marginBottom: (windowHeight * 3) / 4 },
+      });
+      console.log(liveLocationError);
+    }
+    if (
+      accessLiveLocation &&
+      liveLocationResult &&
+      liveLocationResult.status === 200
+    ) {
+      if (liveLocationResult.data.status === 1) {
+        if (liveLocationResult.data.data.live_location) {
+          setAccessLiveLocation(liveLocationResult.data.data.live_location);
+          setTimeout(() => {
+            sendMyLocation(setLiveLocation, pickupId);
+          }, 11000);
+        }
+      }
+    }
+  }, [liveLocationResult, liveLocationIsError, accessLiveLocation]);
+};
 
 const sendMyLocation = async (setLiveLocation, pickupId) => {
   let myCurrentLocation = await getLocation();
