@@ -110,6 +110,36 @@ function OrderStatus({
     console.log(error);
     setLoad(false);
   } 
+  
+  useEffect(() => {
+    setLoad(false);
+    if (
+      pickupIsError ||
+      (pickupResult &&
+        (pickupResult === 401 ||
+          pickupResult === 400 ||
+          pickupResult === 0 ||
+          pickupResult === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+        containerStyle: { marginBottom: (windowHeight * 11) / 20 },
+      });
+      console.log(pickupError);
+    }
+
+    if (pickupResult && pickupResult.status === 200) {
+      if (pickupResult.data.status === 1) {
+        console.log("result.data.refresh", result.data.refresh);
+        Toast.show("Update Done !! ", {
+          duration: Toast.durations.LONG,
+          containerStyle: { marginBottom: (windowHeight * 3) / 4 },
+        });
+        setLoad(false);
+        refetchStatus();
+      }
+    }
+  }, [pickupResult, pickupIsError]);
 
   useEffect(() => {
     setLoad(false);
