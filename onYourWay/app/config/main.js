@@ -104,7 +104,11 @@ const accessLocation = async (data) => {
   const token = await SecureStore.getItemAsync("access_token");
   return await postAPI(`${baseUrl}/access_location`, data, token);
 };
- 
+
+const setLocation = async (data) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await postAPI(`${baseUrl}/set_location`, data, token);
+};
 
 export default {
   getAPI,
@@ -123,5 +127,6 @@ export default {
   getLocation,
   getMyPickup,
   addOrUpdatePickup,
-  accessLocation, 
+  accessLocation,
+  setLocation,
 };
