@@ -16,8 +16,7 @@ import styles from "./styles";
 
 function OrderInfo({
   id,
-  pickupId,
-  userName,
+  pickupId, 
   userImg,
   from,
   to,
@@ -28,28 +27,28 @@ function OrderInfo({
   completed,
   navigation,
   picked,
-  pickerName,
-  pickerEmail,
-  pickerPhone,
-  pickerAddress,
-  pickerRate,
+  userName,
+  userEmail,
+  userPhone,
+  userAddress,
+  userRate,
   setIsLoading,
   setRefreshing,
-  pickerOrderCount,
+  userOrderCount,
   liveLocation,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
   const chat = async () => {
     setIsLoading(true);
-    const user = await firebaseHelper.findUser(pickerPhone);
+    const user = await firebaseHelper.findUser(userPhone);
     const user_info = await SecureStore.getItemAsync("user_info");
     const phone = JSON.parse(user_info).phone;
     const myData = await firebaseHelper.findUser(phone);
     if (user && myData) {
-      await firebaseHelper.onAddFriend(pickerPhone, myData, setIsLoading);
+      await firebaseHelper.onAddFriend(userPhone, myData, setIsLoading);
       navigation.navigate("InChat", {
-        userName: pickerName,
+        userName: userName,
         userImg,
         myData,
         selectedUser: user,
@@ -95,13 +94,13 @@ function OrderInfo({
 
               <UserInfo
                 refRBSheet={userInfoBSheet}
-                pickerName={pickerName}
-                pickerEmail={pickerEmail}
-                pickerPhone={pickerPhone}
-                pickerAddress={pickerAddress}
+                userName={userName}
+                userEmail={userEmail}
+                userPhone={userPhone}
+                userAddress={userAddress}
                 userImg={userImg}
-                pickerRate={pickerRate}
-                orderCount={pickerOrderCount}
+                userRate={userRate}
+                orderCount={userOrderCount}
               />
               <OrderStatus
                 refRBSheet={orderStatusBSheet}
