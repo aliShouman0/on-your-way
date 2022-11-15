@@ -4,7 +4,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Toast from "react-native-root-toast";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { AntDesign } from "@expo/vector-icons";
 
 import colors from "../../config/colors";
@@ -25,6 +25,7 @@ function OrderStatus({
   liveLocation,
   id,
   pickupId,
+  setIsLoading,
 }) {
   const cancelOrderBSheet = useRef();
   const receiveOrderBSheet = useRef();
@@ -45,15 +46,30 @@ function OrderStatus({
       ? "Reject"
       : "Accept"
   }\nlocation`;
+
   const {
     isLoading,
     data: result,
     isError,
     error,
-  } = useQuery("orderStatus", () => main.OrderStatus(id), {
-    refetchOnMount: "always",
-    refetchOnWindowFocus: true,
-  });
+    refetch: refetchStatus,
+  } = useQuery(
+    isReceiver ? "orderStatusReceiver" : "orderStatusPicker",
+    () => main.OrderStatus(id),
+    {
+      refetchOnMount: "always",
+      refetchOnWindowFocus: true,
+    }
+  );
+
+  const {
+    mutate,
+    isError: pickupIsError,
+    isLoading: pickupLoad,
+    error: pickupError,
+    data: pickupResult,
+  } = useMutation(main.addOrUpdatePickup);
+
   const [items, setItems] = useState([
     { label: "Problem", value: "problem" },
     { label: "Not Started", value: "not" },
@@ -65,10 +81,20 @@ function OrderStatus({
   ]);
 
   const onLocationSubmit = () => {
+    setLoad(false);
     if (liveLocation) {
       refRBSheet.current.close();
       navigation.navigate("Location", { pickupId });
-    }
+    } else setLoad(true);
+  };
+
+  const onSavePress = () => {
+    setLoad(false);
+    if (!location) {
+      alert("Location is required");
+      setLoad(true);
+      return;
+    } 
   };
 
   if (isError || (result && (result === 401 || result === 400))) {
@@ -76,12 +102,14 @@ function OrderStatus({
       duration: Toast.durations.LONG,
     });
     console.log(error);
-  }
+    setLoad(false);
+  } 
 
   useEffect(() => {
+    setLoad(false);
+
     if (result && result.status === 200) {
       if (result.data.status === 1) {
-        main.save("access_token", result.data.refresh);
         setValue(result.data.data.status);
         setDate(new Date(parseInt(result.data.data.arrived_time) * 1000));
         setLocation(result.data.data.location);
@@ -103,7 +131,7 @@ function OrderStatus({
           container: styles.container,
         }}
       >
-        {isLoading ? (
+        {isLoading || pickupLoad ? (
           <Loading />
         ) : (
           <>
@@ -211,7 +239,7 @@ function OrderStatus({
                     styles.save,
                     !save ? { backgroundColor: "grey" } : "",
                   ]}
-                  onPress={() => {}}
+                  onPress={onSavePress}
                 />
               )}
               <View style={styles.btnContainer}>
