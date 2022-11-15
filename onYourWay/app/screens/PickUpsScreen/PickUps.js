@@ -6,8 +6,7 @@ import Toast from "react-native-root-toast";
 
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
-import styles from "./styles";
-import DropDownCity from "../../components/DropDownCity/DropDownCity";
+import styles from "./styles"; 
 import Loading from "../../components/Loading/Loading";
 import main from "../../config/main";
 
@@ -23,12 +22,11 @@ function PickUps({ navigation }) {
     error,
     refetch,
   } = useQuery("getPickup", main.getMyPickup, {
-    refetchOnMount: "always",
-    retryOnMount: true,
     enabled: false,
   });
 
   useEffect(() => {
+    setLoadData(false);
     if (isFocused) {
       setLoadData(false);
       refetch();
@@ -39,7 +37,6 @@ function PickUps({ navigation }) {
     setLoadData(false);
     if (result && result.status === 200) {
       if (result.data.status === 1) {
-        main.save("access_token", result.data.refresh);
         setLoadData(true);
       }
     }
