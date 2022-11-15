@@ -104,7 +104,7 @@ function OrderStatus({
     setAccessLiveLocation,
     accessLiveLocation
   );
-  
+
   //accessLocation
   controller.accessLocationUseEffect(
     setLoad,
@@ -325,6 +325,7 @@ function OrderStatus({
         setRefreshing={setRefreshing}
         pickupId={pickupId}
         orderId={id}
+        isReceiver={isReceiver}
       />
     </>
   );

@@ -10,16 +10,23 @@ import Input from "../Input/Input";
 import styles from "./styles";
 import AppButton from "../AppButton/AppButton";
 import CompletedOrder from "../CompletedOrder/CompletedOrder";
-function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
+function ReceiveOrder({
+  refRBSheet,
+  setRefreshing,
+  pickupId,
+  orderId,
+  isReceiver,
+}) {
+  const ReceiverCode = `${orderId + pickupId}?${orderId}@${pickupId}`;
+  const pickerCode = `${pickupId}?${orderId}@${orderId + pickupId}`;
   const completedOrderRBSheet = useRef();
   const [code, setCode] = useState("");
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [startScan, setStartScan] = useState(false);
   const [codeValue, setCodeValue] = useState(
-    `${orderId + pickupId}?${orderId}@${pickupId}`
+    isReceiver ? ReceiverCode : pickerCode
   );
-
   const windowHeight = Dimensions.get("window").height;
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -55,7 +62,7 @@ function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
       alert("Please Scan The code ⛔");
       return;
     }
-    if (code !== `${pickupId}?${orderId}@${orderId + pickupId}`) {
+    if (code != (isReceiver ? pickerCode : ReceiverCode)) {
       alert("Wrong Code!!");
       return;
     }
@@ -73,7 +80,7 @@ function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
         closeOnDragDown={true}
         closeOnPressMask={true}
         animationType={"fade"}
-        height={startScan ? (windowHeight * 3) / 4 : (windowHeight * 3) / 5}
+        height={startScan ? (windowHeight * 3) / 4 : (windowHeight * 3) / 4}
         customStyles={{
           draggableIcon: styles.draggableIcon,
           container: styles.container,
@@ -96,7 +103,7 @@ function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
           ) : (
             <>
               <QRCode
-                value={codeValue ? "codeValue" : "error"}
+                value={codeValue ? codeValue : "error"}
                 logoSize={100}
                 logoBackgroundColor="transparent"
                 backgroundColor="transparent"
@@ -121,6 +128,7 @@ function ReceiveOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
         setRefreshing={setRefreshing}
         pickupId={pickupId}
         orderId={orderId}
+        isReceiver={isReceiver}
       />
     </>
   );
