@@ -7,12 +7,16 @@ const baseLink = "http://192.168.8.135:8000/storage/";
 
 const postAPI = async (api_url, api_data, api_token = null) => {
   try {
-    return await axios.post(api_url, api_data, {
+    const result = await axios.post(api_url, api_data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: "Bearer  " + api_token,
       },
     });
+    if (result.data.refresh) {
+      await save("access_token", result.data.refresh);
+    }
+    return result;
   } catch (error) {
     console.log("Error from POST API ", error);
     console.log("error.response ", error.response.data);
@@ -22,12 +26,16 @@ const postAPI = async (api_url, api_data, api_token = null) => {
 
 const getAPI = async (api_url, api_token) => {
   try {
-    return await axios(api_url, {
+    const result = await axios(api_url, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: "Bearer  " + api_token,
       },
     });
+    if (result.data.refresh) {
+      await save("access_token", result.data.refresh);
+    }
+    return result;
   } catch (error) {
     console.log("Error from POST API ", error);
     console.log("error.response ", error.response.data);
@@ -54,7 +62,7 @@ const getMyOrder = async () => {
 };
 
 const save = async (key, value) => {
-  await SecureStore.setItemAsync(key, value);
+  await SecureStore.setItemAsync(key, value); 
 };
 
 const OrderStatus = async (id) => {
@@ -87,6 +95,11 @@ const getMyPickup = async () => {
   return await getAPI(`${baseUrl}/get_my_pickup`, token);
 };
 
+const addOrUpdatePickup = async (data) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await postAPI(`${baseUrl}/add_update_pickup`, data, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -103,4 +116,5 @@ export default {
   addOrder,
   getLocation,
   getMyPickup,
+  addOrUpdatePickup,
 };
