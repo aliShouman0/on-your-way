@@ -35,6 +35,7 @@ function OrderStatus({
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Not Started");
   const [load, setLoad] = useState(false);
+  const [save, setSave] = useState(false);
   const locationBtnValue = `${
     isReceiver
       ? liveLocation
@@ -66,7 +67,7 @@ function OrderStatus({
   const onLocationSubmit = () => {
     if (liveLocation) {
       refRBSheet.current.close();
-      navigation.navigate("Location",{pickupId});
+      navigation.navigate("Location", { pickupId });
     }
   };
 
@@ -76,6 +77,7 @@ function OrderStatus({
     });
     console.log(error);
   }
+
   useEffect(() => {
     if (result && result.status === 200) {
       if (result.data.status === 1) {
@@ -153,6 +155,7 @@ function OrderStatus({
                         value={value}
                         items={items}
                         setOpen={setOpen}
+                        onOpen={() => setSave(true)}
                         setValue={setValue}
                         setItems={setItems}
                         disabled={isReceiver}
@@ -174,7 +177,12 @@ function OrderStatus({
 
                 <TouchableOpacity
                   style={styles.time}
-                  onPress={() => setopenTime(isReceiver ? false : true)}
+                  onPress={() => {
+                    if (!isReceiver) {
+                      setSave(true);
+                      setopenTime(true);
+                    }
+                  }}
                 >
                   <LightInput
                     text={"Average\ntime"}
@@ -193,12 +201,16 @@ function OrderStatus({
                   setValue={setLocation}
                   style={styles.lightInput}
                   textStyle={styles.text}
+                  onFocus={() => setSave(true)}
                 />
               </View>
               {!isReceiver && (
                 <AppButton
                   value={"Save"}
-                  style={[styles.save, { backgroundColor: "grey" }]}
+                  style={[
+                    styles.save,
+                    !save ? { backgroundColor: "grey" } : "",
+                  ]}
                   onPress={() => {}}
                 />
               )}
@@ -214,7 +226,7 @@ function OrderStatus({
                 <SmallButton
                   value={locationBtnValue}
                   onPress={onLocationSubmit}
-                  color={liveLocation ? "" : "grey"}
+                  color={!isReceiver || liveLocation ? "" : "grey"}
                 />
                 <SmallButton
                   value={"Cancel"}
