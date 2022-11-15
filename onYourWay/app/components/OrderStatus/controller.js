@@ -120,7 +120,17 @@ const pickupResultUseEffect = (
     }
   }, [pickupResult, pickupIsError]);
 };
- 
+
+
+const sendMyLocation = async (setLiveLocation, pickupId) => {
+  let myCurrentLocation = await getLocation();
+  const liveLocationData = new FormData();
+  liveLocationData.append("id", pickupId);
+  liveLocationData.append("latitude", myCurrentLocation.latitude);
+  liveLocationData.append("longitude", myCurrentLocation.longitude);
+  setLiveLocation(liveLocationData);
+};
+
 const getLocation = async () => {
   let { status } = await geoLocation.requestForegroundPermissionsAsync();
   if (status !== "granted") {
@@ -190,6 +200,7 @@ export default {
   pickupResultUseEffect,
   onSavePress,
   onLocationSubmit,
-  items, 
+  items,
+  liveLocationUseEffect,
   sendMyLocation,
 };
