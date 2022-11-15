@@ -9,6 +9,8 @@ import {
 } from "firebase/database";
 import { auth, database } from "./firebase";
 import { off } from "firebase/database";
+import * as SecureStore from "expo-secure-store";
+import Toast from "react-native-root-toast";
 
 const findUser = async (phone) => {
   const database = getDatabase();
@@ -97,13 +99,18 @@ const onAddFriend = async (phone, myData, setIsLoading) => {
   setIsLoading(false);
 };
 
-const onSend = async (msg, OldSelectedUser, myData, setMessages, setMyMessage) => { 
-
-  //as first time chatting will not have the user in friends list  so we get an updated data from firebase  
-  const selectedUser = await findUser(OldSelectedUser.phone); 
-  const friends = selectedUser["friends"]; 
-  const currentFriends = friends.findIndex((f) => f.phone === myData.phone); 
-  const chatroomId = friends[currentFriends]["chatroomId"]; 
+const onSend = async (
+  msg,
+  OldSelectedUser,
+  myData,
+  setMessages,
+  setMyMessage
+) => {
+  //as first time chatting will not have the user in friends list  so we get an updated data from firebase
+  const selectedUser = await findUser(OldSelectedUser.phone);
+  const friends = selectedUser["friends"];
+  const currentFriends = friends.findIndex((f) => f.phone === myData.phone);
+  const chatroomId = friends[currentFriends]["chatroomId"];
   const database = getDatabase();
   //fetch fresh messages from server
   const currentChatroom = await fetchMessages(chatroomId);
@@ -132,9 +139,7 @@ const onSend = async (msg, OldSelectedUser, myData, setMessages, setMyMessage) =
 
 const fetchMessages = async (chatroomId) => {
   const database = getDatabase();
-  const snapshot = await get(
-    ref(database, `chatrooms/${chatroomId}`)
-  );
+  const snapshot = await get(ref(database, `chatrooms/${chatroomId}`));
   return snapshot.val();
 };
 
@@ -177,6 +182,28 @@ const onSignup = async (phone, email, name, setError) => {
   }
 };
 
+const chat = async (setIsLoading, userPhone, userName, userImg, navigation) => {
+  setIsLoading(true);
+  const user = await findUser(userPhone);
+  const user_info = await SecureStore.getItemAsync("user_info");
+  const phone = JSON.parse(user_info).phone;
+  const myData = await findUser(phone);
+  if (user && myData) {
+    await onAddFriend(userPhone, myData, setIsLoading);
+    navigation.navigate("InChat", {
+      userName: userName,
+      userImg,
+      myData,
+      selectedUser: user,
+    });
+    return;
+  }
+  setIsLoading(false);
+  Toast.show("Some Thing went Wrong 😔", {
+    duration: Toast.durations.LONG,
+  });
+};
+
 export default {
   onAddFriend,
   findUser,
@@ -185,4 +212,5 @@ export default {
   fetchMessages,
   loadMessages,
   onSignup,
+  chat,
 };
