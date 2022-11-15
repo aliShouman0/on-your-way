@@ -41,27 +41,7 @@ function OrderInfo({
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
-  const chat = async () => {
-    setIsLoading(true);
-    const user = await firebaseHelper.findUser(userPhone);
-    const user_info = await SecureStore.getItemAsync("user_info");
-    const phone = JSON.parse(user_info).phone;
-    const myData = await firebaseHelper.findUser(phone);
-    if (user && myData) {
-      await firebaseHelper.onAddFriend(userPhone, myData, setIsLoading);
-      navigation.navigate("InChat", {
-        userName: userName,
-        userImg,
-        myData,
-        selectedUser: user,
-      });
-      return;
-    }
-    setIsLoading(false);
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-    });
-  };
+  
   return (
     <View style={styles.mainView}>
       {(picked === 1 || completed) && (
@@ -94,7 +74,18 @@ function OrderInfo({
                   value={"Info"}
                   onPress={() => userInfoBSheet.current.open()}
                 />
-                <SmallButton value={"CHAT"} onPress={chat} />
+                <SmallButton
+                  value={"CHAT"}
+                  onPress={() =>
+                    firebaseHelper.chat(
+                      setIsLoading,
+                      userPhone,
+                      userName,
+                      userImg,
+                      navigation
+                    )
+                  }
+                />
                 <SmallButton
                   value={"STATUS"}
                   color={colors.secondary}
