@@ -35,8 +35,9 @@ function MyOrder({ navigation }) {
       refetch();
     }
   }, [isFocused]);
-  
+
   useEffect(() => {
+    setLoadData(false);
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         main.save("access_token", result.data.refresh);
@@ -57,6 +58,8 @@ function MyOrder({ navigation }) {
     Toast.show("Some Thing went Wrong 😔", {
       duration: Toast.durations.LONG,
     });
+
+    setLoadData(false);
     console.log(error);
   }
 
@@ -85,7 +88,6 @@ function MyOrder({ navigation }) {
             <OrderInfo
               key={item.index}
               id={item.id}
-              userName={item.picked ? picker.name : ""}
               userImg={
                 item.picked ? { uri: main.baseLink + picker.avatar } : ""
               }
@@ -96,12 +98,12 @@ function MyOrder({ navigation }) {
               orderDescription={item.description}
               navigation={navigation}
               picked={item.picked}
-              pickerName={item.picked ? picker.name : ""}
-              pickerEmail={item.picked ? picker.email : ""}
-              pickerPhone={item.picked ? picker.phone : ""}
-              pickerAddress={item.picked ? picker.address : ""}
-              pickerRate={item.picked ? picker.rate : ""}
-              pickerOrderCount={item.picked ? picker.order_count : ""}
+              userName={item.picked ? picker.name : ""}
+              userEmail={item.picked ? picker.email : ""}
+              userPhone={item.picked ? picker.phone : ""}
+              userAddress={item.picked ? picker.address : ""}
+              userRate={item.picked ? picker.rate : ""}
+              userOrderCount={item.picked ? picker.order_count : ""}
               pickupId={item.picked ? item.pickup_info.id : ""}
               liveLocation={item.picked ? item.pickup_info.live_location : ""}
               setIsLoading={setLoad}
