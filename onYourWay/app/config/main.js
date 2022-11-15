@@ -120,6 +120,11 @@ const getEndedOrder = async () => {
   return await getAPI(`${baseUrl}/get_ended_order`, token);
 };
 
+const getAllOrders = async () => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await getAPI(`${baseUrl}/get_all_orders`, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -141,4 +146,5 @@ export default {
   setLocation,
   completePickup,
   getEndedOrder,
+  getAllOrders,
 };
