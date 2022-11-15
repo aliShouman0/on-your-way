@@ -16,7 +16,7 @@ import styles from "./styles";
 
 function OrderInfo({
   id,
-  pickupId, 
+  pickupId,
   userImg,
   from,
   to,
@@ -36,6 +36,8 @@ function OrderInfo({
   setRefreshing,
   userOrderCount,
   liveLocation,
+  orderRated,
+  canceled,
 }) {
   const userInfoBSheet = useRef();
   const orderStatusBSheet = useRef();
@@ -62,7 +64,7 @@ function OrderInfo({
   };
   return (
     <View style={styles.mainView}>
-      {picked === 1 && (
+      {(picked === 1 || completed) && (
         <View style={styles.userInfo}>
           <Image resizeMode="contain" source={userImg} style={styles.userImg} />
           <Text style={styles.userName}>{userName}</Text>
@@ -73,7 +75,15 @@ function OrderInfo({
       <Text style={styles.description}>{orderDescription}</Text>
       {completed ? (
         <View style={styles.rate}>
-          <Rate rate={3} size={25} styleText={{ fontSize: text.sizeMid }} />
+          {!canceled ? (
+            <Rate
+              rate={orderRated}
+              size={25}
+              styleText={{ fontSize: text.sizeMid }}
+            />
+          ) : (
+            <Text style={styles.userName}>Canceled</Text>
+          )}
         </View>
       ) : (
         <>
