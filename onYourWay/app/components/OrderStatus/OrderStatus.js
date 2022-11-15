@@ -87,6 +87,14 @@ function OrderStatus({
     isLoading: liveLocationLoad,
   } = useMutation(main.setLocation);
 
+  useEffect(() => {
+    if (accessLiveLocation && !isReceiver) {
+      setTimeout(() => {
+        controller.sendMyLocation(setLiveLocation, pickupId);
+      }, 11000);
+    }
+  }, []);
+
   controller.liveLocationUseEffect(
     liveLocationIsError,
     liveLocationResult,
@@ -96,7 +104,7 @@ function OrderStatus({
     setAccessLiveLocation,
     accessLiveLocation
   );
-
+  
   //accessLocation
   controller.accessLocationUseEffect(
     setLoad,
