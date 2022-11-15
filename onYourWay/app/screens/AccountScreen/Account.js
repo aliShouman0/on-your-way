@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -7,19 +7,41 @@ import {
   Image,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as SecureStore from "expo-secure-store";
 
 import styles from "./styles";
 import Input from "../../components/Input/Input";
 import Navbar from "../../components/Navbar/Navbar";
 import Rate from "../../components/Rate/Rate";
 import text from "../../config/text";
+import { useIsFocused } from "@react-navigation/native";
 
 function Account({ navigation }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [rate, setRate] = useState("");
   const [date, setDate] = useState(new Date());
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const getInfo = async () => {
+      const info = await SecureStore.getItemAsync("user_info");
+      const { email, name, phone, address, birthday, rate, order_count } =
+        JSON.parse(info);
+      setEmail(email);
+      setName(name);
+      setPhone(phone);
+      setAddress(address);
+      setDate(new Date(birthday));
+      setRate(
+        order_count == 0 ? 0 : Math.round(Math.round(rate) / order_count)
+      );
+    };
+    getInfo();
+  }, [isFocused]);
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Account"} navigation={navigation} />
@@ -28,7 +50,7 @@ function Account({ navigation }) {
         source={require("../../assets/user1.jpg")}
         style={styles.userImg}
       />
-      <Rate rate={3} size={30} styleText={{ fontSize: text.sizeMid }} />
+      <Rate rate={rate} size={30} styleText={{ fontSize: text.sizeMid }} />
       <ScrollView style={styles.scroll}>
         <View style={styles.inputContainer}>
           <Input
