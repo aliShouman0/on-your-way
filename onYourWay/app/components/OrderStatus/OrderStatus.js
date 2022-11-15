@@ -37,12 +37,13 @@ function OrderStatus({
   const [value, setValue] = useState("Not Started");
   const [load, setLoad] = useState(false);
   const [save, setSave] = useState(false);
+  const [accessLiveLocation, setAccessLiveLocation] = useState(liveLocation);
   const locationBtnValue = `${
     isReceiver
-      ? liveLocation
+      ? accessLiveLocation
         ? "Live"
         : "No "
-      : liveLocation
+      : accessLiveLocation
       ? "Reject"
       : "Accept"
   }\nlocation`;
@@ -70,6 +71,14 @@ function OrderStatus({
     data: pickupResult,
   } = useMutation(main.addOrUpdatePickup);
 
+  const {
+    mutate: accessLocation,
+    isError: accessLocationIsError,
+    isLoading: accessLocationLoad,
+    error: accessLocationError,
+    data: accessLocationResult,
+  } = useMutation(main.accessLocation);
+
   const [items, setItems] = useState([
     { label: "Problem", value: "problem" },
     { label: "Not Started", value: "not" },
@@ -82,10 +91,15 @@ function OrderStatus({
 
   const onLocationSubmit = () => {
     setLoad(false);
-    if (liveLocation) {
+    if (accessLiveLocation && isReceiver) {
       refRBSheet.current.close();
       navigation.navigate("Location", { pickupId });
-    } else setLoad(true);
+    } else {
+      const accessLocationData = new FormData();
+      accessLocationData.append("id", pickupId);
+      accessLocationData.append("access", !accessLiveLocation ? "1" : "0");
+      accessLocation(accessLocationData);
+    }
   };
 
   const onSavePress = () => {
@@ -103,14 +117,35 @@ function OrderStatus({
     mutate(updateData);
   };
 
-  if (isError || (result && (result === 401 || result === 400))) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-    });
-    console.log(error);
+  useEffect(() => {
     setLoad(false);
-  } 
-  
+    if (
+      accessLocationIsError ||
+      (accessLocationResult &&
+        (accessLocationResult === 401 ||
+          accessLocationResult === 400 ||
+          accessLocationResult === 0 ||
+          accessLocationResult === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+        containerStyle: { marginBottom: (windowHeight * 3) / 4 },
+      });
+      console.log(accessLocationError);
+    }
+
+    if (accessLocationResult && accessLocationResult.status === 200) {
+      if (accessLocationResult.data.status === 1) {
+        Toast.show("Update Done !! ", {
+          duration: Toast.durations.LONG,
+          containerStyle: { marginBottom: (windowHeight * 3) / 4 },
+        });
+        setAccessLiveLocation(!accessLiveLocation);
+        setLoad(true);
+      }
+    }
+  }, [accessLocationResult, accessLocationIsError]);
+
   useEffect(() => {
     setLoad(false);
     if (
@@ -123,14 +158,13 @@ function OrderStatus({
     ) {
       Toast.show("Some Thing went Wrong 😔", {
         duration: Toast.durations.LONG,
-        containerStyle: { marginBottom: (windowHeight * 11) / 20 },
+        containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });
       console.log(pickupError);
     }
 
     if (pickupResult && pickupResult.status === 200) {
       if (pickupResult.data.status === 1) {
-        console.log("result.data.refresh", result.data.refresh);
         Toast.show("Update Done !! ", {
           duration: Toast.durations.LONG,
           containerStyle: { marginBottom: (windowHeight * 3) / 4 },
@@ -151,6 +185,14 @@ function OrderStatus({
         setLocation(result.data.data.location);
         setLoad(true);
       }
+    }
+
+    if (isError || (result && (result === 401 || result === 400))) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+      console.log(error);
+      setLoad(false);
     }
   }, [result]);
 
@@ -290,7 +332,7 @@ function OrderStatus({
                 <SmallButton
                   value={locationBtnValue}
                   onPress={onLocationSubmit}
-                  color={!isReceiver || liveLocation ? "" : "grey"}
+                  color={!isReceiver || accessLiveLocation ? "" : "grey"}
                 />
                 <SmallButton
                   value={"Cancel"}
