@@ -75,7 +75,31 @@ function PickUps({ navigation }) {
         renderItem={({ item, index, separators }) => {
           let orderInformation = item.order_info;
           let userInfo = orderInformation.user_info;
-          return <></>;
+          return (
+            <OrderInfo
+              key={item.index}
+              id={orderInformation.id}
+              userImg={userInfo.avatar}
+              from={orderInformation.from}
+              to={orderInformation.to}
+              pay={orderInformation.pay}
+              orderImg={{ uri: main.baseLink + orderInformation.main_image }}
+              orderDescription={orderInformation.description}
+              navigation={navigation}
+              picked={1}
+              userName={userInfo.name}
+              userEmail={userInfo.email}
+              userPhone={userInfo.phone}
+              userAddress={userInfo.address}
+              userRate={userInfo.rate}
+              userOrderCount={userInfo.order_count}
+              pickupId={item.id}
+              liveLocation={item.live_location}
+              setIsLoading={setLoad}
+              setRefreshing={refetch}
+              isReceiver={false}
+            />
+          );
         }}
       />
     </SafeAreaView>
