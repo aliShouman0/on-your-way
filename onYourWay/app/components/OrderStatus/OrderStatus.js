@@ -103,18 +103,20 @@ function OrderStatus({
   };
 
   const onSavePress = () => {
-    setLoad(false);
     if (!location) {
       alert("Location is required");
       setLoad(true);
       return;
     }
-    const updateData = new FormData();
-    updateData.append("pickup_id", pickupId);
-    updateData.append("arrived_time", date.valueOf() / 1000);
-    updateData.append("status", value);
-    updateData.append("location", location);
-    mutate(updateData);
+    if (save) {
+      setLoad(false);
+      const updateData = new FormData();
+      updateData.append("pickup_id", pickupId);
+      updateData.append("arrived_time", date.valueOf() / 1000);
+      updateData.append("status", value);
+      updateData.append("location", location);
+      mutate(updateData);
+    }
   };
 
   useEffect(() => {
