@@ -8,12 +8,12 @@ import styles from "./styles";
 
 function UserInfo({
   refRBSheet,
-  pickerName,
-  pickerEmail,
-  pickerPhone,
-  pickerAddress,
+  userName,
+  userEmail,
+  userPhone,
+  userAddress,
   userImg,
-  pickerRate,
+  userRate,
   orderCount,
 }) {
   const windowHeight = Dimensions.get("window").height;
@@ -37,7 +37,7 @@ function UserInfo({
             rate={
               orderCount == 0
                 ? 0
-                : Math.round(Math.round(pickerRate) / orderCount)
+                : Math.round(Math.round(userRate) / orderCount)
             }
           />
         </View>
@@ -46,25 +46,25 @@ function UserInfo({
             text="Name"
             editable={false}
             contextMenuHidden={true}
-            value={pickerName}
+            value={userName}
           />
           <LightInput
             text="Email"
             editable={false}
             contextMenuHidden={true}
-            value={pickerEmail}
+            value={userEmail}
           />
           <LightInput
             text="Phone"
             editable={false}
             contextMenuHidden={true}
-            value={pickerPhone}
+            value={userPhone}
           />
           <LightInput
             text="Address"
             editable={false}
             contextMenuHidden={true}
-            value={pickerAddress}
+            value={userAddress}
           />
         </View>
       </View>
