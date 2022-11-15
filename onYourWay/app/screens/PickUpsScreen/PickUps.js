@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useQuery } from "react-query";
+import Toast from "react-native-root-toast";
 
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
@@ -11,8 +12,6 @@ import Loading from "../../components/Loading/Loading";
 import main from "../../config/main";
 
 function PickUps({ navigation }) {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [loadData, setLoadData] = useState(false);
   const [load, setLoad] = useState(false);
@@ -23,7 +22,7 @@ function PickUps({ navigation }) {
     isError,
     error,
     refetch,
-  } = useQuery("myOrder", main.getMyPickup, {
+  } = useQuery("getPickup", main.getMyPickup, {
     refetchOnMount: "always",
     retryOnMount: true,
     enabled: false,
@@ -37,11 +36,11 @@ function PickUps({ navigation }) {
   }, [isFocused]);
 
   useEffect(() => {
+    setLoadData(false);
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         main.save("access_token", result.data.refresh);
         setLoadData(true);
-        console.log(result.data.data);
       }
     }
     setRefreshing(false);
@@ -55,26 +54,29 @@ function PickUps({ navigation }) {
       duration: Toast.durations.LONG,
     });
     console.log(error);
+    setLoadData(false);
   }
-
   if (isLoading || load || !loadData) {
     return <Loading />;
   }
+
   return (
     <SafeAreaView style={styles.mainView}>
-      <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} /> 
+      <Navbar type={"main"} title={"Pick Ups"} navigation={navigation} />
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={result}
+        data={loadData ? result.data.data : []}
         refreshing={refreshing}
         onRefresh={() => {
           setLoadData(false);
           refetch();
         }}
-        renderItem={({ item, index, separators }) => (
-          <></> 
-        )}
+        renderItem={({ item, index, separators }) => {
+          let orderInformation = item.order_info;
+          let userInfo = orderInformation.user_info;
+          return <></>;
+        }}
       />
     </SafeAreaView>
   );
