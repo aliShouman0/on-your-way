@@ -80,6 +80,7 @@ function Orders({ navigation }) {
           refetch();
         }}
         renderItem={({ item, index, separators }) => {
+          user = item.user_info;
           return (
             <NewOrderInfo
               key={item.id}
