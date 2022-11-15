@@ -37,7 +37,16 @@ function Orders({ navigation }) {
     }
   }, [isFocused]);
 
- 
+  useEffect(() => {
+    setLoadData(false);
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        setLoadData(true);
+      }
+    }
+    setRefreshing(false);
+  }, [result]);
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Orders"} navigation={navigation} />
