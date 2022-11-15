@@ -18,7 +18,26 @@ function Orders({ navigation }) {
   const [refreshing, setRefreshing] = useState(true);
   const [load, setLoad] = useState(false);
   const isFocused = useIsFocused();
-  
+  const {
+    isLoading,
+    data: result,
+    isError,
+    error,
+    refetch,
+  } = useQuery("getAllOrders", main.getAllOrders, {
+    refetchOnMount: "always",
+    retryOnMount: true,
+    enabled: false,
+  });
+
+  useEffect(() => {
+    if (isFocused) {
+      setLoadData(false);
+      refetch();
+    }
+  }, [isFocused]);
+
+ 
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"main"} title={"Orders"} navigation={navigation} />
