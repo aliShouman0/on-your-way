@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -37,6 +37,7 @@ function OrderStatus({
   const [value, setValue] = useState("Not Started");
   const [load, setLoad] = useState(false);
   const [save, setSave] = useState(false);
+  const [items, setItems] = useState(controller.items);
   const [accessLiveLocation, setAccessLiveLocation] = useState(liveLocation);
   const locationBtnValue = `${
     isReceiver
@@ -78,8 +79,25 @@ function OrderStatus({
     data: accessLocationResult,
   } = useMutation(main.accessLocation);
 
-  const [items, setItems] = useState(controller.items);
+  const {
+    mutate: setLiveLocation,
+    isError: liveLocationIsError,
+    error: liveLocationError,
+    data: liveLocationResult,
+    isLoading: liveLocationLoad,
+  } = useMutation(main.setLocation);
 
+  controller.liveLocationUseEffect(
+    liveLocationIsError,
+    liveLocationResult,
+    liveLocationError,
+    setLiveLocation,
+    pickupId,
+    setAccessLiveLocation,
+    accessLiveLocation
+  );
+
+  //accessLocation
   controller.accessLocationUseEffect(
     setLoad,
     accessLocationIsError,
@@ -89,6 +107,7 @@ function OrderStatus({
     accessLiveLocation
   );
 
+  //addOrUpdatePickup
   controller.pickupResultUseEffect(
     setLoad,
     pickupIsError,
@@ -96,7 +115,7 @@ function OrderStatus({
     pickupError,
     refetchStatus
   );
-
+  //orderStatus
   controller.resultUseEffect(
     setLoad,
     result,
@@ -260,7 +279,8 @@ function OrderStatus({
                       refRBSheet,
                       pickupId,
                       navigation,
-                      accessLocation
+                      accessLocation,
+                      setLiveLocation
                     )
                   }
                   color={!isReceiver || accessLiveLocation ? "" : "grey"}
