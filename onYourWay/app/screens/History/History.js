@@ -41,20 +41,30 @@ function History({ navigation }) {
           setLoadData(false);
           refetch();
         }}
-        renderItem={({ item, index, separators }) => (
-          <OrderInfo
-            key={item.id}
-            id={item.id}
-            userName={item.userName}
-            userImg={item.userImg}
-            from={item.from}
-            to={item.to}
-            pay={item.pay}
-            orderImg={item.orderImg}
-            orderDescription={item.orderDescription}
-            completed={true}
-          />
-        )}
+        renderItem={({ item, index, separators }) => {
+          user = item.user_info;
+          canceled = item.ended_pickup_info.canceled;
+          return (
+            <OrderInfo
+              key={item.id}
+              id={item.id}
+              userName={user.name}
+              userImg={{ uri: main.baseLink + user.avatar }}
+              from={item.from}
+              to={item.to}
+              pay={item.pay}
+              orderImg={{ uri: main.baseLink + item.main_image }}
+              orderDescription={item.description}
+              completed={true}
+              orderRated={
+                !canceled
+                  ? item.ended_pickup_info.completed_pickup_info.receiver_rated
+                  : 0
+              }
+              canceled={canceled}
+            />
+          );
+        }}
       />
     </SafeAreaView>
   );
