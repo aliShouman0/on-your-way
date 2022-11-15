@@ -13,6 +13,7 @@ function LightInput({
   editable,
   style,
   textStyle,
+  onFocus,
 }) {
   return (
     <View style={styles.inputContainer}>
@@ -27,6 +28,7 @@ function LightInput({
         onChangeText={(text) => setValue(text)}
         editable={editable}
         contextMenuHidden={contextMenuHidden}
+        onFocus={onFocus}
       />
     </View>
   );
