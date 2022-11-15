@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Dimensions } from "react-native";
+import * as geoLocation from "expo-location";
+import Toast from "react-native-root-toast"; 
 
-import Toast from "react-native-root-toast";
 const windowHeight = Dimensions.get("window").height;
 
 const items = [
@@ -119,6 +120,19 @@ const pickupResultUseEffect = (
     }
   }, [pickupResult, pickupIsError]);
 };
+ 
+const getLocation = async () => {
+  let { status } = await geoLocation.requestForegroundPermissionsAsync();
+  if (status !== "granted") {
+    alert("Permission to access location was denied");
+    return;
+  }
+  let getLocation = await geoLocation.getCurrentPositionAsync({});
+  return {
+    latitude: getLocation.coords.latitude,
+    longitude: getLocation.coords.longitude,
+  };
+};
 
 const onSavePress = (
   location,
@@ -152,7 +166,8 @@ const onLocationSubmit = (
   refRBSheet,
   pickupId,
   navigation,
-  accessLocation
+  accessLocation,
+  setLiveLocation
 ) => {
   if (accessLiveLocation && isReceiver) {
     setLoad(false);
@@ -175,5 +190,6 @@ export default {
   pickupResultUseEffect,
   onSavePress,
   onLocationSubmit,
-  items,
+  items, 
+  sendMyLocation,
 };
