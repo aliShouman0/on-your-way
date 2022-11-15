@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import Toast from "react-native-root-toast";
 import { useMutation, useQuery } from "react-query";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -16,6 +15,7 @@ import ReceiveOrder from "../ReceiveOrder/ReceiveOrder";
 import AppButton from "../AppButton/AppButton";
 import main from "../../config/main";
 import Loading from "../Loading/Loading";
+import controller from "./controller";
 
 function OrderStatus({
   refRBSheet,
@@ -74,129 +74,38 @@ function OrderStatus({
   const {
     mutate: accessLocation,
     isError: accessLocationIsError,
-    isLoading: accessLocationLoad,
     error: accessLocationError,
     data: accessLocationResult,
   } = useMutation(main.accessLocation);
 
-  const [items, setItems] = useState([
-    { label: "Problem", value: "problem" },
-    { label: "Not Started", value: "not" },
-    { label: "Awaiting Info", value: "awaiting" },
-    { label: "Hold", value: "hold" },
-    { label: "Picking", value: "picking" },
-    { label: "Picked", value: "picked" },
-    { label: "On Way", value: "onWay" },
-  ]);
+  const [items, setItems] = useState(controller.items);
 
-  const onLocationSubmit = () => {
-    setLoad(false);
-    if (accessLiveLocation && isReceiver) {
-      refRBSheet.current.close();
-      navigation.navigate("Location", { pickupId });
-    } else {
-      const accessLocationData = new FormData();
-      accessLocationData.append("id", pickupId);
-      accessLocationData.append("access", !accessLiveLocation ? "1" : "0");
-      accessLocation(accessLocationData);
-    }
-  };
+  controller.accessLocationUseEffect(
+    setLoad,
+    accessLocationIsError,
+    accessLocationResult,
+    accessLocationError,
+    setAccessLiveLocation,
+    accessLiveLocation
+  );
 
-  const onSavePress = () => {
-    if (!location) {
-      alert("Location is required");
-      setLoad(true);
-      return;
-    }
-    if (save) {
-      setLoad(false);
-      const updateData = new FormData();
-      updateData.append("pickup_id", pickupId);
-      updateData.append("arrived_time", date.valueOf() / 1000);
-      updateData.append("status", value);
-      updateData.append("location", location);
-      mutate(updateData);
-    }
-  };
+  controller.pickupResultUseEffect(
+    setLoad,
+    pickupIsError,
+    pickupResult,
+    pickupError,
+    refetchStatus
+  );
 
-  useEffect(() => {
-    setLoad(false);
-    if (
-      accessLocationIsError ||
-      (accessLocationResult &&
-        (accessLocationResult === 401 ||
-          accessLocationResult === 400 ||
-          accessLocationResult === 0 ||
-          accessLocationResult === 500))
-    ) {
-      Toast.show("Some Thing went Wrong 😔", {
-        duration: Toast.durations.LONG,
-        containerStyle: { marginBottom: (windowHeight * 3) / 4 },
-      });
-      console.log(accessLocationError);
-    }
-
-    if (accessLocationResult && accessLocationResult.status === 200) {
-      if (accessLocationResult.data.status === 1) {
-        Toast.show("Update Done !! ", {
-          duration: Toast.durations.LONG,
-          containerStyle: { marginBottom: (windowHeight * 3) / 4 },
-        });
-        setAccessLiveLocation(!accessLiveLocation);
-        setLoad(true);
-      }
-    }
-  }, [accessLocationResult, accessLocationIsError]);
-
-  useEffect(() => {
-    setLoad(false);
-    if (
-      pickupIsError ||
-      (pickupResult &&
-        (pickupResult === 401 ||
-          pickupResult === 400 ||
-          pickupResult === 0 ||
-          pickupResult === 500))
-    ) {
-      Toast.show("Some Thing went Wrong 😔", {
-        duration: Toast.durations.LONG,
-        containerStyle: { marginBottom: (windowHeight * 3) / 4 },
-      });
-      console.log(pickupError);
-    }
-
-    if (pickupResult && pickupResult.status === 200) {
-      if (pickupResult.data.status === 1) {
-        Toast.show("Update Done !! ", {
-          duration: Toast.durations.LONG,
-          containerStyle: { marginBottom: (windowHeight * 3) / 4 },
-        });
-        setLoad(false);
-        refetchStatus();
-      }
-    }
-  }, [pickupResult, pickupIsError]);
-
-  useEffect(() => {
-    setLoad(false);
-
-    if (result && result.status === 200) {
-      if (result.data.status === 1) {
-        setValue(result.data.data.status);
-        setDate(new Date(parseInt(result.data.data.arrived_time) * 1000));
-        setLocation(result.data.data.location);
-        setLoad(true);
-      }
-    }
-
-    if (isError || (result && (result === 401 || result === 400))) {
-      Toast.show("Some Thing went Wrong 😔", {
-        duration: Toast.durations.LONG,
-      });
-      console.log(error);
-      setLoad(false);
-    }
-  }, [result]);
+  controller.resultUseEffect(
+    setLoad,
+    result,
+    setValue,
+    setDate,
+    setLocation,
+    isError,
+    error
+  );
 
   return (
     <>
@@ -319,7 +228,17 @@ function OrderStatus({
                     styles.save,
                     !save ? { backgroundColor: "grey" } : "",
                   ]}
-                  onPress={onSavePress}
+                  onPress={() =>
+                    controller.onSavePress(
+                      location,
+                      setLoad,
+                      save,
+                      pickupId,
+                      date,
+                      value,
+                      mutate
+                    )
+                  }
                 />
               )}
               <View style={styles.btnContainer}>
@@ -333,7 +252,17 @@ function OrderStatus({
                 />
                 <SmallButton
                   value={locationBtnValue}
-                  onPress={onLocationSubmit}
+                  onPress={() =>
+                    controller.onLocationSubmit(
+                      setLoad,
+                      accessLiveLocation,
+                      isReceiver,
+                      refRBSheet,
+                      pickupId,
+                      navigation,
+                      accessLocation
+                    )
+                  }
                   color={!isReceiver || accessLiveLocation ? "" : "grey"}
                 />
                 <SmallButton
