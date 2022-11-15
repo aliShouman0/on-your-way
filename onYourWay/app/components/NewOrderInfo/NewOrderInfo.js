@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native"; 
+import firebaseHelper from "../../config/firebaseHelper";
 
 import colors from "../../config/colors";
 import InfoBoxes from "../InfoBoxes/InfoBoxes";
@@ -10,6 +11,7 @@ function NewOrderInfo({
   id,
   userName,
   userImg,
+  userPhone,
   from,
   to,
   pay,
@@ -17,6 +19,8 @@ function NewOrderInfo({
   orderImg1,
   orderImg2,
   orderImg3,
+  setIsLoading,
+  navigation,
 }) {
   return (
     <View style={styles.mainView}>
@@ -48,7 +52,15 @@ function NewOrderInfo({
       <View style={styles.btnContainer}>
         <SmallButton
           value={"CHAT"}
-          onPress={() => {}}
+          onPress={() => {
+            firebaseHelper.chat(
+              setIsLoading,
+              userPhone,
+              userName,
+              userImg,
+              navigation
+            );
+          }}
           buttonStyle={styles.buttonStyle}
         />
         <SmallButton
