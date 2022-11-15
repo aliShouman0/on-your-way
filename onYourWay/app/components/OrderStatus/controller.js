@@ -154,12 +154,13 @@ const onLocationSubmit = (
   navigation,
   accessLocation
 ) => {
-  setLoad(false);
   if (accessLiveLocation && isReceiver) {
+    setLoad(false);
     refRBSheet.current.close();
     navigation.navigate("Location", { pickupId });
   } else {
     if (!isReceiver) {
+      setLoad(false);
       const accessLocationData = new FormData();
       accessLocationData.append("id", pickupId);
       accessLocationData.append("access", !accessLiveLocation ? "1" : "0");
