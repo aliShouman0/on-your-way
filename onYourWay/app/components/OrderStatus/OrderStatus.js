@@ -94,7 +94,13 @@ function OrderStatus({
       alert("Location is required");
       setLoad(true);
       return;
-    } 
+    }
+    const updateData = new FormData();
+    updateData.append("pickup_id", pickupId);
+    updateData.append("arrived_time", date.valueOf() / 1000);
+    updateData.append("status", value);
+    updateData.append("location", location);
+    mutate(updateData);
   };
 
   if (isError || (result && (result === 401 || result === 400))) {
