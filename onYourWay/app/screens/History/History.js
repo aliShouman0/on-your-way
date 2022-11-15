@@ -27,7 +27,32 @@ function History({ navigation }) {
     enabled: false,
   });
 
- 
+  useEffect(() => {
+    setLoadData(false);
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        main.save("access_token", result.data.refresh);
+        setLoadData(true);
+      }
+    }
+    setRefreshing(false);
+  }, [result]);
+
+  if (isLoading || load || !loadData) {
+    return <Loading />;
+  }
+
+  if (
+    isError ||
+    (result && (result === 401 || result === 400 || result === 500))
+  ) {
+    Toast.show("Some Thing went Wrong 😔", {
+      duration: Toast.durations.LONG,
+    });
+
+    setLoadData(false);
+    console.log(error);
+  }
 
   return (
     <SafeAreaView style={styles.mainView}>
