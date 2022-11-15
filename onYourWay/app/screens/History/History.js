@@ -28,6 +28,13 @@ function History({ navigation }) {
   });
 
   useEffect(() => {
+    if (isFocused) {
+      setLoadData(false);
+      refetch();
+    }
+  }, [isFocused]);
+
+  useEffect(() => {
     setLoadData(false);
     if (result && result.status === 200) {
       if (result.data.status === 1) {
