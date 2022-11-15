@@ -115,6 +115,11 @@ const completePickup = async (data) => {
   return await postAPI(`${baseUrl}/complete_pickup`, data, token);
 };
 
+const getEndedOrder = async () => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await getAPI(`${baseUrl}/get_ended_order`, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -135,4 +140,5 @@ export default {
   accessLocation,
   setLocation,
   completePickup,
+  getEndedOrder,
 };
