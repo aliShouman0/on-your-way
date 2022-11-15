@@ -11,7 +11,13 @@ import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
 import main from "../../config/main";
 import { useMutation } from "react-query";
-function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
+function CompletedOrder({
+  refRBSheet,
+  setRefreshing,
+  pickupId,
+  orderId,
+  isReceiver,
+}) {
   const [comment, setComment] = useState("");
   const [rate, setRate] = useState(3);
   const windowHeight = Dimensions.get("window").height;
@@ -21,7 +27,7 @@ function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
     isLoading,
     error,
     data: result,
-  } = useMutation(main.receivedOrder);
+  } = useMutation(isReceiver ? main.receivedOrder : main.completePickup);
 
   if (rate < 0) setRate(0);
   if (rate > 5) setRate(5);
@@ -32,9 +38,14 @@ function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
       return;
     }
     const data = new FormData();
+    if (isReceiver) {
+      data.append("receiver_comment", comment);
+      data.append("receiver_rated", rate);
+    } else {
+      data.append("picker_comment", comment);
+      data.append("picker_rated", rate);
+    }
     data.append("pickup_id", pickupId);
-    data.append("receiver_comment", comment);
-    data.append("receiver_rated", rate);
     mutate(data);
   };
 
@@ -59,7 +70,7 @@ function CompletedOrder({ refRBSheet, setRefreshing, pickupId, orderId }) {
       });
       setRefreshing();
     }
-  } 
+  }
 
   return (
     <RBSheet
