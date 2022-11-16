@@ -13,6 +13,8 @@ function Login() {
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
 
+  const submit = (e) => {};
+
   if (load) {
     return <Loading />;
   }
@@ -24,6 +26,28 @@ function Login() {
       <div className="w-1/6 h-1/6 mb-16">
         <img src={logo} alt="Logo" />
       </div>
+      <form className=" w-1/3 " onSubmit={(e) => submit(e)}>
+        <InputBox
+          htmlFor="email"
+          type="email"
+          value={email}
+          setValue={setEmail}
+          placeholder="Email"
+        />
+        <InputBox
+          htmlFor="password"
+          type="password"
+          value={password}
+          setValue={setPassword}
+          placeholder="Password"
+        />
+        <input
+          type={"submit"}
+          value="LOGIN"
+          className={`text-center text-lg font-bold bg-secondary w-full p-3 mt-4 rounded-full cursor-pointer`}
+        />
+        {error && <p className="  mt-3 rounded-md text-red-900">{errorText}</p>}
+      </form>
     </div>
   );
 }
