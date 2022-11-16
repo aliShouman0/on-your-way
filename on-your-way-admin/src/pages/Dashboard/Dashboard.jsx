@@ -58,13 +58,12 @@ function Dashboard() {
     labels,
     datasets: [
       {
-        label: "User/Rate User/Cancel  pickup User/Profits",
+        label: "User/Rate",
         data: [8, 507, 143, 242, 586, 188, 479],
         backgroundColor: colors.darker,
       },
     ],
   };
-
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar />
@@ -73,7 +72,16 @@ function Dashboard() {
         <p className="text-white text-4xl mt-5 font-bold text-left">
           Statistics
         </p>
-        <div className="flex flex-col justify-center items-center"></div>
+        <div className="flex flex-col justify-center items-center">
+          <Bar
+            options={options}
+            data={data}
+            width={25}
+            height={15}
+            className="m-10"
+          />
+ 
+        </div>
       </section>
     </div>
   );
