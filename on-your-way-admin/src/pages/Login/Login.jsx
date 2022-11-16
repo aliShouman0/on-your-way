@@ -13,7 +13,23 @@ function Login() {
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
 
-  const submit = (e) => {};
+  const submit = (e) => {
+    e.preventDefault();
+    setLoad(true);
+    setError(false);
+    if (!email) {
+      setError(true);
+      setLoad(false);
+      setErrorText("All Inputs are required ");
+      return;
+    }
+    if (!password) {
+      setError(true);
+      setLoad(false);
+      setErrorText("All Inputs are required ");
+      return;
+    }
+  };
 
   if (load) {
     return <Loading />;
@@ -21,7 +37,7 @@ function Login() {
 
   return (
     <div
-      className={`bg-primary h-screen w-screen overflow-hidden flex flex-col items-center justify-center`}
+      className={`bg-primary h-screen w-screen overflow-hidden flex flex-col items-center justify-center  `}
     >
       <div className="w-1/6 h-1/6 mb-16">
         <img src={logo} alt="Logo" />
@@ -46,7 +62,7 @@ function Login() {
           value="LOGIN"
           className={`text-center text-lg font-bold bg-secondary w-full p-3 mt-4 rounded-full cursor-pointer`}
         />
-        {error && <p className="  mt-3 rounded-md text-red-900">{errorText}</p>}
+        {error && <p className="  mt-3 rounded-md text-red-700 animate-pulse">*{errorText}</p>}
       </form>
     </div>
   );
