@@ -32,7 +32,7 @@ function LeftPanel({ active }) {
             ? "bg-secondary font-bold text-black"
             : "bg-dark text-white"
         }`}
-        onClick={() => navigate("/orders")}
+        onClick={() => navigate("/users")}
       >
         <HiUsers size={25} color="black" className="absolute left-12" />
         <span className="ml-5">Users</span>
@@ -40,11 +40,11 @@ function LeftPanel({ active }) {
 
       <button
         className={`flex  justify-center mt-8 p-3 w-full ${
-          active === "Order"
+          active === "orders"
             ? "bg-secondary font-bold text-black"
             : "bg-dark text-white"
         }`}
-        onClick={() => navigate("/users")}
+        onClick={() => navigate("/orders")}
       >
         <GrDropbox size={25} color="black" className="absolute left-12" />
         <span className="ml-5">Orders</span>
