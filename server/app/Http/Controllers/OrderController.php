@@ -17,7 +17,7 @@ class OrderController extends Controller
     function getMyOrder()
     {
         $id = Auth::id();
-        $order = Order::where("user_id", $id)->where("ended", false)->where("approved", true)->with("PickupInfo")->get();
+        $order = Order::where("user_id", $id)->where("ended", false)->where("approved", true)->with("PickupInfo")->orderBy('picked', "DESC")->get();
         if ($order) {
 
             return response()->json([
@@ -70,11 +70,13 @@ class OrderController extends Controller
     }
 
     //addOrUpdatePickup
-    function addOrUpdatePickup(Request $request, $pickup_id = 0)
+    function addOrUpdatePickup(Request $request)
     {
-        if ($pickup_id == 0) {
+        $orderSave = 1;
+        $id=Auth::id();
+        if ($request->pickup_id == 0) {
             $pickup = new Pickup;
-            if (!$request->picker_id || !$request->order_id) {
+            if (  !$request->order_id) {
                 return response()->json([
                     "status" => 0,
                     "data" => "Error -Some Thing went wrong "
@@ -82,10 +84,11 @@ class OrderController extends Controller
             }
             $order = Order::find($request->order_id);
             $order->picked = true;
-            $pickup->picker_id = $request->picker_id;
+            $pickup->picker_id = $id;
             $pickup->order_id = $request->order_id;
+            $orderSave = $order->save();
         } else {
-            $pickup = Pickup::find($pickup_id);
+            $pickup = Pickup::find($request->pickup_id);
             $pickup->arrived_time = $request->arrived_time ? $request->arrived_time : $pickup->arrived_time;
             $pickup->completed = $request->completed ? $request->completed : $pickup->completed;
             $pickup->canceled = $request->canceled ? $request->canceled : $pickup->canceled;
@@ -93,7 +96,7 @@ class OrderController extends Controller
             $pickup->location = $request->location ? $request->location : $pickup->location;
         }
 
-        if ($pickup->save() && $order->save()) {
+        if ($pickup->save() && $orderSave) {
 
             return response()->json([
                 "status" => 1,
@@ -222,7 +225,7 @@ class OrderController extends Controller
     function getMyEndedOrder()
     {
         $id = Auth::id();
-        $order = Order::where("user_id", $id)->where("ended", true)->with("EndedPickupInfo")->get();
+        $order = Order::where("user_id", $id)->where("ended", true)->with("EndedPickupInfo")->with("userInfo")->get();
         if ($order) {
 
             return response()->json([
@@ -463,11 +466,11 @@ class OrderController extends Controller
     }
 
     //reject live Location  
-    function  rejectLocation(Request $request)
+    function  accessLocation(Request $request)
     {
-        if ($request->id) {
+        if ($request->id && isset($request->access)) {
             $pickup = Pickup::find($request->id);
-            $pickup->live_location = false;
+            $pickup->live_location = $request->access;
 
             if ($pickup->save()) {
                 return response()->json([
