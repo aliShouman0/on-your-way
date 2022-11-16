@@ -9,8 +9,22 @@ import logo from "../../assets/logo-gold.png";
 function LeftPanel({ active }) {
   const navigate = useNavigate();
   return (
-    <aside className="">
-      {" "}
+    <aside className="fixed left-0 top-0 bg-darker h-screen w-1/4 flex flex-col items-center z-[100]   ">
+      <div className="w-1/2 h-1/4 mt-6  ">
+        <img src={logo} alt="Logo" />
+      </div>
+
+      <button
+        className={`flex   justify-center mt-6  p-3 w-full ${
+          active === "dashboard"
+            ? "bg-secondary font-bold text-black"
+            : "bg-dark text-white"
+        }`}
+        onClick={() => navigate("/dashboard")}
+      >
+        <MdDashboard size={25} color="black" className="absolute left-12" />
+        <span className="ml-5">Dashboard</span>
+      </button>
     </aside>
   );
 }
