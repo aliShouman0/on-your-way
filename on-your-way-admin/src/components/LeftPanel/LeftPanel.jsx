@@ -49,6 +49,13 @@ function LeftPanel({ active }) {
         <GrDropbox size={25} color="black" className="absolute left-12" />
         <span className="ml-5">Orders</span>
       </button>
+
+      <button
+        className={`flex justify-center mt-auto mb-10 p-3 w-3/4  bg-dark text-white text-md `}
+        onClick={() => navigate("/login")}
+      >
+        Logout
+      </button>
     </aside>
   );
 }
