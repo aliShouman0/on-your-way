@@ -48,6 +48,21 @@ function Orders({ navigation }) {
   }, [isFocused]);
 
   useEffect(() => {
+    setSearch(false);
+    setLoadData(false);
+    const searchData = new FormData();
+    if (from || to) {
+      if (from) {
+        searchData.append("from", from);
+      }
+      if (to) {
+        searchData.append("to", from);
+      }
+      mutate(searchData);
+    }
+  }, [from, to]);
+
+  useEffect(() => {
     setLoadData(false);
     if (searchResult && searchResult.status === 200) {
       if (searchResult.data.status === 1) {
