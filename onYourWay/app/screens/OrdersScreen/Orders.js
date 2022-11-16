@@ -1,7 +1,7 @@
 import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import Toast from "react-native-root-toast";
 
 import DropDownCity from "../../components/DropDownCity/DropDownCity";
@@ -17,6 +17,7 @@ function Orders({ navigation }) {
   const [loadData, setLoadData] = useState(false);
   const [refreshing, setRefreshing] = useState(true);
   const [load, setLoad] = useState(false);
+  const [search, setSearch] = useState(false);
   const isFocused = useIsFocused();
   const {
     isLoading,
@@ -30,8 +31,17 @@ function Orders({ navigation }) {
     enabled: false,
   });
 
+  const {
+    mutate,
+    isError: searchIsError,
+    isLoading: searchLoad,
+    error: searchError,
+    data: searchResult,
+  } = useMutation(main.searchOrders);
+
   useEffect(() => {
     if (isFocused) {
+      setSearch(false);
       setLoadData(false);
       refetch();
     }
@@ -42,25 +52,26 @@ function Orders({ navigation }) {
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         setLoadData(true);
+        setRefreshing(false);
       }
     }
     setRefreshing(false);
-  }, [result]);
+    if (
+      isError ||
+      searchLoad ||
+      (result && (result === 401 || result === 400 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+
+      setLoadData(false);
+      console.log(error);
+    }
+  }, [result, isError]);
 
   if (isLoading || load || !loadData) {
     return <Loading />;
-  }
-
-  if (
-    isError ||
-    (result && (result === 401 || result === 400 || result === 500))
-  ) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-    });
-
-    setLoadData(false);
-    console.log(error);
   }
 
   return (
@@ -73,20 +84,30 @@ function Orders({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={loadData ? result.data.data : []}
+        data={
+          loadData
+            ? search && searchResult.data
+              ? searchResult.data.data
+              : result.data.data
+            : []
+        }
         refreshing={refreshing}
         onRefresh={() => {
           setLoadData(false);
+          setSearch(false);
+          setFrom("");
+          setTo("");
           refetch();
         }}
         renderItem={({ item, index, separators }) => {
-          user = item.user_info;
+          let user = item.user_info;
           return (
             <NewOrderInfo
               key={item.id}
               id={item.id}
               userName={user.name}
               userImg={{ uri: main.baseLink + user.avatar }}
+              userPhone={user.phone}
               from={item.from}
               to={item.to}
               pay={item.pay}
@@ -94,6 +115,15 @@ function Orders({ navigation }) {
               orderImg2={{ uri: main.baseLink + item.image1 }}
               orderImg3={{ uri: main.baseLink + item.image2 }}
               orderDescription={item.description}
+              setIsLoading={setLoad}
+              navigation={navigation}
+              refetch={() => {
+                setLoadData(false);
+                setSearch(false);
+                setFrom("");
+                setTo("");
+                refetch();
+              }}
             />
           );
         }}
