@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'birthday', 'front_id_photo', 'back_id_photo', 'is_verified', 'user_type_id', 'updated_at', 'created_at'
+        'password', 'remember_token',   'front_id_photo', 'back_id_photo', 'is_verified', 'user_type_id', 'updated_at', 'created_at'
     ];
 
     protected $casts = [
