@@ -23,5 +23,18 @@ const addPickupResultUseEffect = (
       });
       console.log(pickupError);
     }
+    if (pickupResult && pickupResult.status === 200) {
+      if (pickupResult.data.status === 1) {
+        Toast.show("Added to Your List Done !! ", {
+          duration: Toast.durations.LONG,
+        });
+        setLoad(false);
+        refetchStatus();
+      }
+    }
   }, [pickupResult, pickupIsError]);
+};
+
+export default {
+  addPickupResultUseEffect,
 };
