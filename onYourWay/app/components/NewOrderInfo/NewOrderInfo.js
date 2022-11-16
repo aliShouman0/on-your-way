@@ -1,11 +1,14 @@
 import React from "react";
-import { Image, Text, View } from "react-native"; 
+import { Image, Text, View } from "react-native";
 import firebaseHelper from "../../config/firebaseHelper";
 
 import colors from "../../config/colors";
 import InfoBoxes from "../InfoBoxes/InfoBoxes";
 import SmallButton from "../SmallButton/SmallButton";
 import styles from "./styles";
+import { useMutation } from "react-query";
+import main from "../../config/main";
+import controller from "./controller";
 
 function NewOrderInfo({
   id,
@@ -21,7 +24,30 @@ function NewOrderInfo({
   orderImg3,
   setIsLoading,
   navigation,
+  refetch,
 }) {
+  const {
+    mutate,
+    isError: pickupIsError,
+    isLoading: pickupLoad,
+    error: pickupError,
+    data: pickupResult,
+  } = useMutation(main.addOrUpdatePickup);
+
+  controller.addPickupResultUseEffect(
+    setIsLoading,
+    pickupIsError,
+    pickupResult,
+    pickupError,
+    refetch
+  );
+
+  const pick = () => {
+    const data = new FormData();
+    data.append("order_id", id);
+    mutate(data);
+  };
+
   return (
     <View style={styles.mainView}>
       <View style={styles.userInfo}>
@@ -66,7 +92,7 @@ function NewOrderInfo({
         <SmallButton
           value={"Pick"}
           color={colors.secondary}
-          onPress={() => {}}
+          onPress={pick}
           buttonStyle={styles.buttonStyle}
         />
       </View>
