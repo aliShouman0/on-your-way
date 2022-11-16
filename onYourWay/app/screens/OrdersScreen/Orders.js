@@ -49,6 +49,32 @@ function Orders({ navigation }) {
 
   useEffect(() => {
     setLoadData(false);
+    if (searchResult && searchResult.status === 200) {
+      if (searchResult.data.status === 1) {
+        console.log(searchResult.data);
+        setSearch(true);
+        setLoadData(true);
+      }
+    }
+    setRefreshing(false);
+    if (
+      searchIsError ||
+      searchError ||
+      (searchResult &&
+        (searchResult === 401 || searchResult === 400 || searchResult === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+
+      setLoadData(false);
+      setSearch(false);
+      console.log(searchError);
+    }
+  }, [searchResult, searchIsError]);
+
+  useEffect(() => {
+    setLoadData(false);
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         setLoadData(true);
