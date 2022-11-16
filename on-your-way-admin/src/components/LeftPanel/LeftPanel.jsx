@@ -25,6 +25,30 @@ function LeftPanel({ active }) {
         <MdDashboard size={25} color="black" className="absolute left-12" />
         <span className="ml-5">Dashboard</span>
       </button>
+
+      <button
+        className={`flex   justify-center mt-8 p-3 w-full ${
+          active === "users"
+            ? "bg-secondary font-bold text-black"
+            : "bg-dark text-white"
+        }`}
+        onClick={() => navigate("/orders")}
+      >
+        <HiUsers size={25} color="black" className="absolute left-12" />
+        <span className="ml-5">Users</span>
+      </button>
+
+      <button
+        className={`flex  justify-center mt-8 p-3 w-full ${
+          active === "Order"
+            ? "bg-secondary font-bold text-black"
+            : "bg-dark text-white"
+        }`}
+        onClick={() => navigate("/users")}
+      >
+        <GrDropbox size={25} color="black" className="absolute left-12" />
+        <span className="ml-5">Orders</span>
+      </button>
     </aside>
   );
 }
