@@ -27,7 +27,7 @@ Route::group(["prefix" => "ony"], function () {
         //get specific pickup 
         Route::get('get_pickup/{order_id}', [OrderController::class, 'getPickup'])->name("getPickup");
         // addOrUpdatePickup
-        Route::post("add_update_pickup/{pickup_id?}", [OrderController::class, "addOrUpdatePickup"])->name("addOrUpdatePickup");
+        Route::post("add_update_pickup", [OrderController::class, "addOrUpdatePickup"])->name("addOrUpdatePickup");
         //receivedOrder
         Route::post("received_order", [OrderController::class, "receivedOrder"])->name("receivedOrder");
         //completePickups
@@ -44,8 +44,8 @@ Route::group(["prefix" => "ony"], function () {
         Route::post('add_order', [OrderController::class, 'AddOrder'])->name("AddOrder");
         //accept live location
         Route::post('accept_location', [OrderController::class, 'acceptLocation'])->name("acceptLocation");
-        //reject live location
-        Route::post('reject_location', [OrderController::class, 'rejectLocation'])->name("rejectLocation");
+        //reject or accept live location
+        Route::post('access_location', [OrderController::class, 'accessLocation'])->name("accessLocation");
         //set Location
         Route::post('set_location', [OrderController::class, 'setLocation'])->name("setLocation");
         //get Location
