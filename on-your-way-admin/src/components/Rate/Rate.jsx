@@ -3,7 +3,26 @@ import { ImStarFull } from "react-icons/im";
 import colors from "../../constants/colors";
 
 function Rate({ rate, size }) {
-  return <div className=" "></div>;
+  const getStar = () => {
+    const rows = [];
+    for (let i = 0; i < rate; i++) {
+      rows.push(
+        <ImStarFull className="mr-2" color={colors.secondary} size={size} />
+      );
+    }
+    for (let i = 0; i < 5 - rate; i++) {
+      rows.push(
+        <ImStarFull className="mr-2" color={colors.white} size={size} />
+      );
+    }
+    return rows;
+  };
+  return (
+    <div className="flex justify-center  items-center">
+      <span className="text-white text-center mt-1 mr-2">Rated:</span>
+      {getStar()}
+    </div>
+  );
 }
 Rate.defaultProps = {
   size: -1,
