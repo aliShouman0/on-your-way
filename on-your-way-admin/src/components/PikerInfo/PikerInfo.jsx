@@ -17,6 +17,34 @@ function PikerInfo({ image, email, name, phone, address, rate, close }) {
             <img src={image} alt="userImage" className="mb-3" />
             <Rate rate={rate} size={24} />
           </div>
+          <div className="w-1/2 h-full flex flex-col  items-center justify-center mx-2">
+            <InputBox
+              type="text"
+              value={name}
+              placeholder="Full Name"
+              disabled={true}
+            />
+            <InputBox
+              type="email"
+              value={email}
+              placeholder="Email"
+              disabled={true}
+            />
+            <InputBox
+              htmlFor="phone"
+              type="text"
+              value={phone}
+              placeholder="phone"
+              disabled={true}
+            />
+            <InputBox
+              htmlFor="address"
+              type="text"
+              value={address}
+              placeholder="Address"
+              disabled={true}
+            />
+          </div>
         </div>
       </div>
     </div>
