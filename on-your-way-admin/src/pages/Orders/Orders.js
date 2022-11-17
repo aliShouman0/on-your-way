@@ -16,13 +16,31 @@ function Orders() {
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar />
-      <LeftPanel active={"orders"} />
+      <LeftPanel active={"orders"} /> 
       <section className="absolute top-[10%] right-0 h-auto w-3/4 p-5 flex flex-col bg-dark  ">
         <div className="flex justify-between mt-5 items-center">
           <p className="text-white text-4xl  font-bold text-left">Orders</p>
           <Search value={search} setValue={setSearch} placeholder="Search" />
         </div>
-        <div className="flex flex-wrap justify-center items-center  mt-10"></div>
+        <div className="flex flex-wrap justify-center items-center  mt-10">
+          <OrderInfo
+            userImage={user}
+            userName={"Ali"}
+            mainImage={key}
+            image1={key}
+            image2={key}
+            description={"description"}
+            from={"leb"}
+            to={"be"}
+            pay={"1700"}
+            status={"na"}
+            AverageTime={"Time"}
+            currentLocation={"Location"}
+            piker={setPikerInfo}
+            comments={setOrderComments}
+            id={10}
+          />
+        </div>
       </section>
     </div>
   );
