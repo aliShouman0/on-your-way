@@ -1,6 +1,5 @@
 import React from "react";
-import InfoBoxes from "../InfoBoxes/InfoBoxes";
-import PikerInfo from "../PikerInfo/PikerInfo";
+import InfoBoxes from "../InfoBoxes/InfoBoxes"; 
 import SharpInfoBoxes from "../SharpInfoBoxes/SharpInfoBoxes";
 
 function OrderInfo({
@@ -19,6 +18,8 @@ function OrderInfo({
   currentLocation,
   piker,
   comments,
+  approved,
+  editApproved
 }) {
   return (
     <div className="bg-darker p-5 flex flex-col rounded-md text-white w-30 m-5">
@@ -64,10 +65,10 @@ function OrderInfo({
           Picker
         </button>{" "}
         <button
-          onClick={""}
+          onClick={editApproved}
           className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
         >
-          Approved
+         {approved? "Approved":"Disapprove"}
         </button>
       </div>
     </div>
