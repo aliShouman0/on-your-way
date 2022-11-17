@@ -16,7 +16,31 @@ function Orders() {
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar />
-      <LeftPanel active={"orders"} /> 
+      <LeftPanel active={"orders"} />
+      {pikerInfo && (
+        <PikerInfo
+          image={user}
+          name={"ali"}
+          email={"email"}
+          phone={"phone"}
+          address={"address"}
+          rate={3}
+          close={() => setPikerInfo(0)}
+        />
+      )}
+      {orderComments && (
+        <OrderComments
+          pikerImage={user}
+          PikerName={"ALi"}
+          pikerRate={1}
+          pikerComment={"I need to sleep"}
+          ReceiverImage={user}
+          ReceiverName={"Aya"}
+          ReceiverRate={3}
+          ReceiverComment={"In Your Dream"}
+          close={() => setOrderComments(0)}
+        />
+      )}
       <section className="absolute top-[10%] right-0 h-auto w-3/4 p-5 flex flex-col bg-dark  ">
         <div className="flex justify-between mt-5 items-center">
           <p className="text-white text-4xl  font-bold text-left">Orders</p>
