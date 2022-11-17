@@ -18,7 +18,7 @@ export const postAPI = async (url, data) => {
 
 export const getAPI = async (url) => {
   try {
-    const result = await axios.post(BASE_URL + url,  {
+    const result = await axios(BASE_URL + url, {
       headers: {
         Authorization: "Bearer  " + localStorage.getItem("access_token"),
       },
@@ -38,4 +38,16 @@ export const postLogin = async (data) => {
 
 export const getMyInfo = async () => {
   return await postAPI("/me");
+};
+
+export const getAllUsers = async () => {
+  return await getAPI("/get_all_users");
+};
+
+export const getUsersRate = async () => {
+  return await getAPI("/get_users_rate");
+};
+
+export const getUsersProfit = async () => {
+  return await getAPI("/get_users_profit");
 };
