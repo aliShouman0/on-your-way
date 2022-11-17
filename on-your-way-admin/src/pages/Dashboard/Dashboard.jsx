@@ -49,6 +49,39 @@ function Dashboard() {
     enabled: false,
   });
 
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        const { userOrderCountData, userRateData } = loadRate(result.data.data);
+        setRateBar(
+          <Bar
+            options={options}
+            data={userRateData}
+            width={25}
+            height={15}
+            className="m-10"
+          />
+        );
+        setorderCountBar(
+          <Bar
+            options={options}
+            data={userOrderCountData}
+            width={25}
+            height={15}
+            className="m-10"
+          />
+        );
+        refetch();
+      }
+    }
+    if (result === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [result]);
+
+ 
+
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar error={isError || isErrorGetProfit} />
