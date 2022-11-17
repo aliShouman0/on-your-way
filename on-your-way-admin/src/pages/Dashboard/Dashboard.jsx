@@ -80,7 +80,26 @@ function Dashboard() {
     }
   }, [result]);
 
- 
+  useEffect(() => {
+    if (resultProfit && resultProfit.status === 200) {
+      if (resultProfit.data.status === 1) {
+        const dataProfit = loadProfit(resultProfit.data.data);
+        setProfitBar(
+          <Bar
+            options={options}
+            data={dataProfit}
+            width={25}
+            height={15}
+            className="m-10"
+          />
+        );
+      }
+    }
+    if (result === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [resultProfit]);
 
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
