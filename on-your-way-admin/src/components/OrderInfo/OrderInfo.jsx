@@ -50,6 +50,26 @@ function OrderInfo({
         AverageTime={AverageTime}
         currentLocation={currentLocation}
       />
+      <div className="flex w-full justify-between ">
+        <button
+          onClick={() => comments(id)}
+          className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
+        >
+          Comments
+        </button>{" "}
+        <button
+          onClick={() => piker(id)}
+          className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
+        >
+          Picker
+        </button>{" "}
+        <button
+          onClick={""}
+          className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
+        >
+          Approved
+        </button>
+      </div>
     </div>
   );
 }
