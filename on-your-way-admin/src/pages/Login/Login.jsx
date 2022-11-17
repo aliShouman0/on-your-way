@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
+import { getMyInfo, postLogin } from "../../config/axios";
 import logo from "../../assets/logo-gold.png";
 import { useNavigate } from "react-router-dom";
 import InputBox from "../../components/InputBox/InputBox";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/Loading/Loading"; 
 
 function Login() {
   const navigate = useNavigate();
@@ -11,27 +13,42 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
   const [error, setError] = useState(false);
-  const [load, setLoad] = useState(false);
+  const {
+    mutate: mutateLogin,
+    isError,
+    isLoading,
+    error: loginError,
+    data: result,
+  } = useMutation(postLogin);
 
-  const submit = (e) => {
-    e.preventDefault();navigate("/dashboard")
-    setLoad(true);
+  const {
+    mutate: mutateMyInfo,
+    isError: isErrorGetMyInfo,
+    isLoading: isLoadingGetMyInfo,
+    error: errorGetMyInfo,
+    data: resultGetMyInfo,
+  } = useMutation(getMyInfo);
+
+  const submit = async (e) => {
+    e.preventDefault();
     setError(false);
     if (!email) {
       setError(true);
-      setLoad(false);
       setErrorText("All Inputs are required ");
       return;
     }
     if (!password) {
       setError(true);
-      setLoad(false);
       setErrorText("All Inputs are required ");
       return;
     }
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    mutateLogin(data);
   };
-
-  if (load) {
+  
+  if (isLoading || isLoadingGetMyInfo) {
     return <Loading />;
   }
 
@@ -62,7 +79,11 @@ function Login() {
           value="LOGIN"
           className={`text-center text-lg font-bold bg-secondary w-full p-3 mt-4 rounded-full cursor-pointer`}
         />
-        {error && <p className="  mt-3 rounded-md text-red-700 animate-pulse">*{errorText}</p>}
+        {error && (
+          <p className="  mt-3 rounded-md text-red-700 animate-pulse">
+            *{errorText}
+          </p>
+        )}
       </form>
     </div>
   );
