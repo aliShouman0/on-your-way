@@ -29,7 +29,27 @@ function OrderInfo({
         <span className="text-md ml-5">{userName}</span>
       </div>
       <InfoBoxes from={from} to={to} pay={pay} />
-     
+      <div className="flex justify-between mt-4  w-full h-3/4">
+        <img src={mainImage} alt="mainImage" className="w-24 h-20 rounded-md" />
+        <img
+          src={image1}
+          alt="mainImage"
+          className="w-24 ml-2 h-20 rounded-md"
+        />
+        <img
+          src={image2}
+          alt="mainImage"
+          className="w-24 ml-2 h-20 rounded-md"
+        />
+      </div>
+      <div className="border border-x-zinc-50 p-3 mt-5 mb-2 rounded-lg w-full   ">
+        <p className="text-sm text-zinc-50">{description}</p>
+      </div>
+      <SharpInfoBoxes
+        status={status}
+        AverageTime={AverageTime}
+        currentLocation={currentLocation}
+      />
     </div>
   );
 }
