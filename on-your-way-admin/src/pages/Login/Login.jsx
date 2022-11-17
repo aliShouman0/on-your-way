@@ -14,7 +14,7 @@ function Login() {
   const [load, setLoad] = useState(false);
 
   const submit = (e) => {
-    e.preventDefault();
+    e.preventDefault();navigate("/dashboard")
     setLoad(true);
     setError(false);
     if (!email) {
