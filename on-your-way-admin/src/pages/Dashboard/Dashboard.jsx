@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import colors from "../../constants/colors";
 
 import {
   Chart as ChartJS,
@@ -12,10 +11,19 @@ import {
   Legend,
 } from "chart.js";
 
+import Loading from "../../components/Loading/Loading";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import Navbar from "../../components/Navbar/Navbar";
+import { getUsersProfit, getUsersRate } from "../../config/axios";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { loadProfit, loadRate, options } from "./controller";
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const [rateBar, setRateBar] = useState("");
+  const [orderCountBar, setorderCountBar] = useState("");
+  const [profitBar, setProfitBar] = useState("");
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -24,101 +32,41 @@ function Dashboard() {
     Tooltip,
     Legend
   );
+  const {
+    isLoading,
+    data: result,
+    isError,
+  } = useQuery(["users"], getUsersRate);
 
-  const options = {
-    responsive: true,
-    legend: {
-      labels: {
-        fontColor: "white",
-        color: "black",
-        fontSize: 120,
-      },
-    },
-    scales: {
-      yAxes: {
-        ticks: {
-          beginAtZero: true,
-          color: "black",
-          fontSize: 12,
-        },
-      },
-      xAxes: {
-        ticks: {
-          beginAtZero: true,
-          color: "black",
-          fontSize: 12,
-        },
-      },
-    },
-  };
-
-  const labels = ["ALi", "Baker", "walaa", "Aya", "Mohammd", "Malak", "Alex"];
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "User/Rate",
-        data: [8, 507, 143, 242, 586, 188, 479],
-        backgroundColor: colors.darker,
-      },
-    ],
-  };
-  const data2 = {
-    labels,
-    datasets: [
-      {
-        label: "User/Cancel  pickup",
-        data: [8, 507, 143, 242, 586, 188, 479],
-        backgroundColor: colors.secondary,
-      },
-    ],
-  };
-
-  const data3 = {
-    labels,
-    datasets: [
-      {
-        label: "User/Profits",
-        data: [8, 507, 143, 242, 586, 188, 479],
-        backgroundColor: colors.white,
-      },
-    ],
-  };
+  const {
+    isLoading: loading,
+    data: resultProfit,
+    isError: isErrorGetProfit,
+    refetch,
+  } = useQuery(["profit"], getUsersProfit, {
+    refetchOnMount: false,
+    retryOnMount: true,
+    enabled: false,
+  });
 
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
-      <Navbar />
+      <Navbar error={isError || isErrorGetProfit} />
       <LeftPanel active={"dashboard"} />
       <section className="absolute top-[10%] right-0 h-auto w-3/4 p-5 flex flex-col bg-dark  ">
         <p className="text-white text-4xl mt-5 font-bold text-left">
           Statistics
         </p>
-        <div className="flex flex-col justify-center items-center">
-          <Bar
-            options={options}
-            data={data}
-            width={25}
-            height={15}
-            className="m-10"
-          />
 
-          <Bar
-            options={options}
-            data={data2}
-            width={25}
-            height={15}
-            className="m-10"
-          />
-
-          <Bar
-            options={options}
-            data={data3}
-            width={25}
-            height={15}
-            className="m-10"
-          />
-        </div>
+        {isLoading || loading ? (
+          <Loading small={true} />
+        ) : (
+          <div className="flex flex-col justify-center items-center">
+            {rateBar}
+            {orderCountBar}
+            {profitBar}
+          </div>
+        )}
       </section>
     </div>
   );
