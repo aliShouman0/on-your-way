@@ -41,7 +41,7 @@ function UserTable({ onImageId, onVerified, data }) {
             <tr className="bg-transparent " key={data.id}>
               <td className="py-4 px-4">
                 <div className="w-12 h-1/4  ">
-                  <img src={data.avatar} alt="logo" />
+                  <img src={data.avatar} alt="userImage" />
                 </div>
               </td>
               <td className="py-4 px-4">{data.name}</td>
@@ -55,7 +55,7 @@ function UserTable({ onImageId, onVerified, data }) {
                   className="w-12 h-1/4  "
                   onClick={() => onImageId(data.id)}
                 >
-                  <img src={data.idImage} alt="logo" />
+                  <img src={data.idImage} alt="userImage" />
                 </div>
               </td>
               <td className="py-4 px-4">
