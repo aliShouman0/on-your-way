@@ -67,6 +67,28 @@ function Login() {
     }
   }, [result, isError, loginError]);
 
+  useEffect(() => {
+    if (resultGetMyInfo && resultGetMyInfo.status === 200) {
+      if (resultGetMyInfo.data.user_type_id === 1) {
+        localStorage.setItem("user_info", resultGetMyInfo.data.data);
+        navigate("/dashboard");
+        return;
+      } else {
+        setErrorText("You Don't Have Access");
+        setError(true);
+      }
+    }
+    if (resultGetMyInfo === 400 || resultGetMyInfo === 401) {
+      setErrorText("Some Thing is Wrong");
+      setError(true);
+    }
+
+    if (isErrorGetMyInfo) {
+      setErrorText(errorGetMyInfo);
+      setError(true);
+    }
+  }, [resultGetMyInfo, isErrorGetMyInfo, errorGetMyInfo]);
+
   if (isLoading || isLoadingGetMyInfo) {
     return <Loading />;
   }
