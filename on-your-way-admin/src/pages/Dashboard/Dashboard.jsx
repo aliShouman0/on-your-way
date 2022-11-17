@@ -64,6 +64,28 @@ function Dashboard() {
       },
     ],
   };
+  const data2 = {
+    labels,
+    datasets: [
+      {
+        label: "User/Cancel  pickup",
+        data: [8, 507, 143, 242, 586, 188, 479],
+        backgroundColor: colors.secondary,
+      },
+    ],
+  };
+
+  const data3 = {
+    labels,
+    datasets: [
+      {
+        label: "User/Profits",
+        data: [8, 507, 143, 242, 586, 188, 479],
+        backgroundColor: colors.white,
+      },
+    ],
+  };
+
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar />
@@ -80,7 +102,22 @@ function Dashboard() {
             height={15}
             className="m-10"
           />
- 
+
+          <Bar
+            options={options}
+            data={data2}
+            width={25}
+            height={15}
+            className="m-10"
+          />
+
+          <Bar
+            options={options}
+            data={data3}
+            width={25}
+            height={15}
+            className="m-10"
+          />
         </div>
       </section>
     </div>
