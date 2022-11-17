@@ -12,7 +12,8 @@ function App() {
         <Route path={"/"} element={<Login />} />
         <Route path={"/login"} element={<Login />} />
         <Route path={"/dashboard"} element={<Dashboard />} />
-        <Route path={"/users"} element={<Users />} /> 
+        <Route path={"/users"} element={<Users />} />
+        <Route path={"/Orders"} element={<Orders />} />
 
 
       </Routes>
