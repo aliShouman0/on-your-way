@@ -1,5 +1,4 @@
-import React from "react";
-import user from "../../assets/user.png";
+import React from "react"; 
 import { BASE_STORAGE } from "../../constants/constants";
 
 function Navbar({ error }) {
