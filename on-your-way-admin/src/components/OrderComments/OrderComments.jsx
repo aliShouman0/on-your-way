@@ -42,6 +42,25 @@ function OrderComments({
             />
             <Rate rate={pikerRate} size={24} />
           </div>
+          <div className="flex flex-col  items-center mx-5">
+            <div className="w-1/2 h-1/4 ">
+              <img src={ReceiverImage} alt="userImage" />
+            </div>
+            <InputBox
+              type="text"
+              value={ReceiverName}
+              placeholder="Full Name"
+              disabled={true}
+            />
+            <InputBox
+              type="text"
+              value={ReceiverComment}
+              placeholder="Comments"
+              disabled={true}
+              textarea={true}
+            />
+            <Rate rate={ReceiverRate} size={24} />
+          </div>
         </div>
       </div>
     </div>
