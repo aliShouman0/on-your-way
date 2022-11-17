@@ -5,7 +5,7 @@ import { getMyInfo, postLogin } from "../../config/axios";
 import logo from "../../assets/logo-gold.png";
 import { useNavigate } from "react-router-dom";
 import InputBox from "../../components/InputBox/InputBox";
-import Loading from "../../components/Loading/Loading"; 
+import Loading from "../../components/Loading/Loading";
 
 function Login() {
   const navigate = useNavigate();
@@ -47,7 +47,26 @@ function Login() {
     data.append("password", password);
     mutateLogin(data);
   };
-  
+
+  useEffect(() => {
+    if (result && result.status === 200) {
+      localStorage.setItem("access_token", result.data.access_token);
+      mutateMyInfo();
+    }
+    if (result === 401) {
+      setErrorText("Login Failed");
+      setError(true);
+    }
+    if (result === 400 || result === 500) {
+      setErrorText("Some Thing is Wrong");
+      setError(true);
+    }
+    if (isError) {
+      setErrorText(loginError);
+      setError(true);
+    }
+  }, [result, isError, loginError]);
+
   if (isLoading || isLoadingGetMyInfo) {
     return <Loading />;
   }
