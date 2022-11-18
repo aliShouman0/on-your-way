@@ -69,7 +69,29 @@ function Users() {
     }
   }, [result]);
 
+  useEffect(() => {
+    if (verifiedUserResult && verifiedUserResult.status === 200) {
+      if (verifiedUserResult.data.status === 1) { 
+        refetch();
+      } else setError(true);
+    } else if (verifiedUserResult && !verifiedUserIsLoading) setError(true);
+    if (verifiedUserResult === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [verifiedUserResult]);
 
+  useEffect(() => {
+    if (search === "" || search === " ") {
+      refetch();
+    } else {
+      const data = new FormData();
+      data.append("from", search);
+      data.append("to", search);
+      searchUserRefetch(data);
+    }
+  }, [search]); 
+ 
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar error={isError || verifiedUserIsError || error} />
