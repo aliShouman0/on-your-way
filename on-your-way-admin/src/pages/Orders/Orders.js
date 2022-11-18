@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import Navbar from "../../components/Navbar/Navbar";
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
@@ -6,8 +9,6 @@ import PikerInfo from "../../components/PikerInfo/PikerInfo";
 import OrderComments from "../../components/OrderComments/OrderComments";
 import Search from "../../components/Search/Search";
 import { getAllOrder, searchOrder, setApprovedOrder } from "../../config/axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import { BASE_STORAGE } from "../../constants/constants";
 
@@ -39,15 +40,13 @@ function Orders() {
     isLoading: searchOrderIsLoad,
     data: searchOrderResult,
     isError: searchOrderIsError,
-    refetch: searchOrderRefetch,
-    data: resultSearch,
     refetch: research,
   } = useQuery(["searchOrder"], () => searchOrder(search), { enabled: false });
 
   useEffect(() => {
     if (approvedOrderResult && approvedOrderResult.status === 200) {
       if (approvedOrderResult.data.status === 1) {
-        refetch(); 
+        refetch();
         setError(false);
       } else setError(true);
     } else if (!isLoading) setError(true);
@@ -65,7 +64,7 @@ function Orders() {
     }
     if (orderComments !== 0) {
       const res = data.find((item) => item.id === orderComments);
-      setPopUpData(res); 
+      setPopUpData(res);
       setPopUpOpen(1);
     }
   }, [pikerInfo, orderComments]);
@@ -73,7 +72,7 @@ function Orders() {
   useEffect(() => {
     if (result && result.status === 200) {
       if (result.data.status === 1) {
-        setData(result.data.data); 
+        setData(result.data.data);
         setError(false);
       } else setError(true);
     } else if (!isLoading) setError(true);
@@ -83,11 +82,10 @@ function Orders() {
     }
   }, [result]);
 
-
   useEffect(() => {
     if (searchOrderResult && searchOrderResult.status === 200) {
       if (searchOrderResult.data.status === 1) {
-        setData(searchOrderResult.data.data); 
+        setData(searchOrderResult.data.data);
         setError(false);
       } else setError(true);
     } else if (!searchOrderIsLoad) setError(true);
@@ -107,7 +105,9 @@ function Orders() {
 
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
-      <Navbar error={isError || error} />
+      <Navbar
+        error={isError || error || searchOrderIsError || approvedOrderIsError}
+      />
       <LeftPanel active={"orders"} />
       {pikerInfo && popUpOpen && (
         <PikerInfo
@@ -169,7 +169,7 @@ function Orders() {
           ) : (
             data.map((order) => {
               const picker = order.picked ? order.pickup_info.picker_info : 0;
-              const pickup = order.picked ? order.pickup_info : 0; 
+              const pickup = order.picked ? order.pickup_info : 0;
               return (
                 <OrderInfo
                   key={order.id}
@@ -185,7 +185,8 @@ function Orders() {
                   pay={order.pay}
                   status={pickup && pickup.status}
                   AverageTime={
-                    pickup && new Date(pickup.arrived_time*1000).toLocaleDateString()
+                    pickup &&
+                    new Date(pickup.arrived_time * 1000).toLocaleDateString()
                   }
                   currentLocation={pickup && pickup.location}
                   piker={setPikerInfo}
