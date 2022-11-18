@@ -77,7 +77,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $user,
-                "refresh" => Auth::refresh()
+
             ]);
         }
         return response()->json([
@@ -96,7 +96,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $user,
-                "refresh" => Auth::refresh()
+
             ]);
         }
         return response()->json([
@@ -120,7 +120,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $user,
-                "refresh" => Auth::refresh()
+                //  
             ]);
         }
         return response()->json([
@@ -140,7 +140,7 @@ class UserController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $user,
-                    "refresh" => Auth::refresh()
+
                 ]);
             }
         }
@@ -161,7 +161,7 @@ class UserController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $user,
-                    "refresh" => Auth::refresh()
+
                 ]);
             }
         }
