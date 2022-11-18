@@ -186,4 +186,22 @@ class UserController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
+    //getImages
+    function getUserImages(Request $request)
+    {
+        if ($request->phones ) { 
+             $user = User::select('phone', 'avatar')->whereIn('phone',  json_decode($request->phones, true))->get();
+            if (1) {
+                return response()->json([
+                    "status" => 1,
+                    "data" =>  $user ,
+
+                ]);
+            }
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
 }
