@@ -65,8 +65,7 @@ function Orders({ navigation }) {
   useEffect(() => {
     setLoadData(false);
     if (searchResult && searchResult.status === 200) {
-      if (searchResult.data.status === 1) {
-        console.log(searchResult.data);
+      if (searchResult.data.status === 1) { 
         setSearch(true);
         setLoadData(true);
       }

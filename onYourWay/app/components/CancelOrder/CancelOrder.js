@@ -46,7 +46,6 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
 
   if (result && result.status === 200) {
     if (result.data.status === 1) {
-      main.save("access_token", result.data.refresh);
       Toast.show("Canceling Done !! ", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: (windowHeight * 11) / 20 },

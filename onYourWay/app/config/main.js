@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useMutation } from "react-query";
-import Toast from "react-native-root-toast";
 import * as SecureStore from "expo-secure-store";
 const baseUrl = "http://192.168.8.135:8000/api/ony";
 const baseLink = "http://192.168.8.135:8000/storage/";
@@ -13,9 +11,6 @@ const postAPI = async (api_url, api_data, api_token = null) => {
         Authorization: "Bearer  " + api_token,
       },
     });
-    if (result.data.refresh) {
-      await save("access_token", result.data.refresh);
-    }
     return result;
   } catch (error) {
     console.log("Error from POST API ", error);
@@ -32,9 +27,6 @@ const getAPI = async (api_url, api_token) => {
         Authorization: "Bearer  " + api_token,
       },
     });
-    if (result.data.refresh) {
-      await save("access_token", result.data.refresh);
-    }
     return result;
   } catch (error) {
     console.log("Error from POST API ", error);

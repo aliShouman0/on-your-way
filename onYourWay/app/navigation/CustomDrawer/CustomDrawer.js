@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Image, View, Text, TouchableOpacity, NativeModules } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  NativeModules,
+} from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -10,7 +16,6 @@ import * as SecureStore from "expo-secure-store";
 import styles from "./styles";
 import main from "../../config/main";
 import Loading from "../../components/Loading/Loading";
-
 
 const CustomDrawer = (props) => {
   const account = props.state.index == 5;
@@ -60,9 +65,13 @@ const CustomDrawer = (props) => {
 
         <TouchableOpacity
           style={styles.footerContent}
-          onPress={() =>{
-            setLoad(true); 
-            NativeModules.DevSettings.reload();
+          onPress={() => {
+            setLoad(true);
+            SecureStore.deleteItemAsync("access_token")
+            props.navigation.reset({
+              index: 0,
+              routes: [{ name: "Login" }],
+            });
           }}
         >
           <MaterialCommunityIcons name="logout" size={40} style={styles.icon} />

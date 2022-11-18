@@ -63,7 +63,6 @@ function CompletedOrder({
 
   if (result && result.status === 200) {
     if (result.data.status === 1) {
-      main.save("access_token", result.data.refresh);
       Toast.show("Done!! ", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: windowHeight / 2 },

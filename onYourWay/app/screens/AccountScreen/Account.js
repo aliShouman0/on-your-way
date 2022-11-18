@@ -15,6 +15,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Rate from "../../components/Rate/Rate";
 import text from "../../config/text";
 import { useIsFocused } from "@react-navigation/native";
+import main from "../../config/main";
 
 function Account({ navigation }) {
   const [email, setEmail] = useState("");
@@ -23,12 +24,13 @@ function Account({ navigation }) {
   const [address, setAddress] = useState("");
   const [rate, setRate] = useState("");
   const [date, setDate] = useState(new Date());
+  const [avatar, setAvatar] = useState("");
   const isFocused = useIsFocused();
 
   useEffect(() => {
     const getInfo = async () => {
       const info = await SecureStore.getItemAsync("user_info");
-      const { email, name, phone, address, birthday, rate, order_count } =
+      const { email, name, phone, address, birthday, rate, order_count ,avatar} =
         JSON.parse(info);
       setEmail(email);
       setName(name);
@@ -38,6 +40,7 @@ function Account({ navigation }) {
       setRate(
         order_count == 0 ? 0 : Math.round(Math.round(rate) / order_count)
       );
+      setAvatar(avatar)
     };
     getInfo();
   }, [isFocused]);
@@ -47,7 +50,7 @@ function Account({ navigation }) {
       <Navbar type={"main"} title={"Account"} navigation={navigation} />
       <Image
         resizeMode="contain"
-        source={require("../../assets/user1.jpg")}
+        source={{ uri: main.baseLink + avatar }}
         style={styles.userImg}
       />
       <Rate rate={rate} size={30} styleText={{ fontSize: text.sizeMid }} />

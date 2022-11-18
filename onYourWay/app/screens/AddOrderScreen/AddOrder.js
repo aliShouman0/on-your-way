@@ -100,8 +100,7 @@ function AddOrder({ navigation }) {
     }
 
     if (result && result.status === 200) {
-      if (result.data.status === 1) {
-        main.save("access_token", result.data.refresh);
+      if (result.data.status === 1) { 
         Toast.show("Add Order Done ", {
           duration: Toast.durations.LONG,
         });

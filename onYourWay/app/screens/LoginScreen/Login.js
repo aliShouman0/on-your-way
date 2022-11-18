@@ -71,6 +71,12 @@ function Login({ navigation }) {
       });
     }
 
+    if (userInfoResult && userInfoResult === 403) {
+      Toast.show("You are Not Verified Yet!! 😥", {
+        duration: Toast.durations.LONG,
+      });
+    } 
+    
     if (userInfoResult && userInfoResult.status === 200) {
       Toast.show("Verify Done!! 🙂", {
         duration: Toast.durations.LONG,

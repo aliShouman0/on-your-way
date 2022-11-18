@@ -6,7 +6,7 @@ import Toast from "react-native-root-toast";
 
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import Navbar from "../../components/Navbar/Navbar";
-import styles from "./styles"; 
+import styles from "./styles";
 import Loading from "../../components/Loading/Loading";
 import main from "../../config/main";
 
@@ -76,7 +76,7 @@ function PickUps({ navigation }) {
             <OrderInfo
               key={item.index}
               id={orderInformation.id}
-              userImg={userInfo.avatar}
+              userImg={{ uri: main.baseLink + userInfo.avatar }}
               from={orderInformation.from}
               to={orderInformation.to}
               pay={orderInformation.pay}

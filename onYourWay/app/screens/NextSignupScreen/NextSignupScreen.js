@@ -33,7 +33,7 @@ function NextSignupScreen({ navigation, route }) {
     isError,
     isLoading,
     error: signUpError,
-    data,
+    data:result,
   } = useMutation((user) => main.signUp(user));
 
   const onHandleSignup = async () => {

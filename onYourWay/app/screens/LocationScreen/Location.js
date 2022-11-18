@@ -66,7 +66,6 @@ function Location({ navigation, route }) {
     }
     if (result && result.status === 200) {
       if (result.data.status === 1) {
-        main.save("access_token", result.data.refresh);
         if (result.data.data.live_location) {
           const latitude = result.data.data.latitude;
           const longitude = result.data.data.longitude;
