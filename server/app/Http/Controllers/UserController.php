@@ -105,6 +105,23 @@ class UserController extends Controller
         ], 400);
     }
 
+    //getUsersRate
+    function getUsersRate()
+    {
+        $user = User::select('name', 'rate', 'order_count')->orderBy('rate', 'DESC')->limit(7)->get();
+        if ($user) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $user,    
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+    
     //searchUser
     function searchUser($like)
     {
