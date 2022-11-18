@@ -14,7 +14,7 @@ function PikerInfo({ image, email, name, phone, address, rate, close }) {
         </button>
         <div className="flex items-center  justify-center h-full w-full">
           <div className="w-1/2 h-1/4 flex flex-col items-center justify-center mx-2 ">
-            <img src={image} alt="userImage" className="mb-3" />
+            <img src={image} alt="userImage" className="mb-3 rounded-full" />
             <Rate rate={rate} size={24} />
           </div>
           <div className="w-1/2 h-full flex flex-col  items-center justify-center mx-2">
