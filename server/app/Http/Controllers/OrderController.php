@@ -293,6 +293,27 @@ class OrderController extends Controller
         ], 400);
     }
 
+    //adminSearchOrders
+    function adminSearchOrders($like)
+    {
+
+        $id = Auth::id();
+        $order = false;
+        $order = Order::where('from', 'like', '%' .  $like . '%')->orWhere('to', 'like', '%' .  $like . '%')->with("userInfo")->with("PickupInfo")->with("EndedPickupInfo")->orderBy("picked", "DESC")->get();
+
+        if ($order) {
+            return response()->json([
+                "status" => 1,
+                "data" => $order, 
+
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
     function saveImages($image_base64, $Image_name,)
     {
         $data = base64_decode($image_base64);
