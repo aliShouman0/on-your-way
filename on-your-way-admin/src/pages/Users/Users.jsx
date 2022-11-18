@@ -43,7 +43,33 @@ function Users() {
     enabled: false,
   });
 
- 
+  useEffect(() => {
+    if (searchUserResult && searchUserResult.status === 200) {
+      if (searchUserResult.data.status === 1) {
+        setData(searchUserResult.data.data);
+        setError(false);
+      } else setError(true);
+    } else if (!searchUserIsLoad) setError(true);
+    if (searchUserResult === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [searchUserResult]);
+
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        setData(result.data.data);
+        setError(false);
+      } else setError(true);
+    } else if (!isLoading) setError(true);
+    if (result === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [result]);
+
+
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar error={isError || verifiedUserIsError || error} />
