@@ -53,7 +53,11 @@ function Chat({ navigation }) {
         renderedUser.push({
           id: i,
           name: users[i].name,
-          userImg: require("../../assets/user1.jpg"),
+          userImg: {
+            uri:
+              main.baseLink +
+              userImages.find((o) => o.phone === users[i].phone).avatar,
+          },
           date: users[i].date,
           lastMessage: "....",
           user: users[i],
@@ -62,6 +66,24 @@ function Chat({ navigation }) {
     setData(renderedUser);
     setIsLoading(false);
   }, [userImages]);
+
+  useEffect(() => {
+    if (users) {
+      setIsLoading(true);
+      const phones = extractor(users, "phone");
+      const data = new FormData();
+      data.append("phones", JSON.stringify(phones));
+      mutate(data);
+    }
+  }, [users]);
+
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        setUserImages(result.data.data);
+      }
+    }
+  }, [result]);
 
   if (isLoading || getUserImagesIsLoad) {
     return <Loading />;
