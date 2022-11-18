@@ -50,6 +50,8 @@ Route::group(["prefix" => "ony"], function () {
         Route::post('set_location', [OrderController::class, 'setLocation'])->name("setLocation");
         //get Location
         Route::get('get_location/{id}', [OrderController::class, 'getLocation'])->name("getLocation");
+        //getUserImages
+        Route::post('get_user_images', [UserController::class, 'getUserImages'])->name("getUserImages");
 
         // on admin can access
         Route::group(["middleware" => "isAdmin"], function () {
@@ -71,7 +73,6 @@ Route::group(["prefix" => "ony"], function () {
             Route::get("get_comments/{pickup_id}", [OrderController::class, "getComments"])->name("getComments");
             //setApprovedOrder
             Route::post("set_approved_order", [OrderController::class, "setApprovedOrder"])->name("approveOrder");
-          
         });
     });
 });
