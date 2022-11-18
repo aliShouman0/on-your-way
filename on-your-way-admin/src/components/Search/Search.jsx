@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-function Search({ value, setValue, placeholder, onSubmit }) {
+function Search({ value, setValue, placeholder}) {
   return (
     <div className="relative">
       <input
@@ -10,7 +10,6 @@ function Search({ value, setValue, placeholder, onSubmit }) {
         onChange={(e) => setValue(e.target.value)}
         className="p-3  border-none  outline-none rounded-md bg-primary text-white"
         placeholder={placeholder}
-        onSubmit={onSubmit}
       />
       <AiOutlineSearch
         size={25}
