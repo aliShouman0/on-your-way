@@ -127,35 +127,14 @@ class UserController extends Controller
             "status" => 0,
             "data" => "Error -Some Thing went wrong "
         ], 400);
-    }
+    } 
 
     //verifiedUser
-    function verifiedUser(Request $request)
+    function setVerifiedUser(Request $request)
     {
-        if ($request->id) {
-            $user = User::find($request->id);
-            $user->is_verified = true;
-            $user = $user->makeVisible(['birthday', 'front_id_photo', 'back_id_photo', 'is_verified', 'user_type_id',  'created_at']);
-            if ($user->save()) {
-                return response()->json([
-                    "status" => 1,
-                    "data" => $user,
-
-                ]);
-            }
-        }
-        return response()->json([
-            "status" => 0,
-            "data" => "Error -Some Thing went wrong "
-        ], 400);
-    }
-
-    //Un verified user
-    function UnVerifiedUser(Request $request)
-    {
-        if ($request->id) {
-            $user = User::find($request->id);
-            $user->is_verified = false;
+        if ($request->id && isset($request->is_verified)) {
+            $user = User::find($request->id); 
+            $user->is_verified = $request->is_verified;
             $user = $user->makeVisible(['birthday', 'front_id_photo', 'back_id_photo', 'is_verified', 'user_type_id',  'created_at']);
             if ($user->save()) {
                 return response()->json([
