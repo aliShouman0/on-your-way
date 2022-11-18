@@ -1,5 +1,5 @@
 import React from "react";
-import InfoBoxes from "../InfoBoxes/InfoBoxes"; 
+import InfoBoxes from "../InfoBoxes/InfoBoxes";
 import SharpInfoBoxes from "../SharpInfoBoxes/SharpInfoBoxes";
 
 function OrderInfo({
@@ -19,13 +19,15 @@ function OrderInfo({
   piker,
   comments,
   approved,
-  editApproved
+  editApproved,
+  picked,
+  ended,
 }) {
   return (
     <div className="bg-darker p-5 flex flex-col rounded-md text-white w-30 m-5">
       <div className="flex items-center mt-2 mb-4 ">
         <div className="w-12 h-1/5  ">
-          <img src={userImage} alt="userImage" />
+          <img src={userImage} alt="userImage" className="rounded-full" />
         </div>
         <span className="text-md ml-5">{userName}</span>
       </div>
@@ -46,31 +48,43 @@ function OrderInfo({
       <div className="border border-x-zinc-50 p-3 mt-5 mb-2 rounded-lg w-full   ">
         <p className="text-sm text-zinc-50">{description}</p>
       </div>
-      <SharpInfoBoxes
-        status={status}
-        AverageTime={AverageTime}
-        currentLocation={currentLocation}
-      />
-      <div className="flex w-full justify-between ">
-        <button
-          onClick={() => comments(id)}
-          className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
-        >
-          Comments
-        </button>{" "}
-        <button
-          onClick={() => piker(id)}
-          className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
-        >
-          Picker
-        </button>{" "}
+      {picked === 1 ? (
+        <>
+          <SharpInfoBoxes
+            status={status}
+            AverageTime={AverageTime}
+            currentLocation={currentLocation}
+          />
+          <div className="flex w-full justify-between ">
+            <button
+              onClick={() => comments(id)}
+              className="bg-white w-24 text-black p-2 font-semibold text-xs disabled:bg-gray-500 disabled:cursor-not-allowed cursor-pointer"
+              disabled={!ended}
+            >
+              Comments
+            </button>
+            <button
+              onClick={() => piker(id)}
+              className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
+            >
+              Picker
+            </button>
+            <button
+              onClick={editApproved}
+              className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
+            >
+              {approved ? "Approved" : "Disapprove"}
+            </button>
+          </div>
+        </>
+      ) : (
         <button
           onClick={editApproved}
-          className="bg-white w-24 text-black p-2 font-semibold text-xs cursor-pointer"
+          className="bg-white w-full mt-2 text-black p-2 font-semibold text-xs cursor-pointer"
         >
-         {approved? "Approved":"Disapprove"}
+          {approved ? "Approved" : "Disapprove"}
         </button>
-      </div>
+      )}
     </div>
   );
 }
