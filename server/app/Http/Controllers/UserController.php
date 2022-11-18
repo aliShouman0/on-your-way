@@ -121,7 +121,27 @@ class UserController extends Controller
             "data" => "Error -Some Thing went wrong "
         ], 400);
     }
-    
+
+    //getUsersProfit
+    function getUsersProfit()
+    {
+        $user = User::select('name', 'profit')->orderBy('profit', 'DESC')->limit(7)->get();
+        $user = $user->makeVisible(['profit']);
+        if ($user) {
+
+            return response()->json([
+                "status" => 1,
+                "data" => $user,
+
+            ]);
+        }
+        return response()->json([
+            "status" => 0,
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
+    }
+
+
     //searchUser
     function searchUser($like)
     {
