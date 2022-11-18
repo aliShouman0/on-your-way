@@ -49,7 +49,7 @@ function Orders() {
         refetch();
         setError(false);
       } else setError(true);
-    } else if (!isLoading) setError(true);
+    } else if (!approvedOrderIsLoading) setError(true);
     if (approvedOrderResult === 401) {
       navigate("/login");
       return;
