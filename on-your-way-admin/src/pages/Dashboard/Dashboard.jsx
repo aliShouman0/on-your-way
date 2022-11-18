@@ -24,6 +24,7 @@ function Dashboard() {
   const [rateBar, setRateBar] = useState("");
   const [orderCountBar, setorderCountBar] = useState("");
   const [profitBar, setProfitBar] = useState("");
+  const [error, setError] = useState(false);
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -72,8 +73,8 @@ function Dashboard() {
           />
         );
         refetch();
-      }
-    }
+      } else setError(true);
+    } else if (!isLoading) setError(true);
     if (result === 401) {
       navigate("/login");
       return;
@@ -93,8 +94,8 @@ function Dashboard() {
             className="m-10"
           />
         );
-      }
-    }
+      } else setError(true);
+    } else if (!loading) setError(true);
     if (result === 401) {
       navigate("/login");
       return;
@@ -103,7 +104,7 @@ function Dashboard() {
 
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
-      <Navbar error={isError || isErrorGetProfit} />
+      <Navbar error={isError || isErrorGetProfit || error} />
       <LeftPanel active={"dashboard"} />
       <section className="absolute top-[10%] right-0 h-auto w-3/4 p-5 flex flex-col bg-dark  ">
         <p className="text-white text-4xl mt-5 font-bold text-left">
