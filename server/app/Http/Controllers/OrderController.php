@@ -397,19 +397,18 @@ class OrderController extends Controller
     }
 
     //approveOrder 
-    function  approveOrder(Request $request)
+    function  setApprovedOrder(Request $request)
     {
         if (
-            $request->order_id
+            $request->order_id && isset($request->approved)
         ) {
             $order = Order::find($request->order_id);
-            $order->approved = true;
+            $order->approved = $request->approved;
 
             if ($order->save()) {
                 return response()->json([
                     "status" => 1,
-                    "data" => $order,
-                    
+                    "data" => $order, 
                 ]);
             }
         }
@@ -419,28 +418,6 @@ class OrderController extends Controller
         ], 400);
     }
 
-    //approveOrder 
-    function  disapproveOrder(Request $request)
-    {
-        if (
-            $request->order_id
-        ) {
-            $order = Order::find($request->order_id);
-            $order->approved = false;
-
-            if ($order->save()) {
-                return response()->json([
-                    "status" => 1,
-                    "data" => $order,
-                    
-                ]);
-            }
-        }
-        return response()->json([
-            "status" => 0,
-            "data" => "Error -Some Thing went wrong "
-        ], 400);
-    }
 
     //accept live Location  
     function  acceptLocation(Request $request)
