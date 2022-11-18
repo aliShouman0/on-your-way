@@ -1,5 +1,6 @@
 import React from "react";
 import Switch from "react-switch";
+import { BASE_STORAGE } from "../../constants/constants";
 
 import colors from "../../constants/colors";
 
@@ -23,9 +24,6 @@ function UserTable({ onImageId, onVerified, data }) {
               Address
             </th>
             <th scope="col" className="py-3 px-4">
-              Birthday
-            </th>
-            <th scope="col" className="py-3 px-4">
               Rate
             </th>
             <th scope="col" className="py-3 px-4">
@@ -38,31 +36,37 @@ function UserTable({ onImageId, onVerified, data }) {
         </thead>
         <tbody>
           {data.map((data, i) => (
-            <tr className="bg-transparent " key={data.id}>
+            <tr className="bg-transparent text-xs" key={data.id}>
               <td className="py-4 px-4">
                 <div className="w-12 h-1/4  ">
-                  <img src={data.avatar} alt="userImage" />
+                  <img
+                    src={`${BASE_STORAGE}/${data.avatar}`}
+                    className="rounded-full"
+                    alt="userImage"
+                  />
                 </div>
               </td>
               <td className="py-4 px-4">{data.name}</td>
               <td className="py-4 px-4">{data.email}</td>
               <td className="py-4 px-4">{data.phone}</td>
               <td className="py-4 px-4">{data.address}</td>
-              <td className="py-4 px-4">{data.birthday}</td>
-              <td className="py-4 px-4">{data.rate}</td>
+              <td className="py-4 px-4">{ (data.rate/data.order_count).toFixed(2)}</td>
               <td className="py-4 px-4">
                 <div
                   className="w-12 h-1/4  "
                   onClick={() => onImageId(data.id)}
                 >
-                  <img src={data.idImage} alt="userImage" />
+                  <img
+                    src={`${BASE_STORAGE}/${data.front_id_photo}`}
+                    alt="userImage"
+                  />
                 </div>
               </td>
               <td className="py-4 px-4">
                 <Switch
-                  id={data.id}
+                  id={`${data.id}`}
                   onChange={(checked, event, id) => onVerified(checked, id)}
-                  checked={data.verified}
+                  checked={data.is_verified ? true : false}
                   onColor={colors.secondary}
                   offColor={colors.primary}
                   width={48}
