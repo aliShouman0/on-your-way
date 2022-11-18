@@ -53,22 +53,25 @@ Route::group(["prefix" => "ony"], function () {
 
         // on admin can access
         Route::group(["middleware" => "isAdmin"], function () {
+            // getUsersProfit
+            Route::get("get_users_profit", [UserController::class, "getUsersProfit"])->name("getUsersProfit");
+            // getUsersRate
+            Route::get("get_users_rate", [UserController::class, "getUsersRate"])->name("getUsersRate");
             // getAllUsers
             Route::get("get_all_users", [UserController::class, "getAllUsers"])->name("getAllUsers");
             // Search
             Route::get("search_user/{like}", [UserController::class, "searchUser"])->name("searchUser");
-            // Verified user
-            Route::post("verified_user", [UserController::class, "verifiedUser"])->name("verifiedUser");
-            // UnVerifiedUser
-            Route::post("unverified_user", [UserController::class, "UnVerifiedUser"])->name("UnVerifiedUser");
+            // adminSearchOrders
+            Route::get("search_orders/{like}", [OrderController::class, "adminSearchOrders"])->name("adminSearchOrders");
+            // set Verified User u 
+            Route::post("set_verified_user", [UserController::class, "setVerifiedUser"])->name("setVerifiedUser");
             // get Order ended or not
             Route::get("get_all_order", [OrderController::class, "getAllOrder"])->name("getAllOrder");
             //get order Comments
             Route::get("get_comments/{pickup_id}", [OrderController::class, "getComments"])->name("getComments");
-            //approve Order
-            Route::post("approve_order", [OrderController::class, "approveOrder"])->name("approveOrder");
-            //disapprove Order
-            Route::post("disapprove_order", [OrderController::class, "disapproveOrder"])->name("disapproveOrder");
+            //setApprovedOrder
+            Route::post("set_approved_order", [OrderController::class, "setApprovedOrder"])->name("approveOrder");
+          
         });
     });
 });
