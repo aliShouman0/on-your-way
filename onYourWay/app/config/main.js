@@ -122,6 +122,11 @@ const searchOrders = async (data) => {
   return await postAPI(`${baseUrl}/search_orders`, data, token);
 };
 
+const getUserImages = async (data) => {
+  const token = await SecureStore.getItemAsync("access_token");
+  return await postAPI(`${baseUrl}/get_user_images`, data, token);
+};
+
 export default {
   getAPI,
   postAPI,
@@ -145,4 +150,5 @@ export default {
   getEndedOrder,
   getAllOrders,
   searchOrders,
+  getUserImages,
 };
