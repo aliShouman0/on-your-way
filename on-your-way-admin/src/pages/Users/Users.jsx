@@ -47,7 +47,14 @@ function Users() {
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar error={isError || verifiedUserIsError || error} />
-      <LeftPanel active={"users"} /> 
+      <LeftPanel active={"users"} />
+      {openPopUp === -1 && popUpData && (
+        <ViewId
+          frontImage={BASE_STORAGE + "/" + popUpData.front_id_photo}
+          backImage={BASE_STORAGE + "/" + popUpData.back_id_photo}
+          close={() => setOpenPopUp(0)}
+        />
+      )}
       <section className="absolute top-[10%] right-0 h-auto w-3/4 p-5 flex flex-col bg-dark  ">
         <div className="flex justify-between mt-5 items-center">
           <p className="text-white text-4xl  font-bold text-left">Users</p>
