@@ -90,7 +90,15 @@ function Users() {
       data.append("to", search);
       searchUserRefetch(data);
     }
-  }, [search]); 
+  }, [search]);
+
+  useEffect(() => {
+    if (openPopUp !== 0 && openPopUp !== -1) {
+      const getPopUpData = data.find((o) => o.id === openPopUp);
+      setPopUpData(getPopUpData); 
+      setOpenPopUp(-1);
+    }
+  }, [openPopUp]);
  
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
