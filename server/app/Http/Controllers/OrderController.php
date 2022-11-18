@@ -23,7 +23,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $order,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
         return response()->json([
@@ -42,7 +42,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $pickup,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
         return response()->json([
@@ -60,7 +60,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $pickup,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
         return response()->json([
@@ -73,10 +73,10 @@ class OrderController extends Controller
     function addOrUpdatePickup(Request $request)
     {
         $orderSave = 1;
-        $id=Auth::id();
+        $id = Auth::id();
         if ($request->pickup_id == 0) {
             $pickup = new Pickup;
-            if (  !$request->order_id) {
+            if (!$request->order_id) {
                 return response()->json([
                     "status" => 0,
                     "data" => "Error -Some Thing went wrong "
@@ -86,6 +86,7 @@ class OrderController extends Controller
             $order->picked = true;
             $pickup->picker_id = $id;
             $pickup->order_id = $request->order_id;
+            $pickup->arrived_time=time();
             $orderSave = $order->save();
         } else {
             $pickup = Pickup::find($request->pickup_id);
@@ -101,7 +102,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $pickup,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
 
@@ -139,7 +140,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $completed_pickups,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -178,7 +179,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $completed_pickups,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -211,7 +212,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $canceledPickup,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -231,7 +232,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $order,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
         return response()->json([
@@ -250,7 +251,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $order,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
         return response()->json([
@@ -283,7 +284,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $order,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
         return response()->json([
@@ -333,8 +334,7 @@ class OrderController extends Controller
 
                 return response()->json([
                     "status" => 1,
-                    "data" => $order,
-                    "refresh" => Auth::refresh()
+                    "data" => $order, 
                 ]);
             }
         }
@@ -348,13 +348,12 @@ class OrderController extends Controller
     //getAllOrder ended or not
     function getAllOrder()
     {
-        $order = Order::with("PickupInfo")->with("userInfo")->get();
+        $order = Order::with("PickupInfo")->with("userInfo")->with("EndedPickupInfo")->orderBy("picked", "DESC")->get();
         if ($order) {
 
             return response()->json([
                 "status" => 1,
-                "data" => $order,
-                "refresh" => Auth::refresh()
+                "data" => $order, 
             ]);
         }
         return response()->json([
@@ -387,8 +386,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $result,
-                    "canceled" => $canceled,
-                    "refresh" => Auth::refresh()
+                    "canceled" => $canceled, 
                 ]);
             }
         }
@@ -411,7 +409,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $order,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -434,7 +432,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $order,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -455,7 +453,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $pickup,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -476,7 +474,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $pickup,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -501,7 +499,7 @@ class OrderController extends Controller
                 return response()->json([
                     "status" => 1,
                     "data" => $pickup,
-                    "refresh" => Auth::refresh()
+                    
                 ]);
             }
         }
@@ -521,7 +519,7 @@ class OrderController extends Controller
             return response()->json([
                 "status" => 1,
                 "data" => $pickup,
-                "refresh" => Auth::refresh()
+                
             ]);
         }
 
