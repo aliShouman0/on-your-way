@@ -25,7 +25,7 @@ function OrderComments({
         <div className="flex items-center  justify-evenly h-full w-full mx-5">
           <div className="flex flex-col  items-center">
             <div className="w-1/2 h-1/4 ">
-              <img src={pikerImage} alt="userImage" />
+              <img src={pikerImage} alt="userImage" className="rounded-full"/>
             </div>
             <InputBox
               type="text"
@@ -44,7 +44,7 @@ function OrderComments({
           </div>
           <div className="flex flex-col  items-center mx-5">
             <div className="w-1/2 h-1/4 ">
-              <img src={ReceiverImage} alt="userImage" />
+              <img src={ReceiverImage} alt="userImage" className="rounded-full"/>
             </div>
             <InputBox
               type="text"
