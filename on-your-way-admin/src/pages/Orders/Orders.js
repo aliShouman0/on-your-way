@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import user from "../../assets/user.png";
 import key from "../../assets/keyboard .jpg";
@@ -8,62 +8,147 @@ import OrderInfo from "../../components/OrderInfo/OrderInfo";
 import PikerInfo from "../../components/PikerInfo/PikerInfo";
 import OrderComments from "../../components/OrderComments/OrderComments";
 import Search from "../../components/Search/Search";
+import { getAllOrder, searchOrder, setApprovedOrder } from "../../config/axios";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
+import { BASE_STORAGE } from "../../constants/constants";
 
 function Orders() {
+  const navigate = useNavigate();
   const [pikerInfo, setPikerInfo] = useState(0);
   const [orderComments, setOrderComments] = useState(0);
   const [search, setSearch] = useState("");
+  const [error, setError] = useState(false);
+  const [data, setData] = useState([]);
+  const [popUpData, setPopUpData] = useState({});
+  const [popUpOpen, setPopUpOpen] = useState(0);
+
+  const {
+    isLoading,
+    data: result,
+    isError,
+    refetch,
+  } = useQuery(["allOrder"], getAllOrder);
+
+  const {
+    mutate: mutateSetApprovedOrder,
+    isError: approvedOrderIsError,
+    isLoading: approvedOrderIsLoading,
+    data: approvedOrderResult,
+  } = useMutation(setApprovedOrder);
+
+  const {
+    isLoading: searchOrderIsLoad,
+    data: searchOrderResult,
+    isError: searchOrderIsError,
+    refetch: searchOrderRefetch,
+    data: resultSearch,
+    refetch: research,
+  } = useQuery(["searchOrder"], () => searchOrder(search), { enabled: false });
+
+
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
-      <Navbar />
+      <Navbar error={isError || error} />
       <LeftPanel active={"orders"} />
-      {pikerInfo && (
+      {pikerInfo && popUpOpen && (
         <PikerInfo
-          image={user}
-          name={"ali"}
-          email={"email"}
-          phone={"phone"}
-          address={"address"}
-          rate={3}
-          close={() => setPikerInfo(0)}
+          image={BASE_STORAGE + "/" + popUpData.pickup_info.picker_info.avatar}
+          name={popUpData.pickup_info.picker_info.name}
+          email={popUpData.pickup_info.picker_info.email}
+          phone={popUpData.pickup_info.picker_info.phone}
+          address={popUpData.pickup_info.picker_info.address}
+          rate={
+            popUpData.pickup_info.picker_info.rate /
+            popUpData.pickup_info.picker_info.order_count
+          }
+          close={() => {
+            setPopUpOpen(0);
+            setPopUpData({});
+            setPikerInfo(0);
+          }}
         />
       )}
-      {orderComments && (
+      {popUpOpen && orderComments && (
         <OrderComments
-          pikerImage={user}
-          PikerName={"ALi"}
-          pikerRate={1}
-          pikerComment={"I need to sleep"}
-          ReceiverImage={user}
-          ReceiverName={"Aya"}
-          ReceiverRate={3}
-          ReceiverComment={"In Your Dream"}
-          close={() => setOrderComments(0)}
+          pikerImage={
+            BASE_STORAGE + "/" + popUpData.pickup_info.picker_info.avatar
+          }
+          PikerName={popUpData.pickup_info.picker_info.name}
+          pikerRate={
+            popUpData.ended_pickup_info.completed_pickup_info.picker_rated
+          }
+          pikerComment={
+            popUpData.ended_pickup_info.completed_pickup_info.picker_comment
+          }
+          ReceiverImage={BASE_STORAGE + "/" + popUpData.user_info.avatar}
+          ReceiverName={popUpData.user_info.name}
+          ReceiverRate={
+            popUpData.ended_pickup_info.completed_pickup_info.receiver_rated
+          }
+          ReceiverComment={
+            popUpData.ended_pickup_info.completed_pickup_info.receiver_comment
+          }
+          close={() => {
+            setPopUpOpen(0);
+            setPopUpData({});
+            setOrderComments(0);
+          }}
         />
       )}
       <section className="absolute top-[10%] right-0 h-auto w-3/4 p-5 flex flex-col bg-dark  ">
         <div className="flex justify-between mt-5 items-center">
           <p className="text-white text-4xl  font-bold text-left">Orders</p>
-          <Search value={search} setValue={setSearch} placeholder="Search" />
+          <Search
+            value={search}
+            setValue={setSearch}
+            placeholder="Search Cities"
+          />
         </div>
         <div className="flex flex-wrap justify-center items-center  mt-10">
-          <OrderInfo
-            userImage={user}
-            userName={"Ali"}
-            mainImage={key}
-            image1={key}
-            image2={key}
-            description={"description"}
-            from={"leb"}
-            to={"be"}
-            pay={"1700"}
-            status={"na"}
-            AverageTime={"Time"}
-            currentLocation={"Location"}
-            piker={setPikerInfo}
-            comments={setOrderComments}
-            id={10}
-          />
+          {isLoading ? (
+            <Loading small={true} />
+          ) : (
+            data.map((order) => {
+              const picker = order.picked ? order.pickup_info.picker_info : 0;
+              const pickup = order.picked ? order.pickup_info : 0;
+              console.log(pickup&&pickup.arrived_time)
+              return (
+                <OrderInfo
+                  key={order.id}
+                  picked={order.picked}
+                  userImage={BASE_STORAGE + "/" + order.user_info.avatar}
+                  userName={order.user_info.name}
+                  mainImage={BASE_STORAGE + "/" + order.main_image}
+                  image1={BASE_STORAGE + "/" + order.image1}
+                  image2={BASE_STORAGE + "/" + order.image2}
+                  description={order.description}
+                  from={order.from}
+                  to={order.to}
+                  pay={order.pay}
+                  status={pickup && pickup.status}
+                  AverageTime={
+                    pickup && new Date(pickup.arrived_time*1000).toLocaleDateString()
+                  }
+                  currentLocation={pickup && pickup.location}
+                  piker={setPikerInfo}
+                  comments={setOrderComments}
+                  id={order.id}
+                  ended={
+                    order.picked && order.ended && order.pickup_info.completed
+                  }
+                  approved={order.approved}
+                  editApproved={() => {
+                    const data = new FormData();
+                    data.append("order_id", order.id);
+                    data.append("approved", order.approved ? 0 : 1);
+                    mutateSetApprovedOrder(data);
+                  }}
+                />
+              );
+            })
+          )}
         </div>
       </section>
     </div>
