@@ -26,7 +26,7 @@ class JWT
             return response()->json([
                 "status" => -1,
                 "data" => "User Not Verified"
-            ], 400);
+            ], 403);
         }
     }
 }
