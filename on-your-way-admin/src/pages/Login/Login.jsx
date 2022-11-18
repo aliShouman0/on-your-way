@@ -70,7 +70,7 @@ function Login() {
   useEffect(() => {
     if (resultGetMyInfo && resultGetMyInfo.status === 200) {
       if (resultGetMyInfo.data.user_type_id === 1) {
-        localStorage.setItem("user_info", resultGetMyInfo.data.data);
+        localStorage.setItem("user_info", JSON.stringify(resultGetMyInfo.data));
         navigate("/dashboard");
         return;
       } else {
