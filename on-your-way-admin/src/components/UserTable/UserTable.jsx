@@ -50,7 +50,7 @@ function UserTable({ onImageId, onVerified, data }) {
               <td className="py-4 px-4">{data.email}</td>
               <td className="py-4 px-4">{data.phone}</td>
               <td className="py-4 px-4">{data.address}</td>
-              <td className="py-4 px-4">{ (data.rate/data.order_count).toFixed(2)}</td>
+              <td className="py-4 px-4">{data.order_count!==0? (data.rate/data.order_count).toFixed(2):0}</td>
               <td className="py-4 px-4">
                 <div
                   className="w-12 h-1/4  "
