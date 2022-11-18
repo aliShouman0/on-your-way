@@ -97,7 +97,13 @@ function Orders() {
     }
   }, [searchOrderResult]);
 
- 
+  useEffect(() => {
+    if (search === "" || search === " ") {
+      refetch();
+    } else {
+      research();
+    }
+  }, [search]);
 
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
