@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import user from "../../assets/user.png";
-import key from "../../assets/keyboard .jpg";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import Navbar from "../../components/Navbar/Navbar";
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
@@ -47,7 +44,33 @@ function Orders() {
     refetch: research,
   } = useQuery(["searchOrder"], () => searchOrder(search), { enabled: false });
 
+  useEffect(() => {
+    if (approvedOrderResult && approvedOrderResult.status === 200) {
+      if (approvedOrderResult.data.status === 1) {
+        refetch(); 
+        setError(false);
+      } else setError(true);
+    } else if (!isLoading) setError(true);
+    if (approvedOrderResult === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [approvedOrderResult]);
 
+  useEffect(() => {
+    if (pikerInfo !== 0) {
+      const res = data.find((item) => item.id === pikerInfo);
+      setPopUpData(res);
+      setPopUpOpen(1);
+    }
+    if (orderComments !== 0) {
+      const res = data.find((item) => item.id === orderComments);
+      setPopUpData(res); 
+      setPopUpOpen(1);
+    }
+  }, [pikerInfo, orderComments]);
+
+  
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar error={isError || error} />
@@ -112,8 +135,7 @@ function Orders() {
           ) : (
             data.map((order) => {
               const picker = order.picked ? order.pickup_info.picker_info : 0;
-              const pickup = order.picked ? order.pickup_info : 0;
-              console.log(pickup&&pickup.arrived_time)
+              const pickup = order.picked ? order.pickup_info : 0; 
               return (
                 <OrderInfo
                   key={order.id}
