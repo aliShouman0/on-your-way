@@ -70,7 +70,35 @@ function Orders() {
     }
   }, [pikerInfo, orderComments]);
 
-  
+  useEffect(() => {
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        setData(result.data.data); 
+        setError(false);
+      } else setError(true);
+    } else if (!isLoading) setError(true);
+    if (result === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [result]);
+
+
+  useEffect(() => {
+    if (searchOrderResult && searchOrderResult.status === 200) {
+      if (searchOrderResult.data.status === 1) {
+        setData(searchOrderResult.data.data); 
+        setError(false);
+      } else setError(true);
+    } else if (!searchOrderIsLoad) setError(true);
+    if (searchOrderResult === 401) {
+      navigate("/login");
+      return;
+    }
+  }, [searchOrderResult]);
+
+ 
+
   return (
     <div className=" w-full h-screen bg-dark   overflow-x-hidden ">
       <Navbar error={isError || error} />
