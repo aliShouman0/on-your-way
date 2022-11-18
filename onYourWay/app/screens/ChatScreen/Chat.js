@@ -7,13 +7,27 @@ import ChatBox from "../../components/ChatBox/ChatBox";
 import Navbar from "../../components/Navbar/Navbar";
 import Loading from "../../components/Loading/Loading";
 import styles from "./styles";
+import main from "../../config/main";
+import { useMutation } from "react-query";
 
 function Chat({ navigation }) {
   const [data, setData] = useState(renderedUser);
   const [users, setUsers] = useState([]);
   const [myData, setMyData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [userImages, setUserImages] = useState([]);
   const renderedUser = [];
+  const {
+    mutate,
+    isLoading: getUserImagesIsLoad,
+    data: result,
+  } = useMutation(main.getUserImages);
+  const extractor = (data, key) => {
+    return data.map(function (element) {
+      return element[key];
+    });
+  };
+
   useEffect(() => {
     setIsLoading(true);
     const getPhone = async () => {
@@ -34,7 +48,7 @@ function Chat({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (users)
+    if (users && userImages)
       for (let i = 0; i < users.length; i++) {
         renderedUser.push({
           id: i,
@@ -46,9 +60,10 @@ function Chat({ navigation }) {
         });
       }
     setData(renderedUser);
-  }, [users, Loading]);
+    setIsLoading(false);
+  }, [userImages]);
 
-  if (isLoading) {
+  if (isLoading || getUserImagesIsLoad) {
     return <Loading />;
   }
   return (
