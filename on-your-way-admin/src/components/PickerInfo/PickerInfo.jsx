@@ -2,7 +2,7 @@ import React from "react";
 import InputBox from "../InputBox/InputBox";
 import Rate from "../Rate/Rate";
 
-function PikerInfo({ image, email, name, phone, address, rate, close }) {
+function PickerInfo({ image, email, name, phone, address, rate, close }) {
   return (
     <div className="fixed top-0 left-0  bg-[rgba(0,0,0,0.8)] h-screen w-screen z-[1000]">
       <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-8 bg-primary  h-auto w-auto   rounded-lg">
@@ -51,4 +51,4 @@ function PikerInfo({ image, email, name, phone, address, rate, close }) {
   );
 }
 
-export default PikerInfo;
+export default PickerInfo;

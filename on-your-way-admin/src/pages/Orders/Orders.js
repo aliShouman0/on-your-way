@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import Navbar from "../../components/Navbar/Navbar";
 import OrderInfo from "../../components/OrderInfo/OrderInfo";
-import PikerInfo from "../../components/PikerInfo/PikerInfo";
+import PickerInfo from "../../components/PickerInfo/PickerInfo";
 import OrderComments from "../../components/OrderComments/OrderComments";
 import Search from "../../components/Search/Search";
 import { getAllOrder, searchOrder, setApprovedOrder } from "../../config/axios";
@@ -110,7 +110,7 @@ function Orders() {
       />
       <LeftPanel active={"orders"} />
       {pikerInfo && popUpOpen && (
-        <PikerInfo
+        <PickerInfo
           image={BASE_STORAGE + "/" + popUpData.pickup_info.picker_info.avatar}
           name={popUpData.pickup_info.picker_info.name}
           email={popUpData.pickup_info.picker_info.email}
