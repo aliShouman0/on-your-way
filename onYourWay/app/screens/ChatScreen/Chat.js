@@ -50,13 +50,12 @@ function Chat({ navigation }) {
   useEffect(() => {
     if (users && userImages)
       for (let i = 0; i < users.length; i++) {
+        const image = userImages.find((o) => o.phone === users[i].phone); 
         renderedUser.push({
           id: i,
           name: users[i].name,
           userImg: {
-            uri:
-              main.baseLink +
-              userImages.find((o) => o.phone === users[i].phone).avatar,
+            uri: main.baseLink + (image ? image.avatar : ""),
           },
           date: users[i].date,
           lastMessage: "....",
