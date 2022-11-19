@@ -29,20 +29,25 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Login                              | SignUp                               | Next                                     | Account                                        | Add order                                       |
-| ---------------------------------- | ------------------------------------ | ---------------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
-| ![Login](./readme/figma/Login.jpg) | ![SignUp](./readme/figma/Signup.jpg) | ![SignUp](./readme/figma/NextSignup.jpg) | ![Artist's Albums](./readme/figma/Account.jpg) | ![Artist's Albums](./readme/figma/AddOrder.jpg) |
+| Login                              | SignUp                               | Next SignUp                               | Add order                                       |
+| ---------------------------------- | ------------------------------------ | ---------------------------------------- |  ----------------------------------------------- |
+| ![Login](./readme/figma/Login.jpg) | ![SignUp](./readme/figma/Signup.jpg) | ![Next SignUp](./readme/figma/NextSignup.jpg) | ![Add order](./readme/figma/AddOrder.jpg) |
 
 | MyOrder                                        | Order                                        | Chat                                        | In Chat                                       |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- | --------------------------------------------- |
-| ![Artists results](./readme/figma/MyOrder.jpg) | ![Artist's Albums](./readme/figma/Order.jpg) | ![Artists results](./readme/figma/Chat.jpg) | ![Artist's Albums](./readme/figma/InChat.jpg) |
+| ![MyOrder](./readme/figma/MyOrder.jpg) | ![Order](./readme/figma/Order.jpg) | ![Chat](./readme/figma/Chat.jpg) | ![In Chat](./readme/figma/InChat.jpg) |
+
+
+ | Account                                | Location                               
+ | -------------------------------------- | --------------------------------------
+ | ![Account](./readme/figma/Account.jpg) | ![Location](./readme/figma/Location.jpg)
 
 > Bottom Sheet
 
-| cancel order                                       | Received order                                       | Order Completed                                       | Order Details                                         |
+| Cancel Order                                       | Received order                                       | Order Completed                                       | Order Details                                         |
 | -------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| ![Artists results](./readme/figma/CancelOrder.jpg) | ![Artist's Albums](./readme/figma/ReceivedOrder.jpg) | ![Artist's Albums](./readme/figma/OrderCompleted.jpg) | ![Artist's Albums](./readme/figma/MyOrderDetails.jpg) |
-
+| ![Cancel Order ](./readme/figma/CancelOrder.jpg) | ![Received Order ](./readme/figma/ReceivedOrder.jpg) | ![Order Completed ](./readme/figma/OrderCompleted.jpg) | ![Order Details](./readme/figma/MyOrderDetails.jpg) |
+ 
 <br><br>
 
 <img src="./readme/title4.svg"/>
