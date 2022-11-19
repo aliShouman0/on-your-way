@@ -36,7 +36,8 @@ export default StyleSheet.create({
     borderWidth: 0,
   },
   searchTextInputStyle: {
-    borderColor: colors.backgroundColor,
+    borderColor: colors.black ,
+    color: colors.black,
   },
   input: {
     marginVertical: 20,
