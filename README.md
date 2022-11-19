@@ -50,11 +50,23 @@
 Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 - This project uses the [React Native app development framework](https://reactnative.dev/). React Native is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
+
+- This project use [Expo CLI](https://expo.dev/). Expo CLI is built on top of React Native and it is the fastest way to set up your react native project.
+
 - For Admin user we have a [Desktop Application using Electron JS](https://www.electronjs.org/). Electron JS is a runtime framework that allows the user to create desktop applications with HTML5, CSS, and JavaScript.
-- In parallel with Electron JS for admin, this project uses [React JS](https://reactjs.org/) for the front end.React is a JavaScript library for building user interfaces as a single-page application, and it allows the creation of reusable UI components.
+
+- In parallel with Electron JS for admin, this project uses [React JS](https://reactjs.org/) for the front end.React is a JavaScript library for building user interfaces as a single-page application, and it allows the creation of reusable UI components.And For Designing admin we use [Tailwind](https://tailwindcss.com/). Tailwind CSS is a framework for quickly building and customizing applications .
+
+- For Admin stats this project uses [Chart.js](https://www.chartjs.org/). Chart.js is a free, open-source JavaScript library for data visualization
+
 - This Project uses a [Firebase real-time database](https://firebase.google.com/products/realtime-database) for chatting to have live chat.The Firebase Realtime Database is a cloud-hosted NoSQL database that lets you store and sync data between your users in realtime.
+
 - This project uses for Backend [Laravel web application framework](https://laravel.com/).Laravel is a PHP web framework intended for the development of web applications following the model–view–controller (MVC) architectural pattern.
-- For Database this project uses [MySQL database](https://www.mysql.com/).MySQL is an open-source relational database management system (RDBMS). RDBMS is a software or service used to create and manage databases based on a relational model.
+
+- For Database this project uses [MySQL database](https://www.mysql.com/). MySQL is an open-source relational database management system (RDBMS) that is based on Structured Query Language (SQL). RDBMS is a software or service used to create and manage databases based on a relational model.
+
+
+
 
 <br><br>
 <img src="./readme/title5.svg"/>
