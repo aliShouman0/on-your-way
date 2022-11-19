@@ -38,9 +38,9 @@
 | ![MyOrder](./readme/figma/MyOrder.jpg) | ![Order](./readme/figma/Order.jpg) | ![Chat](./readme/figma/Chat.jpg) | ![In Chat](./readme/figma/InChat.jpg) |
 
 
- | Account                                | Location                               
- | -------------------------------------- | --------------------------------------
- | ![Account](./readme/figma/Account.jpg) | ![Location](./readme/figma/Location.jpg)
+ | Account                                | Location                               | History                               
+ | -------------------------------------- | --------------------------------------| --------------------------------------
+ | ![Account](./readme/figma/Account.jpg) | ![Location](./readme/figma/Location.jpg)| ![Location](./readme/figma/History.jpg)
 
 > Bottom Sheet
 
