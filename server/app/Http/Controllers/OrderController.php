@@ -345,8 +345,8 @@ class OrderController extends Controller
             $image1 = uniqid();
             $image2 = uniqid();
             $this->saveImages($request->main_image, $main_image);
-            $this->saveImages($request->main_image, $image1);
-            $this->saveImages($request->main_image, $image2);
+            $this->saveImages($request->image1, $image1);
+            $this->saveImages($request->image2, $image2);
             $order->main_image = "orders_images/" . $main_image . ".png";
             $order->image1 = "orders_images/" . $image1 . ".png";
             $order->image2 = "orders_images/" . $image2 . ".png";
