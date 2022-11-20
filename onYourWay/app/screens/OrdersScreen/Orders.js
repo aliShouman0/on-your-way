@@ -56,7 +56,7 @@ function Orders({ navigation }) {
         searchData.append("from", from);
       }
       if (to) {
-        searchData.append("to", from);
+        searchData.append("to", to);
       }
       mutate(searchData);
     }
