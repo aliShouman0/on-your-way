@@ -74,15 +74,14 @@ function MyOrder({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={loadData ? result.data.data : []}
+        data={loadData &&result.data? result.data.data : []}
         onRefresh={() => {
           setLoadData(false);
           refetch();
         }}
         refreshing={refreshing}
-        renderItem={({ item, index, separators }) => {
-          userImg = item.picked ? item.pickup_info.picker_info.avatar : "";
-          picker = item.picked ? item.pickup_info.picker_info : "";
+        renderItem={({ item, index, separators }) => { 
+          const picker = item.picked ? item.pickup_info.picker_info : "";
           return (
             <OrderInfo
               key={item.index}

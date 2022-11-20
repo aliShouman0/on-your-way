@@ -63,7 +63,7 @@ function PickUps({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={loadData ? result.data.data : []}
+        data={loadData && result.data ? result.data.data : []}
         refreshing={refreshing}
         onRefresh={() => {
           setLoadData(false);
