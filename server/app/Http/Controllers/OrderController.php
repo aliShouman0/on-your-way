@@ -245,7 +245,7 @@ class OrderController extends Controller
     function getAllOrders()
     {
         $id = Auth::id();
-        $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->with("userInfo")->get();
+        $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where("approved", true)->with("userInfo")->get();
         if ($order) {
 
             return response()->json([
