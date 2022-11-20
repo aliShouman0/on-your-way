@@ -56,7 +56,7 @@ function OrderStatus({
     error,
     refetch: refetchStatus,
   } = useQuery(
-    isReceiver ? "orderStatusReceiver" : "orderStatusPicker",
+  [  isReceiver ? "orderStatusReceiver"+id : "orderStatusPicker"+id],
     () => main.OrderStatus(id),
     {
       refetchOnMount: "always",
