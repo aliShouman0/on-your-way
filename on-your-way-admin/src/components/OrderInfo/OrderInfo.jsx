@@ -82,7 +82,7 @@ function OrderInfo({
           onClick={editApproved}
           className="bg-white w-full mt-2 text-black p-2 font-semibold text-xs cursor-pointer"
         >
-          {approved ? "Approved" : "Disapprove"}
+          {!approved ? "Approved" : "Disapprove"}
         </button>
       )}
     </div>
