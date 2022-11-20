@@ -47,7 +47,16 @@
 | Cancel Order                                       | Received order                                       | Order Completed                                       | Order Details                                         |
 | -------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | ![Cancel Order ](./readme/figma/CancelOrder.jpg) | ![Received Order ](./readme/figma/ReceivedOrder.jpg) | ![Order Completed ](./readme/figma/OrderCompleted.jpg) | ![Order Details](./readme/figma/MyOrderDetails.jpg) |
- 
+
+>Admin
+
+| Users                                         | Orders                                           |
+| ----------------------------------------------- | ---------------------------------------------- |
+| ![Users](./readme/figma/adminUsers.jpg) | ![Orders](./readme/figma/adminOrders.jpg) |
+
+
+
+
 <br><br>
 
 <img src="./readme/title4.svg"/>
@@ -80,23 +89,25 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 | Login                                 | SignUp                                  | Next                                        | Account                                           | Add order                                          |
 | ------------------------------------- | --------------------------------------- | ------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
-| ![Login](./readme/realApp/login.jpeg) | ![SignUp](./readme/realApp/signUp.jpeg) | ![SignUp](./readme/realApp/nextSignup.jpeg) | ![Artist's Albums](./readme/realApp/account.jpeg) | ![Artist's Albums](./readme/realApp/addOrder.jpeg) |
+| ![Login](./readme/realApp/login.jpeg) | ![SignUp](./readme/realApp/signUp.jpeg) | ![SignUp](./readme/realApp/nextSignup.jpeg) | ![Account](./readme/realApp/account.jpeg) | ![Add order](./readme/realApp/addOrder.jpeg) |
 
 | MyOrder                                           | Order                                           | Chat                                           | In Chat                                          |
 | ------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------- | ------------------------------------------------ |
-| ![Artists results](./readme/realApp/myOrder.jpeg) | ![Artist's Albums](./readme/realApp/order.jpeg) | ![Artists results](./readme/realApp/chat.jpeg) | ![Artist's Albums](./readme/realApp/inchat.jpeg) |
+| ![MyOrder](./readme/realApp/myOrder.jpeg) | ![Order](./readme/realApp/order.jpeg) | ![Chat](./readme/realApp/chat.jpeg) | ![In Chat](./readme/realApp/inchat.jpeg) |
 
 >
 
 | Order Details && App OverView                | cancel order                                    |
 | -------------------------------------------- | ----------------------------------------------- |
-| ![Artist's Albums](./readme/realApp/overView.gif) | ![Artists results](./readme/realApp/cancelOrder.gif) |
+| ![App OverView](./readme/realApp/overView.gif) | ![cancel order](./readme/realApp/cancelOrder.gif) |
 
 | Received order                                         | Location                                    |
 | ------------------------------------------------------ | ------------------------------------------------------- |
-| ![Artist's Albums](./readme/realApp/receivedOrder.gif) | ![Artist's Albums](./readme/realApp/location.gif) |
+| ![Received order](./readme/realApp/receivedOrder.gif) | ![Location](./readme/realApp/location.gif) |
 
->
+>Admin
+
+
 
 <br><br>
 <img src="./readme/title6.svg"/>
