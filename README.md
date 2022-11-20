@@ -90,11 +90,11 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 | Order Details && App OverView                | cancel order                                    |
 | -------------------------------------------- | ----------------------------------------------- |
-| ![Artist's Albums](./readme/realApp/app.gif) | ![Artists results](./readme/realApp/cancel.gif) |
+| ![Artist's Albums](./readme/realApp/overView.gif) | ![Artists results](./readme/realApp/cancelOrder.gif) |
 
-| Received order                                         | Order Completed                                         |
+| Received order                                         | Location                                    |
 | ------------------------------------------------------ | ------------------------------------------------------- |
-| ![Artist's Albums](./readme/realApp/Receivedorder.gif) | ![Artist's Albums](./readme/realApp/OrderCompleted.gif) |
+| ![Artist's Albums](./readme/realApp/receivedOrder.gif) | ![Artist's Albums](./readme/realApp/location.gif) |
 
 >
 
