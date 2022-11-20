@@ -107,7 +107,9 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 >Admin
 
-
+| Users                                         | Orders                                  |
+| ----------------------------------------------| ----------------------------------------- |
+| ![Users](./readme/realApp/adminUserStats.gif) | ![Orders](./readme/realApp/adminOrder.gif) |
 
 <br><br>
 <img src="./readme/title6.svg"/>
