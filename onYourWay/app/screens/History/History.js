@@ -42,7 +42,7 @@ function History({ navigation }) {
       }
     }
     setRefreshing(false);
-    console.log(isLoading,result)
+    
     if (
       isError ||
       (result && (result === 401 || result === 400 || result === 500))

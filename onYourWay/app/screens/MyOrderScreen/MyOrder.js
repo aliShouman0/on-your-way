@@ -39,27 +39,29 @@ function MyOrder({ navigation }) {
   useEffect(() => {
     setLoadData(false);
     if (result && result.status === 200) {
-      if (result.data.status === 1) { 
+      if (result.data.status === 1) {
         setLoadData(true);
       }
+    }
+    if (
+      isError ||
+      (result && (result === 401 || result === 400 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
+      setLoadData(false);
+      console.log(error);
     }
     setRefreshing(false);
   }, [result]);
 
   if (isLoading || load || !loadData) {
     return <Loading />;
-  }
-
-  if (
-    isError ||
-    (result && (result === 401 || result === 400 || result === 500))
-  ) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-    });
-
-    setLoadData(false);
-    console.log(error);
   }
 
   return (
@@ -74,13 +76,13 @@ function MyOrder({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={loadData &&result.data? result.data.data : []}
+        data={loadData && result.data ? result.data.data : []}
         onRefresh={() => {
           setLoadData(false);
           refetch();
         }}
         refreshing={refreshing}
-        renderItem={({ item, index, separators }) => { 
+        renderItem={({ item, index, separators }) => {
           const picker = item.picked ? item.pickup_info.picker_info : "";
           return (
             <OrderInfo
