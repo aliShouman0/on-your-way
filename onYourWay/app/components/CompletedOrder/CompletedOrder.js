@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, Text, View, TouchableOpacity } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -17,6 +17,7 @@ function CompletedOrder({
   pickupId,
   orderId,
   isReceiver,
+  navigation,
 }) {
   const [comment, setComment] = useState("");
   const [rate, setRate] = useState(3);
@@ -48,29 +49,33 @@ function CompletedOrder({
     data.append("pickup_id", pickupId);
     mutate(data);
   };
-
-  if (
-    isError ||
-    (result &&
-      (result === 401 || result === 400 || result === 0 || result === 500))
-  ) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-      containerStyle: { marginBottom: windowHeight / 2 },
-    });
-    console.log(error);
-  }
-
-  if (result && result.status === 200) {
-    if (result.data.status === 1) {
-      Toast.show("Done!! ", {
+  useEffect(() => {
+    if (
+      isError ||
+      (result &&
+        (result === 401 ||   result === 0 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: windowHeight / 2 },
       });
-      setRefreshing();
+      console.log(error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
-  }
 
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        Toast.show("Done!! ", {
+          duration: Toast.durations.LONG,
+          containerStyle: { marginBottom: windowHeight / 2 },
+        });
+        setRefreshing();
+      }
+    }
+  }, [result]);
   return (
     <RBSheet
       ref={refRBSheet}

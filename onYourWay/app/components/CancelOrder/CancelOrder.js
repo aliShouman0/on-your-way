@@ -10,7 +10,7 @@ import AppButton from "../AppButton/AppButton";
 import styles from "./styles";
 import main from "../../config/main.js";
 
-function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
+function CancelOrder({ refRBSheet, setRefreshing, pickupId, navigation }) {
   const [reason, setReason] = useState("");
   const windowHeight = Dimensions.get("window").height;
   const {
@@ -32,27 +32,33 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId }) {
     mutate(data);
   };
 
-  if (
-    isError ||
-    (result &&
-      (result === 401 || result === 400 || result === 0 || result === 500))
-  ) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-      containerStyle: { marginBottom: (windowHeight * 11) / 20 },
-    });
-    console.log(error);
-  }
-
-  if (result && result.status === 200) {
-    if (result.data.status === 1) {
-      Toast.show("Canceling Done !! ", {
+  useEffect(() => {
+    if (
+      isError ||
+      (result &&
+        (result === 401 ||   result === 0 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: (windowHeight * 11) / 20 },
       });
-      setRefreshing();
+      console.log(error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
-  }
+
+    if (result && result.status === 200) {
+      if (result.data.status === 1) {
+        Toast.show("Canceling Done !! ", {
+          duration: Toast.durations.LONG,
+          containerStyle: { marginBottom: (windowHeight * 11) / 20 },
+        });
+        setRefreshing();
+      }
+    }
+  }, [result]);
 
   return (
     <RBSheet
