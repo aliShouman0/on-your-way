@@ -2,7 +2,8 @@
 
 <div align="center">
 
-> Hello world! This is the project’s summary that describes the project plain and simple, limited to the space available.
+>A Fast Low-Cost Local Delivery app,An app that eases the communication process between the delivery personnel and
+the customer by allowing them to connect from different cities.
 
 **[PROJECT PHILOSOPHY](https://github.com/aliShouman0/on-your-way#-project-philosophy) • [WIREFRAMES](https://github.com/aliShouman0/on-your-way#-wireframes) • [TECH STACK](https://github.com/aliShouman0/on-your-way#-tech-stack) • [IMPLEMENTATION](https://github.com/aliShouman0/on-your-way#-impplementation) • [HOW TO RUN?](https://github.com/aliShouman0/on-your-way#-how-to-run)**
 
@@ -48,7 +49,7 @@
 | -------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | ![Cancel Order ](./readme/figma/CancelOrder.jpg) | ![Received Order ](./readme/figma/ReceivedOrder.jpg) | ![Order Completed ](./readme/figma/OrderCompleted.jpg) | ![Order Details](./readme/figma/MyOrderDetails.jpg) |
 
->Admin
+>## Admin
 
 | Users                                         | Orders                                           |
 | ----------------------------------------------- | ---------------------------------------------- |
@@ -114,13 +115,11 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 <br><br>
 <img src="./readme/title6.svg"/>
 
-> This is an example of how you may give instructions on setting up your project locally.
 > To get a local copy up and running follow these simple example steps.
 
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
+## Prerequisites
+ 
 
 - Install NPM from: [NPM](https://nodejs.org/en/download)
 
@@ -129,20 +128,32 @@ This is an example of how to list things you need to use the software and how to
 - Database server: Any Apache HTTP Server, MariaDB database server, recommended [XAMPP](https://www.apachefriends.org)
 
 
-### Installation
+## Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+### First, Cloning and installing packages
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+_Below are the steps to follow to run the project_
+ 
+1. Clone the repo
    ```sh
    git clone https://github.com/aliShouman0/on-your-way.git
    ```
-3. Install NPM packages
+2. Install NPM packages for admin electron by opening terminal in `on-your-way-admin` and run
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
+3. Install NPM packages for user react native by opening terminal in `on-your-way-user` and run
+   ```sh
+   npm install
    ```
+4. Install Composer packages  for server   by opening terminal in `on-your-way-server` and run
+   ```sh
+   composer install
+   ```
+   Or if error occurs  
+    ```sh
+   composer update
+   ```
+
+
+
