@@ -154,6 +154,36 @@ _Below are the steps to follow to run the project_
     ```sh
    composer update
    ```
+### Second, let's start the server  
 
+In `on-your-way-server`:
+
+1. Copy `.env.example` file and rename it `.env` you can run
+   ```sh
+   cp .env.example .env
+   ```
+2. Open your .env file and change the database name (DB_DATABASE) to whatever you need or to `onyourway_db`, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration if you configured them.
+
+3. Run the following command for larval ,JWT and Data Base 
+   ```sh
+      php artisan key:generate
+   ```
+   ```sh
+      php artisan jwt:secret
+   ```
+   ```sh
+      php artisan migrate
+   ```
+   ```sh
+      php artisan storage:link
+   ```
+   ```sh
+      php artisan serve --host <YOUR_LOCAL_IP4@> --port 8000
+   ```
+   you can get your IPV4@ by running
+   ```sh
+      ipconfig
+   ```
+   
 
 
