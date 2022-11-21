@@ -6,7 +6,8 @@ const addPickupResultUseEffect = (
   pickupIsError,
   pickupResult,
   pickupError,
-  refetchStatus
+  refetchStatus,
+  navigation
 ) => {
   return useEffect(() => {
     setLoad(false);
@@ -22,6 +23,10 @@ const addPickupResultUseEffect = (
         duration: Toast.durations.LONG,
       });
       console.log(pickupError);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
     if (pickupResult && pickupResult.status === 200) {
       if (pickupResult.data.status === 1) {

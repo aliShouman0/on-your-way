@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Dimensions } from "react-native";
 import * as geoLocation from "expo-location";
-import Toast from "react-native-root-toast"; 
+import Toast from "react-native-root-toast";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -21,15 +21,15 @@ const accessLocationUseEffect = (
   accessLocationResult,
   accessLocationError,
   setAccessLiveLocation,
-  accessLiveLocation
+  accessLiveLocation,
+  navigation
 ) => {
   return useEffect(() => {
     setLoad(false);
     if (
       accessLocationIsError ||
       (accessLocationResult &&
-        (accessLocationResult === 401 ||
-          accessLocationResult === 400 ||
+        (accessLocationResult === 401 || 
           accessLocationResult === 0 ||
           accessLocationResult === 500))
     ) {
@@ -38,6 +38,10 @@ const accessLocationUseEffect = (
         containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });
       console.log(accessLocationError);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
 
     if (accessLocationResult && accessLocationResult.status === 200) {
@@ -60,7 +64,8 @@ const resultUseEffect = (
   setDate,
   setLocation,
   isError,
-  error
+  error,
+  navigation
 ) => {
   return useEffect(() => {
     setLoad(false);
@@ -74,12 +79,16 @@ const resultUseEffect = (
       }
     }
 
-    if (isError || (result && (result === 401 || result === 400))) {
+    if (isError || (result && (result === 401||result===500  ))) {
       Toast.show("Some Thing went Wrong 😔", {
         duration: Toast.durations.LONG,
       });
       console.log(error);
       setLoad(false);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
   }, [result]);
 };
@@ -89,15 +98,15 @@ const pickupResultUseEffect = (
   pickupIsError,
   pickupResult,
   pickupError,
-  refetchStatus
+  refetchStatus,
+  navigation
 ) => {
   return useEffect(() => {
     setLoad(false);
     if (
       pickupIsError ||
       (pickupResult &&
-        (pickupResult === 401 ||
-          pickupResult === 400 ||
+        (pickupResult === 401 || 
           pickupResult === 0 ||
           pickupResult === 500))
     ) {
@@ -106,6 +115,10 @@ const pickupResultUseEffect = (
         containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });
       console.log(pickupError);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
 
     if (pickupResult && pickupResult.status === 200) {
@@ -128,14 +141,14 @@ const liveLocationUseEffect = (
   setLiveLocation,
   pickupId,
   setAccessLiveLocation,
-  accessLiveLocation
+  accessLiveLocation,
+  navigation
 ) => {
   return useEffect(() => {
     if (
       liveLocationIsError ||
       (liveLocationResult &&
-        (liveLocationResult === 401 ||
-          liveLocationResult === 400 ||
+        (liveLocationResult === 401 || 
           liveLocationResult === 0 ||
           liveLocationResult === 500))
     ) {
@@ -144,6 +157,10 @@ const liveLocationUseEffect = (
         containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });
       console.log(liveLocationError);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
     if (
       accessLiveLocation &&

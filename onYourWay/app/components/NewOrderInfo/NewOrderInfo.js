@@ -39,7 +39,8 @@ function NewOrderInfo({
     pickupIsError,
     pickupResult,
     pickupError,
-    refetch
+    refetch,
+    navigation
   );
 
   const pick = () => {

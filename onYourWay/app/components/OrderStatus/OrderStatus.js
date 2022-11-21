@@ -56,7 +56,7 @@ function OrderStatus({
     error,
     refetch: refetchStatus,
   } = useQuery(
-  [  isReceiver ? "orderStatusReceiver"+id : "orderStatusPicker"+id],
+    [isReceiver ? "orderStatusReceiver" + id : "orderStatusPicker" + id],
     () => main.OrderStatus(id),
     {
       refetchOnMount: "always",
@@ -102,7 +102,8 @@ function OrderStatus({
     setLiveLocation,
     pickupId,
     setAccessLiveLocation,
-    accessLiveLocation
+    accessLiveLocation,
+    navigation
   );
 
   //accessLocation
@@ -112,7 +113,8 @@ function OrderStatus({
     accessLocationResult,
     accessLocationError,
     setAccessLiveLocation,
-    accessLiveLocation
+    accessLiveLocation,
+    navigation
   );
 
   //addOrUpdatePickup
@@ -121,7 +123,8 @@ function OrderStatus({
     pickupIsError,
     pickupResult,
     pickupError,
-    refetchStatus
+    refetchStatus,
+    navigation
   );
   //orderStatus
   controller.resultUseEffect(
@@ -131,7 +134,8 @@ function OrderStatus({
     setDate,
     setLocation,
     isError,
-    error
+    error,
+    navigation
   );
 
   return (
@@ -156,7 +160,7 @@ function OrderStatus({
                 <Image
                   resizeMode="stretch"
                   source={
-                    load&&result.data
+                    load && result.data
                       ? {
                           uri:
                             main.baseLink + result.data.data.order_info.image1,
@@ -168,7 +172,7 @@ function OrderStatus({
                 <Image
                   resizeMode="stretch"
                   source={
-                    load&&result.data
+                    load && result.data
                       ? {
                           uri:
                             main.baseLink + result.data.data.order_info.image2,
@@ -319,6 +323,7 @@ function OrderStatus({
         refRBSheet={cancelOrderBSheet}
         setRefreshing={setRefreshing}
         pickupId={pickupId}
+        navigation={navigation}
       />
       <ReceiveOrder
         refRBSheet={receiveOrderBSheet}
@@ -326,6 +331,7 @@ function OrderStatus({
         pickupId={pickupId}
         orderId={id}
         isReceiver={isReceiver}
+        navigation={navigation}
       />
     </>
   );
