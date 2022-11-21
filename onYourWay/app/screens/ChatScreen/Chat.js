@@ -21,6 +21,8 @@ function Chat({ navigation }) {
     mutate,
     isLoading: getUserImagesIsLoad,
     data: result,
+    isError,
+    error,
   } = useMutation(main.getUserImages);
   const extractor = (data, key) => {
     return data.map(function (element) {
@@ -50,7 +52,7 @@ function Chat({ navigation }) {
   useEffect(() => {
     if (users && userImages)
       for (let i = 0; i < users.length; i++) {
-        const image = userImages.find((o) => o.phone === users[i].phone); 
+        const image = userImages.find((o) => o.phone === users[i].phone);
         renderedUser.push({
           id: i,
           name: users[i].name,
@@ -77,6 +79,21 @@ function Chat({ navigation }) {
   }, [users]);
 
   useEffect(() => {
+    if (
+      isError ||
+      (result &&
+        (result === 401 || result === 400 || result === 0 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔 ", {
+        duration: Toast.durations.LONG,
+      });
+      console.log(error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
+    }
+
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         setUserImages(result.data.data);
