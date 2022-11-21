@@ -16,6 +16,7 @@ function ReceiveOrder({
   pickupId,
   orderId,
   isReceiver,
+  navigation,
 }) {
   const ReceiverCode = `${orderId + pickupId}?${orderId}@${pickupId}`;
   const pickerCode = `${pickupId}?${orderId}@${orderId + pickupId}`;
@@ -129,6 +130,7 @@ function ReceiveOrder({
         pickupId={pickupId}
         orderId={orderId}
         isReceiver={isReceiver}
+        navigation={navigation}
       />
     </>
   );
