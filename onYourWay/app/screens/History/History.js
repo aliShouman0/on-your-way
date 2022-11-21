@@ -42,22 +42,26 @@ function History({ navigation }) {
       }
     }
     setRefreshing(false);
+    console.log(isLoading,result)
+    if (
+      isError ||
+      (result && (result === 401 || result === 400 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+  
+      setLoadData(false);
+      console.log(error); 
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
+    }
   }, [result]);
 
   if (isLoading || load || !loadData) {
     return <Loading />;
-  }
-
-  if (
-    isError ||
-    (result && (result === 401 || result === 400 || result === 500))
-  ) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-    });
-
-    setLoadData(false);
-    console.log(error);
   }
 
   return (
