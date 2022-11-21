@@ -104,8 +104,8 @@ function Orders({ navigation }) {
       Toast.show("Some Thing went Wrong 😔", {
         duration: Toast.durations.LONG,
       });
-
-      setLoadData(false);
+      setSearch(false);
+      setLoadData(false); 
       console.log(error);
     }
   }, [result, isError]);
@@ -126,9 +126,11 @@ function Orders({ navigation }) {
         keyExtractor={(data) => data.id.toString()}
         data={
           loadData
-            ? search && searchResult.data
+            ? search && searchResult&&searchResult.data
               ? searchResult.data.data
-              : result.data.data
+              : result.data
+              ? result.data.data
+              : []
             : []
         }
         refreshing={refreshing}
