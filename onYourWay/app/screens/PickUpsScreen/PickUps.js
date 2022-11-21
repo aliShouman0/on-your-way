@@ -50,6 +50,10 @@ function PickUps({ navigation }) {
       });
       console.log(error);
       setLoadData(false); 
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
   }, [result]);
 

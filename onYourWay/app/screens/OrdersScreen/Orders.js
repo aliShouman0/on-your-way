@@ -83,6 +83,10 @@ function Orders({ navigation }) {
 
       setLoadData(false);
       setSearch(false);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
       console.log(searchError);
     }
   }, [searchResult, searchIsError]);
@@ -106,6 +110,10 @@ function Orders({ navigation }) {
       });
       setSearch(false);
       setLoadData(false); 
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
       console.log(error);
     }
   }, [result, isError]);
