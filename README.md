@@ -130,7 +130,7 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 ## Installation
 
-### First, Cloning and installing packages
+### First, Cloning and Installing Packages
 
 _Below are the steps to follow to run the project_
  
@@ -162,9 +162,9 @@ In `on-your-way-server`:
    ```sh
    cp .env.example .env
    ```
-2. Open your .env file and change the database name (DB_DATABASE) to whatever you need or to `onyourway_db`, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration if you configured them.
+2. Open your `.env` file and change the database name (DB_DATABASE) to whatever you need or to `onyourway_db`, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration if you configured them.
 
-3. Run the following command for larval ,JWT and Data Base 
+3. Run the following command for larval ,JWT and Data Base  (you must have your XAMPP server running)
    ```sh
       php artisan key:generate
    ```
@@ -178,12 +178,35 @@ In `on-your-way-server`:
       php artisan storage:link
    ```
    ```sh
-      php artisan serve --host <YOUR_LOCAL_IP4@> --port 8000
+      php artisan serve --host <YOUR_LOCAL_IPv4@> --port 8000
    ```
-   you can get your IPV4@ by running
+   you can get your IPV4@ by running 
+
+   on windows 
+
    ```sh
       ipconfig
    ```
-   
+   on linux
 
+   ```sh
+      ifconfig 
+   ```
 
+### Now the Admin part
+
+Go to `on-your-way-admin`:
+
+1. In `\src\constants\constants.js` and change it to you IPV4@ or server IP@
+
+   ```js
+   BASE_URL = "SERVER_IP@/api/ony";
+   BASE_STORAGE = "SERVER_IP@/storage";
+   ```
+2. In The Terminal Run 
+
+   ```sh
+      electron:serve
+   ```
+
+    
