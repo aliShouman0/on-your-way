@@ -97,6 +97,10 @@ function AddOrder({ navigation }) {
         duration: Toast.durations.LONG,
       });
       console.log(error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
 
     if (result && result.status === 200) {

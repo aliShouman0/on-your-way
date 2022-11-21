@@ -63,6 +63,10 @@ function Location({ navigation, route }) {
         duration: Toast.durations.LONG,
       });
       console.log(error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
     if (result && result.status === 200) {
       if (result.data.status === 1) {
