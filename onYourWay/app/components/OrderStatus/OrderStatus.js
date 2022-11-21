@@ -156,7 +156,7 @@ function OrderStatus({
                 <Image
                   resizeMode="stretch"
                   source={
-                    load
+                    load&&result.data
                       ? {
                           uri:
                             main.baseLink + result.data.data.order_info.image1,
@@ -168,7 +168,7 @@ function OrderStatus({
                 <Image
                   resizeMode="stretch"
                   source={
-                    load
+                    load&&result.data
                       ? {
                           uri:
                             main.baseLink + result.data.data.order_info.image2,
