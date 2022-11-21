@@ -41,18 +41,18 @@ function PickUps({ navigation }) {
       }
     }
     setRefreshing(false);
+    if (
+      isError ||
+      (result && (result === 401 || result === 400 || result === 500))
+    ) {
+      Toast.show("Some Thing went Wrong 😔", {
+        duration: Toast.durations.LONG,
+      });
+      console.log(error);
+      setLoadData(false); 
+    }
   }, [result]);
 
-  if (
-    isError ||
-    (result && (result === 401 || result === 400 || result === 500))
-  ) {
-    Toast.show("Some Thing went Wrong 😔", {
-      duration: Toast.durations.LONG,
-    });
-    console.log(error);
-    setLoadData(false);
-  }
   if (isLoading || load || !loadData) {
     return <Loading />;
   }
