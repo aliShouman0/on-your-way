@@ -70,15 +70,15 @@ function History({ navigation }) {
       <FlatList
         style={styles.flatList}
         keyExtractor={(data) => data.id.toString()}
-        data={loadData &&result.data ? result.data.data : []}
+        data={loadData && result.data ? result.data.data : []}
         refreshing={refreshing}
         onRefresh={() => {
           setLoadData(false);
           refetch();
         }}
         renderItem={({ item, index, separators }) => {
-          user = item.user_info;
-          canceled = item.ended_pickup_info.canceled;
+          const user = item.user_info;
+          const canceled = item.ended_pickup_info.canceled;
           return (
             <OrderInfo
               key={item.id}

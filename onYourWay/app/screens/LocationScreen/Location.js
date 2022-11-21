@@ -57,7 +57,7 @@ function Location({ navigation, route }) {
     if (
       isError ||
       (result &&
-        (result === 401 || result === 400 || result === 0 || result === 500))
+        (result === 401 || result === 0 || result === 500))
     ) {
       Toast.show("Some Thing went Wrong 😔", {
         duration: Toast.durations.LONG,
