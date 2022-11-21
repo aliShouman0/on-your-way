@@ -50,7 +50,8 @@ function Chat({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (users && userImages)
+    setIsLoading(true);
+    if (users && userImages) {
       for (let i = 0; i < users.length; i++) {
         const image = userImages.find((o) => o.phone === users[i].phone);
         renderedUser.push({
@@ -64,8 +65,9 @@ function Chat({ navigation }) {
           user: users[i],
         });
       }
-    setData(renderedUser);
-    setIsLoading(false);
+      setData(renderedUser);
+      setIsLoading(false);
+    }
   }, [userImages]);
 
   useEffect(() => {
