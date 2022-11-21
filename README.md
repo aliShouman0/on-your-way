@@ -121,10 +121,12 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 This is an example of how to list things you need to use the software and how to install them.
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+- Install NPM from: [NPM](https://nodejs.org/en/download)
+
+- Install composer from: [Composer](https://getcomposer.org/download)
+
+- Database server: Any Apache HTTP Server, MariaDB database server, recommended [XAMPP](https://www.apachefriends.org)
+
 
 ### Installation
 
