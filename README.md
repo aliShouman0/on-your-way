@@ -103,7 +103,7 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 | Received order                                         | Location                                    |
 | ------------------------------------------------------ | ------------------------------------------------------- |
-| ![Received order](./readme/realApp/receivedOrder.gif) | ![Location](./readme/realApp/location.gif) |
+| ![Received order](./readme/realApp/Receivedorder.gif) | ![Location](./readme/realApp/location.gif) |
 
 >Admin
 
@@ -116,6 +116,7 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 > This is an example of how you may give instructions on setting up your project locally.
 > To get a local copy up and running follow these simple example steps.
+
 
 ### Prerequisites
 
