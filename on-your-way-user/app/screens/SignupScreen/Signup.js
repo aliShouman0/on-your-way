@@ -17,7 +17,7 @@ function Signup({ navigation }) {
   const [password, setPassword] = useState("");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
-
+  const todyDate=new Date()
   // test if email match
   function emailMatch(em) {
     let pattern = /\w[\w0-9+_.-]*@[a-z0-9]+.\w+/;
@@ -33,7 +33,7 @@ function Signup({ navigation }) {
   // validation input and go next
   const next = () => {
     if (!email || !name || !phone || !address || !confirmPass || !password) {
-      alert("All Input Are required ");
+      alert("All inputs are required");
       return;
     }
     if (!emailMatch(email)) {
@@ -61,6 +61,8 @@ function Signup({ navigation }) {
       date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
     });
   };
+
+
   return (
     <SafeAreaView style={styles.mainView}>
       <Navbar type={"back"} title={"Register"} navigation={navigation} />
@@ -69,7 +71,7 @@ function Signup({ navigation }) {
           <Input text="Full Name" value={name} setValue={setName} />
           <TouchableOpacity style={styles.date} onPress={() => setOpen(true)}>
             <Input
-              text="Date Of Birth"
+              text="Date of Birth"
               value={date.toDateString()}
               placeholder={date.toDateString()}
               editable={false}
@@ -112,7 +114,7 @@ function Signup({ navigation }) {
           <AppButton value={"Next"} onPress={next} />
         </View>
 
-        {open && (
+        {open&&(
           <DateTimePicker
             value={date}
             mode="date"
@@ -120,6 +122,7 @@ function Signup({ navigation }) {
               setDate(date);
               setOpen(false);
             }}
+            maximumDate={new Date(`${todyDate.getMonth()+1}/${todyDate.getDate()}/${todyDate.getFullYear()-18}`)}
           />
         )}
       </ScrollView>
