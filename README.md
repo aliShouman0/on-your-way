@@ -197,7 +197,7 @@ In `on-your-way-server`:
 
 Go to `on-your-way-admin`:
 
-1. In `\src\constants\constants.js` and change it to you IPV4@ or server IP@
+1. In `\src\constants\constants.js` change IP to you IPV4@ or server IP@
 
    ```js
    BASE_URL = "SERVER_IP@/api/ony";
@@ -206,7 +206,57 @@ Go to `on-your-way-admin`:
 2. In The Terminal Run 
 
    ```sh
-      electron:serve
+     npm run electron:serve
    ```
 
-    
+### Finally for User Application 
+
+In `on-your-way-user` :
+
+1. Copy  `.env.example` file and rename it "or Create" `.env`  you can run
+   ```sh
+   cp .env.example .env
+   ```
+2. Add Server IP@ /Link
+   ```js
+      BASE_URL=<SERVER_IP>/api/ony
+   ```
+3. Add Your API Google Maps Key, You can follow [Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/get-api-key) to learn how to get one
+
+   ```js
+      GOOGLE_MAPS_APIKEY=<YOUR_KEY>
+   ```
+4. Go to [Firebase](https://firebase.google.com/), create a project and create real-time data base.
+
+5. Add Your Firebase Configuration,Just copy all your the configuration in `.env`
+     ```js 
+      API_KEY=  
+      AUTH_DOMAIN=  
+      PROJECT_ID=  
+      STORAGE_BUCKET=  
+      MESSAGING_SENDER_ID= 
+      APP_ID= 
+      MEASUREMENT_ID=  
+    ```
+6. In `\app\config\main.js` change IP to you IPV4@ or server IP@
+   ```js 
+      const baseUrl = "SERVER_IP@/api/ony";
+      const baseLink = "SERVER_IP@/storage/";
+   ```
+
+7. In The Terminal Run 
+
+   ```sh
+     npm start
+   ```
+<br> 
+
+> - ## _Congratulations, the App Must be Working Now._    
+
+<br> 
+
+> ## Note
+- Some Installation may be different on different OS.
+- The app was never tested on an ios devises .
+
+
