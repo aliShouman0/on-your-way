@@ -20,10 +20,13 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: 50,
   },
+  style: {
+    marginTop: 50,
+  },
   signup: {
     color: colors.white,
     fontSize: text.sizeSmall,
-    marginTop: 20,
+    marginTop: 5,
     fontWeight: "300",
   },
   register: {

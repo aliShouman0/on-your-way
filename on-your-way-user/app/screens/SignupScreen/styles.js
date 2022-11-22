@@ -24,6 +24,9 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: 15,
   },
+  appButton: {
+    marginTop: 25,
+  },
   date: {
     width: "100%",
     alignItems: "center",

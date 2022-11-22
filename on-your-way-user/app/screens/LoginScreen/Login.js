@@ -133,7 +133,7 @@ function Login({ navigation }) {
           setValue={setPassword}
           secureTextEntry={true}
         />
-        <AppButton value={"Login"} onPress={onLogin} />
+        <AppButton value={"Login"} onPress={onLogin} style={styles.style}/>
         <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.signup}>
             Don't have an account? <Text style={styles.register}>Register Here</Text>

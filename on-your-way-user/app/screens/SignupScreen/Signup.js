@@ -111,7 +111,7 @@ function Signup({ navigation }) {
             setValue={setConfirmPass}
             secureTextEntry={true}
           />
-          <AppButton value={"Next"} onPress={next} />
+          <AppButton value={"Next"} onPress={next} style={styles.appButton} />
         </View>
 
         {open&&(

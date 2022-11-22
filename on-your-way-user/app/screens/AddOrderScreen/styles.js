@@ -13,12 +13,13 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
-    marginTop: 50,
+    marginTop: 30,
     marginBottom: 20,
     marginVertical: 15,
   },
   DropDownContainer: {
     width: "35%",
+    marginBottom:0
   },
   containerStyle: {
     width: "100%",
@@ -52,7 +53,8 @@ export default StyleSheet.create({
     color: colors.black,
   },
   input: {
-    marginVertical: 20,
+    marginBottom: 20,
+    marginTop:0
   },
   icon: {
     position: "absolute",
