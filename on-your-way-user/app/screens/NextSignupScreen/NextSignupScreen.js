@@ -33,7 +33,7 @@ function NextSignupScreen({ navigation, route }) {
     isError,
     isLoading,
     error: signUpError,
-    data:result,
+    data: result,
   } = useMutation((user) => main.signUp(user));
 
   const onHandleSignup = async () => {
@@ -112,16 +112,18 @@ function NextSignupScreen({ navigation, route }) {
             uploadRBSheet.current.open();
           }}
         >
-          <View style={styles.icon}>
-            <MaterialCommunityIcons
-              name="camera-plus"
-              size={35}
-              color="black"
-            />
-            <Text>Your Photo</Text>
-          </View>
+          {!photo && (
+            <View style={styles.icon}>
+              <MaterialCommunityIcons
+                name="camera-plus"
+                size={35}
+                color="black"
+              />
+              <Text>Your Photo</Text>
+            </View>
+          )}
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             style={styles.image}
             source={photo ? { uri: photo.uri } : ""}
           />
@@ -135,12 +137,18 @@ function NextSignupScreen({ navigation, route }) {
             uploadRBSheet.current.open();
           }}
         >
-          <View style={styles.icon}>
-            <MaterialIcons name="add-photo-alternate" size={35} color="black" />
-            <Text>Front ID </Text>
-          </View>
+          {!frontId && (
+            <View style={styles.icon}>
+              <MaterialIcons
+                name="add-photo-alternate"
+                size={35}
+                color="black"
+              />
+              <Text>Front ID </Text>
+            </View>
+          )}
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             style={styles.imgId}
             source={frontId ? { uri: frontId.uri } : ""}
           />
@@ -152,12 +160,18 @@ function NextSignupScreen({ navigation, route }) {
             uploadRBSheet.current.open();
           }}
         >
-          <View style={styles.icon}>
-            <MaterialIcons name="add-photo-alternate" size={35} color="black" />
-            <Text>Back ID </Text>
-          </View>
+          {!backId && (
+            <View style={styles.icon}>
+              <MaterialIcons
+                name="add-photo-alternate"
+                size={35}
+                color="black"
+              />
+              <Text>Back ID </Text>
+            </View>
+          )}
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             style={styles.imgId}
             source={backId ? { uri: backId.uri } : ""}
           />
