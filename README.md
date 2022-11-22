@@ -213,7 +213,7 @@ Go to `on-your-way-admin`:
 
 In `on-your-way-user` :
 
-1. Copy  `.env.example` file and rename it "or Create" `.env`  you can run
+1. Copy "or Create" `.env.example` file and rename it `.env` you can run
    ```sh
    cp .env.example .env
    ```
@@ -228,7 +228,7 @@ In `on-your-way-user` :
    ```
 4. Go to [Firebase](https://firebase.google.com/), create a project and create real-time data base.
 
-5. Add Your Firebase Configuration,Just copy all your the configuration in `.env`
+5. Add Your Firebase Configuration,Just copy all your the configuration to `.env`
      ```js 
       API_KEY=  
       AUTH_DOMAIN=  
