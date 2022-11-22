@@ -20,6 +20,7 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: text.sizeMid,
     textAlign: "center",
+    fontWeight:"500"
   },
   rightIcon: {
     marginRight: 15,

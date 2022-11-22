@@ -16,6 +16,6 @@ export default StyleSheet.create({
     color: colors.black,
     fontSize: text.sizeMid,
     textTransform: "uppercase",
-    fontWeight: "bold",
+    fontWeight: "900",
   },
 });
