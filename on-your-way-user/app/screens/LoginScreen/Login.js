@@ -49,9 +49,6 @@ function Login({ navigation }) {
     }
 
     if (result && result.status === 200) {
-      Toast.show("Login Done!! 🙂", {
-        duration: Toast.durations.LONG,
-      });
       const access_token = result.data.access_token;
       ContinueLogin(access_token);
     }
@@ -72,13 +69,13 @@ function Login({ navigation }) {
     }
 
     if (userInfoResult && userInfoResult === 403) {
-      Toast.show("You are Not Verified Yet!! 😥", {
+      Toast.show(" You are not verified yet !! 😥", {
         duration: Toast.durations.LONG,
       });
     } 
     
-    if (userInfoResult && userInfoResult.status === 200) {
-      Toast.show("Verify Done!! 🙂", {
+    if (userInfoResult && userInfoResult.status === 200) {      
+      Toast.show("Login Successful !! 🙂", {
         duration: Toast.durations.LONG,
       });
       save("user_info", JSON.stringify(userInfoResult.data));
@@ -91,7 +88,7 @@ function Login({ navigation }) {
 
   const onLogin = async () => {
     if (!email || !password) {
-      alert("All Inputs Are Required");
+      alert("All inputs are required");
       return;
     }
     const data = new FormData();
@@ -139,7 +136,7 @@ function Login({ navigation }) {
         <AppButton value={"Login"} onPress={onLogin} />
         <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.signup}>
-            Don't have an account? <Text style={styles.register}>Register</Text>
+            Don't have an account? <Text style={styles.register}>Register Here</Text>
           </Text>
         </TouchableOpacity>
       </View>

@@ -38,7 +38,7 @@ function NextSignupScreen({ navigation, route }) {
 
   const onHandleSignup = async () => {
     if (!photo || !frontId || !backId) {
-      alert("All Image Are Required");
+      alert("All inputs are required");
       return;
     }
     setLoad(true);

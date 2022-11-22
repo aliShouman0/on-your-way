@@ -73,7 +73,7 @@ function AddOrder({ navigation }) {
       !image2 ||
       !image2
     ) {
-      alert("All Inputs Including The 3 Images are Required");
+      alert("All inputs including the 3 images are required");
       return;
     }
     const data = new FormData();
