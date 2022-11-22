@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import styles from "./styles";
 
-function Rate({ rate, styleText, size }) {
+function Rate({ rate, text,styleText, size }) {
   const getStar = () => {
     const rows = [];
     for (let i = 0; i < rate; i++) {
@@ -30,7 +30,7 @@ function Rate({ rate, styleText, size }) {
   };
   return (
     <View style={styles.view}>
-      <Text style={[styles.text, styleText]}>Rated:</Text>
+      <Text style={text?[styles.text, styleText]:{display:"none"}}>{text}</Text>
       {getStar()}
     </View>
   );
