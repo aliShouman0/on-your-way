@@ -42,7 +42,7 @@ const CustomDrawer = (props) => {
             source={
               data && data.avatar
                 ? { uri: main.baseLink + data.avatar }
-                : require("../../assets/user.png")
+                : ""
             }
             style={styles.userImg}
           />
