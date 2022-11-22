@@ -104,7 +104,7 @@ function AddOrder({ navigation }) {
     }
 
     if (result && result.status === 200) {
-      if (result.data.status === 1) { 
+      if (result.data.status === 1) {
         Toast.show("Add Order Done ", {
           duration: Toast.durations.LONG,
         });
@@ -163,12 +163,18 @@ function AddOrder({ navigation }) {
             uploadRBSheet.current.open();
           }}
         >
-          <View style={styles.icon}>
-            <MaterialIcons name="add-photo-alternate" size={25} color="black" />
-            <Text>Main Image</Text>
-          </View>
+          {!mainImg && (
+            <View style={styles.icon}>
+              <MaterialIcons
+                name="add-photo-alternate"
+                size={25}
+                color="black"
+              />
+              <Text>Main Image</Text>
+            </View>
+          )}
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             style={styles.img}
             source={mainImg ? { uri: mainImg.uri } : ""}
           />
@@ -179,12 +185,18 @@ function AddOrder({ navigation }) {
             uploadRBSheet.current.open();
           }}
         >
-          <View style={styles.icon}>
-            <MaterialIcons name="add-photo-alternate" size={25} color="black" />
-            <Text> Image-1 </Text>
-          </View>
+          {!image1 && (
+            <View style={styles.icon}>
+              <MaterialIcons
+                name="add-photo-alternate"
+                size={25}
+                color="black"
+              />
+              <Text> Image-1 </Text>
+            </View>
+          )}
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             style={styles.img}
             source={image1 ? { uri: image1.uri } : ""}
           />
@@ -195,12 +207,18 @@ function AddOrder({ navigation }) {
             uploadRBSheet.current.open();
           }}
         >
-          <View style={styles.icon}>
-            <MaterialIcons name="add-photo-alternate" size={25} color="black" />
-            <Text> Image-2 </Text>
-          </View>
+          {!image2 && (
+            <View style={styles.icon}>
+              <MaterialIcons
+                name="add-photo-alternate"
+                size={25}
+                color="black"
+              />
+              <Text> Image-2 </Text>
+            </View>
+          )}
           <Image
-            resizeMode="contain"
+            resizeMode="stretch"
             style={styles.img}
             source={image2 ? { uri: image2.uri } : ""}
           />
