@@ -50,7 +50,7 @@ function Users() {
         setError(false);
       } else setError(true);
     } else if (!searchUserIsLoad) setError(true);
-    if (searchUserResult === 401) {
+    if (searchUserResult === 401||result===500) {
       navigate("/login");
       return;
     }
@@ -63,7 +63,7 @@ function Users() {
         setError(false);
       } else setError(true);
     } else if (!isLoading) setError(true);
-    if (result === 401) {
+    if (result === 401||result===500) {
       navigate("/login");
       return;
     }
@@ -75,7 +75,7 @@ function Users() {
         refetch();
       } else setError(true);
     } else if (verifiedUserResult && !verifiedUserIsLoading) setError(true);
-    if (verifiedUserResult === 401) {
+    if (verifiedUserResult === 401||result===500) {
       navigate("/login");
       return;
     }

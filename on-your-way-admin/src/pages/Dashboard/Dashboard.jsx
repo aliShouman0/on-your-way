@@ -75,7 +75,7 @@ function Dashboard() {
         refetch();
       } else setError(true);
     } else if (!isLoading) setError(true);
-    if (result === 401) {
+    if (result === 401||result===500) {
       navigate("/login");
       return;
     }
@@ -96,7 +96,7 @@ function Dashboard() {
         );
       } else setError(true);
     } else if (!loading) setError(true);
-    if (result === 401) {
+    if (result === 401||result===500) {
       navigate("/login");
       return;
     }

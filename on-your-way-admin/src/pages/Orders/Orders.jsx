@@ -50,7 +50,7 @@ function Orders() {
         setError(false);
       } else setError(true);
     } else if (!approvedOrderIsLoading) setError(true);
-    if (approvedOrderResult === 401) {
+    if (approvedOrderResult === 401||result===500) {
       navigate("/login");
       return;
     }
@@ -76,7 +76,7 @@ function Orders() {
         setError(false);
       } else setError(true);
     } else if (!isLoading) setError(true);
-    if (result === 401) {
+    if (result === 401||result===500) {
       navigate("/login");
       return;
     }
@@ -89,7 +89,7 @@ function Orders() {
         setError(false);
       } else setError(true);
     } else if (!searchOrderIsLoad) setError(true);
-    if (searchOrderResult === 401) {
+    if (searchOrderResult === 401||result===500) {
       navigate("/login");
       return;
     }
