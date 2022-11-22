@@ -122,26 +122,34 @@ function AddOrder({ navigation }) {
       <Navbar type={"back"} title={"Add Order"} navigation={navigation} />
       <UploadImage refRBSheet={uploadRBSheet} setImage={setPhoto} />
       <View style={styles.container}>
-        <DropDownCity
-          placeholder={"From"}
-          setValue={setFrom}
-          value={from}
-          dropDownContainerStyle={styles.dropDownContainerStyle}
-          style={styles.style}
-          textStyle={styles.textStyle}
-          iconColor={colors.black}
-          searchTextInputStyle={styles.searchTextInputStyle}
-        />
-        <DropDownCity
-          placeholder={"To"}
-          setValue={setTo}
-          value={to}
-          dropDownContainerStyle={styles.dropDownContainerStyle}
-          style={styles.style}
-          textStyle={styles.textStyle}
-          iconColor={colors.black}
-          searchTextInputStyle={styles.searchTextInputStyle}
-        />
+        <View style={styles.DropDownContainer}>
+          <Text style={styles.label}>From</Text>
+          <DropDownCity
+            placeholder={"From"}
+            setValue={setFrom}
+            value={from}
+            dropDownContainerStyle={styles.dropDownContainerStyle}
+            style={styles.style}
+            textStyle={styles.textStyle}
+            iconColor={colors.black}
+            searchTextInputStyle={styles.searchTextInputStyle}
+            containerStyle={styles.containerStyle}
+          />
+        </View>
+        <View style={styles.DropDownContainer}>
+          <Text style={styles.label}>To</Text>
+          <DropDownCity
+            placeholder={"To"}
+            setValue={setTo}
+            value={to}
+            dropDownContainerStyle={styles.dropDownContainerStyle}
+            style={styles.style}
+            textStyle={styles.textStyle}
+            iconColor={colors.black}
+            searchTextInputStyle={styles.searchTextInputStyle}
+            containerStyle={styles.containerStyle}
+          />
+        </View>
       </View>
       <Input
         text="Description"
