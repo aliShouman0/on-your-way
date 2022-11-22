@@ -17,6 +17,18 @@ export default StyleSheet.create({
     marginBottom: 20,
     marginVertical: 15,
   },
+  DropDownContainer: {
+    width: "35%",
+  },
+  containerStyle: {
+    width: "100%",
+  },
+  label: {
+    color: colors.white, 
+    fontSize: text.sizeSmall,
+    fontWeight:"bold",
+    marginBottom:10
+  },
   textStyle: {
     color: colors.black,
     fontWeight: "400",
@@ -36,7 +48,7 @@ export default StyleSheet.create({
     borderWidth: 0,
   },
   searchTextInputStyle: {
-    borderColor: colors.black ,
+    borderColor: colors.black,
     color: colors.black,
   },
   input: {
