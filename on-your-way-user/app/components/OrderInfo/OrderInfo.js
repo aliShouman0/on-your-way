@@ -46,12 +46,12 @@ function OrderInfo({
     <View style={styles.mainView}>
       {(picked === 1 || completed) && (
         <View style={styles.userInfo}>
-          <Image resizeMode="contain" source={userImg} style={styles.userImg} />
+          <Image resizeMode="stretch" source={userImg} style={styles.userImg} />
           <Text style={styles.userName}>{userName}</Text>
         </View>
       )}
       <InfoBoxes from={from} to={to} pay={pay} />
-      <Image resizeMode="contain" source={orderImg} style={styles.orderImg} />
+      <Image resizeMode="stretch" source={orderImg} style={styles.orderImg} />
       <Text style={styles.description}>{orderDescription}</Text>
       {completed ? (
         <View style={styles.rate}>
