@@ -10,9 +10,10 @@ export default StyleSheet.create({
   text: {
     color: colors.white,
     fontSize: text.sizeSmall,
+    fontWeight:"bold",
     width: "90%",
     textAlign: "left",
-    marginBottom: 4,
+    marginBottom: 10,
   },
   input: {
     backgroundColor: colors.white,
@@ -23,5 +24,6 @@ export default StyleSheet.create({
     padding: "4%",
     margin: 8,
     fontSize: 15,
+    marginTop:0
   },
 });

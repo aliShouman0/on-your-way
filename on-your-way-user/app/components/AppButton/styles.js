@@ -9,7 +9,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 15,
-    width: "80%",
+    width: "90%",
     marginVertical: 10,
   },
   text: {
