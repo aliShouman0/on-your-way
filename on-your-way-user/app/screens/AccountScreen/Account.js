@@ -65,7 +65,7 @@ function Account({ navigation }) {
           />
           <TouchableOpacity style={styles.date}>
             <Input
-              text="Date Of Birth"
+              text="Date of Birth"
               value={date.toDateString()}
               placeholder={date.toDateString()}
               editable={false}
