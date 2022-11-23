@@ -95,7 +95,7 @@ function CompletedOrder({
           <View style={styles.view}>
             <Text style={styles.textTitle}>Congrats </Text>
             <View style={styles.rateView}>
-              <Rate rate={rate} styleText={styles.rate} size={28} />
+              <Rate text={"Rating:"} rate={rate} styleText={styles.rate} size={28} />
               <View style={styles.iconView}>
                 <TouchableOpacity onPress={() => setRate(rate + 1)}>
                   <FontAwesome5

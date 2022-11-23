@@ -233,7 +233,7 @@ function OrderStatus({
                   }}
                 >
                   <LightInput
-                    text={"Average\ntime"}
+                    text={"Arrival \ntime"}
                     editable={false}
                     contextMenuHidden={true}
                     value={`${date.getHours()}:${date.getMinutes()}`}

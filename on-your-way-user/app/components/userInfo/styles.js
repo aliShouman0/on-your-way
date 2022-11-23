@@ -12,10 +12,10 @@ export default StyleSheet.create({
   },
   sheetView: {
     backgroundColor: colors.primary,
-    flex: 1,
-    flexDirection: "row",
+    flex: 1, 
     padding: 8,
     alignItems: "center",
+    width:"100%"
   },
   userInfo: {
     flex: 1,
@@ -28,10 +28,8 @@ export default StyleSheet.create({
     borderRadius: 75,
     marginBottom: 30,
   },
-  userDetails: {
-    flex: 1.5,
-    alignItems: "center",
-    justifyContent: "center",
+  userDetails: { 
     marginVertical: 3,
+    width:"100%"
   },
 });

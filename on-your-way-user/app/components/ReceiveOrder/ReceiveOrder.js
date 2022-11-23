@@ -81,7 +81,7 @@ function ReceiveOrder({
         closeOnDragDown={true}
         closeOnPressMask={true}
         animationType={"fade"}
-        height={startScan ? (windowHeight * 3) / 4 : (windowHeight * 3) / 4}
+        height={startScan ? (windowHeight * 3) / 4 : (windowHeight * 3) / 5}
         customStyles={{
           draggableIcon: styles.draggableIcon,
           container: styles.container,

@@ -60,6 +60,7 @@ function OrderInfo({
               rate={orderRated}
               size={25}
               styleText={{ fontSize: text.sizeMid }}
+              text={"Your rating:"}
             />
           ) : (
             <Text style={styles.userName}>Canceled</Text>

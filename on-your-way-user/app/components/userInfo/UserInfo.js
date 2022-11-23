@@ -24,7 +24,7 @@ function UserInfo({
       closeOnDragDown={true}
       closeOnPressMask={true}
       animationType={"fade"}
-      height={(windowHeight * 1) / 2}
+      height={(windowHeight * 3) / 4}
       customStyles={{
         draggableIcon: styles.draggableIcon,
         container: styles.container,
@@ -34,10 +34,11 @@ function UserInfo({
         <View style={styles.userInfo}>
           <Image source={userImg} style={styles.userImg} />
           <Rate
+          size={30}
             rate={
               orderCount == 0
                 ? 0
-                : Math.round(Math.round(userRate) / orderCount)
+                : Math.round(userRate / orderCount)
             }
           />
         </View>

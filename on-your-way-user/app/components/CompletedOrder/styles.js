@@ -13,16 +13,17 @@ export default StyleSheet.create({
   view: {
     flex: 1,
     alignItems: "center",
+    justifyContent:"center",
     width: "100%",
   },
-  textTitle: {
+  textTitle: { 
     fontSize: text.sizeBig,
     fontWeightL: "500",
     color: colors.white,
-    marginVertical: 15,
+    marginBottom: 30,
   },
   input: {
-    marginBottom: 15,
+    marginBottom: 35,
     textAlignVertical: "top",
     height: 90,
   },
