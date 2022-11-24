@@ -55,7 +55,7 @@ function CompletedOrder({
       (result &&
         (result === 401 ||   result === 0 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: windowHeight / 2 },
       });
@@ -93,20 +93,20 @@ function CompletedOrder({
       ) : (
         <>
           <View style={styles.view}>
-            <Text style={styles.textTitle}>Congrats </Text>
+            <Text style={styles.textTitle}>We care about your opinion </Text>
             <View style={styles.rateView}>
               <Rate text={"Rating:"} rate={rate} styleText={styles.rate} size={28} />
               <View style={styles.iconView}>
-                <TouchableOpacity onPress={() => setRate(rate + 1)}>
+                <TouchableOpacity onPress={() => setRate(rate - 1)}>
                   <FontAwesome5
-                    name="plus-circle"
+                    name="minus-circle"
                     size={30}
                     style={styles.icon}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setRate(rate - 1)}>
+                <TouchableOpacity onPress={() => setRate(rate + 1)}>
                   <FontAwesome5
-                    name="minus-circle"
+                    name="plus-circle"
                     size={30}
                     style={styles.icon}
                   />

@@ -38,6 +38,7 @@ export default StyleSheet.create({
     fontWeightL: "200",
     color: colors.white,
     width: "90%",
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom:10
   },
 });

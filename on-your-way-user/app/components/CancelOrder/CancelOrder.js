@@ -35,10 +35,9 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId, navigation }) {
   useEffect(() => {
     if (
       isError ||
-      (result &&
-        (result === 401 ||   result === 0 || result === 500))
+      (result && (result === 401 || result === 0 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: (windowHeight * 11) / 20 },
       });
@@ -66,7 +65,7 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId, navigation }) {
       closeOnDragDown={true}
       closeOnPressMask={true}
       animationType={"fade"}
-      height={(windowHeight * 11) / 20}
+      height={(windowHeight * 1) / 2}
       customStyles={{
         draggableIcon: styles.draggableIcon,
         container: styles.container,
@@ -89,7 +88,7 @@ function CancelOrder({ refRBSheet, setRefreshing, pickupId, navigation }) {
               style={styles.input}
             />
             <Text style={styles.note}>
-              Note: that will affect your rate if the pickup accepted
+              Please note that your cancellation might affect your rate
             </Text>
             <AppButton value={"Cancel"} onPress={onCancel} />
           </View>
