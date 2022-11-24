@@ -45,7 +45,7 @@ function PickUps({ navigation }) {
       isError ||
       (result && (result === 401 || result === 400 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
       });
       console.log(error);

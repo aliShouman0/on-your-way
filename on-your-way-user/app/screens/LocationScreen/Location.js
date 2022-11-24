@@ -59,7 +59,7 @@ function Location({ navigation, route }) {
       (result &&
         (result === 401 || result === 0 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
       });
       console.log(error);
@@ -75,7 +75,7 @@ function Location({ navigation, route }) {
           const longitude = result.data.data.longitude;
           setUserLocation({ latitude, longitude });
         } else {
-          Toast.show("Location Rejected 😔", {
+          Toast.show("Location Rejected ", {
             duration: Toast.durations.LONG,
           });
           navigation.pop();

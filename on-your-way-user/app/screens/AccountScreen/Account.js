@@ -38,7 +38,7 @@ function Account({ navigation }) {
       setAddress(address);
       setDate(new Date(birthday));
       setRate(
-        order_count == 0 ? 0 : Math.round(Math.round(rate) / order_count)
+        order_count == 0 ? 0 : Math.round(rate / order_count)
       );
       setAvatar(avatar)
     };
@@ -86,7 +86,7 @@ function Account({ navigation }) {
             contextMenuHidden={true}
           />
           <Input
-            text="Phone"
+            text="Phone Number"
             value={phone}
             setValue={setPhone}
             editable={false}

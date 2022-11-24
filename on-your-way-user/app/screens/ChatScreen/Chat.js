@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
 import * as SecureStore from "expo-secure-store";
+import Toast from "react-native-root-toast";
 
 import firebaseHelper from "../../config/firebaseHelper";
 import ChatBox from "../../components/ChatBox/ChatBox";
@@ -86,7 +87,7 @@ function Chat({ navigation }) {
       (result &&
         (result === 401 || result === 400 || result === 0 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔 ", {
+      Toast.show("Some Thing went Wrong  ", {
         duration: Toast.durations.LONG,
       });
       console.log(error);

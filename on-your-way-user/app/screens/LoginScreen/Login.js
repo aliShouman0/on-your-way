@@ -37,13 +37,13 @@ function Login({ navigation }) {
   useEffect(() => {
     if (isError) {
       console.log(loginError);
-      Toast.show("Sorry Some Thing Went Wrong 😮", {
+      Toast.show("Sorry Some Thing Went Wrong ", {
         duration: Toast.durations.LONG,
       });
     }
 
     if (result && (result === 401 || result === 400)) {
-      Toast.show("That's Wrong 😔", {
+      Toast.show("That's Wrong ", {
         duration: Toast.durations.LONG,
       });
     }
@@ -57,27 +57,24 @@ function Login({ navigation }) {
   useEffect(() => {
     if (userInfoIsError) {
       console.log(userInfoError);
-      Toast.show("Sorry Some Thing Went Wrong 😮", {
+      Toast.show("Sorry Some Thing Went Wrong ", {
         duration: Toast.durations.LONG,
       });
     }
 
     if (userInfoResult && userInfoResult === 401) {
-      Toast.show("That's Wrong 😔", {
+      Toast.show("Wrong input", {
         duration: Toast.durations.LONG,
       });
     }
 
     if (userInfoResult && userInfoResult === 403) {
-      Toast.show(" You are not verified yet !! 😥", {
+      Toast.show(" You are not verified", {
         duration: Toast.durations.LONG,
       });
     } 
     
-    if (userInfoResult && userInfoResult.status === 200) {      
-      Toast.show("Login Successful !! 🙂", {
-        duration: Toast.durations.LONG,
-      });
+    if (userInfoResult && userInfoResult.status === 200) {       
       save("user_info", JSON.stringify(userInfoResult.data));
       navigation.reset({
         index: 0,

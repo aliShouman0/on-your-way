@@ -63,12 +63,12 @@ function NextSignupScreen({ navigation, route }) {
     //  sign up user on local server
     signUp(data);
     if (isError || (result && (result === 401 || result === 400))) {
-      alert("Some Thing went Wrong 😔");
+      alert("Some Thing went Wrong");
       setError("");
       setLoad(false);
       return;
     }
-    Toast.show("Sign up Successfully!", {
+    Toast.show("Signup successful", {
       duration: Toast.durations.LONG,
     });
     navigation.reset({

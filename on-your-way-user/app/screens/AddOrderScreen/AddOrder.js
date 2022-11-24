@@ -93,7 +93,7 @@ function AddOrder({ navigation }) {
       (result &&
         (result === 401 || result === 400 || result === 0 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong  ", {
         duration: Toast.durations.LONG,
       });
       console.log(error);
@@ -105,7 +105,7 @@ function AddOrder({ navigation }) {
 
     if (result && result.status === 200) {
       if (result.data.status === 1) {
-        Toast.show("Add Order Done ", {
+        Toast.show("Order Added", {
           duration: Toast.durations.LONG,
         });
         navigation.navigate("MyOrder");

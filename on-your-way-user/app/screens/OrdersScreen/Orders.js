@@ -77,7 +77,7 @@ function Orders({ navigation }) {
       (searchResult &&
         (searchResult === 401 || searchResult === 400 || searchResult === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
       });
 
@@ -105,7 +105,7 @@ function Orders({ navigation }) {
       searchLoad ||
       (result && (result === 401 || result === 400 || result === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
       });
       setSearch(false);
