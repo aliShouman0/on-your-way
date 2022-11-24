@@ -196,7 +196,7 @@ function OrderStatus({
                 {!isReceiver && (
                   <>
                     <View style={styles.statusContainer}>
-                      <Text style={styles.statusText}>{"Current\nstatus"}</Text>
+                      <Text style={styles.statusText}>{"Order\nstatus"}</Text>
                       <DropDownPicker
                         placeholder="Status"
                         open={open}

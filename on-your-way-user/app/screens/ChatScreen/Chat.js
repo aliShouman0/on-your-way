@@ -54,7 +54,7 @@ function Chat({ navigation }) {
     setIsLoading(true);
     if (users && userImages) {
       for (let i = 0; i < users.length; i++) {
-        const image = userImages.find((o) => o.phone === users[i].phone);
+        const image = userImages.find((o) => o.phone == users[i].phone);
         renderedUser.push({
           id: i,
           name: users[i].name,
