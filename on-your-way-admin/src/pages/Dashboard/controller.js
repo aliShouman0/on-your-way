@@ -8,26 +8,28 @@ export const extractor = (data, key) => {
 
 export const options = {
   responsive: true,
-  legend: {
-    labels: {
-      fontColor: "white",
-      color: "black",
-      fontSize: 120,
-    },
-  },
-  scales: {
-    yAxes: {
-      ticks: {
-        beginAtZero: true,
+  plugins: {
+    legend: {
+      labels: {
+        fontColor: "white",
         color: "black",
-        fontSize: 12,
+        font: { size: 13 },
       },
     },
-    xAxes: {
-      ticks: {
-        beginAtZero: true,
-        color: "black",
-        fontSize: 12,
+    scales: {
+      yAxes: {
+        ticks: {
+          beginAtZero: true,
+          color: "black",
+          fontSize: 12,
+        },
+      },
+      xAxes: {
+        ticks: {
+          beginAtZero: true,
+          color: "black",
+          fontSize: 12,
+        },
       },
     },
   },
