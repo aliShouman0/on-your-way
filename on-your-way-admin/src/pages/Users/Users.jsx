@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import user from "../../assets/user.png";
 import LeftPanel from "../../components/LeftPanel/LeftPanel";
 import Loading from "../../components/Loading/Loading";
 import Navbar from "../../components/Navbar/Navbar";
@@ -117,7 +116,7 @@ function Users() {
           <Search value={search} setValue={setSearch} placeholder="Search" />
         </div>
         <div className="flex flex-col justify-center items-center mt-10">
-          {isLoading || verifiedUserIsLoading ? (
+          {isLoading ? (
             <Loading small={true} />
           ) : (
             <UserTable
