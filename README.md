@@ -30,18 +30,18 @@ the customer by allowing them to connect from different cities.
 > This design was planned before on paper, then moved to Figma app for the fine details.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Login                              | SignUp                               | Next SignUp                               | Add order                                       |
-| ---------------------------------- | ------------------------------------ | ---------------------------------------- |  ----------------------------------------------- |
-| ![Login](./readme/figma/Login.jpg) | ![SignUp](./readme/figma/Signup.jpg) | ![Next SignUp](./readme/figma/NextSignup.jpg) | ![Add order](./readme/figma/AddOrder.jpg) |
+| Login                              | MyOrder                                        | Add order                                       |
+| ---------------------------------- | ---------------------------------------------- |  ----------------------------------------------- |
+| ![Login](./readme/figma/Login.jpg) | ![MyOrder](./readme/figma/MyOrder.jpg)         | ![Add order](./readme/figma/AddOrder.jpg) |
 
-| MyOrder                                        | Order                                        | Chat                                        | In Chat                                       |
-| ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- | --------------------------------------------- |
-| ![MyOrder](./readme/figma/MyOrder.jpg) | ![Order](./readme/figma/Order.jpg) | ![Chat](./readme/figma/Chat.jpg) | ![In Chat](./readme/figma/InChat.jpg) |
+| Order                                        | History                                | Account                                | 
+| -------------------------------------------- | -------------------------------------- | -------------------------------------- | 
+| ![Order](./readme/figma/Order.jpg)           | ![Location](./readme/figma/History.jpg) | ![Account](./readme/figma/Account.jpg) | 
 
-
- | Account                                | Location                               | History                               
- | -------------------------------------- | --------------------------------------| --------------------------------------
- | ![Account](./readme/figma/Account.jpg) | ![Location](./readme/figma/Location.jpg)| ![Location](./readme/figma/History.jpg)
+ 
+ | Chat                                        | In Chat                                       | Location                                
+ | ------------------------------------------- | --------------------------------------------- | --------------------------------------  
+ | ![Chat](./readme/figma/Chat.jpg)             | ![In Chat](./readme/figma/InChat.jpg)        | ![Location](./readme/figma/Location.jpg)
 
 > Bottom Sheet
 
@@ -88,13 +88,13 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 > Using the above mentioned tech stacks and the wire frames build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Login                                 | SignUp                                  | Next                                        | Account                                           | Add order                                          |
-| ------------------------------------- | --------------------------------------- | ------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
-| ![Login](./readme/realApp/login.jpeg) | ![SignUp](./readme/realApp/signUp.jpeg) | ![SignUp](./readme/realApp/nextSignup.jpeg) | ![Account](./readme/realApp/account.jpeg) | ![Add order](./readme/realApp/addOrder.jpeg) |
+| Login                                 | MyOrder                                          | Add order                                          |
+| ------------------------------------- | -------------------------------------------------| -------------------------------------------------- |
+| ![Login](./readme/realApp/login.jpg)  | ![MyOrder](./readme/realApp/myOrder.jpeg)        | ![Add order](./readme/realApp/addOrder.jpg) |
 
-| MyOrder                                           | Order                                           | Chat                                           | In Chat                                          |
-| ------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------- | ------------------------------------------------ |
-| ![MyOrder](./readme/realApp/myOrder.jpeg) | ![Order](./readme/realApp/order.jpeg) | ![Chat](./readme/realApp/chat.jpeg) | ![In Chat](./readme/realApp/inchat.jpeg) |
+| Order                                           | Chat                                           | In Chat                                          |
+| ----------------------------------------------- | ---------------------------------------------- | ------------------------------------------------ |
+| ![Order](./readme/realApp/order.jpeg)           | ![Chat](./readme/realApp/chat.jpeg) | ![In Chat](./readme/realApp/inchat.jpeg) |
 
 >
 
