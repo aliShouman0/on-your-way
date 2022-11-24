@@ -4,25 +4,31 @@ function SharpInfoBoxes({ status, AverageTime, currentLocation }) {
   return (
     <div className="flex w-full justify-between items-center ">
       <div className=" w-24   ">
-        <p className="text-xs font-extralight mb-3 text-zinc-50">Status</p>
-        <p className="text-sm border border-x-zinc-50 p-2 h-10">{status}</p>
+        <p className="text-xs  mb-2   text-zinc-50 opacity-70 ">
+          Order
+          <br />
+          status
+        </p>
+        <p className="text-sm border border-white border-opacity-40  rounded-md  mb-4    p-2 h-10">
+          {status}
+        </p>
       </div>
       <div className=" w-24 ml-2">
-        <p className="text-xs font-extralight mb-3 text-zinc-50">
-          Average
+        <p className="text-xs  mb-2   text-zinc-50 opacity-70 ">
+          Arrival
           <br />
-          Time
+          time
         </p>
-        <p className="text-sm border mb-4 border-x-zinc-50 p-2 h-10">
+        <p className="text-sm border border-white border-opacity-40  rounded-md mb-4    p-2 h-10">
           {AverageTime}
         </p>
       </div>
       <div className=" w-24 ml-2 ">
-        <p className="text-xs font-extralight mb-3 text-zinc-50">
+        <p className="text-xs  mb-2   text-zinc-50 opacity-70 ">
           Current <br />
-          Location
+          location
         </p>
-        <p className="text-sm border mb-4 border-x-zinc-50 p-2 h-10">
+        <p className="text-sm border border-white border-opacity-40  rounded-md mb-4    p-2 h-10">
           {currentLocation}
         </p>
       </div>
