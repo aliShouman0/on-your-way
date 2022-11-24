@@ -46,5 +46,7 @@ export default StyleSheet.create({
   barCodeScanner: {
     width: "90%",
     flex: 1,
-  },
+  },btn:{
+    marginTop:50
+  }
 });

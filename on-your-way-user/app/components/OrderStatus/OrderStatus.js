@@ -34,7 +34,7 @@ function OrderStatus({
   const [date, setDate] = useState(new Date());
   const [openTime, setopenTime] = useState(false);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("Not Started");
+  const [value, setValue] = useState("Pending");
   const [load, setLoad] = useState(false);
   const [save, setSave] = useState(false);
   const [items, setItems] = useState(controller.items);
@@ -43,7 +43,7 @@ function OrderStatus({
     isReceiver
       ? accessLiveLocation
         ? "Live"
-        : "No "
+        : "No live"
       : accessLiveLocation
       ? "Reject"
       : "Accept"
@@ -185,7 +185,7 @@ function OrderStatus({
               <View style={styles.orderStatus}>
                 {isReceiver && (
                   <LightInput
-                    text={"Current\nstatus"}
+                    text={"Order\nstatus"}
                     editable={false}
                     contextMenuHidden={true}
                     value={value}

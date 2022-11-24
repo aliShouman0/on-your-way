@@ -7,12 +7,9 @@ const windowHeight = Dimensions.get("window").height;
 
 const items = [
   { label: "Problem", value: "problem" },
-  { label: "Not Started", value: "not" },
-  { label: "Awaiting Info", value: "awaiting" },
-  { label: "Hold", value: "hold" },
-  { label: "Picking", value: "picking" },
-  { label: "Picked", value: "picked" },
-  { label: "On Way", value: "onWay" },
+  { label: "Pending", value: "Pending" }, 
+  { label: "On Hold", value: "On Hold" },
+  { label: "Delivering", value: "Delivering" }, 
 ];
 
 const accessLocationUseEffect = (
@@ -33,7 +30,7 @@ const accessLocationUseEffect = (
           accessLocationResult === 0 ||
           accessLocationResult === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });
@@ -73,14 +70,14 @@ const resultUseEffect = (
     if (result && result.status === 200) {
       if (result.data.status === 1) {
         setValue(result.data.data.status);
-        setDate(new Date(parseInt(result.data.data.arrived_time) * 1000));
+        setDate(new Date(result.data.data.arrived_time * 1000));
         setLocation(result.data.data.location);
         setLoad(true);
       }
     }
 
     if (isError || (result && (result === 401||result===500  ))) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
       });
       console.log(error);
@@ -110,7 +107,7 @@ const pickupResultUseEffect = (
           pickupResult === 0 ||
           pickupResult === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong ", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });
@@ -152,7 +149,7 @@ const liveLocationUseEffect = (
           liveLocationResult === 0 ||
           liveLocationResult === 500))
     ) {
-      Toast.show("Some Thing went Wrong in set live location😔", {
+      Toast.show("Some Thing went Wrong in set live location", {
         duration: Toast.durations.LONG,
         containerStyle: { marginBottom: (windowHeight * 3) / 4 },
       });

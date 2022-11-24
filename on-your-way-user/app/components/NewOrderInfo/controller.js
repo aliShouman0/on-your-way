@@ -19,7 +19,7 @@ const addPickupResultUseEffect = (
           pickupResult === 0 ||
           pickupResult === 500))
     ) {
-      Toast.show("Some Thing went Wrong 😔", {
+      Toast.show("Some Thing went Wrong  ", {
         duration: Toast.durations.LONG,
       });
       console.log(pickupError);
@@ -30,7 +30,7 @@ const addPickupResultUseEffect = (
     }
     if (pickupResult && pickupResult.status === 200) {
       if (pickupResult.data.status === 1) {
-        Toast.show("Added to Your List Done !! ", {
+        Toast.show("Added to pickups List", {
           duration: Toast.durations.LONG,
         });
         setLoad(false);

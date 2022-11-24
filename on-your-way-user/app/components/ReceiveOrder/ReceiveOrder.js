@@ -60,14 +60,14 @@ function ReceiveOrder({
 
   const onSubmit = () => {
     if (!code) {
-      alert("Please Scan The code ⛔");
+      alert("Please Scan The code ");
       return;
     }
     if (code != (isReceiver ? pickerCode : ReceiverCode)) {
-      alert("Wrong Code!!");
+      alert("Wrong Code");
       return;
     }
-    Toast.show("Congrats!! Order Done ♾️🎉", {
+    Toast.show("Order completed", {
       duration: Toast.durations.LONG,
       containerStyle: { marginBottom: (windowHeight * 3) / 5 },
     });
@@ -81,7 +81,7 @@ function ReceiveOrder({
         closeOnDragDown={true}
         closeOnPressMask={true}
         animationType={"fade"}
-        height={startScan ? (windowHeight * 3) / 4 : (windowHeight * 3) / 5}
+        height={startScan ? (windowHeight * 3) / 4 : (windowHeight * 3) / 4}
         customStyles={{
           draggableIcon: styles.draggableIcon,
           container: styles.container,
@@ -119,7 +119,7 @@ function ReceiveOrder({
                 <FontAwesome name="camera" size={45} style={styles.icon} />
                 <Text style={styles.scan}>Scan</Text>
               </TouchableOpacity>
-              <AppButton value={"submit"} onPress={onSubmit} />
+              <AppButton value={"submit"} onPress={onSubmit} style={styles.btn} />
             </>
           )}
         </View>

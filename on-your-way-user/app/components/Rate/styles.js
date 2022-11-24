@@ -11,6 +11,7 @@ export default StyleSheet.create({
     fontSize: text.sizeSmall,
     color: colors.white,
     marginRight: 10,
+    fontWeight: "600",
   },
   icon: { color: colors.white },
   fillIcon: { color: colors.secondary },
