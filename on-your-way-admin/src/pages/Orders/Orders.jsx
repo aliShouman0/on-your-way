@@ -50,7 +50,7 @@ function Orders() {
         setError(false);
       } else setError(true);
     } else if (!approvedOrderIsLoading) setError(true);
-    if (approvedOrderResult === 401||result===500) {
+    if (approvedOrderResult === 401 || result === 500) {
       navigate("/login");
       return;
     }
@@ -76,7 +76,7 @@ function Orders() {
         setError(false);
       } else setError(true);
     } else if (!isLoading) setError(true);
-    if (result === 401||result===500) {
+    if (result === 401 || result === 500) {
       navigate("/login");
       return;
     }
@@ -89,7 +89,7 @@ function Orders() {
         setError(false);
       } else setError(true);
     } else if (!searchOrderIsLoad) setError(true);
-    if (searchOrderResult === 401||result===500) {
+    if (searchOrderResult === 401 || result === 500) {
       navigate("/login");
       return;
     }
@@ -116,10 +116,10 @@ function Orders() {
           email={popUpData.pickup_info.picker_info.email}
           phone={popUpData.pickup_info.picker_info.phone}
           address={popUpData.pickup_info.picker_info.address}
-          rate={
+          rate={Math.round(
             popUpData.pickup_info.picker_info.rate /
-            popUpData.pickup_info.picker_info.order_count
-          }
+              popUpData.pickup_info.picker_info.order_count
+          )}
           close={() => {
             setPopUpOpen(0);
             setPopUpData({});
@@ -163,7 +163,7 @@ function Orders() {
             placeholder="Search Cities"
           />
         </div>
-        <div className="flex flex-wrap justify-center items-center  mt-10">
+        <div className="flex flex-wrap justify-around items-center  mt-10">
           {isLoading ? (
             <Loading small={true} />
           ) : (
@@ -186,7 +186,10 @@ function Orders() {
                   status={pickup && pickup.status}
                   AverageTime={
                     pickup &&
-                    new Date(pickup.arrived_time * 1000).toLocaleDateString()
+                    new Date(pickup.arrived_time * 1000).toLocaleTimeString(
+                      [],
+                      { hour: "2-digit", minute: "2-digit" }
+                    )
                   }
                   currentLocation={pickup && pickup.location}
                   piker={setPikerInfo}
