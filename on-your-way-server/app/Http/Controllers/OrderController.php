@@ -269,14 +269,14 @@ class OrderController extends Controller
         $order = false;
         if ($request->to && $request->from) {
 
-            $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('from', 'like', '%' . $request->from . '%')->where('to', 'like', '%' . $request->to . '%')->with("userInfo")->get();
+            $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('from', 'like', '%' . $request->from . '%')->where('to', 'like', '%' . $request->to . '%')->where("approved", true)->with("userInfo")->get();
         } else {
             if ($request->to) {
 
-                $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('to', 'like', '%' . $request->to . '%')->with("userInfo")->get();
+                $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('to', 'like', '%' . $request->to . '%')->where("approved", true)->with("userInfo")->get();
             }
             if ($request->from) {
-                $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('from', 'like', '%' . $request->from . '%')->with("userInfo")->get();
+                $order = Order::whereNot("user_id", $id)->where("picked", false)->where("ended", false)->where('from', 'like', '%' . $request->from . '%')->where("approved", true)->with("userInfo")->get();
             }
         }
 
