@@ -2,7 +2,7 @@ import React from "react";
 import { ImStarFull } from "react-icons/im";
 import colors from "../../constants/colors";
 
-function Rate({ rate, size }) {
+function Rate({ rate, size ,text}) {
   const getStar = () => {
     const rows = [];
     for (let i = 0; i < rate; i++) {
@@ -19,7 +19,7 @@ function Rate({ rate, size }) {
   };
   return (
     <div className="flex justify-center  items-center">
-      <span className="text-white text-center mt-1 mr-2">Rated:</span>
+      <span className={text?"text-white text-center mt-1 mr-2":"hidden"}>{text}</span>
       {getStar()}
     </div>
   );
