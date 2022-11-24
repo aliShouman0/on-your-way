@@ -15,9 +15,15 @@ function Signup({ navigation }) {
   const [address, setAddress] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [password, setPassword] = useState("");
-  const [date, setDate] = useState(new Date());
+  const todyDate = new Date();
+  const [date, setDate] = useState(
+    new Date(
+      `${todyDate.getMonth() + 1}/${todyDate.getDate()}/${
+        todyDate.getFullYear() - 18
+      }`
+    )
+  );
   const [open, setOpen] = useState(false);
-  const todyDate=new Date()
   // test if email match
   function emailMatch(em) {
     let pattern = /\w[\w0-9+_.-]*@[a-z0-9]+.\w+/;
@@ -41,15 +47,15 @@ function Signup({ navigation }) {
       return;
     }
     if (!phoneMatch(phone)) {
-      alert("Phone Not Match ");
+      alert("Phone not match ");
       return;
     }
     if (password != confirmPass) {
-      alert("Password Not Match ");
+      alert("Password not match ");
       return;
     }
     if (password.length < 4) {
-      alert("Password Must Be More Than 4 Character");
+      alert("Password must be more than 4 character");
       return;
     }
     navigation.navigate("NextSignupScreen", {
@@ -61,7 +67,6 @@ function Signup({ navigation }) {
       date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
     });
   };
-
 
   return (
     <SafeAreaView style={styles.mainView}>
@@ -92,7 +97,7 @@ function Signup({ navigation }) {
             keyboardType="email-address"
           />
           <Input
-            text="Phone"
+            text="Phone Number"
             value={phone}
             placeholder={"ex: 70123456"}
             setValue={setPhone}
@@ -114,7 +119,7 @@ function Signup({ navigation }) {
           <AppButton value={"Next"} onPress={next} style={styles.appButton} />
         </View>
 
-        {open&&(
+        {open && (
           <DateTimePicker
             value={date}
             mode="date"
@@ -122,7 +127,13 @@ function Signup({ navigation }) {
               setDate(date);
               setOpen(false);
             }}
-            maximumDate={new Date(`${todyDate.getMonth()+1}/${todyDate.getDate()}/${todyDate.getFullYear()-18}`)}
+            maximumDate={
+              new Date(
+                `${todyDate.getMonth() + 1}/${todyDate.getDate()}/${
+                  todyDate.getFullYear() - 18
+                }`
+              )
+            }
           />
         )}
       </ScrollView>
