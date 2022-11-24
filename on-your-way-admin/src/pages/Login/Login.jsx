@@ -100,7 +100,7 @@ function Login() {
       <div className="w-1/6 h-1/6 mb-16">
         <img src={logo} alt="Logo" />
       </div>
-      <form className=" w-1/3 " onSubmit={(e) => submit(e)}>
+      <form className=" w-1/3 mt-5 " onSubmit={(e) => submit(e)}>
         <InputBox
           htmlFor="email"
           type="email"
@@ -118,7 +118,7 @@ function Login() {
         <input
           type={"submit"}
           value="LOGIN"
-          className={`text-center text-lg font-bold bg-secondary w-full p-3 mt-4 rounded-full cursor-pointer`}
+          className={`text-center text-lg font-bold bg-secondary w-full p-3 mt-10 rounded-full cursor-pointer`}
         />
         {error && (
           <p className="  mt-3 rounded-md text-red-700 animate-pulse">
