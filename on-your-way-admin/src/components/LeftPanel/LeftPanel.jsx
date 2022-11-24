@@ -15,9 +15,9 @@ function LeftPanel({ active }) {
       </div>
 
       <button
-        className={`flex   justify-center mt-6  p-3 w-full ${
+        className={`flex   justify-center mt-6  p-5 w-full ${
           active === "dashboard"
-            ? "bg-secondary font-bold text-black"
+            ? "bg-secondary font-extrabold  text-black"
             : "bg-dark text-white"
         }`}
         onClick={() => navigate("/dashboard")}
@@ -27,9 +27,9 @@ function LeftPanel({ active }) {
       </button>
 
       <button
-        className={`flex   justify-center mt-8 p-3 w-full ${
+        className={`flex   justify-center mt-8 p-5 w-full ${
           active === "users"
-            ? "bg-secondary font-bold text-black"
+            ? "bg-secondary font-extrabold  text-black"
             : "bg-dark text-white"
         }`}
         onClick={() => navigate("/users")}
@@ -39,9 +39,9 @@ function LeftPanel({ active }) {
       </button>
 
       <button
-        className={`flex  justify-center mt-8 p-3 w-full ${
+        className={`flex  justify-center mt-8 p-5 w-full ${
           active === "orders"
-            ? "bg-secondary font-bold text-black"
+            ? "bg-secondary font-extrabold  text-black"
             : "bg-dark text-white"
         }`}
         onClick={() => navigate("/orders")}
@@ -51,7 +51,7 @@ function LeftPanel({ active }) {
       </button>
 
       <button
-        className={`flex justify-center mt-auto mb-10 p-3 w-3/4  bg-dark text-white text-md `}
+        className={`flex justify-center mt-auto mb-10 p-3 w-3/4  rounded-full bg-dark text-white text-md `}
         onClick={() => navigate("/login")}
       >
         Logout
