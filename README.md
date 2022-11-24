@@ -90,7 +90,7 @@ Here's a brief high-level overview of the tech stack the On Your Way app uses:
 
 | Login                                 | MyOrder                                          | Add order                                          |
 | ------------------------------------- | -------------------------------------------------| -------------------------------------------------- |
-| ![Login](./readme/realApp/login.jpg)  | ![MyOrder](./readme/realApp/myOrder.jpeg)        | ![Add order](./readme/realApp/addOrder.jpg) |
+| ![Login](./readme/realApp/login.jpg)  | ![MyOrder](./readme/realApp/myOrder.jpeg)        | ![Add order](./readme/realApp/addorder.jpg) |
 
 | Order                                           | Chat                                           | In Chat                                          |
 | ----------------------------------------------- | ---------------------------------------------- | ------------------------------------------------ |
